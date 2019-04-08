@@ -4,7 +4,7 @@ var amf = require("amf-client-js")
 return amf.AMF.init()
   .then(() => {
     return new amf.Aml10Parser()
-      .parseFileAsync("file://vocabularies/document.yaml")
+      .parseFileAsync("file://vocabularies/aml_doc.yaml")
   })
   .then((model) => {
     return amf.AMF.amfGraphGenerator().generateString(model)
