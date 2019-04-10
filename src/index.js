@@ -1,6 +1,11 @@
 const amf = require('amf-client-js')
+const parseArgs = require('minimist')
 const ldquery = require('ld-query')
+const path = require('path')
+const fs = require('fs-extra')
+const Mustache = require('mustache')
 
+const TMPL_DIR = path.join(__dirname, '..', 'templates')
 const CTX = {
   amldoc: 'http://a.ml/vocabularies/document#',
   meta: 'http://a.ml/vocabularies/meta#',
@@ -8,6 +13,7 @@ const CTX = {
   rdf: 'http://www.w3.org/2000/01/rdf-schema#',
   schema: 'http://schema.org/'
 }
+
 
 /* Converts AML Vocabulary to resolved JSON-LD AMF Graph. */
 async function getJsonLdGraph (fpathArg) {
@@ -115,20 +121,71 @@ function collectPropertiesData (doc) {
   return propsMap
 }
 
-async function main () {
-  if (!process.argv[2]) {
-    console.log('[usage] aml2html <vocabulary-file>')
-    return
-  }
-  await amf.AMF.init()
-  const graph = await getJsonLdGraph(process.argv[2])
+/* Renders single Mustache template with data and writes it to html file */
+function renderTemplate (data, tmplName, htmlName, outDir) {
+  console.log(`Rendering "${tmplName}" template for "${data.id}"`)
+  const inPath = path.join(TMPL_DIR, `${tmplName}.mustache`)
+  const tmplStr = fs.readFileSync(inPath, 'utf-8')
+  const htmlStr = Mustache.render(tmplStr, data)
+  const outPath = path.join(outDir, `${htmlName}.html`)
+  fs.writeFileSync(outPath, htmlStr)
+}
 
-  // Core context used in all the vocabularies
+/* Parses vocabulary name from its @id. */
+function parseVocName (vocData) {
+  return path.parse(vocData.id).name.toLowerCase()
+}
+
+/* Parses class name by splitting it by / and # and picking last part. */
+function parseClassName (clsData) {
+  const afterSlash = clsData.id.split('/').slice(-1)[0]
+  const afterHash = afterSlash.split('#').slice(-1)[0]
+  return afterHash.toLowerCase()
+}
+
+/* Copies CSS files needed for generated html to look nice. */
+function copyCss (outDir) {
+  const tmplCssDir = path.join(TMPL_DIR, 'css')
+  const outCssDir = path.join(outDir, 'css')
+  fs.emptyDirSync(outCssDir)
+  fs.copySync(tmplCssDir, outCssDir)
+}
+
+/* Runs all the logic. */
+async function main () {
+  await amf.AMF.init()
+  const argv = parseArgs(process.argv.slice(2))
+
+  // Ensure output directory exists
+  const outDir = path.resolve(argv.outdir)
+  fs.emptyDirSync(outDir)
+
+  const graph = await getJsonLdGraph(argv.vocabulary)
+
   let doc = ldquery(graph, CTX)
   // Pick root vocabulary itself as a single doc
   doc = doc.query('[@type=meta:Vocabulary]')
+
+  // Vocabularies
+  console.log('Collecting vocabularies data')
   const vocsData = collectVocabulariesData(doc)
+  vocsData.forEach((voc) => {
+    renderTemplate(
+      voc, 'vocabulary',
+      `voc_${parseVocName(voc)}`, outDir)
+  })
+
+  // Classes
+  console.log('Collecting classes data')
   const classesData = collectClassesData(doc)
+  classesData.forEach((cls) => {
+    renderTemplate(
+      cls, 'class',
+      `cls_${parseClassName(cls)}`, outDir)
+  })
+
+  // Copy css
+  copyCss(outDir)
 }
 
 main()
