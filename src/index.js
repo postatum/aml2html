@@ -68,7 +68,7 @@ function collectVocabularyProperties (vocJson) {
   return vocJson[`${CTX.amldoc}declares`]
     .map((decl) => {
       if (decl['@type'].indexOf(`${CTX.meta}Property`) > -1) {
-        return parseDeclarationName({id: (decl['@id'] || '')})
+        return parseHashValue((decl['@id'] || ''))
       }
     })
     .filter((id) => { return !!id })
@@ -96,7 +96,7 @@ function collectVocabularyClasses (vocJson) {
     .map((id) => {
       return {
         clsId: id,
-        name: parseDeclarationName({id: id}),
+        name: parseHashValue(id),
         page: makeClassHtmlPageName({id: id})
       }
     })
@@ -115,7 +115,7 @@ function collectVocabularyClasses (vocJson) {
              description: 'Target asdasd',
              range: 'http://www.w3.org/2001/XMLSchema#anyUri',
              parent: null } ],
-        parents: [] },
+        extends: [ http://a.ml/vocabularies/document#Something ] },
       ...
     ]
 */
@@ -125,16 +125,16 @@ function collectClassesData (doc) {
     .map((term) => {
       return {
         id: term.query('@id'),
-        name: parseDeclarationName({id: term.query('@id')}),
+        name: parseHashValue(term.query('@id')),
         displayName: term.query('meta:displayName @value'),
         description: term.query('schema:description @value'),
         properties: term.queryAll('meta:properties @id').map((id) => {
           return propsMap[id] || {
-            propName: parseDeclarationName({id: id}),
+            propName: parseHashValue(id),
             range: id
           }
         }),
-        parents: term.queryAll('rdf:subClassOf @id')
+        extends: term.queryAll('rdf:subClassOf @id')
       }
     })
   return classTerms
@@ -148,7 +148,9 @@ function collectClassesData (doc) {
         'propName': 'display name',
         'desc': 'Human readable name for the example',
         'range': 'http://www.w3.org/2001/XMLSchema#string',
-        'parent': 'http://schema.org/name'
+        'rangeName': 'string',
+        'parent': 'http://schema.org/name',
+        'parentName': 'name'
       },
       ...
     }
@@ -158,13 +160,16 @@ function collectPropertiesData (doc) {
   const propertyTerms = doc.queryAll(
     'amldoc:declares[@type=meta:Property]')
   propertyTerms.forEach((term) => {
-    propsMap[term.query('@id')] = {
+    let data = {
       propId: term.query('@id'),
-      propName: parseDeclarationName({id: term.query('@id')}),
       desc: term.query('schema:description @value'),
       range: term.query('rdf:range @id'),
-      parent: term.query('rdf:subPropertyOf @id')
+      propExtends: term.query('rdf:subPropertyOf @id')
     }
+    data.propName = parseHashValue(data.propId)
+    data.rangeName = parseHashValue(data.range)
+    data.propExtendsName = parseHashValue(data.propExtends)
+    propsMap[term.query('@id')] = data
   })
   return propsMap
 }
@@ -180,8 +185,8 @@ function renderTemplate (data, tmplName, htmlName, outDir) {
 }
 
 /* Parses class name by splitting it by / and # and picking last part. */
-function parseDeclarationName (clsData) {
-  const afterSlash = clsData.id.split('/').slice(-1)[0]
+function parseHashValue (id) {
+  const afterSlash = (id || '').split('/').slice(-1)[0]
   const afterHash = afterSlash.split('#').slice(-1)[0]
   return afterHash
 }
@@ -194,8 +199,9 @@ function copyCss (outDir) {
   fs.copySync(tmplCssDir, outCssDir)
 }
 
+/* Makes class HTML page name. */
 function makeClassHtmlPageName (cls) {
-  return `cls_${parseDeclarationName(cls).toLowerCase()}.html`
+  return `cls_${parseHashValue(cls.id).toLowerCase()}.html`
 }
 
 /* Runs all the logic. */

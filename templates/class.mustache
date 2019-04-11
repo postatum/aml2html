@@ -23,12 +23,12 @@
         <h2>Description</h2>
         <p>{{description}}</p>
       {{/description}}
-      <h2>Parent classes</h2>
-      {{^parents}} None{{/parents}}
+      <h2>Extends</h2>
+      {{^extends}} Nothing{{/extends}}
       <ul>
-        {{#parents}}
+        {{#extends}}
           <li>{{.}}</li>
-        {{/parents}}
+        {{/extends}}
       </ul>
       <h2>Properties</h2>
       <table class="table table-striped">
@@ -37,7 +37,7 @@
             <th>Name</th>
             <th>ID</th>
             <th>Type</th>
-            <th>Parent</th>
+            <th>Extends</th>
             <th>Description</th>
           </tr>
         </thead>
@@ -46,8 +46,8 @@
             <tr>
               <td>{{propName}}</td>
               <td>{{propId}}</td>
-              <td>{{range}}</td>
-              <td>{{#parent}}{{parent}}{{/parent}}</td>
+              <td><a href="{{range}}" title="{{range}}">{{rangeName}}</a></td>
+              <td>{{#propExtends}}<a href="{{propExtends}}" title="{{propExtends}}">{{propExtendsName}}</a>{{/propExtends}}</td>
               <td>{{#desc}}{{desc}}{{/desc}}</td>
             </tr>
           {{/properties}}
