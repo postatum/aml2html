@@ -1,13 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>RAML Parsers Overview</title>
+  <title>{{name}}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/custom.css">
 </head>
   <body>
-
+    <div class="container">
+      <h1><a href="index.html" title="">Vocabularies</a> > {{name}}</h1>
+      <hr>
+      {{#displayName}}
+        <h2>Name</h2>
+        <p>{{displayName}}</p>
+      {{/displayName}}
+      {{#id}}
+        <h2>ID</h2>
+        <p>{{id}}</p>
+      {{/id}}
+      {{#description}}
+        <h2>Description</h2>
+        <p>{{description}}</p>
+      {{/description}}
+      <h2>Parent classes</h2>
+      {{^parents}} None{{/parents}}
+      <ul>
+        {{#parents}}
+          <li>{{.}}</li>
+        {{/parents}}
+      </ul>
+      <h2>Properties</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Parent</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#properties}}
+            <tr>
+              <td>{{name}}</td>
+              <td>{{range}}</td>
+              <td>{{#parent}}{{parent}}{{/parent}}</td>
+              <td>{{#description}}{{description}}{{/description}}</td>
+            </tr>
+          {{/properties}}
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

@@ -107,7 +107,8 @@ function collectVocabularyClasses (vocJson) {
     [
       ...
       { id: 'http://a.ml/vocabularies/document#DomainElement',
-        name: 'Domain element',
+        name: 'DomainElement',
+        displayName: 'Domain element',
         description: 'asd',
         properties:
          [ { name: 'extends',
@@ -124,10 +125,14 @@ function collectClassesData (doc) {
     .map((term) => {
       return {
         id: term.query('@id'),
-        name: term.query('meta:displayName @value'),
+        name: parseDeclarationName({id: term.query('@id')}),
+        displayName: term.query('meta:displayName @value'),
         description: term.query('schema:description @value'),
         properties: term.queryAll('meta:properties @id').map((id) => {
-          return propsMap[id]
+          return propsMap[id] || {
+            name: parseDeclarationName({id: id}),
+            range: id
+          }
         }),
         parents: term.queryAll('rdf:subClassOf @id')
       }

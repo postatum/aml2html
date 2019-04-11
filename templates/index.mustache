@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>RAML Parsers Overview</title>
+  <title>Vocabularies Overview</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -9,11 +9,11 @@
 </head>
   <body>
     <div class="container">
-      <h1>Vocabularies</h1>
+      <h1><a href="index.html" title="">Vocabularies</a></h1>
       {{#vocs}}
         <hr>
         <div class="voc-info">
-          {{#id}}<p><b>Id:</b> {{id}}</p>{{/id}}
+          {{#id}}<h2>{{id}}</h2>{{/id}}
           {{#base}}<p><b>Base:</b> {{base}}</p>{{/base}}
           {{#usage}}<p><b>Usage:</b> {{usage}}</p>{{/usage}}
           {{#properties}}<p><b>Properties:</b> <samp>{{properties}}</samp></p>{{/properties}}
