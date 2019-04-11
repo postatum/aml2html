@@ -14,7 +14,6 @@ const CTX = {
   schema: 'http://schema.org/'
 }
 
-
 /* Converts AML Vocabulary to resolved JSON-LD AMF Graph. */
 async function getJsonLdGraph (fpathArg) {
   const model = await new amf.Aml10Parser().parseFileAsync(`file://${fpathArg}`)
@@ -32,7 +31,8 @@ async function getJsonLdGraph (fpathArg) {
       { id: 'file://test_data/vocabularies/data_model.yaml',
         base: 'http://a.ml/vocabularies/data#',
         usage: 'Vocabulary ...',
-        classes: [ 'http://a.ml/vocabularies/data#Node', ... ] }
+        classesIds: [ 'http://a.ml/vocabularies/data#Node', ... ],
+        classesPages: [ 'node.html', ... ] }
       ...
     ]
 
@@ -45,11 +45,11 @@ function collectVocabulariesData (doc) {
   vocabularies.push(doc)
   return vocabularies.map((voc) => {
     let vocJson = voc.json()
-    return {
+    let data = {
       id: vocJson['@id'],
       base: vocJson[`${CTX.meta}base`][0]['@value'],
       usage: vocJson[`${CTX.amldoc}usage`][0]['@value'],
-      classes: vocJson[`${CTX.amldoc}declares`]
+      classesIds: vocJson[`${CTX.amldoc}declares`]
         .map((decl) => {
           if (decl['@type'].indexOf(`${CTX.owl}Class`) > -1) {
             return decl['@id']
@@ -57,6 +57,10 @@ function collectVocabulariesData (doc) {
         })
         .filter((id) => { return id !== undefined })
     }
+    data.classesPages = data.classesIds.map((id) => {
+      return makeClassHtmlPageName({id: id})
+    })
+    return data
   })
 }
 
@@ -123,17 +127,12 @@ function collectPropertiesData (doc) {
 
 /* Renders single Mustache template with data and writes it to html file */
 function renderTemplate (data, tmplName, htmlName, outDir) {
-  console.log(`Rendering "${tmplName}" template for "${data.id}"`)
-  const inPath = path.join(TMPL_DIR, `${tmplName}.mustache`)
+  console.log(`Rendering "${tmplName}" template`)
+  const inPath = path.join(TMPL_DIR, tmplName)
   const tmplStr = fs.readFileSync(inPath, 'utf-8')
   const htmlStr = Mustache.render(tmplStr, data)
-  const outPath = path.join(outDir, `${htmlName}.html`)
+  const outPath = path.join(outDir, htmlName)
   fs.writeFileSync(outPath, htmlStr)
-}
-
-/* Parses vocabulary name from its @id. */
-function parseVocName (vocData) {
-  return path.parse(vocData.id).name.toLowerCase()
 }
 
 /* Parses class name by splitting it by / and # and picking last part. */
@@ -149,6 +148,10 @@ function copyCss (outDir) {
   const outCssDir = path.join(outDir, 'css')
   fs.emptyDirSync(outCssDir)
   fs.copySync(tmplCssDir, outCssDir)
+}
+
+function makeClassHtmlPageName (cls) {
+  return `cls_${parseClassName(cls)}.html`
 }
 
 /* Runs all the logic. */
@@ -169,19 +172,15 @@ async function main () {
   // Vocabularies
   console.log('Collecting vocabularies data')
   const vocsData = collectVocabulariesData(doc)
-  vocsData.forEach((voc) => {
-    renderTemplate(
-      voc, 'vocabulary',
-      `voc_${parseVocName(voc)}`, outDir)
-  })
+  renderTemplate(vocsData, 'index.mustache', 'index.html', outDir)
 
   // Classes
   console.log('Collecting classes data')
   const classesData = collectClassesData(doc)
   classesData.forEach((cls) => {
     renderTemplate(
-      cls, 'class',
-      `cls_${parseClassName(cls)}`, outDir)
+      cls, 'class.mustache',
+      makeClassHtmlPageName(cls), outDir)
   })
 
   // Copy css
