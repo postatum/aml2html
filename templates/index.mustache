@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="./css/custom.css">
 </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <h1><a href="index.html" title="">Vocabularies</a></h1>
       {{#vocs}}
         <hr>
@@ -20,7 +20,7 @@
           <p><b>Classes:</b>{{^classes}} None{{/classes}}</p>
           <ul>
             {{#classes}}
-              <li><a href="{{page}}" title="{{id}}">{{name}}</a></li>
+              <li><a href="{{page}}" title="{{clsId}}">{{name}}</a></li>
             {{/classes}}
           </ul>
         </div>

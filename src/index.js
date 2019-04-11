@@ -32,7 +32,7 @@ async function getJsonLdGraph (fpathArg) {
         base: 'http://a.ml/vocabularies/data#',
         usage: 'Vocabulary ...',
         classes: [ {
-          id: 'http://a.ml/vocabularies/data#Node',
+          clsId: 'http://a.ml/vocabularies/data#Node',
           name: 'Node',
           page: 'cls_node.html'
         }, ... ],
@@ -67,7 +67,7 @@ function collectVocabulariesData (doc) {
 function collectVocabularyProperties (vocJson) {
   return vocJson[`${CTX.amldoc}declares`]
     .map((decl) => {
-      if (decl['@type'].indexOf(`${CTX.owl}DatatypeProperty`) > -1) {
+      if (decl['@type'].indexOf(`${CTX.meta}Property`) > -1) {
         return parseDeclarationName({id: (decl['@id'] || '')})
       }
     })
@@ -79,7 +79,7 @@ function collectVocabularyProperties (vocJson) {
   For each vocabulary returns it's list of classes that looks like
     [ ...
       {
-        id: 'http://a.ml/vocabularies/data#Node',
+        clsId: 'http://a.ml/vocabularies/data#Node',
         name: 'Node',
         page: 'cls_node.html'
       }, ...
@@ -95,7 +95,7 @@ function collectVocabularyClasses (vocJson) {
     .filter((id) => { return !!id })
     .map((id) => {
       return {
-        id: id,
+        clsId: id,
         name: parseDeclarationName({id: id}),
         page: makeClassHtmlPageName({id: id})
       }
@@ -130,7 +130,7 @@ function collectClassesData (doc) {
         description: term.query('schema:description @value'),
         properties: term.queryAll('meta:properties @id').map((id) => {
           return propsMap[id] || {
-            name: parseDeclarationName({id: id}),
+            propName: parseDeclarationName({id: id}),
             range: id
           }
         }),
@@ -145,8 +145,8 @@ function collectClassesData (doc) {
     {
        ...
       'http://a.ml/vocabularies/document#displayName': {
-        'name': 'display name',
-        'description': 'Human readable name for the example',
+        'propName': 'display name',
+        'desc': 'Human readable name for the example',
         'range': 'http://www.w3.org/2001/XMLSchema#string',
         'parent': 'http://schema.org/name'
       },
@@ -156,11 +156,12 @@ function collectClassesData (doc) {
 function collectPropertiesData (doc) {
   let propsMap = {}
   const propertyTerms = doc.queryAll(
-    'amldoc:declares[@type=owl:DatatypeProperty]')
+    'amldoc:declares[@type=meta:Property]')
   propertyTerms.forEach((term) => {
     propsMap[term.query('@id')] = {
-      name: term.query('meta:displayName @value'),
-      description: term.query('schema:description @value'),
+      propId: term.query('@id'),
+      propName: parseDeclarationName({id: term.query('@id')}),
+      desc: term.query('schema:description @value'),
       range: term.query('rdf:range @id'),
       parent: term.query('rdf:subPropertyOf @id')
     }
