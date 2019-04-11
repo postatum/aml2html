@@ -31,8 +31,12 @@ async function getJsonLdGraph (fpathArg) {
       { id: 'file://test_data/vocabularies/data_model.yaml',
         base: 'http://a.ml/vocabularies/data#',
         usage: 'Vocabulary ...',
-        classesIds: [ 'http://a.ml/vocabularies/data#Node', ... ],
-        classesPages: [ 'node.html', ... ] }
+        classes: [ {
+          id: 'http://a.ml/vocabularies/data#Node',
+          name: 'Node',
+          page: 'cls_node.html'
+        }, ... ],
+        properties: name, description
       ...
     ]
 
@@ -48,20 +52,54 @@ function collectVocabulariesData (doc) {
     let data = {
       id: vocJson['@id'],
       base: vocJson[`${CTX.meta}base`][0]['@value'],
-      usage: vocJson[`${CTX.amldoc}usage`][0]['@value'],
-      classesIds: vocJson[`${CTX.amldoc}declares`]
-        .map((decl) => {
-          if (decl['@type'].indexOf(`${CTX.owl}Class`) > -1) {
-            return decl['@id']
-          }
-        })
-        .filter((id) => { return id !== undefined })
+      usage: vocJson[`${CTX.amldoc}usage`][0]['@value']
     }
-    data.classesPages = data.classesIds.map((id) => {
-      return makeClassHtmlPageName({id: id})
-    })
+    data.properties = collectVocabularyProperties(vocJson)
+    data.classes = collectVocabularyClasses(vocJson)
     return data
   })
+}
+
+/*
+  For each vocabulary returns it's list of properties names as a string.
+  E.g.: "name, description"
+*/
+function collectVocabularyProperties (vocJson) {
+  return vocJson[`${CTX.amldoc}declares`]
+    .map((decl) => {
+      if (decl['@type'].indexOf(`${CTX.owl}DatatypeProperty`) > -1) {
+        return parseDeclarationName({id: (decl['@id'] || '')})
+      }
+    })
+    .filter((id) => { return !!id })
+    .join(', ')
+}
+
+/*
+  For each vocabulary returns it's list of classes that looks like
+    [ ...
+      {
+        id: 'http://a.ml/vocabularies/data#Node',
+        name: 'Node',
+        page: 'cls_node.html'
+      }, ...
+    ]
+*/
+function collectVocabularyClasses (vocJson) {
+  return vocJson[`${CTX.amldoc}declares`]
+    .map((decl) => {
+      if (decl['@type'].indexOf(`${CTX.owl}Class`) > -1) {
+        return decl['@id']
+      }
+    })
+    .filter((id) => { return !!id })
+    .map((id) => {
+      return {
+        id: id,
+        name: parseDeclarationName({id: id}),
+        page: makeClassHtmlPageName({id: id})
+      }
+    })
 }
 
 /*
@@ -136,10 +174,10 @@ function renderTemplate (data, tmplName, htmlName, outDir) {
 }
 
 /* Parses class name by splitting it by / and # and picking last part. */
-function parseClassName (clsData) {
+function parseDeclarationName (clsData) {
   const afterSlash = clsData.id.split('/').slice(-1)[0]
   const afterHash = afterSlash.split('#').slice(-1)[0]
-  return afterHash.toLowerCase()
+  return afterHash
 }
 
 /* Copies CSS files needed for generated html to look nice. */
@@ -151,7 +189,7 @@ function copyCss (outDir) {
 }
 
 function makeClassHtmlPageName (cls) {
-  return `cls_${parseClassName(cls)}.html`
+  return `cls_${parseDeclarationName(cls).toLowerCase()}.html`
 }
 
 /* Runs all the logic. */
@@ -164,15 +202,17 @@ async function main () {
   fs.emptyDirSync(outDir)
 
   const graph = await getJsonLdGraph(argv.vocabulary)
-
   let doc = ldquery(graph, CTX)
+
   // Pick root vocabulary itself as a single doc
   doc = doc.query('[@type=meta:Vocabulary]')
 
   // Vocabularies
   console.log('Collecting vocabularies data')
   const vocsData = collectVocabulariesData(doc)
-  renderTemplate(vocsData, 'index.mustache', 'index.html', outDir)
+  renderTemplate(
+    {vocs: vocsData}, 'index.mustache',
+    'index.html', outDir)
 
   // Classes
   console.log('Collecting classes data')
