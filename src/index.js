@@ -39,15 +39,14 @@ async function getJsonLdGraph (fpathArg) {
         properties: name, description
       ...
     ]
-
-  Works on JSON instead of using querying API because the latter picks
-  first object in the order of definition instead of picking root
-  elements first.
 */
 function collectVocabulariesData (doc) {
   const vocabularies = doc.queryAll('amldoc:references')
   vocabularies.push(doc)
-  return vocabularies.map((voc) => {
+  const vocsData = vocabularies.map((voc) => {
+    // Works on JSON instead of using querying API because the latter
+    // picks first object in the order of definition instead of picking
+    // root elements first.
     let vocJson = voc.json()
     let data = {
       id: vocJson['@id'],
@@ -58,6 +57,7 @@ function collectVocabulariesData (doc) {
     data.classes = collectVocabularyClasses(vocJson)
     return data
   })
+  return removeDuplicatesById(vocsData)
 }
 
 /*
@@ -137,7 +137,7 @@ function collectClassesData (doc) {
         extends: term.queryAll('rdf:subClassOf @id')
       }
     })
-  return classTerms
+  return removeDuplicatesById(classTerms)
 }
 
 /*
@@ -176,7 +176,9 @@ function collectPropertiesData (doc) {
 
 /* Renders single Mustache template with data and writes it to html file */
 function renderTemplate (data, tmplName, htmlName, outDir) {
-  console.log(`Rendering "${tmplName}" template`)
+  console.log(
+    `Rendering "${tmplName}" template`,
+    data.id ? `for ${data.id}` : '')
   const inPath = path.join(TMPL_DIR, tmplName)
   const tmplStr = fs.readFileSync(inPath, 'utf-8')
   const htmlStr = Mustache.render(tmplStr, data)
@@ -202,6 +204,19 @@ function copyCss (outDir) {
 /* Makes class HTML page name. */
 function makeClassHtmlPageName (cls) {
   return `cls_${parseHashValue(cls.id).toLowerCase()}.html`
+}
+
+/* Removes array items with duplicate ['id'] property. */
+function removeDuplicatesById (items) {
+  const addedIds = []
+  const uniqueItems = []
+  items.forEach((item) => {
+    if (addedIds.indexOf(item.id) === -1) {
+      addedIds.push(item.id)
+      uniqueItems.push(item)
+    }
+  })
+  return uniqueItems
 }
 
 /* Runs all the logic. */

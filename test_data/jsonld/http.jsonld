@@ -1,6 +1,6 @@
 [
   {
-    "@id": "file://vocabularies/http.yaml",
+    "@id": "file://test_data/vocabularies/http.yaml",
     "@type": [
       "http://a.ml/vocabularies/meta#Vocabulary",
       "http://www.w3.org/2002/07/owl#Ontology",
@@ -8,7 +8,7 @@
     ],
     "http://www.w3.org/2002/07/owl#imports": [
       {
-        "@id": "file://vocabularies/http.yaml/vocabularyReference/doc",
+        "@id": "file://test_data/vocabularies/http.yaml/vocabularyReference/doc",
         "@type": [
           "http://a.ml/vocabularies/meta#VocabularyReference",
           "http://a.ml/vocabularies/document#DomainElement"
@@ -20,7 +20,7 @@
         ],
         "http://a.ml/vocabularies/document#Reference": [
           {
-            "@value": "file://vocabularies/aml_doc.yaml"
+            "@value": "file://test_data/vocabularies/aml_doc.yaml"
           }
         ],
         "http://a.ml/vocabularies/meta#base": [
@@ -30,7 +30,7 @@
         ]
       },
       {
-        "@id": "file://vocabularies/http.yaml/vocabularyReference/data",
+        "@id": "file://test_data/vocabularies/http.yaml/vocabularyReference/data",
         "@type": [
           "http://a.ml/vocabularies/meta#VocabularyReference",
           "http://a.ml/vocabularies/document#DomainElement"
@@ -42,7 +42,7 @@
         ],
         "http://a.ml/vocabularies/document#Reference": [
           {
-            "@value": "file://vocabularies/data_model.yaml"
+            "@value": "file://test_data/vocabularies/data_model.yaml"
           }
         ],
         "http://a.ml/vocabularies/meta#base": [
@@ -52,7 +52,7 @@
         ]
       },
       {
-        "@id": "file://vocabularies/http.yaml/vocabularyReference/security",
+        "@id": "file://test_data/vocabularies/http.yaml/vocabularyReference/security",
         "@type": [
           "http://a.ml/vocabularies/meta#VocabularyReference",
           "http://a.ml/vocabularies/document#DomainElement"
@@ -64,7 +64,7 @@
         ],
         "http://a.ml/vocabularies/document#Reference": [
           {
-            "@value": "file://vocabularies/security.yaml"
+            "@value": "file://test_data/vocabularies/security.yaml"
           }
         ],
         "http://a.ml/vocabularies/meta#base": [
@@ -74,7 +74,7 @@
         ]
       },
       {
-        "@id": "file://vocabularies/http.yaml/vocabularyReference/meta",
+        "@id": "file://test_data/vocabularies/http.yaml/vocabularyReference/meta",
         "@type": [
           "http://a.ml/vocabularies/meta#VocabularyReference",
           "http://a.ml/vocabularies/document#DomainElement"
@@ -86,7 +86,7 @@
         ],
         "http://a.ml/vocabularies/document#Reference": [
           {
-            "@value": "file://vocabularies/meta.yaml"
+            "@value": "file://test_data/vocabularies/meta.yaml"
           }
         ],
         "http://a.ml/vocabularies/meta#base": [
@@ -98,7 +98,7 @@
     ],
     "http://a.ml/vocabularies/meta#externals": [
       {
-        "@id": "file://vocabularies/http.yaml/externals/schema-org",
+        "@id": "file://test_data/vocabularies/http.yaml/externals/schema-org",
         "@type": [
           "http://www.w3.org/2002/07/owl#Ontology",
           "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -116,7 +116,7 @@
         ]
       },
       {
-        "@id": "file://vocabularies/http.yaml/externals/hydra",
+        "@id": "file://test_data/vocabularies/http.yaml/externals/hydra",
         "@type": [
           "http://www.w3.org/2002/07/owl#Ontology",
           "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -134,7 +134,7 @@
         ]
       },
       {
-        "@id": "file://vocabularies/http.yaml/externals/shacl",
+        "@id": "file://test_data/vocabularies/http.yaml/externals/shacl",
         "@type": [
           "http://www.w3.org/2002/07/owl#Ontology",
           "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -159,12 +159,12 @@
     ],
     "http://a.ml/vocabularies/document#location": [
       {
-        "@value": "file://vocabularies/http.yaml"
+        "@value": "http://a.ml/amf/default_document"
       }
     ],
     "http://a.ml/vocabularies/document#references": [
       {
-        "@id": "file://vocabularies/security.yaml",
+        "@id": "file://test_data/vocabularies/security.yaml",
         "@type": [
           "http://a.ml/vocabularies/meta#Vocabulary",
           "http://www.w3.org/2002/07/owl#Ontology",
@@ -172,7 +172,7 @@
         ],
         "http://www.w3.org/2002/07/owl#imports": [
           {
-            "@id": "file://vocabularies/security.yaml/vocabularyReference/doc",
+            "@id": "file://test_data/vocabularies/security.yaml/vocabularyReference/doc",
             "@type": [
               "http://a.ml/vocabularies/meta#VocabularyReference",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -184,7 +184,7 @@
             ],
             "http://a.ml/vocabularies/document#Reference": [
               {
-                "@value": "file://vocabularies/aml_doc.yaml"
+                "@value": "file://test_data/vocabularies/aml_doc.yaml"
               }
             ],
             "http://a.ml/vocabularies/meta#base": [
@@ -194,7 +194,7 @@
             ]
           },
           {
-            "@id": "file://vocabularies/security.yaml/vocabularyReference/data",
+            "@id": "file://test_data/vocabularies/security.yaml/vocabularyReference/data",
             "@type": [
               "http://a.ml/vocabularies/meta#VocabularyReference",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -206,7 +206,7 @@
             ],
             "http://a.ml/vocabularies/document#Reference": [
               {
-                "@value": "file://vocabularies/data_model.yaml"
+                "@value": "file://test_data/vocabularies/data_model.yaml"
               }
             ],
             "http://a.ml/vocabularies/meta#base": [
@@ -218,7 +218,7 @@
         ],
         "http://a.ml/vocabularies/meta#externals": [
           {
-            "@id": "file://vocabularies/security.yaml/externals/schema-org",
+            "@id": "file://test_data/vocabularies/security.yaml/externals/schema-org",
             "@type": [
               "http://www.w3.org/2002/07/owl#Ontology",
               "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -236,7 +236,7 @@
             ]
           },
           {
-            "@id": "file://vocabularies/security.yaml/externals/hydra",
+            "@id": "file://test_data/vocabularies/security.yaml/externals/hydra",
             "@type": [
               "http://www.w3.org/2002/07/owl#Ontology",
               "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -254,7 +254,7 @@
             ]
           },
           {
-            "@id": "file://vocabularies/security.yaml/externals/shacl",
+            "@id": "file://test_data/vocabularies/security.yaml/externals/shacl",
             "@type": [
               "http://www.w3.org/2002/07/owl#Ontology",
               "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -1065,12 +1065,12 @@
         ],
         "http://a.ml/vocabularies/document#location": [
           {
-            "@value": "file://vocabularies/security.yaml"
+            "@value": "file://test_data/vocabularies/security.yaml"
           }
         ],
         "http://a.ml/vocabularies/document#references": [
           {
-            "@id": "file://vocabularies/aml_doc.yaml",
+            "@id": "file://test_data/vocabularies/aml_doc.yaml",
             "@type": [
               "http://a.ml/vocabularies/meta#Vocabulary",
               "http://www.w3.org/2002/07/owl#Ontology",
@@ -1078,7 +1078,7 @@
             ],
             "http://www.w3.org/2002/07/owl#imports": [
               {
-                "@id": "file://vocabularies/aml_doc.yaml/vocabularyReference/meta",
+                "@id": "file://test_data/vocabularies/aml_doc.yaml/vocabularyReference/meta",
                 "@type": [
                   "http://a.ml/vocabularies/meta#VocabularyReference",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -1090,7 +1090,7 @@
                 ],
                 "http://a.ml/vocabularies/document#Reference": [
                   {
-                    "@value": "file://vocabularies/meta.yaml"
+                    "@value": "file://test_data/vocabularies/meta.yaml"
                   }
                 ],
                 "http://a.ml/vocabularies/meta#base": [
@@ -1102,7 +1102,7 @@
             ],
             "http://a.ml/vocabularies/meta#externals": [
               {
-                "@id": "file://vocabularies/aml_doc.yaml/externals/schema-org",
+                "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/schema-org",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Ontology",
                   "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -1120,7 +1120,7 @@
                 ]
               },
               {
-                "@id": "file://vocabularies/aml_doc.yaml/externals/shacl",
+                "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/shacl",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Ontology",
                   "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -1138,7 +1138,7 @@
                 ]
               },
               {
-                "@id": "file://vocabularies/aml_doc.yaml/externals/rdf",
+                "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/rdf",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Ontology",
                   "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -1156,7 +1156,7 @@
                 ]
               },
               {
-                "@id": "file://vocabularies/aml_doc.yaml/externals/rdfs",
+                "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/rdfs",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Ontology",
                   "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -2553,12 +2553,12 @@
             ],
             "http://a.ml/vocabularies/document#location": [
               {
-                "@value": "file://vocabularies/aml_doc.yaml"
+                "@value": "file://test_data/vocabularies/aml_doc.yaml"
               }
             ],
             "http://a.ml/vocabularies/document#references": [
               {
-                "@id": "file://vocabularies/meta.yaml",
+                "@id": "file://test_data/vocabularies/meta.yaml",
                 "@type": [
                   "http://a.ml/vocabularies/meta#Vocabulary",
                   "http://www.w3.org/2002/07/owl#Ontology",
@@ -2596,7 +2596,7 @@
                 ],
                 "http://a.ml/vocabularies/document#location": [
                   {
-                    "@value": "file://vocabularies/meta.yaml"
+                    "@value": "file://test_data/vocabularies/meta.yaml"
                   }
                 ],
                 "http://a.ml/vocabularies/document#usage": [
@@ -2613,7 +2613,7 @@
             ]
           },
           {
-            "@id": "file://vocabularies/data_model.yaml",
+            "@id": "file://test_data/vocabularies/data_model.yaml",
             "@type": [
               "http://a.ml/vocabularies/meta#Vocabulary",
               "http://www.w3.org/2002/07/owl#Ontology",
@@ -2621,7 +2621,7 @@
             ],
             "http://www.w3.org/2002/07/owl#imports": [
               {
-                "@id": "file://vocabularies/data_model.yaml/vocabularyReference/doc",
+                "@id": "file://test_data/vocabularies/data_model.yaml/vocabularyReference/doc",
                 "@type": [
                   "http://a.ml/vocabularies/meta#VocabularyReference",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -2633,7 +2633,7 @@
                 ],
                 "http://a.ml/vocabularies/document#Reference": [
                   {
-                    "@value": "file://vocabularies/aml_doc.yaml"
+                    "@value": "file://test_data/vocabularies/aml_doc.yaml"
                   }
                 ],
                 "http://a.ml/vocabularies/meta#base": [
@@ -2645,7 +2645,7 @@
             ],
             "http://a.ml/vocabularies/meta#externals": [
               {
-                "@id": "file://vocabularies/data_model.yaml/externals/rdf",
+                "@id": "file://test_data/vocabularies/data_model.yaml/externals/rdf",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Ontology",
                   "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -2663,7 +2663,7 @@
                 ]
               },
               {
-                "@id": "file://vocabularies/data_model.yaml/externals/schema-org",
+                "@id": "file://test_data/vocabularies/data_model.yaml/externals/schema-org",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Ontology",
                   "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -2922,12 +2922,12 @@
             ],
             "http://a.ml/vocabularies/document#location": [
               {
-                "@value": "file://vocabularies/data_model.yaml"
+                "@value": "file://test_data/vocabularies/data_model.yaml"
               }
             ],
             "http://a.ml/vocabularies/document#references": [
               {
-                "@id": "file://vocabularies/aml_doc.yaml",
+                "@id": "file://test_data/vocabularies/aml_doc.yaml",
                 "@type": [
                   "http://a.ml/vocabularies/meta#Vocabulary",
                   "http://www.w3.org/2002/07/owl#Ontology",
@@ -2935,7 +2935,7 @@
                 ],
                 "http://www.w3.org/2002/07/owl#imports": [
                   {
-                    "@id": "file://vocabularies/aml_doc.yaml/vocabularyReference/meta",
+                    "@id": "file://test_data/vocabularies/aml_doc.yaml/vocabularyReference/meta",
                     "@type": [
                       "http://a.ml/vocabularies/meta#VocabularyReference",
                       "http://a.ml/vocabularies/document#DomainElement"
@@ -2947,7 +2947,7 @@
                     ],
                     "http://a.ml/vocabularies/document#Reference": [
                       {
-                        "@value": "file://vocabularies/meta.yaml"
+                        "@value": "file://test_data/vocabularies/meta.yaml"
                       }
                     ],
                     "http://a.ml/vocabularies/meta#base": [
@@ -2959,7 +2959,7 @@
                 ],
                 "http://a.ml/vocabularies/meta#externals": [
                   {
-                    "@id": "file://vocabularies/aml_doc.yaml/externals/schema-org",
+                    "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/schema-org",
                     "@type": [
                       "http://www.w3.org/2002/07/owl#Ontology",
                       "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -2977,7 +2977,7 @@
                     ]
                   },
                   {
-                    "@id": "file://vocabularies/aml_doc.yaml/externals/shacl",
+                    "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/shacl",
                     "@type": [
                       "http://www.w3.org/2002/07/owl#Ontology",
                       "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -2995,7 +2995,7 @@
                     ]
                   },
                   {
-                    "@id": "file://vocabularies/aml_doc.yaml/externals/rdf",
+                    "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/rdf",
                     "@type": [
                       "http://www.w3.org/2002/07/owl#Ontology",
                       "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -3013,7 +3013,7 @@
                     ]
                   },
                   {
-                    "@id": "file://vocabularies/aml_doc.yaml/externals/rdfs",
+                    "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/rdfs",
                     "@type": [
                       "http://www.w3.org/2002/07/owl#Ontology",
                       "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -4410,12 +4410,12 @@
                 ],
                 "http://a.ml/vocabularies/document#location": [
                   {
-                    "@value": "file://vocabularies/aml_doc.yaml"
+                    "@value": "file://test_data/vocabularies/aml_doc.yaml"
                   }
                 ],
                 "http://a.ml/vocabularies/document#references": [
                   {
-                    "@id": "file://vocabularies/meta.yaml",
+                    "@id": "file://test_data/vocabularies/meta.yaml",
                     "@type": [
                       "http://a.ml/vocabularies/meta#Vocabulary",
                       "http://www.w3.org/2002/07/owl#Ontology",
@@ -4453,7 +4453,7 @@
                     ],
                     "http://a.ml/vocabularies/document#location": [
                       {
-                        "@value": "file://vocabularies/meta.yaml"
+                        "@value": "file://test_data/vocabularies/meta.yaml"
                       }
                     ],
                     "http://a.ml/vocabularies/document#usage": [
@@ -4484,7 +4484,7 @@
         ]
       },
       {
-        "@id": "file://vocabularies/aml_doc.yaml",
+        "@id": "file://test_data/vocabularies/aml_doc.yaml",
         "@type": [
           "http://a.ml/vocabularies/meta#Vocabulary",
           "http://www.w3.org/2002/07/owl#Ontology",
@@ -4492,7 +4492,7 @@
         ],
         "http://www.w3.org/2002/07/owl#imports": [
           {
-            "@id": "file://vocabularies/aml_doc.yaml/vocabularyReference/meta",
+            "@id": "file://test_data/vocabularies/aml_doc.yaml/vocabularyReference/meta",
             "@type": [
               "http://a.ml/vocabularies/meta#VocabularyReference",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -4504,7 +4504,7 @@
             ],
             "http://a.ml/vocabularies/document#Reference": [
               {
-                "@value": "file://vocabularies/meta.yaml"
+                "@value": "file://test_data/vocabularies/meta.yaml"
               }
             ],
             "http://a.ml/vocabularies/meta#base": [
@@ -4516,7 +4516,7 @@
         ],
         "http://a.ml/vocabularies/meta#externals": [
           {
-            "@id": "file://vocabularies/aml_doc.yaml/externals/schema-org",
+            "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/schema-org",
             "@type": [
               "http://www.w3.org/2002/07/owl#Ontology",
               "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -4534,7 +4534,7 @@
             ]
           },
           {
-            "@id": "file://vocabularies/aml_doc.yaml/externals/shacl",
+            "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/shacl",
             "@type": [
               "http://www.w3.org/2002/07/owl#Ontology",
               "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -4552,7 +4552,7 @@
             ]
           },
           {
-            "@id": "file://vocabularies/aml_doc.yaml/externals/rdf",
+            "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/rdf",
             "@type": [
               "http://www.w3.org/2002/07/owl#Ontology",
               "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -4570,7 +4570,7 @@
             ]
           },
           {
-            "@id": "file://vocabularies/aml_doc.yaml/externals/rdfs",
+            "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/rdfs",
             "@type": [
               "http://www.w3.org/2002/07/owl#Ontology",
               "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -5967,12 +5967,12 @@
         ],
         "http://a.ml/vocabularies/document#location": [
           {
-            "@value": "file://vocabularies/aml_doc.yaml"
+            "@value": "file://test_data/vocabularies/aml_doc.yaml"
           }
         ],
         "http://a.ml/vocabularies/document#references": [
           {
-            "@id": "file://vocabularies/meta.yaml",
+            "@id": "file://test_data/vocabularies/meta.yaml",
             "@type": [
               "http://a.ml/vocabularies/meta#Vocabulary",
               "http://www.w3.org/2002/07/owl#Ontology",
@@ -6010,7 +6010,7 @@
             ],
             "http://a.ml/vocabularies/document#location": [
               {
-                "@value": "file://vocabularies/meta.yaml"
+                "@value": "file://test_data/vocabularies/meta.yaml"
               }
             ],
             "http://a.ml/vocabularies/document#usage": [
@@ -6027,7 +6027,7 @@
         ]
       },
       {
-        "@id": "file://vocabularies/data_model.yaml",
+        "@id": "file://test_data/vocabularies/data_model.yaml",
         "@type": [
           "http://a.ml/vocabularies/meta#Vocabulary",
           "http://www.w3.org/2002/07/owl#Ontology",
@@ -6035,7 +6035,7 @@
         ],
         "http://www.w3.org/2002/07/owl#imports": [
           {
-            "@id": "file://vocabularies/data_model.yaml/vocabularyReference/doc",
+            "@id": "file://test_data/vocabularies/data_model.yaml/vocabularyReference/doc",
             "@type": [
               "http://a.ml/vocabularies/meta#VocabularyReference",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -6047,7 +6047,7 @@
             ],
             "http://a.ml/vocabularies/document#Reference": [
               {
-                "@value": "file://vocabularies/aml_doc.yaml"
+                "@value": "file://test_data/vocabularies/aml_doc.yaml"
               }
             ],
             "http://a.ml/vocabularies/meta#base": [
@@ -6059,7 +6059,7 @@
         ],
         "http://a.ml/vocabularies/meta#externals": [
           {
-            "@id": "file://vocabularies/data_model.yaml/externals/rdf",
+            "@id": "file://test_data/vocabularies/data_model.yaml/externals/rdf",
             "@type": [
               "http://www.w3.org/2002/07/owl#Ontology",
               "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -6077,7 +6077,7 @@
             ]
           },
           {
-            "@id": "file://vocabularies/data_model.yaml/externals/schema-org",
+            "@id": "file://test_data/vocabularies/data_model.yaml/externals/schema-org",
             "@type": [
               "http://www.w3.org/2002/07/owl#Ontology",
               "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -6336,12 +6336,12 @@
         ],
         "http://a.ml/vocabularies/document#location": [
           {
-            "@value": "file://vocabularies/data_model.yaml"
+            "@value": "file://test_data/vocabularies/data_model.yaml"
           }
         ],
         "http://a.ml/vocabularies/document#references": [
           {
-            "@id": "file://vocabularies/aml_doc.yaml",
+            "@id": "file://test_data/vocabularies/aml_doc.yaml",
             "@type": [
               "http://a.ml/vocabularies/meta#Vocabulary",
               "http://www.w3.org/2002/07/owl#Ontology",
@@ -6349,7 +6349,7 @@
             ],
             "http://www.w3.org/2002/07/owl#imports": [
               {
-                "@id": "file://vocabularies/aml_doc.yaml/vocabularyReference/meta",
+                "@id": "file://test_data/vocabularies/aml_doc.yaml/vocabularyReference/meta",
                 "@type": [
                   "http://a.ml/vocabularies/meta#VocabularyReference",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -6361,7 +6361,7 @@
                 ],
                 "http://a.ml/vocabularies/document#Reference": [
                   {
-                    "@value": "file://vocabularies/meta.yaml"
+                    "@value": "file://test_data/vocabularies/meta.yaml"
                   }
                 ],
                 "http://a.ml/vocabularies/meta#base": [
@@ -6373,7 +6373,7 @@
             ],
             "http://a.ml/vocabularies/meta#externals": [
               {
-                "@id": "file://vocabularies/aml_doc.yaml/externals/schema-org",
+                "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/schema-org",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Ontology",
                   "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -6391,7 +6391,7 @@
                 ]
               },
               {
-                "@id": "file://vocabularies/aml_doc.yaml/externals/shacl",
+                "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/shacl",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Ontology",
                   "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -6409,7 +6409,7 @@
                 ]
               },
               {
-                "@id": "file://vocabularies/aml_doc.yaml/externals/rdf",
+                "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/rdf",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Ontology",
                   "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -6427,7 +6427,7 @@
                 ]
               },
               {
-                "@id": "file://vocabularies/aml_doc.yaml/externals/rdfs",
+                "@id": "file://test_data/vocabularies/aml_doc.yaml/externals/rdfs",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Ontology",
                   "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -7824,12 +7824,12 @@
             ],
             "http://a.ml/vocabularies/document#location": [
               {
-                "@value": "file://vocabularies/aml_doc.yaml"
+                "@value": "file://test_data/vocabularies/aml_doc.yaml"
               }
             ],
             "http://a.ml/vocabularies/document#references": [
               {
-                "@id": "file://vocabularies/meta.yaml",
+                "@id": "file://test_data/vocabularies/meta.yaml",
                 "@type": [
                   "http://a.ml/vocabularies/meta#Vocabulary",
                   "http://www.w3.org/2002/07/owl#Ontology",
@@ -7867,7 +7867,7 @@
                 ],
                 "http://a.ml/vocabularies/document#location": [
                   {
-                    "@value": "file://vocabularies/meta.yaml"
+                    "@value": "file://test_data/vocabularies/meta.yaml"
                   }
                 ],
                 "http://a.ml/vocabularies/document#usage": [
@@ -7891,7 +7891,7 @@
         ]
       },
       {
-        "@id": "file://vocabularies/meta.yaml",
+        "@id": "file://test_data/vocabularies/meta.yaml",
         "@type": [
           "http://a.ml/vocabularies/meta#Vocabulary",
           "http://www.w3.org/2002/07/owl#Ontology",
@@ -7929,7 +7929,7 @@
         ],
         "http://a.ml/vocabularies/document#location": [
           {
-            "@value": "file://vocabularies/meta.yaml"
+            "@value": "file://test_data/vocabularies/meta.yaml"
           }
         ],
         "http://a.ml/vocabularies/document#usage": [
