@@ -5,7 +5,10 @@ const path = require('path')
 const fs = require('fs-extra')
 const Mustache = require('mustache')
 
+/** Mustache templates directory path. */
 const TMPL_DIR = path.join(__dirname, '..', 'templates')
+
+/** Default context for querying JSON-LD document with ld-query. */
 const CTX = {
   amldoc: 'http://a.ml/vocabularies/document#',
   meta: 'http://a.ml/vocabularies/meta#',
@@ -14,13 +17,17 @@ const CTX = {
   schema: 'http://schema.org/'
 }
 
-/* Converts AML Vocabulary to resolved JSON-LD AMF Graph. */
-async function getJsonLdGraph (fpathArg) {
-  const hasProtocol = fpathArg.startsWith('http://') ||
-    fpathArg.startsWith('https://') ||
-    fpathArg.startsWith('file://')
-  fpathArg = hasProtocol ? fpathArg : `file://${fpathArg}`
-  const model = await new amf.Aml10Parser().parseFileAsync(fpathArg)
+/** Converts AML Vocabulary to resolved JSON-LD AMF Graph.
+ *
+ * @param pathArg File url or path.
+ * @return Object containing resolved JSON-LD AMF Graph of the vocabulary.
+ */
+async function getJsonLdGraph (pathArg) {
+  const hasProtocol = pathArg.startsWith('http://') ||
+    pathArg.startsWith('https://') ||
+    pathArg.startsWith('file://')
+  pathArg = hasProtocol ? pathArg : `file://${pathArg}`
+  const model = await new amf.Aml10Parser().parseFileAsync(pathArg)
   const graphStr = await amf.AMF.amfGraphGenerator().generateString(model)
   const graphModel = await amf.AMF.amfGraphParser().parseStringAsync(graphStr)
   const graphResolved = await amf.AMF.resolveAmfGraph(graphModel)
@@ -28,22 +35,15 @@ async function getJsonLdGraph (fpathArg) {
   return JSON.parse(graphStrResolved)
 }
 
-/*
-  Outputs array of Vocabularies data which looks like:
-    [
-      ...
-      { id: 'file://test_data/vocabularies/data_model.yaml',
-        base: 'http://a.ml/vocabularies/data#',
-        usage: 'Vocabulary ...',
-        classes: [ {
-          clsId: 'http://a.ml/vocabularies/data#Node',
-          name: 'Node',
-          page: 'cls_node.html'
-        }, ... ],
-        properties: name, description
-      ...
-    ]
-*/
+/** Collects vocabularies data in an array.
+ *
+ * @param doc Root Vocabulary object.
+ * @return Array containing vocabularies data. Has format:
+ *    [
+ *      {id, base, usage, properties, classes: [{clsId, clsName, page}, ...]},
+ *      ...
+ *    ]
+ */
 function collectVocabulariesData (doc) {
   const vocabularies = doc.queryAll('amldoc:references')
   vocabularies.push(doc)
@@ -65,10 +65,11 @@ function collectVocabulariesData (doc) {
   return removeDuplicatesById(vocsData)
 }
 
-/*
-  For each vocabulary returns it's list of properties names as a string.
-  E.g.: "name, description"
-*/
+/** For each vocabulary returns a list of it's properties names as a string.
+ *
+ * @param vocJson Vocabulary JSON data.
+ * @return String of vocabulary properties names joined with comma.
+ */
 function collectVocabularyProperties (vocJson) {
   return vocJson[`${CTX.amldoc}declares`]
     .map((decl) => {
@@ -80,16 +81,12 @@ function collectVocabularyProperties (vocJson) {
     .join(', ')
 }
 
-/*
-  For each vocabulary returns it's list of classes that looks like
-    [ ...
-      {
-        clsId: 'http://a.ml/vocabularies/data#Node',
-        name: 'Node',
-        page: 'cls_node.html'
-      }, ...
-    ]
-*/
+/** For each vocabulary returns an array of it's classes data.
+ *
+ * @param vocJson Vocabulary JSON data.
+ * @return Array of vocabulary classes data. Has format:
+ *    [{clsId, clsName, page}, ...]
+ */
 function collectVocabularyClasses (vocJson) {
   return vocJson[`${CTX.amldoc}declares`]
     .map((decl) => {
@@ -107,23 +104,19 @@ function collectVocabularyClasses (vocJson) {
     })
 }
 
-/*
-  Outputs array of classTerms data which looks like:
-    [
-      ...
-      { id: 'http://a.ml/vocabularies/document#DomainElement',
-        name: 'DomainElement',
-        displayName: 'Domain element',
-        description: 'asd',
-        properties:
-         [ { name: 'extends',
-             description: 'Target asdasd',
-             range: 'http://www.w3.org/2001/XMLSchema#anyUri',
-             parent: null } ],
-        extends: [ http://a.ml/vocabularies/document#Something ] },
-      ...
-    ]
-*/
+/** Outputs array of vocabulary classTerms data.
+ *
+ * @param doc Root Vocabulary object.
+ * @return Array of vocabulary classTerms data. Has format:
+ *   [{
+ *      id, name, displayName, description,
+ *      properties: [{
+ *        propId, propName, desc, range, rangeName, propExtends,
+ *        propExtendsName
+ *      }, ...],
+ *      extends: ['someId', ...]
+ *   }, ...]
+ */
 function collectClassesData (doc) {
   const propsMap = collectPropertiesData(doc)
   const classTerms = doc.queryAll('amldoc:declares[@type=owl:Class]')
@@ -145,21 +138,17 @@ function collectClassesData (doc) {
   return removeDuplicatesById(classTerms)
 }
 
-/*
-  Outputs map of propertyTerms ids to its data which looks like:
-    {
-       ...
-      'http://a.ml/vocabularies/document#displayName': {
-        'propName': 'display name',
-        'desc': 'Human readable name for the example',
-        'range': 'http://www.w3.org/2001/XMLSchema#string',
-        'rangeName': 'string',
-        'parent': 'http://schema.org/name',
-        'parentName': 'name'
-      },
-      ...
-    }
-*/
+/** Outputs map of propertyTerms ids to their data.
+ *
+ * @param doc Root Vocabulary object.
+ * @return Map of propertyTerms ids to their data. Has format:
+ *    {
+ *       someId: {
+ *         propId, propName, desc, range, rangeName, propExtends,
+ *         propExtendsName
+ *       }
+ *    }
+ */
 function collectPropertiesData (doc) {
   let propsMap = {}
   const propertyTerms = doc.queryAll(
@@ -179,7 +168,13 @@ function collectPropertiesData (doc) {
   return propsMap
 }
 
-/* Renders single Mustache template with data and writes it to html file */
+/** Renders single Mustache template with data and writes it to html file.
+ *
+ * @param data Data to be renreder in a template.
+ * @param tmplName Mustache template name.
+ * @param htmlName Output HTML template name.
+ * @param outDir Output directory path.
+ */
 function renderTemplate (data, tmplName, htmlName, outDir) {
   console.log(
     `Rendering "${tmplName}" template`,
@@ -191,14 +186,20 @@ function renderTemplate (data, tmplName, htmlName, outDir) {
   fs.writeFileSync(outPath, htmlStr)
 }
 
-/* Parses class name by splitting it by / and # and picking last part. */
+/** Parses class name by splitting it by / and # and picking last part.
+ *
+ * @param id JSON-LD object @id.
+ */
 function parseHashValue (id) {
   const afterSlash = (id || '').split('/').slice(-1)[0]
   const afterHash = afterSlash.split('#').slice(-1)[0]
   return afterHash
 }
 
-/* Copies CSS files needed for generated html to look nice. */
+/** Copies CSS files needed for generated HTML page to look nice.
+ *
+ * @param outDir Generated HTML output directory.
+ */
 function copyCss (outDir) {
   const tmplCssDir = path.join(TMPL_DIR, 'css')
   const outCssDir = path.join(outDir, 'css')
@@ -206,12 +207,18 @@ function copyCss (outDir) {
   fs.copySync(tmplCssDir, outCssDir)
 }
 
-/* Makes class HTML page name. */
+/** Makes class HTML page name.
+ *
+ * @param cls JSON-LD class object of format {id: someId}.
+ */
 function makeClassHtmlPageName (cls) {
   return `cls_${parseHashValue(cls.id).toLowerCase()}.html`
 }
 
-/* Removes array items with duplicate ['id'] property. */
+/** Removes array items with duplicate ['id'] property.
+ *
+ * @param items Array of items with .id property.
+ */
 function removeDuplicatesById (items) {
   const addedIds = []
   const uniqueItems = []
@@ -224,7 +231,7 @@ function removeDuplicatesById (items) {
   return uniqueItems
 }
 
-/* Runs all the logic. */
+/** Runs all the logic. */
 async function main () {
   await amf.AMF.init()
   const argv = parseArgs(process.argv.slice(2))
