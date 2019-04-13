@@ -16,7 +16,11 @@ const CTX = {
 
 /* Converts AML Vocabulary to resolved JSON-LD AMF Graph. */
 async function getJsonLdGraph (fpathArg) {
-  const model = await new amf.Aml10Parser().parseFileAsync(`file://${fpathArg}`)
+  const hasProtocol = fpathArg.startsWith('http://') ||
+    fpathArg.startsWith('https://') ||
+    fpathArg.startsWith('file://')
+  fpathArg = hasProtocol ? fpathArg : `file://${fpathArg}`
+  const model = await new amf.Aml10Parser().parseFileAsync(fpathArg)
   const graphStr = await amf.AMF.amfGraphGenerator().generateString(model)
   const graphModel = await amf.AMF.amfGraphParser().parseStringAsync(graphStr)
   const graphResolved = await amf.AMF.resolveAmfGraph(graphModel)
@@ -50,6 +54,7 @@ function collectVocabulariesData (doc) {
     let vocJson = voc.json()
     let data = {
       id: vocJson['@id'],
+      name: parseHashValue(vocJson['@id']),
       base: vocJson[`${CTX.meta}base`][0]['@value'],
       usage: vocJson[`${CTX.amldoc}usage`][0]['@value']
     }
@@ -96,7 +101,7 @@ function collectVocabularyClasses (vocJson) {
     .map((id) => {
       return {
         clsId: id,
-        name: parseHashValue(id),
+        clsName: parseHashValue(id),
         page: makeClassHtmlPageName({id: id})
       }
     })

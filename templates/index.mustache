@@ -13,14 +13,15 @@
       {{#vocs}}
         <hr>
         <div class="voc-info">
-          {{#id}}<h2>{{id}}</h2>{{/id}}
+          {{#name}}<h2>{{name}}</h2>{{/name}}
+          {{#id}}<p><b>ID:</b> {{id}}</p>{{/id}}
           {{#base}}<p><b>Base:</b> {{base}}</p>{{/base}}
           {{#usage}}<p><b>Usage:</b> {{usage}}</p>{{/usage}}
           {{#properties}}<p><b>Properties:</b> <samp>{{properties}}</samp></p>{{/properties}}
           <p><b>Classes:</b>{{^classes}} None{{/classes}}</p>
           <ul>
             {{#classes}}
-              <li><a href="{{page}}" title="{{clsId}}">{{name}}</a></li>
+              <li><a href="{{page}}" title="{{clsId}}">{{clsName}}</a></li>
             {{/classes}}
           </ul>
         </div>
