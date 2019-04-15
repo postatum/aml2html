@@ -12,6 +12,7 @@
     "mustache": "^3.0.1"
   },
   "scripts": {
-    "vocabulary2html": "node src/vocabulary.js"
+    "vocabulary2html": "node src/vocabulary.js",
+    "dialect2html": "node src/dialect.js"
   }
 }
