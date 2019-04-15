@@ -48,7 +48,10 @@
                 <td>{{propName}}</td>
                 <td>{{propId}}</td>
                 <td><a href="{{range}}" title="{{range}}">{{rangeName}}</a></td>
-                <td>{{#propExtends}}<a href="{{propExtends}}" title="{{propExtends}}">{{propExtendsName}}</a>{{/propExtends}}</td>
+                <td>
+                  {{#propExtends}}
+                    <a href="{{extId}}" title="{{extId}}">{{extName}}</a>
+                  {{/propExtends}}</td>
                 <td>{{#desc}}{{desc}}{{/desc}}</td>
               </tr>
             {{/properties}}

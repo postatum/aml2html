@@ -3,7 +3,6 @@ const parseArgs = require('minimist')
 const ldquery = require('ld-query')
 const path = require('path')
 const fs = require('fs-extra')
-
 const utils = require('./utils')
 
 /** Mustache vocabularies templates directory path. */
@@ -94,8 +93,8 @@ function collectVocabularyClasses (vocJson) {
  *   [{
  *      id, name, displayName, description,
  *      properties: [{
- *        propId, propName, desc, range, rangeName, propExtends,
- *        propExtendsName
+ *        propId, propName, desc, range, rangeName,
+ *        propExtends: [{extId, extName}]
  *      }, ...],
  *      extends: ['someId', ...]
  *   }, ...]
@@ -127,8 +126,8 @@ function collectClassesData (doc) {
  * @return Map of propertyTerms ids to their data. Has format:
  *    {
  *       someId: {
- *         propId, propName, desc, range, rangeName, propExtends,
- *         propExtendsName
+ *         propId, propName, desc, range, rangeName,
+ *         propExtends: [{extId, extName}]
  *       }
  *    }
  */
@@ -141,11 +140,15 @@ function collectPropertiesData (doc) {
       propId: term.query('@id'),
       desc: term.query('schema:description @value'),
       range: term.query('rdf:range @id'),
-      propExtends: term.query('rdf:subPropertyOf @id')
+      propExtends: term.queryAll('rdf:subPropertyOf @id').map((id) => {
+        return {
+          extId: id,
+          extName: utils.parseHashValue(id)
+        }
+      })
     }
     data.propName = utils.parseHashValue(data.propId)
     data.rangeName = utils.parseHashValue(data.range)
-    data.propExtendsName = utils.parseHashValue(data.propExtends)
     propsMap[term.query('@id')] = data
   })
   return propsMap
