@@ -2,7 +2,7 @@
 
 vocabulary: Music Vocabulary
 
-base: http://mulesoft.com/vocabularies/music_curation#
+base: http://a.ml/vocabularies/music_curation#
 
 uses:
   music: music.yaml

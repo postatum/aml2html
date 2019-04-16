@@ -134,14 +134,14 @@
             ],
             "http://a.ml/vocabularies/meta#base": [
               {
-                "@value": "http://mulesoft.com/vocabularies/music#"
+                "@value": "http://a.ml/vocabularies/music#"
               }
             ]
           }
         ],
         "http://a.ml/vocabularies/document#declares": [
           {
-            "@id": "http://mulesoft.com/vocabularies/music_curation#Playlist",
+            "@id": "http://a.ml/vocabularies/music_curation#Playlist",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -158,7 +158,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music_curation#PlaylistSelection",
+            "@id": "http://a.ml/vocabularies/music_curation#PlaylistSelection",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -175,21 +175,21 @@
             ],
             "http://a.ml/vocabularies/meta#properties": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#selectedTrack"
+                "@id": "http://a.ml/vocabularies/music_curation#selectedTrack"
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#score"
+                "@id": "http://a.ml/vocabularies/music_curation#score"
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#position"
+                "@id": "http://a.ml/vocabularies/music_curation#position"
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#author"
+                "@id": "http://a.ml/vocabularies/music_curation#author"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music_curation#author",
+            "@id": "http://a.ml/vocabularies/music_curation#author",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -207,7 +207,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music_curation#score",
+            "@id": "http://a.ml/vocabularies/music_curation#score",
             "@type": [
               "http://www.w3.org/2002/07/owl#ObjectProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -225,12 +225,12 @@
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#MusicalManifestation"
+                "@id": "http://a.ml/vocabularies/music#MusicalManifestation"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music_curation#contents",
+            "@id": "http://a.ml/vocabularies/music_curation#contents",
             "@type": [
               "http://www.w3.org/2002/07/owl#ObjectProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -248,12 +248,12 @@
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#PlaylistSelection"
+                "@id": "http://a.ml/vocabularies/music_curation#PlaylistSelection"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music_curation#catalogId",
+            "@id": "http://a.ml/vocabularies/music_curation#catalogId",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -276,7 +276,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music_curation#trackFrom",
+            "@id": "http://a.ml/vocabularies/music_curation#trackFrom",
             "@type": [
               "http://www.w3.org/2002/07/owl#ObjectProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -294,12 +294,12 @@
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Record"
+                "@id": "http://a.ml/vocabularies/music#Record"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music_curation#position",
+            "@id": "http://a.ml/vocabularies/music_curation#position",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -322,7 +322,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music_curation#spotifyId",
+            "@id": "http://a.ml/vocabularies/music_curation#spotifyId",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -345,12 +345,12 @@
             ],
             "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#catalogId"
+                "@id": "http://a.ml/vocabularies/music_curation#catalogId"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music_curation#selectedTrack",
+            "@id": "http://a.ml/vocabularies/music_curation#selectedTrack",
             "@type": [
               "http://www.w3.org/2002/07/owl#ObjectProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -368,14 +368,14 @@
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Track"
+                "@id": "http://a.ml/vocabularies/music#Track"
               }
             ]
           }
         ],
         "http://a.ml/vocabularies/meta#base": [
           {
-            "@value": "http://mulesoft.com/vocabularies/music_curation#"
+            "@value": "http://a.ml/vocabularies/music_curation#"
           }
         ],
         "http://a.ml/vocabularies/document#location": [
@@ -436,7 +436,7 @@
             ],
             "http://a.ml/vocabularies/document#declares": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#MusicalManifestation",
+                "@id": "http://a.ml/vocabularies/music#MusicalManifestation",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Class",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -453,30 +453,30 @@
                 ],
                 "http://a.ml/vocabularies/meta#properties": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#publisher"
+                    "@id": "http://a.ml/vocabularies/music#publisher"
                   },
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#releaseType"
+                    "@id": "http://a.ml/vocabularies/music#releaseType"
                   },
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#composer"
+                    "@id": "http://a.ml/vocabularies/music#composer"
                   }
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Vinyl",
+                "@id": "http://a.ml/vocabularies/music#Vinyl",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Class",
                   "http://a.ml/vocabularies/document#DomainElement"
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#Medium"
+                    "@id": "http://a.ml/vocabularies/music#Medium"
                   }
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#SoloMuiscArtist",
+                "@id": "http://a.ml/vocabularies/music#SoloMuiscArtist",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Class",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -493,7 +493,7 @@
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#MusicArtist"
+                    "@id": "http://a.ml/vocabularies/music#MusicArtist"
                   },
                   {
                     "@id": "http://schema.org/Person"
@@ -501,7 +501,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Stream",
+                "@id": "http://a.ml/vocabularies/music#Stream",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Class",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -513,12 +513,12 @@
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#Medium"
+                    "@id": "http://a.ml/vocabularies/music#Medium"
                   }
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Torrent",
+                "@id": "http://a.ml/vocabularies/music#Torrent",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Class",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -530,12 +530,12 @@
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#Medium"
+                    "@id": "http://a.ml/vocabularies/music#Medium"
                   }
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Medium",
+                "@id": "http://a.ml/vocabularies/music#Medium",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Class",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -552,7 +552,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Track",
+                "@id": "http://a.ml/vocabularies/music#Track",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Class",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -569,17 +569,17 @@
                 ],
                 "http://a.ml/vocabularies/meta#properties": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#trackNumber"
+                    "@id": "http://a.ml/vocabularies/music#trackNumber"
                   }
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#MusicalManifestation"
+                    "@id": "http://a.ml/vocabularies/music#MusicalManifestation"
                   }
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Label",
+                "@id": "http://a.ml/vocabularies/music#Label",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Class",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -596,12 +596,12 @@
                 ],
                 "http://a.ml/vocabularies/meta#properties": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#lc"
+                    "@id": "http://a.ml/vocabularies/music#lc"
                   }
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Record",
+                "@id": "http://a.ml/vocabularies/music#Record",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Class",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -618,20 +618,20 @@
                 ],
                 "http://a.ml/vocabularies/meta#properties": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#track"
+                    "@id": "http://a.ml/vocabularies/music#track"
                   },
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#trackCount"
+                    "@id": "http://a.ml/vocabularies/music#trackCount"
                   }
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#MusicalManifestation"
+                    "@id": "http://a.ml/vocabularies/music#MusicalManifestation"
                   }
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#MusicArtist",
+                "@id": "http://a.ml/vocabularies/music#MusicArtist",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Class",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -648,19 +648,19 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#CD",
+                "@id": "http://a.ml/vocabularies/music#CD",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Class",
                   "http://a.ml/vocabularies/document#DomainElement"
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#Medium"
+                    "@id": "http://a.ml/vocabularies/music#Medium"
                   }
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#MusicGroup",
+                "@id": "http://a.ml/vocabularies/music#MusicGroup",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Class",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -677,17 +677,17 @@
                 ],
                 "http://a.ml/vocabularies/meta#properties": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#member"
+                    "@id": "http://a.ml/vocabularies/music#member"
                   }
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#MusicArtist"
+                    "@id": "http://a.ml/vocabularies/music#MusicArtist"
                   }
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Performance",
+                "@id": "http://a.ml/vocabularies/music#Performance",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#Class",
                   "http://a.ml/vocabularies/document#DomainElement"
@@ -704,15 +704,15 @@
                 ],
                 "http://a.ml/vocabularies/meta#properties": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#performer"
+                    "@id": "http://a.ml/vocabularies/music#performer"
                   },
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#recorded_as"
+                    "@id": "http://a.ml/vocabularies/music#recorded_as"
                   }
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#catalogue_number",
+                "@id": "http://a.ml/vocabularies/music#catalogue_number",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#DatatypeProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -735,7 +735,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#duration",
+                "@id": "http://a.ml/vocabularies/music#duration",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#DatatypeProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -758,7 +758,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#genre",
+                "@id": "http://a.ml/vocabularies/music#genre",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#DatatypeProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -781,7 +781,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#releaseType",
+                "@id": "http://a.ml/vocabularies/music#releaseType",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#DatatypeProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -804,7 +804,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#recorded_as",
+                "@id": "http://a.ml/vocabularies/music#recorded_as",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#ObjectProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -822,12 +822,12 @@
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#range": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#MusicalManifestation"
+                    "@id": "http://a.ml/vocabularies/music#MusicalManifestation"
                   }
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#trackNumber",
+                "@id": "http://a.ml/vocabularies/music#trackNumber",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#DatatypeProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -850,7 +850,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#track",
+                "@id": "http://a.ml/vocabularies/music#track",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#ObjectProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -868,7 +868,7 @@
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#range": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#Track"
+                    "@id": "http://a.ml/vocabularies/music#Track"
                   }
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
@@ -878,7 +878,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#bpm",
+                "@id": "http://a.ml/vocabularies/music#bpm",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#DatatypeProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -901,7 +901,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#composer",
+                "@id": "http://a.ml/vocabularies/music#composer",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#DatatypeProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -919,7 +919,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#engineer",
+                "@id": "http://a.ml/vocabularies/music#engineer",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#DatatypeProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -937,7 +937,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#member",
+                "@id": "http://a.ml/vocabularies/music#member",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#DatatypeProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -955,7 +955,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#origin",
+                "@id": "http://a.ml/vocabularies/music#origin",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#ObjectProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -978,7 +978,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#publisher",
+                "@id": "http://a.ml/vocabularies/music#publisher",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#ObjectProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -996,12 +996,12 @@
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#range": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#Label"
+                    "@id": "http://a.ml/vocabularies/music#Label"
                   }
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#lc",
+                "@id": "http://a.ml/vocabularies/music#lc",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#DatatypeProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -1024,7 +1024,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#interpreter",
+                "@id": "http://a.ml/vocabularies/music#interpreter",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#ObjectProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -1042,12 +1042,12 @@
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#range": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#MusicArtist"
+                    "@id": "http://a.ml/vocabularies/music#MusicArtist"
                   }
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#trackCount",
+                "@id": "http://a.ml/vocabularies/music#trackCount",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#DatatypeProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -1070,7 +1070,7 @@
                 ]
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#performer",
+                "@id": "http://a.ml/vocabularies/music#performer",
                 "@type": [
                   "http://www.w3.org/2002/07/owl#ObjectProperty",
                   "http://a.ml/vocabularies/meta#Property",
@@ -1088,7 +1088,7 @@
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#range": [
                   {
-                    "@id": "http://mulesoft.com/vocabularies/music#MusicArtist"
+                    "@id": "http://a.ml/vocabularies/music#MusicArtist"
                   }
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
@@ -1100,7 +1100,7 @@
             ],
             "http://a.ml/vocabularies/meta#base": [
               {
-                "@value": "http://mulesoft.com/vocabularies/music#"
+                "@value": "http://a.ml/vocabularies/music#"
               }
             ],
             "http://a.ml/vocabularies/document#location": [
@@ -1164,7 +1164,7 @@
         ],
         "http://a.ml/vocabularies/document#declares": [
           {
-            "@id": "http://mulesoft.com/vocabularies/music#MusicalManifestation",
+            "@id": "http://a.ml/vocabularies/music#MusicalManifestation",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1181,30 +1181,30 @@
             ],
             "http://a.ml/vocabularies/meta#properties": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#publisher"
+                "@id": "http://a.ml/vocabularies/music#publisher"
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#releaseType"
+                "@id": "http://a.ml/vocabularies/music#releaseType"
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#composer"
+                "@id": "http://a.ml/vocabularies/music#composer"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#Vinyl",
+            "@id": "http://a.ml/vocabularies/music#Vinyl",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
             ],
             "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Medium"
+                "@id": "http://a.ml/vocabularies/music#Medium"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#SoloMuiscArtist",
+            "@id": "http://a.ml/vocabularies/music#SoloMuiscArtist",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1221,7 +1221,7 @@
             ],
             "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#MusicArtist"
+                "@id": "http://a.ml/vocabularies/music#MusicArtist"
               },
               {
                 "@id": "http://schema.org/Person"
@@ -1229,7 +1229,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#Stream",
+            "@id": "http://a.ml/vocabularies/music#Stream",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1241,12 +1241,12 @@
             ],
             "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Medium"
+                "@id": "http://a.ml/vocabularies/music#Medium"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#Torrent",
+            "@id": "http://a.ml/vocabularies/music#Torrent",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1258,12 +1258,12 @@
             ],
             "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Medium"
+                "@id": "http://a.ml/vocabularies/music#Medium"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#Medium",
+            "@id": "http://a.ml/vocabularies/music#Medium",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1280,7 +1280,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#Track",
+            "@id": "http://a.ml/vocabularies/music#Track",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1297,17 +1297,17 @@
             ],
             "http://a.ml/vocabularies/meta#properties": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#trackNumber"
+                "@id": "http://a.ml/vocabularies/music#trackNumber"
               }
             ],
             "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#MusicalManifestation"
+                "@id": "http://a.ml/vocabularies/music#MusicalManifestation"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#Label",
+            "@id": "http://a.ml/vocabularies/music#Label",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1324,12 +1324,12 @@
             ],
             "http://a.ml/vocabularies/meta#properties": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#lc"
+                "@id": "http://a.ml/vocabularies/music#lc"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#Record",
+            "@id": "http://a.ml/vocabularies/music#Record",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1346,20 +1346,20 @@
             ],
             "http://a.ml/vocabularies/meta#properties": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#track"
+                "@id": "http://a.ml/vocabularies/music#track"
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#trackCount"
+                "@id": "http://a.ml/vocabularies/music#trackCount"
               }
             ],
             "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#MusicalManifestation"
+                "@id": "http://a.ml/vocabularies/music#MusicalManifestation"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#MusicArtist",
+            "@id": "http://a.ml/vocabularies/music#MusicArtist",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1376,19 +1376,19 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#CD",
+            "@id": "http://a.ml/vocabularies/music#CD",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
             ],
             "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Medium"
+                "@id": "http://a.ml/vocabularies/music#Medium"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#MusicGroup",
+            "@id": "http://a.ml/vocabularies/music#MusicGroup",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1405,17 +1405,17 @@
             ],
             "http://a.ml/vocabularies/meta#properties": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#member"
+                "@id": "http://a.ml/vocabularies/music#member"
               }
             ],
             "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#MusicArtist"
+                "@id": "http://a.ml/vocabularies/music#MusicArtist"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#Performance",
+            "@id": "http://a.ml/vocabularies/music#Performance",
             "@type": [
               "http://www.w3.org/2002/07/owl#Class",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1432,15 +1432,15 @@
             ],
             "http://a.ml/vocabularies/meta#properties": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#performer"
+                "@id": "http://a.ml/vocabularies/music#performer"
               },
               {
-                "@id": "http://mulesoft.com/vocabularies/music#recorded_as"
+                "@id": "http://a.ml/vocabularies/music#recorded_as"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#catalogue_number",
+            "@id": "http://a.ml/vocabularies/music#catalogue_number",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1463,7 +1463,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#duration",
+            "@id": "http://a.ml/vocabularies/music#duration",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1486,7 +1486,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#genre",
+            "@id": "http://a.ml/vocabularies/music#genre",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1509,7 +1509,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#releaseType",
+            "@id": "http://a.ml/vocabularies/music#releaseType",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1532,7 +1532,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#recorded_as",
+            "@id": "http://a.ml/vocabularies/music#recorded_as",
             "@type": [
               "http://www.w3.org/2002/07/owl#ObjectProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1550,12 +1550,12 @@
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#MusicalManifestation"
+                "@id": "http://a.ml/vocabularies/music#MusicalManifestation"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#trackNumber",
+            "@id": "http://a.ml/vocabularies/music#trackNumber",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1578,7 +1578,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#track",
+            "@id": "http://a.ml/vocabularies/music#track",
             "@type": [
               "http://www.w3.org/2002/07/owl#ObjectProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1596,7 +1596,7 @@
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Track"
+                "@id": "http://a.ml/vocabularies/music#Track"
               }
             ],
             "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
@@ -1606,7 +1606,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#bpm",
+            "@id": "http://a.ml/vocabularies/music#bpm",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1629,7 +1629,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#composer",
+            "@id": "http://a.ml/vocabularies/music#composer",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1647,7 +1647,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#engineer",
+            "@id": "http://a.ml/vocabularies/music#engineer",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1665,7 +1665,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#member",
+            "@id": "http://a.ml/vocabularies/music#member",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1683,7 +1683,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#origin",
+            "@id": "http://a.ml/vocabularies/music#origin",
             "@type": [
               "http://www.w3.org/2002/07/owl#ObjectProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1706,7 +1706,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#publisher",
+            "@id": "http://a.ml/vocabularies/music#publisher",
             "@type": [
               "http://www.w3.org/2002/07/owl#ObjectProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1724,12 +1724,12 @@
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#Label"
+                "@id": "http://a.ml/vocabularies/music#Label"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#lc",
+            "@id": "http://a.ml/vocabularies/music#lc",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1752,7 +1752,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#interpreter",
+            "@id": "http://a.ml/vocabularies/music#interpreter",
             "@type": [
               "http://www.w3.org/2002/07/owl#ObjectProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1770,12 +1770,12 @@
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#MusicArtist"
+                "@id": "http://a.ml/vocabularies/music#MusicArtist"
               }
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#trackCount",
+            "@id": "http://a.ml/vocabularies/music#trackCount",
             "@type": [
               "http://www.w3.org/2002/07/owl#DatatypeProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1798,7 +1798,7 @@
             ]
           },
           {
-            "@id": "http://mulesoft.com/vocabularies/music#performer",
+            "@id": "http://a.ml/vocabularies/music#performer",
             "@type": [
               "http://www.w3.org/2002/07/owl#ObjectProperty",
               "http://a.ml/vocabularies/meta#Property",
@@ -1816,7 +1816,7 @@
             ],
             "http://www.w3.org/2000/01/rdf-schema#range": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#MusicArtist"
+                "@id": "http://a.ml/vocabularies/music#MusicArtist"
               }
             ],
             "http://www.w3.org/2000/01/rdf-schema#subPropertyOf": [
@@ -1828,7 +1828,7 @@
         ],
         "http://a.ml/vocabularies/meta#base": [
           {
-            "@value": "http://mulesoft.com/vocabularies/music#"
+            "@value": "http://a.ml/vocabularies/music#"
           }
         ],
         "http://a.ml/vocabularies/document#location": [
@@ -1849,7 +1849,7 @@
         ],
         "http://www.w3.org/ns/shacl#targetClass": [
           {
-            "@id": "http://mulesoft.com/vocabularies/music#Track"
+            "@id": "http://a.ml/vocabularies/music#Track"
           }
         ],
         "http://schema.org/name": [
@@ -1866,7 +1866,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#spotifyId"
+                "@id": "http://a.ml/vocabularies/music_curation#spotifyId"
               }
             ],
             "http://schema.org/name": [
@@ -1920,7 +1920,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#duration"
+                "@id": "http://a.ml/vocabularies/music#duration"
               }
             ],
             "http://schema.org/name": [
@@ -1950,7 +1950,7 @@
         ],
         "http://www.w3.org/ns/shacl#targetClass": [
           {
-            "@id": "http://mulesoft.com/vocabularies/music#MusicArtist"
+            "@id": "http://a.ml/vocabularies/music#MusicArtist"
           }
         ],
         "http://schema.org/name": [
@@ -1967,7 +1967,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#spotifyId"
+                "@id": "http://a.ml/vocabularies/music_curation#spotifyId"
               }
             ],
             "http://schema.org/name": [
@@ -2024,7 +2024,7 @@
         ],
         "http://www.w3.org/ns/shacl#targetClass": [
           {
-            "@id": "http://mulesoft.com/vocabularies/music#Record"
+            "@id": "http://a.ml/vocabularies/music#Record"
           }
         ],
         "http://schema.org/name": [
@@ -2041,7 +2041,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#spotifyId"
+                "@id": "http://a.ml/vocabularies/music_curation#spotifyId"
               }
             ],
             "http://schema.org/name": [
@@ -2095,7 +2095,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#genre"
+                "@id": "http://a.ml/vocabularies/music#genre"
               }
             ],
             "http://schema.org/name": [
@@ -2130,7 +2130,7 @@
         ],
         "http://www.w3.org/ns/shacl#targetClass": [
           {
-            "@id": "http://mulesoft.com/vocabularies/music#MusicArtist"
+            "@id": "http://a.ml/vocabularies/music#MusicArtist"
           }
         ],
         "http://schema.org/name": [
@@ -2147,7 +2147,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#spotifyId"
+                "@id": "http://a.ml/vocabularies/music_curation#spotifyId"
               }
             ],
             "http://schema.org/name": [
@@ -2204,7 +2204,7 @@
         ],
         "http://www.w3.org/ns/shacl#targetClass": [
           {
-            "@id": "http://mulesoft.com/vocabularies/music_curation#PlaylistSelection"
+            "@id": "http://a.ml/vocabularies/music_curation#PlaylistSelection"
           }
         ],
         "http://schema.org/name": [
@@ -2221,7 +2221,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#selectedTrack"
+                "@id": "http://a.ml/vocabularies/music_curation#selectedTrack"
               }
             ],
             "http://schema.org/name": [
@@ -2254,7 +2254,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#performer"
+                "@id": "http://a.ml/vocabularies/music#performer"
               }
             ],
             "http://schema.org/name": [
@@ -2287,7 +2287,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music#composer"
+                "@id": "http://a.ml/vocabularies/music#composer"
               }
             ],
             "http://schema.org/name": [
@@ -2320,7 +2320,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#trackFrom"
+                "@id": "http://a.ml/vocabularies/music_curation#trackFrom"
               }
             ],
             "http://schema.org/name": [
@@ -2353,7 +2353,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#score"
+                "@id": "http://a.ml/vocabularies/music_curation#score"
               }
             ],
             "http://schema.org/name": [
@@ -2378,7 +2378,7 @@
         ],
         "http://www.w3.org/ns/shacl#targetClass": [
           {
-            "@id": "http://mulesoft.com/vocabularies/music_curation#Playlist"
+            "@id": "http://a.ml/vocabularies/music_curation#Playlist"
           }
         ],
         "http://schema.org/name": [
@@ -2395,7 +2395,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#spotifyId"
+                "@id": "http://a.ml/vocabularies/music_curation#spotifyId"
               }
             ],
             "http://schema.org/name": [
@@ -2422,7 +2422,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#author"
+                "@id": "http://a.ml/vocabularies/music_curation#author"
               }
             ],
             "http://schema.org/name": [
@@ -2520,7 +2520,7 @@
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#contents"
+                "@id": "http://a.ml/vocabularies/music_curation#contents"
               }
             ],
             "http://schema.org/name": [
@@ -2541,7 +2541,7 @@
             ],
             "http://a.ml/vocabularies/meta#mapProperty": [
               {
-                "@id": "http://mulesoft.com/vocabularies/music_curation#position"
+                "@id": "http://a.ml/vocabularies/music_curation#position"
               }
             ]
           }

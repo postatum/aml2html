@@ -38,7 +38,10 @@ function collectVocabulariesData (doc) {
       id: vocJson['@id'],
       name: utils.parseHashValue(vocJson['@id']),
       base: vocJson[`${CTX.meta}base`][0]['@value'],
-      usage: vocJson[`${CTX.amldoc}usage`][0]['@value']
+    }
+    const usage = vocJson[`${CTX.amldoc}usage`]
+    if (usage) {
+      data.usage = usage[0]['@value']
     }
     data.properties = collectVocabularyProperties(vocJson)
     data.classes = collectVocabularyClasses(vocJson)
