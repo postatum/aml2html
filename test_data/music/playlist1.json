@@ -1,0 +1,822 @@
+[
+  {
+    "@id": "file://aml/music/playlist1.yaml#",
+    "@type": [
+      "http://a.ml/vocabularies/meta#DialectInstance",
+      "http://a.ml/vocabularies/document#Document",
+      "http://a.ml/vocabularies/document#Fragment",
+      "http://a.ml/vocabularies/document#Module",
+      "http://a.ml/vocabularies/document#Unit"
+    ],
+    "http://a.ml/vocabularies/meta#definedBy": [
+      {
+        "@id": "file://aml/music/dialect/playlist.yaml#"
+      }
+    ],
+    "http://a.ml/vocabularies/document#encodes": [
+      {
+        "@id": "https://api.spotify.com/v1/antoniogarrote/playlists/5Qzm0PDPxbNrLvIu0OVinc",
+        "@type": [
+          "http://mulesoft.com/vocabularies/music_curation#Playlist",
+          "file://aml/music/dialect/playlist.yaml#/declarations/PlaylistNode",
+          "http://a.ml/vocabularies/meta#DialectDomainElement",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://schema.org/description": [
+          {
+            "@value": "Some classical compositions"
+          }
+        ],
+        "http://schema.org/name": [
+          {
+            "@value": "Favs from Tse"
+          }
+        ],
+        "http://mulesoft.com/vocabularies/music_curation#author": [
+          {
+            "@value": "antoniogarrote"
+          }
+        ],
+        "http://schema.org/dateCreated": [
+          {
+            "@value": "2017-11-10",
+            "@type": "http://www.w3.org/2001/XMLSchema#date"
+          }
+        ],
+        "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+          {
+            "@value": "5Qzm0PDPxbNrLvIu0OVinc"
+          }
+        ],
+        "http://mulesoft.com/vocabularies/music_curation#contents": [
+          {
+            "@id": "file://aml/music/playlist1.yaml#/items/1",
+            "@type": [
+              "http://mulesoft.com/vocabularies/music_curation#PlaylistSelection",
+              "file://aml/music/dialect/playlist.yaml#/declarations/SelectionNode",
+              "http://a.ml/vocabularies/meta#DialectDomainElement",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://mulesoft.com/vocabularies/music#composer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/2xeXoF8arRZILlw5MKR2f2",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ComposerNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "2xeXoF8arRZILlw5MKR2f2"
+                  }
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "P\u00E9rotin"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music#performer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/0L8W3JzyTX29RLKZgc3bqS",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ArtistNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "The Hiliard Ensemble"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "0L8W3JzyTX29RLKZgc3bqS"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#selectedTrack": [
+              {
+                "@id": "https://api.spotify.com/v1/tracks/1fdylFrFz7xU6GFEKroIzk",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Track",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/TrackNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Sederunt Principes"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music#duration": [
+                  {
+                    "@value": 705
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "1fdylFrFz7xU6GFEKroIzk"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#trackFrom": [
+              {
+                "@id": "https://api.spotify.com/v1/albums/2wTfPn8Xt2QdoAcq2VLeay",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Record",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/RecordNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "P\u00E9rotin and the Ars Antiqua"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music#genre": [
+                  {
+                    "@value": "classical"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "2wTfPn8Xt2QdoAcq2VLeay"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#position": [
+              {
+                "@value": "1"
+              }
+            ]
+          },
+          {
+            "@id": "file://aml/music/playlist1.yaml#/items/2",
+            "@type": [
+              "http://mulesoft.com/vocabularies/music_curation#PlaylistSelection",
+              "file://aml/music/dialect/playlist.yaml#/declarations/SelectionNode",
+              "http://a.ml/vocabularies/meta#DialectDomainElement",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#trackFrom": [
+              {
+                "@id": "https://api.spotify.com/v1/albums/4zs23dPn7XEJcxu375o6xp",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Record",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/RecordNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "La Musica Notturna delle Strade di Madrid"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "4zs23dPn7XEJcxu375o6xp"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music#composer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/2l4vGfFV7e46yO8lxfxR76",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ComposerNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "2l4vGfFV7e46yO8lxfxR76"
+                  }
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Luigi Boccherini"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#score": [
+              {
+                "@value": 5
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music#performer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/1FUwvrAST5IPF5fxqMz7vS",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ArtistNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Cuarteto Casals"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "1FUwvrAST5IPF5fxqMz7vS"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#selectedTrack": [
+              {
+                "@id": "https://api.spotify.com/v1/tracks/1mEXZtRMEnjqdPTmZfNzU2",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Track",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/TrackNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "String Quintet in C Major G 324, Op 30, No 6\n\"La Musica notturna delle strade di Madrid\"\n"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music#duration": [
+                  {
+                    "@value": 134
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "1mEXZtRMEnjqdPTmZfNzU2"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#position": [
+              {
+                "@value": "2"
+              }
+            ]
+          },
+          {
+            "@id": "file://aml/music/playlist1.yaml#/items/3",
+            "@type": [
+              "http://mulesoft.com/vocabularies/music_curation#PlaylistSelection",
+              "file://aml/music/dialect/playlist.yaml#/declarations/SelectionNode",
+              "http://a.ml/vocabularies/meta#DialectDomainElement",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://mulesoft.com/vocabularies/music#composer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/7jzR5qj8vFnSu5JHaXgFEr",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ComposerNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "7jzR5qj8vFnSu5JHaXgFEr"
+                  }
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Jean Sibelius"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music#performer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/spotify:artist:0AONkUEodQkpkdO5Wul6hE",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ArtistNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Okko Kamu"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "spotify:artist:0AONkUEodQkpkdO5Wul6hE"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#selectedTrack": [
+              {
+                "@id": "https://api.spotify.com/v1/tracks/1nqyxZH4AX0o2S9th6kRZL",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Track",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/TrackNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Tapiola, Op 112"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music#duration": [
+                  {
+                    "@value": 1088
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "1nqyxZH4AX0o2S9th6kRZL"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#trackFrom": [
+              {
+                "@id": "https://api.spotify.com/v1/albums/1wXP5c5E2YLHqPCAkxjyTD",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Record",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/RecordNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Sibelius, The Tempest, The Bard, Tapiola"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "1wXP5c5E2YLHqPCAkxjyTD"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#position": [
+              {
+                "@value": "3"
+              }
+            ]
+          },
+          {
+            "@id": "file://aml/music/playlist1.yaml#/items/4",
+            "@type": [
+              "http://mulesoft.com/vocabularies/music_curation#PlaylistSelection",
+              "file://aml/music/dialect/playlist.yaml#/declarations/SelectionNode",
+              "http://a.ml/vocabularies/meta#DialectDomainElement",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://mulesoft.com/vocabularies/music#composer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/4NJhFmfw43RLBLjQvxDuRS",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ComposerNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "4NJhFmfw43RLBLjQvxDuRS"
+                  }
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Wolfgang Amadeus Mozart"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music#performer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/6pzfUmBsQAKxOhy0NSi8zn",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ArtistNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Anne-Sophie Mutter"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "6pzfUmBsQAKxOhy0NSi8zn"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#selectedTrack": [
+              {
+                "@id": "https://api.spotify.com/v1/tracks/0OLYyVMzILepGc7FKVaLWf",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Track",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/TrackNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Sinfonia Concertante in E flat K364/320d: III Presto"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "0OLYyVMzILepGc7FKVaLWf"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#trackFrom": [
+              {
+                "@id": "https://api.spotify.com/v1/albums/2etuXogtzIC3rFVC5XOrhS",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Record",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/RecordNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Mozart"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "2etuXogtzIC3rFVC5XOrhS"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#position": [
+              {
+                "@value": "4"
+              }
+            ]
+          },
+          {
+            "@id": "file://aml/music/playlist1.yaml#/items/5",
+            "@type": [
+              "http://mulesoft.com/vocabularies/music_curation#PlaylistSelection",
+              "file://aml/music/dialect/playlist.yaml#/declarations/SelectionNode",
+              "http://a.ml/vocabularies/meta#DialectDomainElement",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://mulesoft.com/vocabularies/music#composer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/5iAhVgz6P8Nylxijb0C65v",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ComposerNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "5iAhVgz6P8Nylxijb0C65v"
+                  }
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Claudio Monteverdi"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music#performer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/3f26hJvBDQnllvH0aP4OSb",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ArtistNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Concerto Italiano"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "3f26hJvBDQnllvH0aP4OSb"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#selectedTrack": [
+              {
+                "@id": "https://api.spotify.com/v1/tracks/3MpnuPOrFwNB1iCGr4JkVn",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Track",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/TrackNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Duo belli occhi fur l'armi, onde traffitta"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music#duration": [
+                  {
+                    "@value": 247
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "3MpnuPOrFwNB1iCGr4JkVn"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#trackFrom": [
+              {
+                "@id": "https://api.spotify.com/v1/albums/5vkcLFWodr1G7ka2GS1YBg",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Record",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/RecordNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Madrigali Amorosi"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "5vkcLFWodr1G7ka2GS1YBg"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#position": [
+              {
+                "@value": "5"
+              }
+            ]
+          },
+          {
+            "@id": "file://aml/music/playlist1.yaml#/items/6",
+            "@type": [
+              "http://mulesoft.com/vocabularies/music_curation#PlaylistSelection",
+              "file://aml/music/dialect/playlist.yaml#/declarations/SelectionNode",
+              "http://a.ml/vocabularies/meta#DialectDomainElement",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://mulesoft.com/vocabularies/music#composer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/5iAhVgz6P8Nylxijb0C65v",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ComposerNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "5iAhVgz6P8Nylxijb0C65v"
+                  }
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Claudio Monteverdi"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music#performer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/0vo2ovp2PVDLDsTExmkFpo",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ArtistNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Lautten Compagney"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "0vo2ovp2PVDLDsTExmkFpo"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#selectedTrack": [
+              {
+                "@id": "https://api.spotify.com/v1/tracks/3kaz90sTbwAzWM5nzRLXkJ",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Track",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/TrackNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Zefiro torna e di soavi accenti, SV 251"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music#duration": [
+                  {
+                    "@value": 367
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "3kaz90sTbwAzWM5nzRLXkJ"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#trackFrom": [
+              {
+                "@id": "https://api.spotify.com/v1/albums/02G4mzoARL6iMAfn794ppX",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Record",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/RecordNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "La Dolce Vita"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "02G4mzoARL6iMAfn794ppX"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#position": [
+              {
+                "@value": "6"
+              }
+            ]
+          },
+          {
+            "@id": "file://aml/music/playlist1.yaml#/items/7",
+            "@type": [
+              "http://mulesoft.com/vocabularies/music_curation#PlaylistSelection",
+              "file://aml/music/dialect/playlist.yaml#/declarations/SelectionNode",
+              "http://a.ml/vocabularies/meta#DialectDomainElement",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://mulesoft.com/vocabularies/music#composer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/6s1pCNXcbdtQJlsnM1hRIA",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ComposerNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "6s1pCNXcbdtQJlsnM1hRIA"
+                  }
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Dimitri Shostakovich"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music#performer": [
+              {
+                "@id": "https://api.spotify.com/v1/artists/4Kjr1MPMUfuH3QKXtAljNy",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#MusicArtist",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/ArtistNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Riccardo Chailly"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "4Kjr1MPMUfuH3QKXtAljNy"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#selectedTrack": [
+              {
+                "@id": "https://api.spotify.com/v1/tracks/1QKykbp9b0iNzXCJH6SNWj",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Track",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/TrackNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Jazz Suite No 2.2 Lyriz Waltz"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music#duration": [
+                  {
+                    "@value": 157
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "1QKykbp9b0iNzXCJH6SNWj"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#trackFrom": [
+              {
+                "@id": "https://api.spotify.com/v1/albums/2EqstXogPyAqKnQV2Imr04",
+                "@type": [
+                  "http://mulesoft.com/vocabularies/music#Record",
+                  "file://aml/music/dialect/playlist.yaml#/declarations/RecordNode",
+                  "http://a.ml/vocabularies/meta#DialectDomainElement",
+                  "http://a.ml/vocabularies/document#DomainElement"
+                ],
+                "http://schema.org/name": [
+                  {
+                    "@value": "Shostakovich The Jazz Album"
+                  }
+                ],
+                "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+                  {
+                    "@value": "2EqstXogPyAqKnQV2Imr04"
+                  }
+                ]
+              }
+            ],
+            "http://mulesoft.com/vocabularies/music_curation#position": [
+              {
+                "@value": "7"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "http://a.ml/vocabularies/document#declares": [
+      {
+        "@id": "https://api.spotify.com/v1/artists/4NJhFmfw43RLBLjQvxDuRS",
+        "@type": [
+          "http://mulesoft.com/vocabularies/music#MusicArtist",
+          "file://aml/music/dialect/playlist.yaml#/declarations/ComposerNode",
+          "http://a.ml/vocabularies/meta#DialectDomainElement",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+          {
+            "@value": "4NJhFmfw43RLBLjQvxDuRS"
+          }
+        ],
+        "http://schema.org/name": [
+          {
+            "@value": "Wolfgang Amadeus Mozart"
+          }
+        ]
+      },
+      {
+        "@id": "https://api.spotify.com/v1/artists/5iAhVgz6P8Nylxijb0C65v",
+        "@type": [
+          "http://mulesoft.com/vocabularies/music#MusicArtist",
+          "file://aml/music/dialect/playlist.yaml#/declarations/ComposerNode",
+          "http://a.ml/vocabularies/meta#DialectDomainElement",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://mulesoft.com/vocabularies/music_curation#spotifyId": [
+          {
+            "@value": "5iAhVgz6P8Nylxijb0C65v"
+          }
+        ],
+        "http://schema.org/name": [
+          {
+            "@value": "Claudio Monteverdi"
+          }
+        ]
+      }
+    ]
+  }
+]
