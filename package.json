@@ -1,7 +1,7 @@
 {
   "name": "aml2html",
   "version": "0.1.0",
-  "main": "src/vocabulary.js",
+  "main": "src/index.js",
   "license": "MIT",
   "dependencies": {
     "amf-client-js": "^3.1.9",
@@ -12,7 +12,6 @@
     "mustache": "^3.0.1"
   },
   "scripts": {
-    "vocabulary2html": "node src/vocabulary.js",
-    "dialect2html": "node src/dialect.js"
+    "aml2html": "node src/index.js"
   }
 }
