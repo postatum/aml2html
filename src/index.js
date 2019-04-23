@@ -131,23 +131,26 @@ async function main () {
     return collectDialectData(doc)
   })
 
-  const commonNavData = composeCommonNavData(dialectsData)
+  const commonNavData = collectCommonNavData(dialectsData)
 
   // Collect navigation data and render dialect template
   dialectsData.forEach((dialectData) => {
-    dialectData.navData = composeNavData(dialectData, commonNavData)
-    utils.renderTemplate(
-      dialectData,
-      path.join(TMPL_DIR, 'dialect.mustache'),
-      path.join(outDir, dialectData.html))
+    dialectData.navData = collectNavData(dialectData, commonNavData)
 
-    // Render nodeMappings item data
-    dialectData.nodeMappings.forEach((nodeData) => {
-      utils.renderTemplate(
-        nodeData,
-        path.join(TMPL_DIR, 'node.mustache'),
-        path.join(outDir, nodeData.htmlName))
-    })
+    console.log(JSON.stringify(dialectData, null, 2)) // DEBUG
+
+    // utils.renderTemplate(
+    //   dialectData,
+    //   path.join(TMPL_DIR, 'dialect.mustache'),
+    //   path.join(outDir, dialectData.html))
+
+    // // Render nodeMappings item data
+    // dialectData.nodeMappings.forEach((nodeData) => {
+    //   utils.renderTemplate(
+    //     nodeData,
+    //     path.join(TMPL_DIR, 'node.mustache'),
+    //     path.join(outDir, nodeData.htmlName))
+    // })
   })
 
   // Copy css
@@ -155,48 +158,65 @@ async function main () {
 }
 
 function collectDialectData (doc) {
-  const dialectData = {}
-
+  const dialectData = {
+    name: doc.query('schema:name @value'),
+    id: doc.query('@id')
+  }
+  const slug = dialectData.name.split(' ').join('').toLowerCase()
+  dialectData.htmlName = `${slug}.html`
+  dialectData.nodeMappings = collectNodesData(doc)
   return dialectData
 }
 
-function composeCommonNavData (dialectsData) {
-  const commonNavData = {}
+function collectNodesData (doc) {
 
+}
+
+/*
+  {
+    dialects: [
+      {name: 'WebAPI', htmlName: 'webapi.html'},
+      ...
+    ],
+    nodeMappings: []
+  }
+*/
+function collectCommonNavData (dialectsData) {
+  const commonNavData = {
+    dialects: dialectsData.map((data) => {
+      return {name: data.name, htmlName: data.htmlName}
+    }),
+    nodeMappings: []
+  }
   return commonNavData
 }
 
-function composeNavData (dialectData, commonNavData) {
-  const navData = {}
-
+/*
+{
+    dialects: [
+      {name: 'WebAPI', htmlName: 'webapi.html'},
+      ...
+    ],
+    nodeMappings: [
+      {name: 'Request', htmlName: 'node_request.html'},
+      {name: 'Parameter', htmlName: 'node_parameter.html'},
+      ...
+    ]
+  }
+*/
+function collectNavData (dialectData, commonNavData) {
+  const navData = {
+    dialects: commonNavData.dialects,
+    nodeMappings: dialectData.nodeMappings.map((nd) => {
+      return {name: nd.name, htmlName: nd.htmlName}
+    })
+  }
   return navData
 }
 
 main()
 
 /*
-# commonNavData
-{
-  dialects: [
-    {name: 'WebAPI', htmlName: 'webapi.html'},
-    ...
-  ],
-  nodeMappings: []
-}
-
-# navData
-{
-  dialects: [
-    {name: 'WebAPI', htmlName: 'webapi.html'},
-    ...
-  ],
-  nodeMappings: [
-    {name: 'Request', htmlName: 'node_request.html'},
-    {name: 'Parameter', htmlName: 'node_parameter.html'},
-    ...
-  ]
-}
-
 # dialectsData
 [
   # dialectData
