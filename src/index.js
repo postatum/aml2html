@@ -18,102 +18,6 @@ const CTX = {
   shacl: 'http://www.w3.org/ns/shacl#'
 }
 
-// function collectVocabulariesData (doc) {
-//   const vocabularies = doc.queryAll('amldoc:references')
-//   vocabularies.push(doc)
-//   const vocsData = vocabularies.map((voc) => {
-//     // Works on JSON instead of using querying API because the latter
-//     // picks first object in the order of definition instead of picking
-//     // root elements first.
-//     let vocJson = voc.json()
-//     let data = {
-//       id: vocJson['@id'],
-//       name: utils.parseHashValue(vocJson['@id']),
-//       base: vocJson[`${CTX.meta}base`][0]['@value'],
-//     }
-//     const usage = vocJson[`${CTX.amldoc}usage`]
-//     if (usage) {
-//       data.usage = usage[0]['@value']
-//     }
-//     data.properties = collectVocabularyProperties(vocJson)
-//     data.classes = collectVocabularyClasses(vocJson)
-//     return data
-//   })
-//   return utils.removeDuplicatesById(vocsData)
-// }
-
-// function collectVocabularyProperties (vocJson) {
-//   return vocJson[`${CTX.amldoc}declares`]
-//     .map((decl) => {
-//       if (decl['@type'].indexOf(`${CTX.meta}Property`) > -1) {
-//         return utils.parseHashValue((decl['@id'] || ''))
-//       }
-//     })
-//     .filter((id) => { return !!id })
-//     .join(', ')
-// }
-
-// function collectVocabularyClasses (vocJson) {
-//   return vocJson[`${CTX.amldoc}declares`]
-//     .map((decl) => {
-//       if (decl['@type'].indexOf(`${CTX.owl}Class`) > -1) {
-//         return decl['@id']
-//       }
-//     })
-//     .filter((id) => { return !!id })
-//     .map((id) => {
-//       return {
-//         clsId: id,
-//         clsName: utils.parseHashValue(id),
-//         page: makeClassHtmlPageName({id: id})
-//       }
-//     })
-// }
-
-// function collectClassesData (doc) {
-//   const propsMap = collectPropertiesData(doc)
-//   const classTerms = doc.queryAll('amldoc:declares[@type=owl:Class]')
-//     .map((term) => {
-//       return {
-//         id: term.query('@id'),
-//         name: utils.parseHashValue(term.query('@id')),
-//         displayName: term.query('meta:displayName @value'),
-//         description: term.query('schema:description @value'),
-//         properties: term.queryAll('meta:properties @id').map((id) => {
-//           return propsMap[id] || {
-//             propName: utils.parseHashValue(id),
-//             range: id
-//           }
-//         }),
-//         extends: term.queryAll('rdf:subClassOf @id')
-//       }
-//     })
-//   return utils.removeDuplicatesById(classTerms)
-// }
-
-// function collectPropertiesData (doc) {
-//   let propsMap = {}
-//   const propertyTerms = doc.queryAll(
-//     'amldoc:declares[@type=meta:Property]')
-//   propertyTerms.forEach((term) => {
-//     let data = {
-//       propId: term.query('@id'),
-//       desc: term.query('schema:description @value'),
-//       range: term.query('rdf:range @id'),
-//       propExtends: term.queryAll('rdf:subPropertyOf @id').map((id) => {
-//         return {
-//           extId: id,
-//           extName: utils.parseHashValue(id)
-//         }
-//       })
-//     }
-//     data.propName = utils.parseHashValue(data.propId)
-//     data.rangeName = utils.parseHashValue(data.range)
-//     propsMap[term.query('@id')] = data
-//   })
-//   return propsMap
-// }
-
 /** Runs all the logic. */
 async function main () {
   await amf.AMF.init()
@@ -125,12 +29,12 @@ async function main () {
 
   // Collects dialects data into an array
   const dialectsPaths = Array.isArray(argv._) ? argv._ : [argv._]
-  const dialectsData = dialectsPaths.map(async (dpth) => {
+  const dialectsData = await Promise.all(dialectsPaths.map(async (dpth) => {
     let graph = await utils.getJsonLdGraph(dpth)
     let doc = ldquery(graph, CTX).query('[@type=meta:Dialect]')
     console.log(`Collecting dialect data: ${dpth}`)
     return collectDialectData(doc)
-  })
+  }))
 
   const commonNavData = collectCommonNavData(dialectsData)
 
@@ -213,23 +117,34 @@ function collectDialectData (doc) {
 }
 
 function collectNodesData (doc) {
-  const nodes = doc.queryAll('shacl:Shape').map((node) => {
-    // name, id
-    let nodeData = {
-      name: node.query('schema:name @value'),
-      id: node.query('@id')
-    }
-    // description
-    let targetClassId = node.query('shacl:targetClass @id')
-    let targetClass = doc.query(`[@id=${targetClassId}]`)
-    nodeData.description = targetClass.query('schema:description @value')
-    // htmlName
-    const slug = nodeData.name.split(' ').join('').toLowerCase()
-    nodeData.htmlName = `node_${slug}.html`
-    nodeData.scalarProperties = collectScalarPropsData(node)
-    nodeData.linkProperties = collectLinkPropsData(node)
-    return nodeData
-  })
+  const nodes = doc.queryAll('amldoc:declares[@type=shacl:Shape]')
+    .map((node) => {
+      // name, id
+      let nodeData = {
+        name: node.query('schema:name @value'),
+        id: node.query('@id')
+      }
+      // htmlName
+      let slug = nodeData.name.split(' ').join('').toLowerCase()
+      nodeData.htmlName = `node_${slug}.html`
+
+      let union = node.query('shacl:node[@type=rdf:Seq]')
+      if (union) {
+        let names = union.queryAll('@id').map(utils.parseHashValue)
+        nodeData.description = `Union of: ${names.join(', ')}`
+        nodeData.scalarProperties = []
+        nodeData.linkProperties = []
+      } else {
+        // description
+        let targetClassId = node.query('shacl:targetClass @id')
+        let targetClass = doc.query(`amldoc:declares[@id=${targetClassId}]`)
+        nodeData.description = targetClass.query('schema:description @value')
+        // properties
+        nodeData.scalarProperties = collectScalarPropsData(node)
+        nodeData.linkProperties = collectLinkPropsData(node)
+      }
+      return nodeData
+    })
   return nodes
 }
 
@@ -246,7 +161,7 @@ Scalar properties DO contain 'shacl:datatype' node
   ]
 */
 function collectScalarPropsData (node) {
-  const propsNodes = node.query('shacl:property').filter((prop) => {
+  const propsNodes = node.queryAll('shacl:property').filter((prop) => {
     return !!prop.query('shacl:datatype')
   })
   return propsNodes.map((prop) => {
@@ -273,16 +188,17 @@ Link properties DON'T contain 'shacl:datatype' node
   ]
 */
 function collectLinkPropsData (node) {
-  const propsNodes = node.query('shacl:property').filter((prop) => {
+  const propsNodes = node.queryAll('shacl:property').filter((prop) => {
     return !prop.query('shacl:datatype')
   })
   return propsNodes.map((prop) => {
     let propData = {
       name: prop.query('schema:name @value'),
       id: prop.query('shacl:path @id'),
-      range: utils.parseHashValue(prop.query('rdf:_1 @id')),
       constraints: parsePropertyConstraints(prop)
     }
+    propData.range = prop.queryAll('shacl:node @id')
+      .map(utils.parseHashValue).join(', ')
     return propData
   })
 }
@@ -297,12 +213,17 @@ function parsePropertyConstraints (prop) {
     {name: 'allowMultiple', value: prop.query('meta:allowMultiple @value')},
     {name: 'sorted', value: prop.query('meta:sorted @value')},
     {name: 'mapKey', value: prop.query('meta:mapProperty @id')},
-    {name: 'typeDiscriminator',
-      value: prop.query('meta:typeDiscriminatorMap @value')
-        .split(',').join('\n')},
     {name: 'typeDiscriminatorName',
       value: prop.query('meta:typeDiscriminatorName @value')}
   ]
+  const typeDiscr = prop.query('meta:typeDiscriminatorMap @value')
+  if (typeDiscr) {
+    constraints.push({
+      name: 'typeDiscriminator',
+      value: typeDiscr.split(',').join('\n')
+    })
+  }
+
   return constraints.filter((con) => {
     return !!con.value
   })
@@ -343,8 +264,8 @@ function collectCommonNavData (dialectsData) {
 function collectNavData (dialectData, commonNavData) {
   const navData = {
     dialects: commonNavData.dialects,
-    nodeMappings: dialectData.nodeMappings.map((nd) => {
-      return {name: nd.name, htmlName: nd.htmlName}
+    nodeMappings: dialectData.nodeMappings.map((data) => {
+      return {name: data.name, htmlName: data.htmlName}
     })
   }
   return navData
