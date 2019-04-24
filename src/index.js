@@ -42,69 +42,26 @@ async function main () {
   dialectsData.forEach((dialectData) => {
     dialectData.navData = collectNavData(dialectData, commonNavData)
 
-    console.log(JSON.stringify(dialectData, null, 2)) // DEBUG
+    // Render dialect overview template
+    utils.renderTemplate(
+      dialectData,
+      path.join(TMPL_DIR, 'dialect.mustache'),
+      path.join(outDir, dialectData.html))
 
-    // utils.renderTemplate(
-    //   dialectData,
-    //   path.join(TMPL_DIR, 'dialect.mustache'),
-    //   path.join(outDir, dialectData.html))
-
-    // // Render nodeMappings item data
-    // dialectData.nodeMappings.forEach((nodeData) => {
-    //   utils.renderTemplate(
-    //     nodeData,
-    //     path.join(TMPL_DIR, 'node.mustache'),
-    //     path.join(outDir, nodeData.htmlName))
-    // })
+    // Render nodeMappings item data
+    dialectData.nodeMappings.forEach((nodeData) => {
+      utils.renderTemplate(
+        nodeData,
+        path.join(TMPL_DIR, 'node.mustache'),
+        path.join(outDir, nodeData.htmlName))
+    })
   })
 
   // Copy css
   utils.copyCss(outDir)
 }
 
-/*
-# dialectsData
-  [
-    # dialectData
-    {
-      name: 'WebAPI',
-      htmlName: 'webapi.html',
-      id: 'file://test_data/dialects/canonical_webapi.yaml',
-      nodeMappings: [
-
-        # nodeData
-        {
-          name: 'Request',
-          htmlName: 'node_request.html',
-          id: 'http://a.ml/vocabularies/http#Request',
-          description: 'Request information for an operation',
-          scalarProperties: [
-            {
-              name: 'description',
-              id: 'http://schema.org/description',
-              range: 'string',
-              mandatory: false,
-              otherProperty: 'value',
-              ...
-            }
-          ],
-          linkProperties: [
-            {
-              name: 'parameter',
-              id: 'http://a.ml/vocabularies/http#parameter',
-              range: 'Parameter',
-              mandatory: true,
-              otherProperty: 'value',
-              ...
-            }
-          ]
-        },
-        ...
-      ]
-    },
-    ...
-  ]
-*/
+/* Collects complete dialect data. */
 function collectDialectData (doc) {
   const dialectData = {
     name: doc.query('schema:name @value'),
@@ -116,6 +73,7 @@ function collectDialectData (doc) {
   return dialectData
 }
 
+/* Collects dialect nodeMappings data. */
 function collectNodesData (doc) {
   const nodes = doc.queryAll('amldoc:declares[@type=shacl:Shape]')
     .map((node) => {
@@ -128,10 +86,14 @@ function collectNodesData (doc) {
       let slug = nodeData.name.split(' ').join('').toLowerCase()
       nodeData.htmlName = `node_${slug}.html`
 
-      let union = node.query('shacl:node[@type=rdf:Seq]')
-      if (union) {
-        let names = union.queryAll('@id').map(utils.parseHashValue)
-        nodeData.description = `Union of: ${names.join(', ')}`
+      let isUnion = node.query('@type')
+        .indexOf(`${CTX.meta}UnionNodeMapping`) > -1
+      if (isUnion) {
+        let seq = node.query('shacl:node[@type=rdf:Seq]')
+        let names = seq.queryAll('@id').slice(1).map(utils.parseHashValue)
+        // description
+        nodeData.description = `Union of ${names.join(', ')}`
+        // properties
         nodeData.scalarProperties = []
         nodeData.linkProperties = []
       } else {
@@ -148,18 +110,7 @@ function collectNodesData (doc) {
   return nodes
 }
 
-/*
-Scalar properties DO contain 'shacl:datatype' node
-
-  scalarProperties: [
-    {
-      name: 'description',
-      id: 'http://schema.org/description',
-      range: 'string',
-      constraints: [{name: 'pattern', value: 'asdasd'}, ...]
-    }
-  ]
-*/
+/* Collects nodeMappings item scalar properties data. */
 function collectScalarPropsData (node) {
   const propsNodes = node.queryAll('shacl:property').filter((prop) => {
     return !!prop.query('shacl:datatype')
@@ -169,24 +120,13 @@ function collectScalarPropsData (node) {
       name: prop.query('schema:name @value'),
       id: prop.query('shacl:path @id'),
       range: utils.parseHashValue(prop.query('shacl:datatype @id')),
-      constraints: parsePropertyConstraints(prop)
+      constraints: collectPropertyConstraints(prop)
     }
     return propData
   })
 }
 
-/*
-Link properties DON'T contain 'shacl:datatype' node
-
-  linkProperties: [
-    {
-      name: 'parameter',
-      id: 'http://a.ml/vocabularies/http#parameter',
-      range: 'Parameter',
-      constraints: [{name: 'pattern', value: 'asdasd'}, ...]
-    }
-  ]
-*/
+/* Collects nodeMappings item link properties data. */
 function collectLinkPropsData (node) {
   const propsNodes = node.queryAll('shacl:property').filter((prop) => {
     return !prop.query('shacl:datatype')
@@ -195,49 +135,49 @@ function collectLinkPropsData (node) {
     let propData = {
       name: prop.query('schema:name @value'),
       id: prop.query('shacl:path @id'),
-      constraints: parsePropertyConstraints(prop)
+      constraints: collectPropertyConstraints(prop)
     }
     propData.range = prop.queryAll('shacl:node @id')
-      .map(utils.parseHashValue).join(', ')
+      .map(utils.parseHashValue).slice(1).join(', ')
     return propData
   })
 }
 
-function parsePropertyConstraints (prop) {
+/* Collects nodeMappings item property constraints data. */
+function collectPropertyConstraints (prop) {
   const constraints = [
     {name: 'mandatory', value: prop.query('shacl:minCount @value') > 0},
     {name: 'pattern', value: prop.query('shacl:pattern @value')},
     {name: 'minimum', value: prop.query('shacl:minInclusive @value')},
     {name: 'maximum', value: prop.query('shacl:maxInclusive @value')},
-    {name: 'enum', value: prop.query('shacl:in @value')},
     {name: 'allowMultiple', value: prop.query('meta:allowMultiple @value')},
     {name: 'sorted', value: prop.query('meta:sorted @value')},
     {name: 'mapKey', value: prop.query('meta:mapProperty @id')},
     {name: 'typeDiscriminatorName',
       value: prop.query('meta:typeDiscriminatorName @value')}
   ]
-  const typeDiscr = prop.query('meta:typeDiscriminatorMap @value')
-  if (typeDiscr) {
+
+  const enumNode = prop.query('shacl:in')
+  if (enumNode) {
     constraints.push({
-      name: 'typeDiscriminator',
-      value: typeDiscr.split(',').join('\n')
+      name: 'enum',
+      value: enumNode.queryAll('@value')
     })
   }
 
-  return constraints.filter((con) => {
-    return !!con.value
-  })
+  const discrValue = prop.query('meta:typeDiscriminatorMap @value')
+  if (discrValue) {
+    constraints.push({
+      name: 'typeDiscriminator',
+      value: discrValue.split(',').join('\n')
+    })
+  }
+
+  // Drop empty and falsy values
+  return constraints.filter((con) => { return !!con.value })
 }
 
-/*
-  {
-    dialects: [
-      {name: 'WebAPI', htmlName: 'webapi.html'},
-      ...
-    ],
-    nodeMappings: []
-  }
-*/
+/* Collects common navigation data. */
 function collectCommonNavData (dialectsData) {
   const commonNavData = {
     dialects: dialectsData.map((data) => {
@@ -248,19 +188,7 @@ function collectCommonNavData (dialectsData) {
   return commonNavData
 }
 
-/*
-{
-    dialects: [
-      {name: 'WebAPI', htmlName: 'webapi.html'},
-      ...
-    ],
-    nodeMappings: [
-      {name: 'Request', htmlName: 'node_request.html'},
-      {name: 'Parameter', htmlName: 'node_parameter.html'},
-      ...
-    ]
-  }
-*/
+/* Collects dialect-specific navigation data. */
 function collectNavData (dialectData, commonNavData) {
   const navData = {
     dialects: commonNavData.dialects,

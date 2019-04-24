@@ -1,0 +1,5421 @@
+{
+  "name": "WebAPI",
+  "id": "file://test_data/amf/dialects/canonical_webapi.yaml",
+  "htmlName": "webapi.html",
+  "nodeMappings": [
+    {
+      "name": "Request",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Request",
+      "htmlName": "node_request.html",
+      "description": "Request information for an operation",
+      "scalarProperties": [
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "required",
+          "id": "http://a.ml/vocabularies/http#required",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "parameter",
+          "id": "http://a.ml/vocabularies/http#parameter",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Parameter"
+        },
+        {
+          "name": "header",
+          "id": "http://a.ml/vocabularies/http#header",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Parameter"
+        },
+        {
+          "name": "payload",
+          "id": "http://a.ml/vocabularies/http#payload",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Payload"
+        },
+        {
+          "name": "queryString",
+          "id": "http://a.ml/vocabularies/http#queryString",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "uriParameter",
+          "id": "http://a.ml/vocabularies/http#uriParameter",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Parameter"
+        },
+        {
+          "name": "cookieParameter",
+          "id": "http://a.ml/vocabularies/http#cookieParameter",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Parameter"
+        }
+      ]
+    },
+    {
+      "name": "ArrayShape",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/ArrayShape",
+      "htmlName": "node_arrayshape.html",
+      "description": "Shape that contains a nested collection of data shapes",
+      "scalarProperties": [
+        {
+          "name": "minCount",
+          "id": "http://www.w3.org/ns/shacl#minCount",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "maxCount",
+          "id": "http://www.w3.org/ns/shacl#maxCount",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "uinqueItems",
+          "id": "http://a.ml/vocabularies/shapes#uniqueItems",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "collectionFormat",
+          "id": "http://a.ml/vocabularies/shapes#collectionFormat",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "id": "http://www.w3.org/ns/shacl#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name1",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "defaultValueString",
+          "id": "http://www.w3.org/ns/shacl#defaultValueStr",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "inheritanceClosure",
+          "id": "http://a.ml/vocabularies/shapes#closure",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "raw",
+          "id": "http://www.w3.org/ns/shacl#raw",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "referenceId",
+          "id": "http://a.ml/vocabularies/document#reference-id",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "items",
+          "id": "http://a.ml/vocabularies/shapes#items",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "inherits",
+          "id": "http://a.ml/vocabularies/shapes#inherits",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "not",
+          "id": "http://www.w3.org/ns/shacl#not",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "and",
+          "id": "http://www.w3.org/ns/shacl#and",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "or",
+          "id": "http://www.w3.org/ns/shacl#or",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "exclusiveOr",
+          "id": "http://www.w3.org/ns/shacl#xone",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "documentation",
+          "id": "http://schema.org/documentation",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CreativeWork"
+        },
+        {
+          "name": "XMLSerialization",
+          "id": "http://a.ml/vocabularies/shapes#xmlSerialization",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, XMLSerializer"
+        },
+        {
+          "name": "examples",
+          "id": "http://a.ml/vocabularies/document#examples",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Example"
+        }
+      ]
+    },
+    {
+      "name": "NodeShape",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/NodeShape",
+      "htmlName": "node_nodeshape.html",
+      "description": "Shape that validates a record of fields, like a JS object",
+      "scalarProperties": [
+        {
+          "name": "minProperties",
+          "id": "http://a.ml/vocabularies/shapes#minProperties",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "maxProperties",
+          "id": "http://a.ml/vocabularies/shapes#maxProperties",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "closed",
+          "id": "http://www.w3.org/ns/shacl#closed",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "discriminator",
+          "id": "http://a.ml/vocabularies/shapes#discriminator",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "discriminatorValue",
+          "id": "http://a.ml/vocabularies/shapes#discriminatorValue",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "id": "http://www.w3.org/ns/shacl#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name1",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "defaultValueString",
+          "id": "http://www.w3.org/ns/shacl#defaultValueStr",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "inheritanceClosure",
+          "id": "http://a.ml/vocabularies/shapes#closure",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "raw",
+          "id": "http://www.w3.org/ns/shacl#raw",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "referenceId",
+          "id": "http://a.ml/vocabularies/document#reference-id",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "additionalPropertiesSchema",
+          "id": "http://www.w3.org/ns/shacl#additionalPropertiesSchema",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "property",
+          "id": "http://www.w3.org/ns/shacl#property",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, PropertyShape"
+        },
+        {
+          "name": "dependencies",
+          "id": "http://a.ml/vocabularies/shapes#dependencies",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, PropertyDependencies"
+        },
+        {
+          "name": "inherits",
+          "id": "http://a.ml/vocabularies/shapes#inherits",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "not",
+          "id": "http://www.w3.org/ns/shacl#not",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "and",
+          "id": "http://www.w3.org/ns/shacl#and",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "or",
+          "id": "http://www.w3.org/ns/shacl#or",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "exclusiveOr",
+          "id": "http://www.w3.org/ns/shacl#xone",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "documentation",
+          "id": "http://schema.org/documentation",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CreativeWork"
+        },
+        {
+          "name": "XMLSerialization",
+          "id": "http://a.ml/vocabularies/shapes#xmlSerialization",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, XMLSerializer"
+        },
+        {
+          "name": "examples",
+          "id": "http://a.ml/vocabularies/document#examples",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Example"
+        }
+      ]
+    },
+    {
+      "name": "EndPoint",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/EndPoint",
+      "htmlName": "node_endpoint.html",
+      "description": "EndPoint in the API holding a number of executable operations",
+      "scalarProperties": [
+        {
+          "name": "path",
+          "id": "http://a.ml/vocabularies/http#path",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "summary",
+          "id": "http://schema.org/summary",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "extends",
+          "id": "http://a.ml/vocabularies/document#extends",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            },
+            {
+              "name": "typeDiscriminatorName",
+              "value": "type"
+            },
+            {
+              "name": "typeDiscriminator",
+              "value": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/ParametrizedResourceType->AppliedResourceType\nfile://test_data/amf/dialects/canonical_webapi.yaml#/declarations/ParametrizedTrait->AppliedTrait"
+            }
+          ],
+          "range": "list, ParametrizedResourceType, ParametrizedTrait"
+        },
+        {
+          "name": "supportedOperation",
+          "id": "http://www.w3.org/ns/hydra/core#supportedOperation",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Operation"
+        },
+        {
+          "name": "parameter",
+          "id": "http://a.ml/vocabularies/http#parameter",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Parameter"
+        },
+        {
+          "name": "payload",
+          "id": "http://a.ml/vocabularies/http#payload",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Payload"
+        },
+        {
+          "name": "servers",
+          "id": "http://a.ml/vocabularies/http#server",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Server"
+        },
+        {
+          "name": "security",
+          "id": "http://a.ml/vocabularies/security#security",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, ParametrizedSecurityScheme"
+        }
+      ]
+    },
+    {
+      "name": "ShapeExtension",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/ShapeExtension",
+      "htmlName": "node_shapeextension.html",
+      "description": "Custom extensions for a data shape definition inside an API definition",
+      "scalarProperties": [],
+      "linkProperties": [
+        {
+          "name": "definedBy",
+          "id": "http://a.ml/vocabularies/document#definedBy",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CustomDomainProperty"
+        }
+      ]
+    },
+    {
+      "name": "Parameter",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Parameter",
+      "htmlName": "node_parameter.html",
+      "description": "Piece of data required or returned by an Operation",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "paramName",
+          "id": "http://a.ml/vocabularies/http#paramName",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "required",
+          "id": "http://www.w3.org/ns/hydra/core#required",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "deprecated",
+          "id": "http://a.ml/vocabularies/document#deprecated",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "allowEmptyValue",
+          "id": "http://a.ml/vocabularies/http#allowEmptyValue",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "style",
+          "id": "http://a.ml/vocabularies/http#style",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "explode",
+          "id": "http://a.ml/vocabularies/http#explode",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "allowReserved",
+          "id": "http://a.ml/vocabularies/http#allowReserved",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "binding",
+          "id": "http://a.ml/vocabularies/http#binding",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "schema",
+          "id": "http://a.ml/vocabularies/http#schema",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "payload",
+          "id": "http://a.ml/vocabularies/http#payload",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Payload"
+        },
+        {
+          "name": "example",
+          "id": "http://a.ml/vocabularies/http#example",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Example"
+        }
+      ]
+    },
+    {
+      "name": "SecurityScheme",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/SecurityScheme",
+      "htmlName": "node_securityscheme.html",
+      "description": "Authentication and access control mechanism defined in an API",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://a.ml/vocabularies/security#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "type",
+          "id": "http://a.ml/vocabularies/security#type",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "displayName",
+          "id": "http://schema.org/displayName",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "header",
+          "id": "http://a.ml/vocabularies/http#header",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Parameter"
+        },
+        {
+          "name": "parameter",
+          "id": "http://a.ml/vocabularies/http#parameter",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Parameter"
+        },
+        {
+          "name": "response",
+          "id": "http://www.w3.org/ns/hydra/core#response",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Response"
+        },
+        {
+          "name": "settings",
+          "id": "http://a.ml/vocabularies/security#settings",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, SecuritySettingsUnion"
+        },
+        {
+          "name": "queryString",
+          "id": "http://a.ml/vocabularies/http#queryString",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        }
+      ]
+    },
+    {
+      "name": "Scope",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Scope",
+      "htmlName": "node_scope.html",
+      "description": null,
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://a.ml/vocabularies/security#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://a.ml/vocabularies/security#description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "Server",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Server",
+      "htmlName": "node_server.html",
+      "description": "Information about the network accessible locations where the API is available",
+      "scalarProperties": [
+        {
+          "name": "url",
+          "id": "http://a.ml/vocabularies/http#url",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "variable",
+          "id": "http://a.ml/vocabularies/http#variable",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Parameter"
+        }
+      ]
+    },
+    {
+      "name": "VariableValue",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/VariableValue",
+      "htmlName": "node_variablevalue.html",
+      "description": "Value for a variable in a graph template",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://a.ml/vocabularies/document#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "DataShapesUnion",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/DataShapesUnion",
+      "htmlName": "node_datashapesunion.html",
+      "description": "Union of UnionShape, AnyShape, TupleShape, NodeShape, ArrayShape, SchemaShape, FileShape, MatrixShape, NilShape, ScalarShape",
+      "scalarProperties": [],
+      "linkProperties": []
+    },
+    {
+      "name": "TupleShape",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/TupleShape",
+      "htmlName": "node_tupleshape.html",
+      "description": "Data shape containing a multi-valued collection of shapes",
+      "scalarProperties": [
+        {
+          "name": "minCount",
+          "id": "http://www.w3.org/ns/shacl#minCount",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "maxCount",
+          "id": "http://www.w3.org/ns/shacl#maxCount",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "uinqueItems",
+          "id": "http://a.ml/vocabularies/shapes#uniqueItems",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "additionalItems",
+          "id": "http://a.ml/vocabularies/shapes#additionalItems",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "collectionFormat",
+          "id": "http://a.ml/vocabularies/shapes#collectionFormat",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "id": "http://www.w3.org/ns/shacl#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name1",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "defaultValueString",
+          "id": "http://www.w3.org/ns/shacl#defaultValueStr",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "inheritanceClosure",
+          "id": "http://a.ml/vocabularies/shapes#closure",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "raw",
+          "id": "http://www.w3.org/ns/shacl#raw",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "referenceId",
+          "id": "http://a.ml/vocabularies/document#reference-id",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "items",
+          "id": "http://a.ml/vocabularies/shapes#items",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "inherits",
+          "id": "http://a.ml/vocabularies/shapes#inherits",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "not",
+          "id": "http://www.w3.org/ns/shacl#not",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "and",
+          "id": "http://www.w3.org/ns/shacl#and",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "or",
+          "id": "http://www.w3.org/ns/shacl#or",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "exclusiveOr",
+          "id": "http://www.w3.org/ns/shacl#xone",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "documentation",
+          "id": "http://schema.org/documentation",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CreativeWork"
+        },
+        {
+          "name": "XMLSerialization",
+          "id": "http://a.ml/vocabularies/shapes#xmlSerialization",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, XMLSerializer"
+        },
+        {
+          "name": "examples",
+          "id": "http://a.ml/vocabularies/document#examples",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Example"
+        }
+      ]
+    },
+    {
+      "name": "License",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/License",
+      "htmlName": "node_license.html",
+      "description": "Licensing information for an API",
+      "scalarProperties": [
+        {
+          "name": "url",
+          "id": "http://schema.org/url",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "TemplatedLink",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/TemplatedLink",
+      "htmlName": "node_templatedlink.html",
+      "description": "Templated link containing URL template and variables mapping",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "template",
+          "id": "http://www.w3.org/ns/hydra/core#template",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "operationID",
+          "id": "http://a.ml/vocabularies/http#operationId",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "requestBody",
+          "id": "http://a.ml/vocabularies/http#requestBody",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "mapping",
+          "id": "http://www.w3.org/ns/hydra/core#mapping",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, IriTemplate"
+        },
+        {
+          "name": "server",
+          "id": "http://a.ml/vocabularies/http#server",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, Server"
+        }
+      ]
+    },
+    {
+      "name": "SchemaShape",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/SchemaShape",
+      "htmlName": "node_schemashape.html",
+      "description": "Raw schema that cannot be parsed using AMF shapes model",
+      "scalarProperties": [
+        {
+          "name": "mediaType",
+          "id": "http://www.w3.org/ns/shacl#mediaType",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "id": "http://www.w3.org/ns/shacl#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name1",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "defaultValueString",
+          "id": "http://www.w3.org/ns/shacl#defaultValueStr",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "inheritanceClosure",
+          "id": "http://a.ml/vocabularies/shapes#closure",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "raw",
+          "id": "http://www.w3.org/ns/shacl#raw",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "referenceId",
+          "id": "http://a.ml/vocabularies/document#reference-id",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "inherits",
+          "id": "http://a.ml/vocabularies/shapes#inherits",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "not",
+          "id": "http://www.w3.org/ns/shacl#not",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "and",
+          "id": "http://www.w3.org/ns/shacl#and",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "or",
+          "id": "http://www.w3.org/ns/shacl#or",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "exclusiveOr",
+          "id": "http://www.w3.org/ns/shacl#xone",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "documentation",
+          "id": "http://schema.org/documentation",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CreativeWork"
+        },
+        {
+          "name": "XMLSerialization",
+          "id": "http://a.ml/vocabularies/shapes#xmlSerialization",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, XMLSerializer"
+        },
+        {
+          "name": "examples",
+          "id": "http://a.ml/vocabularies/document#examples",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Example"
+        }
+      ]
+    },
+    {
+      "name": "Encoding",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Encoding",
+      "htmlName": "node_encoding.html",
+      "description": null,
+      "scalarProperties": [
+        {
+          "name": "propertyName",
+          "id": "http://a.ml/vocabularies/http#propertyName",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "contentType",
+          "id": "http://a.ml/vocabularies/http#contentType",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "style",
+          "id": "http://a.ml/vocabularies/http#style",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "explode",
+          "id": "http://a.ml/vocabularies/http#explode",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "allowReserved",
+          "id": "http://a.ml/vocabularies/http#allowReserved",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "header",
+          "id": "http://a.ml/vocabularies/http#header",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Parameter"
+        }
+      ]
+    },
+    {
+      "name": "ResourceType",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/ResourceType",
+      "htmlName": "node_resourcetype.html",
+      "description": "Type of document base unit encoding a RAML resource type",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "variable",
+          "id": "http://a.ml/vocabularies/document#variable",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "APIKeySettings",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/APIKeySettings",
+      "htmlName": "node_apikeysettings.html",
+      "description": "Settings for an API Key security scheme",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://a.ml/vocabularies/security#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "in",
+          "id": "http://a.ml/vocabularies/security#in",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "OpenIDSettings",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/OpenIDSettings",
+      "htmlName": "node_openidsettings.html",
+      "description": "Settings for an OpenID security scheme",
+      "scalarProperties": [
+        {
+          "name": "OpenIDConnectURL",
+          "id": "http://a.ml/vocabularies/security#openIdConnectUrl",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "PropertyShape",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/PropertyShape",
+      "htmlName": "node_propertyshape.html",
+      "description": "Constraint over a property in a data shape.",
+      "scalarProperties": [
+        {
+          "name": "path",
+          "id": "http://www.w3.org/ns/shacl#path",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "min.Count",
+          "id": "http://www.w3.org/ns/shacl#minCount",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "max.Count",
+          "id": "http://www.w3.org/ns/shacl#maxCount",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "readOnly",
+          "id": "http://a.ml/vocabularies/shapes#readOnly",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "patternName",
+          "id": "http://a.ml/vocabularies/shapes#patternName",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "id": "http://www.w3.org/ns/shacl#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name1",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "defaultValueString",
+          "id": "http://www.w3.org/ns/shacl#defaultValueStr",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "inheritanceClosure",
+          "id": "http://a.ml/vocabularies/shapes#closure",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "range",
+          "id": "http://a.ml/vocabularies/shapes#range",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "inherits",
+          "id": "http://a.ml/vocabularies/shapes#inherits",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "not",
+          "id": "http://www.w3.org/ns/shacl#not",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "and",
+          "id": "http://www.w3.org/ns/shacl#and",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "or",
+          "id": "http://www.w3.org/ns/shacl#or",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "exclusiveOr",
+          "id": "http://www.w3.org/ns/shacl#xone",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        }
+      ]
+    },
+    {
+      "name": "AnyShape",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/AnyShape",
+      "htmlName": "node_anyshape.html",
+      "description": "Base class for all shapes stored in the graph model",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://www.w3.org/ns/shacl#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name1",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "defaultValueString",
+          "id": "http://www.w3.org/ns/shacl#defaultValueStr",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "inheritanceClosure",
+          "id": "http://a.ml/vocabularies/shapes#closure",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "raw",
+          "id": "http://www.w3.org/ns/shacl#raw",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "referenceId",
+          "id": "http://a.ml/vocabularies/document#reference-id",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "inherits",
+          "id": "http://a.ml/vocabularies/shapes#inherits",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "not",
+          "id": "http://www.w3.org/ns/shacl#not",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "and",
+          "id": "http://www.w3.org/ns/shacl#and",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "or",
+          "id": "http://www.w3.org/ns/shacl#or",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "exclusiveOr",
+          "id": "http://www.w3.org/ns/shacl#xone",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "documentation",
+          "id": "http://schema.org/documentation",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CreativeWork"
+        },
+        {
+          "name": "XMLSerialization",
+          "id": "http://a.ml/vocabularies/shapes#xmlSerialization",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, XMLSerializer"
+        },
+        {
+          "name": "examples",
+          "id": "http://a.ml/vocabularies/document#examples",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Example"
+        }
+      ]
+    },
+    {
+      "name": "ScalarShape",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/ScalarShape",
+      "htmlName": "node_scalarshape.html",
+      "description": "Data shape describing a scalar value in the input data model, reified as an scalar node in the mapped graph",
+      "scalarProperties": [
+        {
+          "name": "datatype",
+          "id": "http://www.w3.org/ns/shacl#datatype",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "pattern",
+          "id": "http://www.w3.org/ns/shacl#pattern",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "min.Length",
+          "id": "http://www.w3.org/ns/shacl#minLength",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "max.Length",
+          "id": "http://www.w3.org/ns/shacl#maxLength",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "min.Inclusive",
+          "id": "http://www.w3.org/ns/shacl#minInclusive",
+          "range": "double",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "max.Inclusive",
+          "id": "http://www.w3.org/ns/shacl#maxInclusive",
+          "range": "double",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "min.Exclusive",
+          "id": "http://www.w3.org/ns/shacl#minExclusive",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "max.Exclusive",
+          "id": "http://www.w3.org/ns/shacl#maxExclusive",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "format",
+          "id": "http://a.ml/vocabularies/shapes#format",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "multipleOf",
+          "id": "http://a.ml/vocabularies/shapes#multipleOf",
+          "range": "double",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "id": "http://www.w3.org/ns/shacl#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name1",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "defaultValueString",
+          "id": "http://www.w3.org/ns/shacl#defaultValueStr",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "inheritanceClosure",
+          "id": "http://a.ml/vocabularies/shapes#closure",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "raw",
+          "id": "http://www.w3.org/ns/shacl#raw",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "referenceId",
+          "id": "http://a.ml/vocabularies/document#reference-id",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "inherits",
+          "id": "http://a.ml/vocabularies/shapes#inherits",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "not",
+          "id": "http://www.w3.org/ns/shacl#not",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "and",
+          "id": "http://www.w3.org/ns/shacl#and",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "or",
+          "id": "http://www.w3.org/ns/shacl#or",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "exclusiveOr",
+          "id": "http://www.w3.org/ns/shacl#xone",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "documentation",
+          "id": "http://schema.org/documentation",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CreativeWork"
+        },
+        {
+          "name": "XMLSerialization",
+          "id": "http://a.ml/vocabularies/shapes#xmlSerialization",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, XMLSerializer"
+        },
+        {
+          "name": "examples",
+          "id": "http://a.ml/vocabularies/document#examples",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Example"
+        }
+      ]
+    },
+    {
+      "name": "Operation",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Operation",
+      "htmlName": "node_operation.html",
+      "description": "Action that can be executed using a particular HTTP invocation",
+      "scalarProperties": [
+        {
+          "name": "method",
+          "id": "http://www.w3.org/ns/hydra/core#method",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "deprecated",
+          "id": "http://a.ml/vocabularies/document#deprecated",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "guiSummary",
+          "id": "http://a.ml/vocabularies/http#guiSummary",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "scheme",
+          "id": "http://a.ml/vocabularies/http#scheme",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "accepts",
+          "id": "http://a.ml/vocabularies/http#accepts",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "contentType",
+          "id": "http://a.ml/vocabularies/http#contentType",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "tag",
+          "id": "http://a.ml/vocabularies/http#tag",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "extends",
+          "id": "http://a.ml/vocabularies/document#extends",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            },
+            {
+              "name": "typeDiscriminatorName",
+              "value": "type"
+            },
+            {
+              "name": "typeDiscriminator",
+              "value": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/ParametrizedTrait->AppliedTrait"
+            }
+          ],
+          "range": "list, ParametrizedTrait"
+        },
+        {
+          "name": "documentation",
+          "id": "http://schema.org/documentation",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CreativeWork"
+        },
+        {
+          "name": "expects",
+          "id": "http://www.w3.org/ns/hydra/core#expects",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, Request"
+        },
+        {
+          "name": "returns",
+          "id": "http://www.w3.org/ns/hydra/core#returns",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Response"
+        },
+        {
+          "name": "security",
+          "id": "http://a.ml/vocabularies/security#security",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, ParametrizedSecurityScheme"
+        },
+        {
+          "name": "callback",
+          "id": "http://a.ml/vocabularies/http#callback",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Callback"
+        },
+        {
+          "name": "server",
+          "id": "http://a.ml/vocabularies/http#server",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Server"
+        }
+      ]
+    },
+    {
+      "name": "HTTPSettings",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/HTTPSettings",
+      "htmlName": "node_httpsettings.html",
+      "description": "Settings for an HTTP security scheme",
+      "scalarProperties": [
+        {
+          "name": "scheme",
+          "id": "http://a.ml/vocabularies/security#scheme",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "bearerFormat",
+          "id": "http://a.ml/vocabularies/security#bearerFormat",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "DomainExtension",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/DomainExtension",
+      "htmlName": "node_domainextension.html",
+      "description": "Extension to the model being parsed from RAML annotation or OpenAPI extensions\nThey must be a DomainPropertySchema (only in RAML) defining them.\nThe DomainPropertySchema might have an associated Data Shape that must validate the extension nested graph.\nThey are parsed as RDF graphs using a default transformation from a set of nested records into RDF.",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://a.ml/vocabularies/document#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "element",
+          "id": "http://a.ml/vocabularies/document#element",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "definedBy",
+          "id": "http://a.ml/vocabularies/document#definedBy",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CustomDomainProperty"
+        }
+      ]
+    },
+    {
+      "name": "Callback",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Callback",
+      "htmlName": "node_callback.html",
+      "description": "Model defining the information for a HTTP callback/ webhook",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "expression",
+          "id": "http://a.ml/vocabularies/http#expression",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "endpoint",
+          "id": "http://a.ml/vocabularies/http#endpoint",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, EndPoint"
+        }
+      ]
+    },
+    {
+      "name": "CreativeWork",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/CreativeWork",
+      "htmlName": "node_creativework.html",
+      "description": "he most generic kind of creative work, including books, movies, photographs, software programs, etc.",
+      "scalarProperties": [
+        {
+          "name": "url",
+          "id": "http://schema.org/url",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "title",
+          "id": "http://schema.org/title",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "AbstractDeclaration",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/AbstractDeclaration",
+      "htmlName": "node_abstractdeclaration.html",
+      "description": "Graph template that can be used to declare a re-usable graph structure that can be applied to different domain elements\nin order to re-use common semantics. Similar to a Lisp macro or a C++ template.\nIt can be extended by any domain element adding bindings for the variables in the declaration.",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "variable",
+          "id": "http://a.ml/vocabularies/document#variable",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "Payload",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Payload",
+      "htmlName": "node_payload.html",
+      "description": "Encoded payload using certain media-type",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "mediaType",
+          "id": "http://a.ml/vocabularies/http#mediaType",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "schema",
+          "id": "http://a.ml/vocabularies/http#schema",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "example",
+          "id": "http://a.ml/vocabularies/http#example",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Example"
+        },
+        {
+          "name": "encoding",
+          "id": "http://a.ml/vocabularies/http#encoding",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Encoding"
+        }
+      ]
+    },
+    {
+      "name": "SecuritySettingsUnion",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/SecuritySettingsUnion",
+      "htmlName": "node_securitysettingsunion.html",
+      "description": "Union of OAuth2Settings, OAuth1Settings, APIKeySettings, HTTPSettings, OpenIDSettings",
+      "scalarProperties": [],
+      "linkProperties": []
+    },
+    {
+      "name": "Tag",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Tag",
+      "htmlName": "node_tag.html",
+      "description": "Categorical information provided by some API spec format. Tags are extensions to the model supported directly in the input API spec format.",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "externalDocs",
+          "id": "http://schema.org/externalDocs",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CreativeWork"
+        }
+      ]
+    },
+    {
+      "name": "Example",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Example",
+      "htmlName": "node_example.html",
+      "description": "Example value for a schema inside an API",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "displayName",
+          "id": "http://a.ml/vocabularies/document#displayName",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "guiSummary",
+          "id": "http://a.ml/vocabularies/http#guiSummary",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "externalValue",
+          "id": "http://a.ml/vocabularies/document#externalValue",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "strict",
+          "id": "http://a.ml/vocabularies/document#strict",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "mediaType",
+          "id": "http://a.ml/vocabularies/http#mediaType",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "raw",
+          "id": "http://www.w3.org/ns/shacl#raw",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "referenceId",
+          "id": "http://a.ml/vocabularies/document#reference-id",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "CustomDomainProperty",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/CustomDomainProperty",
+      "htmlName": "node_customdomainproperty.html",
+      "description": "Definition of an extension to the domain model defined directly by a user in the RAML/OpenAPI document.\nThis can be achieved by using an annotationType in RAML. In OpenAPI thy don't need to\n      be declared, they can just be used.\n      This should be mapped to new RDF properties declared directly in the main document or module.\n      Contrast this extension mechanism with the creation of a propertyTerm in a vocabulary, a more\nre-usable and generic way of achieving the same functionality.\nIt can be validated using a SHACL shape",
+      "scalarProperties": [
+        {
+          "name": "domain",
+          "id": "http://www.w3.org/2000/01/rdf-schema#domain",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "id": "http://a.ml/vocabularies/document#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "schema",
+          "id": "http://a.ml/vocabularies/shapes#schema",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        }
+      ]
+    },
+    {
+      "name": "ParametrizedResourceType",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/ParametrizedResourceType",
+      "htmlName": "node_parametrizedresourcetype.html",
+      "description": "RAML resource type that can accept parameters",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "target",
+          "id": "http://a.ml/vocabularies/document#target",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, ResourceType, Trait"
+        },
+        {
+          "name": "variable",
+          "id": "http://a.ml/vocabularies/document#variable",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, VariableValue"
+        }
+      ]
+    },
+    {
+      "name": "UnionShape",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/UnionShape",
+      "htmlName": "node_unionshape.html",
+      "description": "Shape representing the union of many alternative data shapes",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://www.w3.org/ns/shacl#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name1",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "defaultValueString",
+          "id": "http://www.w3.org/ns/shacl#defaultValueStr",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "inheritanceClosure",
+          "id": "http://a.ml/vocabularies/shapes#closure",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "raw",
+          "id": "http://www.w3.org/ns/shacl#raw",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "referenceId",
+          "id": "http://a.ml/vocabularies/document#reference-id",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "anyOf",
+          "id": "http://a.ml/vocabularies/shapes#anyOf",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "inherits",
+          "id": "http://a.ml/vocabularies/shapes#inherits",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "not",
+          "id": "http://www.w3.org/ns/shacl#not",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "and",
+          "id": "http://www.w3.org/ns/shacl#and",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "or",
+          "id": "http://www.w3.org/ns/shacl#or",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "exclusiveOr",
+          "id": "http://www.w3.org/ns/shacl#xone",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "documentation",
+          "id": "http://schema.org/documentation",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CreativeWork"
+        },
+        {
+          "name": "XMLSerialization",
+          "id": "http://a.ml/vocabularies/shapes#xmlSerialization",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, XMLSerializer"
+        },
+        {
+          "name": "examples",
+          "id": "http://a.ml/vocabularies/document#examples",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Example"
+        }
+      ]
+    },
+    {
+      "name": "Response",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Response",
+      "htmlName": "node_response.html",
+      "description": "Response information for an operation",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "statusCode",
+          "id": "http://www.w3.org/ns/hydra/core#statusCode",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "header",
+          "id": "http://a.ml/vocabularies/http#header",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Parameter"
+        },
+        {
+          "name": "payload",
+          "id": "http://a.ml/vocabularies/http#payload",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Payload"
+        },
+        {
+          "name": "links",
+          "id": "http://a.ml/vocabularies/http#link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, TemplatedLink"
+        },
+        {
+          "name": "examples",
+          "id": "http://a.ml/vocabularies/document#examples",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Example"
+        }
+      ]
+    },
+    {
+      "name": "FileShape",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/FileShape",
+      "htmlName": "node_fileshape.html",
+      "description": "Shape describing data uploaded in an API request",
+      "scalarProperties": [
+        {
+          "name": "fileType",
+          "id": "http://a.ml/vocabularies/shapes#fileType",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "pattern",
+          "id": "http://www.w3.org/ns/shacl#pattern",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "min.Length",
+          "id": "http://www.w3.org/ns/shacl#minLength",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "max.Length",
+          "id": "http://www.w3.org/ns/shacl#maxLength",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "min.Inclusive",
+          "id": "http://www.w3.org/ns/shacl#minInclusive",
+          "range": "double",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "max.Inclusive",
+          "id": "http://www.w3.org/ns/shacl#maxInclusive",
+          "range": "double",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "min.Exclusive",
+          "id": "http://www.w3.org/ns/shacl#minExclusive",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "max.Exclusive",
+          "id": "http://www.w3.org/ns/shacl#maxExclusive",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "format",
+          "id": "http://a.ml/vocabularies/shapes#format",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "multipleOf",
+          "id": "http://a.ml/vocabularies/shapes#multipleOf",
+          "range": "double",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "id": "http://www.w3.org/ns/shacl#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name1",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "defaultValueString",
+          "id": "http://www.w3.org/ns/shacl#defaultValueStr",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "inheritanceClosure",
+          "id": "http://a.ml/vocabularies/shapes#closure",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "raw",
+          "id": "http://www.w3.org/ns/shacl#raw",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "referenceId",
+          "id": "http://a.ml/vocabularies/document#reference-id",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "inherits",
+          "id": "http://a.ml/vocabularies/shapes#inherits",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "not",
+          "id": "http://www.w3.org/ns/shacl#not",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "and",
+          "id": "http://www.w3.org/ns/shacl#and",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "or",
+          "id": "http://www.w3.org/ns/shacl#or",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "exclusiveOr",
+          "id": "http://www.w3.org/ns/shacl#xone",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "documentation",
+          "id": "http://schema.org/documentation",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CreativeWork"
+        },
+        {
+          "name": "XMLSerialization",
+          "id": "http://a.ml/vocabularies/shapes#xmlSerialization",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, XMLSerializer"
+        },
+        {
+          "name": "examples",
+          "id": "http://a.ml/vocabularies/document#examples",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Example"
+        }
+      ]
+    },
+    {
+      "name": "Trait",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Trait",
+      "htmlName": "node_trait.html",
+      "description": "Type of document base unit encoding a RAML trait",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "variable",
+          "id": "http://a.ml/vocabularies/document#variable",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "OAuth1Settings",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/OAuth1Settings",
+      "htmlName": "node_oauth1settings.html",
+      "description": "Settings for an OAuth1 security scheme",
+      "scalarProperties": [
+        {
+          "name": "requestTokenURI",
+          "id": "http://a.ml/vocabularies/security#requestTokenUri",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "authorizationURI",
+          "id": "http://a.ml/vocabularies/security#authorizationUri",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "tokenCredentialsURI",
+          "id": "http://a.ml/vocabularies/security#tokenCredentialsUri",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "signature",
+          "id": "http://a.ml/vocabularies/security#signature",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "MatrixShape",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/MatrixShape",
+      "htmlName": "node_matrixshape.html",
+      "description": "Data shape containing nested multi-dimensional collection shapes",
+      "scalarProperties": [
+        {
+          "name": "minCount",
+          "id": "http://www.w3.org/ns/shacl#minCount",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "maxCount",
+          "id": "http://www.w3.org/ns/shacl#maxCount",
+          "range": "integer",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "uinqueItems",
+          "id": "http://a.ml/vocabularies/shapes#uniqueItems",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "collectionFormat",
+          "id": "http://a.ml/vocabularies/shapes#collectionFormat",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "id": "http://www.w3.org/ns/shacl#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name1",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "defaultValueString",
+          "id": "http://www.w3.org/ns/shacl#defaultValueStr",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "inheritanceClosure",
+          "id": "http://a.ml/vocabularies/shapes#closure",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "raw",
+          "id": "http://www.w3.org/ns/shacl#raw",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "referenceId",
+          "id": "http://a.ml/vocabularies/document#reference-id",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "items",
+          "id": "http://a.ml/vocabularies/shapes#items",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "inherits",
+          "id": "http://a.ml/vocabularies/shapes#inherits",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "not",
+          "id": "http://www.w3.org/ns/shacl#not",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "and",
+          "id": "http://www.w3.org/ns/shacl#and",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "or",
+          "id": "http://www.w3.org/ns/shacl#or",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "exclusiveOr",
+          "id": "http://www.w3.org/ns/shacl#xone",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "documentation",
+          "id": "http://schema.org/documentation",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CreativeWork"
+        },
+        {
+          "name": "XMLSerialization",
+          "id": "http://a.ml/vocabularies/shapes#xmlSerialization",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, XMLSerializer"
+        },
+        {
+          "name": "examples",
+          "id": "http://a.ml/vocabularies/document#examples",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Example"
+        }
+      ]
+    },
+    {
+      "name": "ParametrizedTrait",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/ParametrizedTrait",
+      "htmlName": "node_parametrizedtrait.html",
+      "description": "RAML trait with declared parameters",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "target",
+          "id": "http://a.ml/vocabularies/document#target",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, ResourceType, Trait"
+        },
+        {
+          "name": "variable",
+          "id": "http://a.ml/vocabularies/document#variable",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, VariableValue"
+        }
+      ]
+    },
+    {
+      "name": "NilShape",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/NilShape",
+      "htmlName": "node_nilshape.html",
+      "description": "Data shape representing the null/nil value in the input schema",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://www.w3.org/ns/shacl#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name1",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "defaultValueString",
+          "id": "http://www.w3.org/ns/shacl#defaultValueStr",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "inheritanceClosure",
+          "id": "http://a.ml/vocabularies/shapes#closure",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "raw",
+          "id": "http://www.w3.org/ns/shacl#raw",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "referenceId",
+          "id": "http://a.ml/vocabularies/document#reference-id",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "inherits",
+          "id": "http://a.ml/vocabularies/shapes#inherits",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "not",
+          "id": "http://www.w3.org/ns/shacl#not",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "and",
+          "id": "http://www.w3.org/ns/shacl#and",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "or",
+          "id": "http://www.w3.org/ns/shacl#or",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "exclusiveOr",
+          "id": "http://www.w3.org/ns/shacl#xone",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, DataShapesUnion"
+        },
+        {
+          "name": "documentation",
+          "id": "http://schema.org/documentation",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, CreativeWork"
+        },
+        {
+          "name": "XMLSerialization",
+          "id": "http://a.ml/vocabularies/shapes#xmlSerialization",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, XMLSerializer"
+        },
+        {
+          "name": "examples",
+          "id": "http://a.ml/vocabularies/document#examples",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Example"
+        }
+      ]
+    },
+    {
+      "name": "WebAPI",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/WebAPI",
+      "htmlName": "node_webapi.html",
+      "description": "Top level element describing a HTTP API",
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "id": "http://schema.org/description",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "accepts",
+          "id": "http://a.ml/vocabularies/http#accepts",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "contentType",
+          "id": "http://a.ml/vocabularies/http#contentType",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "scheme",
+          "id": "http://a.ml/vocabularies/http#scheme",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "version",
+          "id": "http://schema.org/version",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "termsOfService",
+          "id": "http://schema.org/termsOfService",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "server",
+          "id": "http://a.ml/vocabularies/http#server",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Server"
+        },
+        {
+          "name": "provider",
+          "id": "http://schema.org/provider",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, Organization"
+        },
+        {
+          "name": "license",
+          "id": "http://schema.org/license",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, License"
+        },
+        {
+          "name": "documentation",
+          "id": "http://schema.org/documentation",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, CreativeWork"
+        },
+        {
+          "name": "endpoint",
+          "id": "http://a.ml/vocabularies/http#endpoint",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, EndPoint"
+        },
+        {
+          "name": "security",
+          "id": "http://a.ml/vocabularies/security#security",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, ParametrizedSecurityScheme"
+        },
+        {
+          "name": "tag",
+          "id": "http://a.ml/vocabularies/http#tag",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Tag"
+        }
+      ]
+    },
+    {
+      "name": "XMLSerializer",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/XMLSerializer",
+      "htmlName": "node_xmlserializer.html",
+      "description": "Information about how to encode into XML a particular data shape",
+      "scalarProperties": [
+        {
+          "name": "xmlAttribute",
+          "id": "http://a.ml/vocabularies/shapes#xmlAttribute",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "xmlWrapped",
+          "id": "http://a.ml/vocabularies/shapes#xmlWrapped",
+          "range": "boolean",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "xmlName",
+          "id": "http://a.ml/vocabularies/shapes#xmlName",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "xmlNamespace",
+          "id": "http://a.ml/vocabularies/shapes#xmlNamespace",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "xmlPrefix",
+          "id": "http://a.ml/vocabularies/shapes#xmlPrefix",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "Organization",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Organization",
+      "htmlName": "node_organization.html",
+      "description": "Organization providing an API",
+      "scalarProperties": [
+        {
+          "name": "url",
+          "id": "http://schema.org/url",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "name",
+          "id": "http://schema.org/name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "email",
+          "id": "http://schema.org/email",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "PropertyDependencies",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/PropertyDependencies",
+      "htmlName": "node_propertydependencies.html",
+      "description": "Dependency between sets of property shapes",
+      "scalarProperties": [
+        {
+          "name": "propertySource",
+          "id": "http://a.ml/vocabularies/shapes#propertySource",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "propertyTarget",
+          "id": "http://a.ml/vocabularies/shapes#propertyTarget",
+          "range": "link",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "ParametrizedSecurityScheme",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/ParametrizedSecurityScheme",
+      "htmlName": "node_parametrizedsecurityscheme.html",
+      "description": null,
+      "scalarProperties": [
+        {
+          "name": "name",
+          "id": "http://a.ml/vocabularies/security#name",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "scheme",
+          "id": "http://a.ml/vocabularies/security#scheme",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, SecurityScheme"
+        },
+        {
+          "name": "settings",
+          "id": "http://a.ml/vocabularies/security#settings",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ],
+          "range": "list, SecuritySettingsUnion"
+        }
+      ]
+    },
+    {
+      "name": "IriTemplate",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/IriTemplate",
+      "htmlName": "node_iritemplate.html",
+      "description": null,
+      "scalarProperties": [
+        {
+          "name": "variable",
+          "id": "http://www.w3.org/ns/hydra/core#variable",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "linkExprssion",
+          "id": "http://a.ml/vocabularies/http#linkExpression",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": []
+    },
+    {
+      "name": "OAuth2Settings",
+      "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/OAuth2Settings",
+      "htmlName": "node_oauth2settings.html",
+      "description": "Settings for an OAuth2 security scheme",
+      "scalarProperties": [
+        {
+          "name": "authorizationURI",
+          "id": "http://a.ml/vocabularies/security#authorizationUri",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "accessTokenURI",
+          "id": "http://a.ml/vocabularies/security#accessTokenUri",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "authorizationGrant",
+          "id": "http://a.ml/vocabularies/security#authorizationGrant",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ]
+        },
+        {
+          "name": "flow",
+          "id": "http://a.ml/vocabularies/security#flow",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        },
+        {
+          "name": "refreshURI",
+          "id": "http://a.ml/vocabularies/security#refreshUri",
+          "range": "string",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "linkProperties": [
+        {
+          "name": "scope",
+          "id": "http://a.ml/vocabularies/security#scope",
+          "constraints": [
+            {
+              "name": "mandatory",
+              "value": false
+            },
+            {
+              "name": "allowMultiple",
+              "value": true
+            }
+          ],
+          "range": "list, Scope"
+        }
+      ]
+    }
+  ],
+  "navData": {
+    "dialects": [
+      {
+        "name": "WebAPI",
+        "htmlName": "webapi.html"
+      }
+    ],
+    "nodeMappings": [
+      {
+        "name": "Request",
+        "htmlName": "node_request.html"
+      },
+      {
+        "name": "ArrayShape",
+        "htmlName": "node_arrayshape.html"
+      },
+      {
+        "name": "NodeShape",
+        "htmlName": "node_nodeshape.html"
+      },
+      {
+        "name": "EndPoint",
+        "htmlName": "node_endpoint.html"
+      },
+      {
+        "name": "ShapeExtension",
+        "htmlName": "node_shapeextension.html"
+      },
+      {
+        "name": "Parameter",
+        "htmlName": "node_parameter.html"
+      },
+      {
+        "name": "SecurityScheme",
+        "htmlName": "node_securityscheme.html"
+      },
+      {
+        "name": "Scope",
+        "htmlName": "node_scope.html"
+      },
+      {
+        "name": "Server",
+        "htmlName": "node_server.html"
+      },
+      {
+        "name": "VariableValue",
+        "htmlName": "node_variablevalue.html"
+      },
+      {
+        "name": "DataShapesUnion",
+        "htmlName": "node_datashapesunion.html"
+      },
+      {
+        "name": "TupleShape",
+        "htmlName": "node_tupleshape.html"
+      },
+      {
+        "name": "License",
+        "htmlName": "node_license.html"
+      },
+      {
+        "name": "TemplatedLink",
+        "htmlName": "node_templatedlink.html"
+      },
+      {
+        "name": "SchemaShape",
+        "htmlName": "node_schemashape.html"
+      },
+      {
+        "name": "Encoding",
+        "htmlName": "node_encoding.html"
+      },
+      {
+        "name": "ResourceType",
+        "htmlName": "node_resourcetype.html"
+      },
+      {
+        "name": "APIKeySettings",
+        "htmlName": "node_apikeysettings.html"
+      },
+      {
+        "name": "OpenIDSettings",
+        "htmlName": "node_openidsettings.html"
+      },
+      {
+        "name": "PropertyShape",
+        "htmlName": "node_propertyshape.html"
+      },
+      {
+        "name": "AnyShape",
+        "htmlName": "node_anyshape.html"
+      },
+      {
+        "name": "ScalarShape",
+        "htmlName": "node_scalarshape.html"
+      },
+      {
+        "name": "Operation",
+        "htmlName": "node_operation.html"
+      },
+      {
+        "name": "HTTPSettings",
+        "htmlName": "node_httpsettings.html"
+      },
+      {
+        "name": "DomainExtension",
+        "htmlName": "node_domainextension.html"
+      },
+      {
+        "name": "Callback",
+        "htmlName": "node_callback.html"
+      },
+      {
+        "name": "CreativeWork",
+        "htmlName": "node_creativework.html"
+      },
+      {
+        "name": "AbstractDeclaration",
+        "htmlName": "node_abstractdeclaration.html"
+      },
+      {
+        "name": "Payload",
+        "htmlName": "node_payload.html"
+      },
+      {
+        "name": "SecuritySettingsUnion",
+        "htmlName": "node_securitysettingsunion.html"
+      },
+      {
+        "name": "Tag",
+        "htmlName": "node_tag.html"
+      },
+      {
+        "name": "Example",
+        "htmlName": "node_example.html"
+      },
+      {
+        "name": "CustomDomainProperty",
+        "htmlName": "node_customdomainproperty.html"
+      },
+      {
+        "name": "ParametrizedResourceType",
+        "htmlName": "node_parametrizedresourcetype.html"
+      },
+      {
+        "name": "UnionShape",
+        "htmlName": "node_unionshape.html"
+      },
+      {
+        "name": "Response",
+        "htmlName": "node_response.html"
+      },
+      {
+        "name": "FileShape",
+        "htmlName": "node_fileshape.html"
+      },
+      {
+        "name": "Trait",
+        "htmlName": "node_trait.html"
+      },
+      {
+        "name": "OAuth1Settings",
+        "htmlName": "node_oauth1settings.html"
+      },
+      {
+        "name": "MatrixShape",
+        "htmlName": "node_matrixshape.html"
+      },
+      {
+        "name": "ParametrizedTrait",
+        "htmlName": "node_parametrizedtrait.html"
+      },
+      {
+        "name": "NilShape",
+        "htmlName": "node_nilshape.html"
+      },
+      {
+        "name": "WebAPI",
+        "htmlName": "node_webapi.html"
+      },
+      {
+        "name": "XMLSerializer",
+        "htmlName": "node_xmlserializer.html"
+      },
+      {
+        "name": "Organization",
+        "htmlName": "node_organization.html"
+      },
+      {
+        "name": "PropertyDependencies",
+        "htmlName": "node_propertydependencies.html"
+      },
+      {
+        "name": "ParametrizedSecurityScheme",
+        "htmlName": "node_parametrizedsecurityscheme.html"
+      },
+      {
+        "name": "IriTemplate",
+        "htmlName": "node_iritemplate.html"
+      },
+      {
+        "name": "OAuth2Settings",
+        "htmlName": "node_oauth2settings.html"
+      }
+    ]
+  }
+}
