@@ -226,8 +226,8 @@ function collectNodesData (doc) {
     // htmlName
     const slug = nodeData.name.split(' ').join('').toLowerCase()
     nodeData.htmlName = `node_${slug}.html`
-    nodeData.scalarProperties = collectScalarPropsData(doc, node)
-    nodeData.linkProperties = collectLinkScalarPropsData(doc, node)
+    nodeData.scalarProperties = collectScalarPropsData(node)
+    nodeData.linkProperties = collectLinkPropsData(node)
     return nodeData
   })
   return nodes
@@ -245,37 +245,19 @@ Scalar properties DO contain 'shacl:datatype' node
     }
   ]
 */
-function collectScalarPropsData (doc, node) {
+function collectScalarPropsData (node) {
   const propsNodes = node.query('shacl:property').filter((prop) => {
     return !!prop.query('shacl:datatype')
   })
-  const props = propsNodes.map((prop) => {
+  return propsNodes.map((prop) => {
     let propData = {
       name: prop.query('schema:name @value'),
       id: prop.query('shacl:path @id'),
-      range: parseHashValue(prop.query('shacl:datatype @id')),
-      constraints: [
-        {name: 'mandatory', value: prop.query('shacl:minCount @value') > 0},
-        {name: 'pattern', value: prop.query('shacl:pattern @value')},
-        {name: 'minimum', value: prop.query('shacl:minInclusive @value')},
-        {name: 'maximum', value: prop.query('shacl:maxInclusive @value')},
-        {name: 'enum', value: prop.query('shacl:in @value')},
-        {name: 'allowMultiple', value: prop.query('meta:allowMultiple @value')},
-        {name: 'sorted', value: prop.query('meta:sorted @value')},
-        {name: 'mapKey', value: prop.query('meta:mapProperty @id')},
-        {name: 'typeDiscriminator',
-         value: prop.query('meta:typeDiscriminatorMap @value')
-                    .split(',').join('\n')},
-        {name: 'typeDiscriminatorName',
-         value: prop.query('meta:typeDiscriminatorName @value')}
-      ]
+      range: utils.parseHashValue(prop.query('shacl:datatype @id')),
+      constraints: parsePropertyConstraints(prop)
     }
-    propData.constraints = propData.constraints.filter((con) => {
-      return !!con.value
-    })
     return propData
   })
-  return props
 }
 
 /*
@@ -290,11 +272,40 @@ Link properties DON'T contain 'shacl:datatype' node
     }
   ]
 */
-function collectLinkPropsData (doc, node) {
+function collectLinkPropsData (node) {
   const propsNodes = node.query('shacl:property').filter((prop) => {
     return !prop.query('shacl:datatype')
   })
+  return propsNodes.map((prop) => {
+    let propData = {
+      name: prop.query('schema:name @value'),
+      id: prop.query('shacl:path @id'),
+      range: utils.parseHashValue(prop.query('rdf:_1 @id')),
+      constraints: parsePropertyConstraints(prop)
+    }
+    return propData
+  })
+}
 
+function parsePropertyConstraints (prop) {
+  const constraints = [
+    {name: 'mandatory', value: prop.query('shacl:minCount @value') > 0},
+    {name: 'pattern', value: prop.query('shacl:pattern @value')},
+    {name: 'minimum', value: prop.query('shacl:minInclusive @value')},
+    {name: 'maximum', value: prop.query('shacl:maxInclusive @value')},
+    {name: 'enum', value: prop.query('shacl:in @value')},
+    {name: 'allowMultiple', value: prop.query('meta:allowMultiple @value')},
+    {name: 'sorted', value: prop.query('meta:sorted @value')},
+    {name: 'mapKey', value: prop.query('meta:mapProperty @id')},
+    {name: 'typeDiscriminator',
+      value: prop.query('meta:typeDiscriminatorMap @value')
+        .split(',').join('\n')},
+    {name: 'typeDiscriminatorName',
+      value: prop.query('meta:typeDiscriminatorName @value')}
+  ]
+  return constraints.filter((con) => {
+    return !!con.value
+  })
 }
 
 /*
