@@ -61,6 +61,7 @@ nodeMappings:
           - Oauth2SecurityScheme
         mapKey: security.name
         allowMultiple: true
+        sorted: true
         typeDiscriminator:
           basic: BasicSecurityScheme
           apiKey: ApiKeySecurityScheme
