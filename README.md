@@ -9,9 +9,9 @@ $ npm install
 ```
 
 ## Usage
-Run CLI command with (*note the required `--` before arguments*):
-```sh
-$ npm run aml2html -- <dialectPath>... --outdir=DIR
+CLI command notation (*note the required `--` before arguments*):
+```
+npm run aml2html -- <dialectPath>... --outdir=DIR
 ```
 
 E.g.
