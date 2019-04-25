@@ -51,7 +51,6 @@ async function main () {
     // Render nodeMappings item data
     dialectData.nodeMappings.forEach((nodeData) => {
       nodeData.navData = dialectData.navData
-      nodeData.dialectName = dialectData.name
       utils.renderTemplate(
         nodeData,
         path.join(TMPL_DIR, 'node.mustache'),
@@ -69,24 +68,26 @@ function collectDialectData (doc) {
     name: doc.query('schema:name @value'),
     id: doc.query('@id')
   }
-  const slug = dialectData.name.split(' ').join('').toLowerCase()
-  dialectData.htmlName = `${slug}.html`
-  dialectData.nodeMappings = collectNodesData(doc).sort(utils.nameSorter)
+  dialectData.slug = dialectData.name.split(' ').join('').toLowerCase()
+  dialectData.htmlName = `${dialectData.slug}.html`
+  dialectData.nodeMappings = collectNodesData(doc, dialectData)
+    .sort(utils.nameSorter)
   return dialectData
 }
 
 /* Collects dialect nodeMappings data. */
-function collectNodesData (doc) {
+function collectNodesData (doc, dialectData) {
   const nodes = doc.queryAll('amldoc:declares[@type=shacl:Shape]')
     .map((node) => {
       // name, id
       let nodeData = {
         name: node.query('schema:name @value'),
-        id: node.query('@id')
+        id: node.query('@id'),
+        dialectName: dialectData.name
       }
       // htmlName
-      let slug = nodeData.name.split(' ').join('').toLowerCase()
-      nodeData.htmlName = `node_${slug}.html`
+      nodeData.slug = nodeData.name.split(' ').join('').toLowerCase()
+      nodeData.htmlName = `schema_${dialectData.slug}_${nodeData.slug}.html`
 
       let isUnion = node.query('@type')
         .indexOf(`${CTX.meta}UnionNodeMapping`) > -1
