@@ -46,10 +46,12 @@ async function main () {
     utils.renderTemplate(
       dialectData,
       path.join(TMPL_DIR, 'dialect.mustache'),
-      path.join(outDir, dialectData.html))
+      path.join(outDir, dialectData.htmlName))
 
     // Render nodeMappings item data
     dialectData.nodeMappings.forEach((nodeData) => {
+      nodeData.navData = dialectData.navData
+      nodeData.dialectName = dialectData.name
       utils.renderTemplate(
         nodeData,
         path.join(TMPL_DIR, 'node.mustache'),
@@ -105,6 +107,13 @@ function collectNodesData (doc) {
         nodeData.scalarProperties = collectScalarPropsData(node)
         nodeData.linkProperties = collectLinkPropsData(node)
       }
+      let linkedRanges = nodeData.linkProperties.map((data) => {
+        return data.range
+      })
+      // Remove duplicates
+      nodeData.linkedSchemasStr = linkedRanges.filter((v,i) => {
+        return linkedRanges.indexOf(v) === i
+      }).join(', ')
       return nodeData
     })
   return nodes

@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Vocabularies Overview</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/custom.css">
-</head>
+  <head>
+    <title>{{name}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+  </head>
   <body>
     <div class="container-fluid">
-      <h1><a href="index.html" title="">Vocabularies</a></h1>
-      {{#vocs}}
-        <hr>
-        <div class="voc-info">
-          {{#name}}<h2>{{name}}</h2>{{/name}}
-          {{#id}}<p><b>ID:</b> {{id}}</p>{{/id}}
-          {{#base}}<p><b>Base:</b> {{base}}</p>{{/base}}
-          {{#usage}}<p><b>Usage:</b> {{usage}}</p>{{/usage}}
-          {{#properties}}<p><b>Properties:</b> <samp>{{properties}}</samp></p>{{/properties}}
-          <p><b>Classes:</b>{{^classes}} None{{/classes}}</p>
-          <ul>
-            {{#classes}}
-              <li><a href="{{page}}" title="{{clsId}}">{{clsName}}</a></li>
-            {{/classes}}
-          </ul>
+      <div class="col-md-2">
+        <div id="aside-dialects">
+          <h1>Dialects</h1>
+          <hr>
+          {{#navData.dialects}}
+            <p><a href="{{htmlName}}" title="{{name}}">{{name}}</a></p>
+          {{/navData.dialects}}
         </div>
-      {{/vocs}}
+        <div id="aside-schemas">
+          <h1>Schemas</h1>
+          <hr>
+          {{#navData.nodeMappings}}
+            <p><a href="{{htmlName}}" title="{{name}}">{{name}}</a></p>
+          {{/navData.nodeMappings}}
+        </div>
+      </div>
+      <div class="col-md-10">
+        <h1>{{name}}</h1>
+        <p>URL: {{id}}</p>
+        <p>Schemas:</p>
+        <ul>
+          {{#nodeMappings}}
+            <li><a href="{{htmlName}}" title="{{name}}">{{name}}</a></li>
+          {{/nodeMappings}}
+        </ul>
+      </div>
     </div>
   </body>
 </html>

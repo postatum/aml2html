@@ -1,60 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>{{name}} vocabulary</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/custom.css">
-</head>
+  <head>
+    <title>{{dialectName}} :: {{name}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+  </head>
   <body>
     <div class="container-fluid">
-      <h1><a href="index.html" title="">Vocabularies</a> > {{name}}</h1>
-      <hr>
-      {{#displayName}}
-        <h2>Name</h2>
-        <p>{{displayName}}</p>
-      {{/displayName}}
-      {{#id}}
-        <h2>ID</h2>
-        <p>{{id}}</p>
-      {{/id}}
-      {{#description}}
-        <h2>Description</h2>
-        <p>{{description}}</p>
-      {{/description}}
-      <h2>Extends</h2>
-      {{^extends}} Nothing{{/extends}}
-      <ul>
-        {{#extends}}
-          <li>{{.}}</li>
-        {{/extends}}
-      </ul>
-      <h2>Properties</h2>
-      <div class='table-responsive'>
+      <div class="col-md-2">
+        <div id="aside-dialects">
+          <h1>Dialects</h1>
+          <hr>
+          {{#navData.dialects}}
+            <p><a href="{{htmlName}}" title="{{name}}">{{name}}</a></p>
+          {{/navData.dialects}}
+        </div>
+        <div id="aside-schemas">
+          <h1>Schemas</h1>
+          <hr>
+          {{#navData.nodeMappings}}
+            <p><a href="{{htmlName}}" title="{{name}}">{{name}}</a></p>
+          {{/navData.nodeMappings}}
+        </div>
+      </div>
+      <div class="col-md-10">
+        <h1>{{dialectName}} :: {{name}}</h1>
+        <p>Term ID: {{id}}</p>
+        <p>Description: {{description}}</p>
+        <p>Linked schemas: {{linkedSchemasStr}}</p>
+
         <table class="table table-hover table-bordered">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>ID</th>
-              <th>Type</th>
-              <th>Extends</th>
-              <th>Description</th>
-            </tr>
-          </thead>
+          <caption>Scalar Properties</caption>
           <tbody>
-            {{#properties}}
+            {{#scalarProperties}}
               <tr>
-                <td>{{propName}}</td>
-                <td>{{propId}}</td>
-                <td><a href="{{range}}" title="{{range}}">{{rangeName}}</a></td>
+                <td>{{name}}</td>
                 <td>
-                  {{#propExtends}}
-                    <a href="{{extId}}" title="{{extId}}">{{extName}}</a>
-                  {{/propExtends}}</td>
-                <td>{{#desc}}{{desc}}{{/desc}}</td>
+                  <ul>
+                    <li>Term ID: {{id}}</li>
+                    <li>Range: {{range}}</li>
+                    {{#constraints}}
+                      <li>{{name}}: {{value}}</li>
+                    {{/constraints}}
+                  </ul>
+                </td>
               </tr>
-            {{/properties}}
+            {{/scalarProperties}}
+          </tbody>
+        </table>
+
+        <table class="table table-hover table-bordered">
+          <caption>Link Properties</caption>
+          <tbody>
+            {{#linkProperties}}
+              <tr>
+                <td>{{name}}</td>
+                <td>
+                  <ul>
+                    <li>Term ID: {{id}}</li>
+                    <li>Range: {{range}}</li>
+                    {{#constraints}}
+                      <li>{{name}}: {{value}}</li>
+                    {{/constraints}}
+                  </ul>
+                </td>
+              </tr>
+            {{/linkProperties}}
           </tbody>
         </table>
       </div>

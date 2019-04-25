@@ -5,6 +5,8 @@
   "nodeMappings": [
     {
       "name": "Request",
+      "dialectName": "WebAPI",
+      "linkedSchemasStr": "Parameter, Payload, DataShapesUnion",
       "id": "file://test_data/amf/dialects/canonical_webapi.yaml#/declarations/Request",
       "htmlName": "node_request.html",
       "description": "Request information for an operation",
