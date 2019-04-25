@@ -75,11 +75,22 @@ function renderTemplate (data, tmplPath, htmlPath) {
   fs.writeFileSync(htmlPath, htmlStr)
 }
 
+function nameSorter (a, b) {
+  if (a.name > b.name) {
+    return 1
+  }
+  if (a.name < b.name) {
+    return -1
+  }
+  return 0
+}
+
 module.exports = {
   getJsonLdGraph: getJsonLdGraph,
   copyCss: copyCss,
   removeDuplicatesById: removeDuplicatesById,
   parseHashValue: parseHashValue,
   renderTemplate: renderTemplate,
-  TMPL_DIR: TMPL_DIR
+  TMPL_DIR: TMPL_DIR,
+  nameSorter: nameSorter
 }

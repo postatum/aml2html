@@ -9,15 +9,15 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div class="col-md-2">
-        <div id="aside-dialects">
+      <div class="col-md-2 aside">
+        <div>
           <h1>Dialects</h1>
           <hr>
           {{#navData.dialects}}
             <p><a href="{{htmlName}}" title="{{name}}">{{name}}</a></p>
           {{/navData.dialects}}
         </div>
-        <div id="aside-schemas">
+        <div>
           <h1>Schemas</h1>
           <hr>
           {{#navData.nodeMappings}}
@@ -28,11 +28,15 @@
       <div class="col-md-10">
         <h1>{{dialectName}} :: {{name}}</h1>
         <p>Term ID: {{id}}</p>
-        <p>Description: {{description}}</p>
-        <p>Linked schemas: {{linkedSchemasStr}}</p>
+        {{#description}}
+          <p>Description: {{description}}</p>
+        {{/description}}
+        {{#linkedSchemasStr}}
+          <p>Linked schemas: {{linkedSchemasStr}}</p>
+        {{/linkedSchemasStr}}
 
         <table class="table table-hover table-bordered">
-          <caption>Scalar Properties</caption>
+          <caption>{{^scalarProperties}}No {{/scalarProperties}}Scalar Properties</caption>
           <tbody>
             {{#scalarProperties}}
               <tr>
@@ -52,7 +56,7 @@
         </table>
 
         <table class="table table-hover table-bordered">
-          <caption>Link Properties</caption>
+          <caption>{{^linkProperties}}No {{/linkProperties}}Link Properties</caption>
           <tbody>
             {{#linkProperties}}
               <tr>

@@ -9,15 +9,15 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div class="col-md-2">
-        <div id="aside-dialects">
+      <div class="col-md-2 aside">
+        <div>
           <h1>Dialects</h1>
           <hr>
           {{#navData.dialects}}
             <p><a href="{{htmlName}}" title="{{name}}">{{name}}</a></p>
           {{/navData.dialects}}
         </div>
-        <div id="aside-schemas">
+        <div>
           <h1>Schemas</h1>
           <hr>
           {{#navData.nodeMappings}}

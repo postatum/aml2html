@@ -71,7 +71,7 @@ function collectDialectData (doc) {
   }
   const slug = dialectData.name.split(' ').join('').toLowerCase()
   dialectData.htmlName = `${slug}.html`
-  dialectData.nodeMappings = collectNodesData(doc)
+  dialectData.nodeMappings = collectNodesData(doc).sort(utils.nameSorter)
   return dialectData
 }
 
@@ -102,7 +102,9 @@ function collectNodesData (doc) {
         // description
         let targetClassId = node.query('shacl:targetClass @id')
         let targetClass = doc.query(`amldoc:declares[@id=${targetClassId}]`)
-        nodeData.description = targetClass.query('schema:description @value')
+        nodeData.description = targetClass
+          ? targetClass.query('schema:description @value')
+          : ''
         // properties
         nodeData.scalarProperties = collectScalarPropsData(node)
         nodeData.linkProperties = collectLinkPropsData(node)
@@ -111,7 +113,7 @@ function collectNodesData (doc) {
         return data.range
       })
       // Remove duplicates
-      nodeData.linkedSchemasStr = linkedRanges.filter((v,i) => {
+      nodeData.linkedSchemasStr = linkedRanges.filter((v, i) => {
         return linkedRanges.indexOf(v) === i
       }).join(', ')
       return nodeData
