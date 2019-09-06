@@ -29,7 +29,7 @@ async function main () {
 
   // Collects dialects data into an array
   const dialectsPaths = Array.isArray(argv._) ? argv._ : [argv._]
-  const dialectsData = await Promise.all(dialectsPaths.map(async (dpth) => {
+  const dialectsData = await Promise.all(dialectsPaths.map(async dpth => {
     let graph = await utils.getJsonLdGraph(dpth)
     let doc = ldquery(graph, CTX).query('[@type=meta:Dialect]')
     console.log(`Collecting dialect data: ${dpth}`)
@@ -49,7 +49,7 @@ async function main () {
       path.join(outDir, dialectData.htmlName))
 
     // Render nodeMappings item data
-    dialectData.nodeMappings.forEach((nodeData) => {
+    dialectData.nodeMappings.forEach(nodeData => {
       nodeData.navData = dialectData.navData
       utils.renderTemplate(
         nodeData,
@@ -83,7 +83,7 @@ function collectDialectData (doc) {
 /* Collects dialect nodeMappings data. */
 function collectNodesData (doc, dialectData) {
   const nodes = doc.queryAll('amldoc:declares[@type=shacl:Shape]')
-    .map((node) => {
+    .map(node => {
       // name, id
       let nodeData = {
         name: node.query('schema:name @value'),
@@ -133,10 +133,9 @@ function collectNodesData (doc, dialectData) {
 
 /* Collects nodeMappings item scalar properties data. */
 function collectScalarPropsData (doc, node) {
-  const propsNodes = node.queryAll('shacl:property').filter((prop) => {
-    return !!prop.query('shacl:datatype')
-  })
-  return propsNodes.map((prop) => {
+  const propsNodes = node.queryAll('shacl:property')
+    .filter(prop => !!prop.query('shacl:datatype'))
+  return propsNodes.map(prop => {
     let propData = collectCommonPropData(doc, prop)
     propData.range = utils.parseHashValue(prop.query('shacl:datatype @id'))
     return propData
@@ -145,10 +144,9 @@ function collectScalarPropsData (doc, node) {
 
 /* Collects nodeMappings item link properties data. */
 function collectLinkPropsData (doc, node, dialectSlug) {
-  const propsNodes = node.queryAll('shacl:property').filter((prop) => {
-    return !prop.query('shacl:datatype')
-  })
-  return propsNodes.map((prop) => {
+  const propsNodes = node.queryAll('shacl:property')
+    .filter(prop => !prop.query('shacl:datatype'))
+  return propsNodes.map(prop => {
     let propData = collectCommonPropData(doc, prop)
     propData.range = prop.queryAll('shacl:node @id').slice(1)
       .map(rangeId => {
@@ -211,13 +209,13 @@ function collectPropertyConstraints (prop) {
   }
 
   // Drop empty and falsy values
-  return constraints.filter((con) => { return !!con.value })
+  return constraints.filter(con => !!con.value)
 }
 
 /* Collects common navigation data. */
 function collectCommonNavData (dialectsData) {
   const commonNavData = {
-    dialects: dialectsData.map((data) => {
+    dialects: dialectsData.map(data => {
       return {name: data.name, htmlName: data.htmlName}
     }),
     nodeMappings: []
@@ -229,7 +227,7 @@ function collectCommonNavData (dialectsData) {
 function collectNavData (dialectData, commonNavData) {
   const navData = {
     dialects: commonNavData.dialects,
-    nodeMappings: dialectData.nodeMappings.map((data) => {
+    nodeMappings: dialectData.nodeMappings.map(data => {
       return {name: data.name, htmlName: data.htmlName}
     })
   }
