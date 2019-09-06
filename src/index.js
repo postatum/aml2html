@@ -145,14 +145,17 @@ function collectLinkPropsData (doc, node, dialectSlug) {
   })
   return propsNodes.map((prop) => {
     let propData = collectCommonPropData(doc, prop)
-    propData.range = prop.queryAll('shacl:node @id')
-      .map(utils.parseHashValue).slice(1)
-      .map(rng => {
-        return {
-          rangeName: rng,
-          rangeHtmlName: utils.makeSchemaHtmlName(
-            dialectSlug, utils.slugify(rng))
+    propData.range = prop.queryAll('shacl:node @id').slice(1)
+      .map(rangeId => {
+        const data = {
+          rangeName: utils.parseHashValue(rangeId)
         }
+        const declaredLocally = doc.query(`amldoc:declares[@id=${rangeId}]`)
+        if (declaredLocally) {
+          data.rangeHtmlName = utils.makeSchemaHtmlName(
+            dialectSlug, utils.slugify(data.rangeName))
+        }
+        return data
       })
     return propData
   })

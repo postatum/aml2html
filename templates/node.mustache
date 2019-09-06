@@ -35,7 +35,14 @@
         {{^linkedSchemas}}No {{/linkedSchemas}}Linked schemas
         <ul>
           {{#linkedSchemas}}
-            <li><a href="{{rangeHtmlName}}" title="{{rangeName}}">{{rangeName}}</a></li>
+            <li>
+              {{#rangeHtmlName}}
+                <a href="{{rangeHtmlName}}" title="{{rangeName}}">{{rangeName}}</a>
+              {{/rangeHtmlName}}
+              {{^rangeHtmlName}}
+                {{rangeName}}
+              {{/rangeHtmlName}}
+            </li>
           {{/linkedSchemas}}
         </ul>
 
@@ -75,7 +82,14 @@
                       Range:
                       <ul>
                         {{#range}}
-                          <li><a href="{{rangeHtmlName}}" title="{{rangeName}}">{{rangeName}}</a></li>
+                          <li>
+                            {{#rangeHtmlName}}
+                              <a href="{{rangeHtmlName}}" title="{{rangeName}}">{{rangeName}}</a>
+                            {{/rangeHtmlName}}
+                            {{^rangeHtmlName}}
+                              {{rangeName}}
+                            {{/rangeHtmlName}}
+                          </li>
                         {{/range}}
                       </ul>
                     </li>
