@@ -66,7 +66,12 @@ async function main () {
 function collectDialectData (doc) {
   const dialectData = {
     name: doc.query('schema:name @value'),
-    id: doc.query('@id')
+    id: doc.query('@id'),
+    version: doc.query('schema:version @value')
+  }
+  const usage = doc.json()[`${CTX.amldoc}usage`]
+  if (usage) {
+    dialectData.usage = usage[0]['@value']
   }
   dialectData.slug = utils.slugify(dialectData.name)
   dialectData.htmlName = `${dialectData.slug}.html`

@@ -28,6 +28,12 @@
       <div class="col-md-10">
         <h1>{{name}}</h1>
         <p>URL: {{id}}</p>
+        {{#usage}}
+          <p>Description: {{usage}}</p>
+        {{/usage}}
+        {{#version}}
+          <p>Version: {{version}}</p>
+        {{/version}}
         <p>Schemas:</p>
         <ul>
           {{#nodeMappings}}
