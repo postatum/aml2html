@@ -31,9 +31,13 @@
         {{#description}}
           <p>Description: {{description}}</p>
         {{/description}}
-        {{#linkedSchemasStr}}
-          <p>Linked schemas: {{linkedSchemasStr}}</p>
-        {{/linkedSchemasStr}}
+
+        {{^linkedSchemas}}No {{/linkedSchemas}}Linked schemas
+        <ul>
+          {{#linkedSchemas}}
+            <li><a href="{{rangeHtmlName}}" title="{{rangeName}}">{{rangeName}}</a></li>
+          {{/linkedSchemas}}
+        </ul>
 
         <table class="table table-hover table-bordered">
           <caption>{{^scalarProperties}}No {{/scalarProperties}}Scalar Properties</caption>

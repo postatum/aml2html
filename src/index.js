@@ -112,13 +112,15 @@ function collectNodesData (doc, dialectData) {
         nodeData.linkProperties = collectLinkPropsData(
           doc, node, dialectData.slug)
       }
-      let linkedRanges = nodeData.linkProperties.map((data) => {
-        return data.range
+      nodeData.linkedSchemas = []
+      nodeData.linkProperties.forEach(prop => {
+        nodeData.linkedSchemas = nodeData.linkedSchemas.concat(...prop.range)
       })
       // Remove duplicates
-      nodeData.linkedSchemasStr = linkedRanges.filter((v, i) => {
-        return linkedRanges.indexOf(v) === i
-      }).join(', ')
+      let rangesNames = nodeData.linkedSchemas.map(sch => sch.rangeName)
+      nodeData.linkedSchemas = nodeData.linkedSchemas.filter((s, i) => {
+        return rangesNames.indexOf(s.rangeName) === i
+      })
       return nodeData
     })
   return nodes
