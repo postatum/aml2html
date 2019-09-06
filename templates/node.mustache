@@ -45,6 +45,9 @@
                   <ul>
                     <li>Term ID: {{id}}</li>
                     <li>Range: {{range}}</li>
+                    {{#propDesc}}
+                      <li>Description: {{propDesc}}</li>
+                    {{/propDesc}}
                     {{#constraints}}
                       <li>{{name}}: {{value}}</li>
                     {{/constraints}}
@@ -65,6 +68,9 @@
                   <ul>
                     <li>Term ID: {{id}}</li>
                     <li>Range: {{range}}</li>
+                    {{#propDesc}}
+                      <li>Description: {{propDesc}}</li>
+                    {{/propDesc}}
                     {{#constraints}}
                       <li>{{name}}: {{value}}</li>
                     {{/constraints}}

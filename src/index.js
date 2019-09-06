@@ -107,8 +107,8 @@ function collectNodesData (doc, dialectData) {
           ? targetClass.query('schema:description @value')
           : ''
         // properties
-        nodeData.scalarProperties = collectScalarPropsData(node)
-        nodeData.linkProperties = collectLinkPropsData(node)
+        nodeData.scalarProperties = collectScalarPropsData(doc, node)
+        nodeData.linkProperties = collectLinkPropsData(doc, node)
       }
       let linkedRanges = nodeData.linkProperties.map((data) => {
         return data.range
@@ -123,36 +123,42 @@ function collectNodesData (doc, dialectData) {
 }
 
 /* Collects nodeMappings item scalar properties data. */
-function collectScalarPropsData (node) {
+function collectScalarPropsData (doc, node) {
   const propsNodes = node.queryAll('shacl:property').filter((prop) => {
     return !!prop.query('shacl:datatype')
   })
   return propsNodes.map((prop) => {
-    let propData = {
-      name: prop.query('schema:name @value'),
-      id: prop.query('shacl:path @id'),
-      range: utils.parseHashValue(prop.query('shacl:datatype @id')),
-      constraints: collectPropertyConstraints(prop)
-    }
+    let propData = collectCommonPropData(doc, prop)
+    propData.range = utils.parseHashValue(prop.query('shacl:datatype @id'))
     return propData
   })
 }
 
 /* Collects nodeMappings item link properties data. */
-function collectLinkPropsData (node) {
+function collectLinkPropsData (doc, node) {
   const propsNodes = node.queryAll('shacl:property').filter((prop) => {
     return !prop.query('shacl:datatype')
   })
   return propsNodes.map((prop) => {
-    let propData = {
-      name: prop.query('schema:name @value'),
-      id: prop.query('shacl:path @id'),
-      constraints: collectPropertyConstraints(prop)
-    }
+    let propData = collectCommonPropData(doc, prop)
     propData.range = prop.queryAll('shacl:node @id')
       .map(utils.parseHashValue).slice(1).join(', ')
     return propData
   })
+}
+
+/* Collects property data common to scalar and link properties. */
+function collectCommonPropData (doc, prop) {
+  let propData = {
+    name: prop.query('schema:name @value'),
+    id: prop.query('shacl:path @id'),
+    constraints: collectPropertyConstraints(prop)
+  }
+  let vocabProp = doc.query(`amldoc:declares[@id=${propData.id}]`)
+  if (vocabProp) {
+    propData.propDesc = vocabProp.query('schema:description @value')
+  }
+  return propData
 }
 
 /* Collects nodeMappings item property constraints data. */
