@@ -67,7 +67,14 @@
                 <td>
                   <ul>
                     <li>Term ID: {{id}}</li>
-                    <li>Range: {{range}}</li>
+                    <li>
+                      Range:
+                      <ul>
+                        {{#range}}
+                          <li><a href="{{rangeHtmlName}}" title="{{rangeName}}">{{rangeName}}</a></li>
+                        {{/range}}
+                      </ul>
+                    </li>
                     {{#propDesc}}
                       <li>Description: {{propDesc}}</li>
                     {{/propDesc}}

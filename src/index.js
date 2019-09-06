@@ -68,7 +68,7 @@ function collectDialectData (doc) {
     name: doc.query('schema:name @value'),
     id: doc.query('@id')
   }
-  dialectData.slug = dialectData.name.split(' ').join('').toLowerCase()
+  dialectData.slug = utils.slugify(dialectData.name)
   dialectData.htmlName = `${dialectData.slug}.html`
   dialectData.nodeMappings = collectNodesData(doc, dialectData)
     .sort(utils.nameSorter)
@@ -86,8 +86,9 @@ function collectNodesData (doc, dialectData) {
         dialectName: dialectData.name
       }
       // htmlName
-      nodeData.slug = nodeData.name.split(' ').join('').toLowerCase()
-      nodeData.htmlName = `schema_${dialectData.slug}_${nodeData.slug}.html`
+      nodeData.slug = utils.slugify(nodeData.name)
+      nodeData.htmlName = utils.makeSchemaHtmlName(
+        dialectData.slug, nodeData.slug)
 
       let isUnion = node.query('@type')
         .indexOf(`${CTX.meta}UnionNodeMapping`) > -1
@@ -108,7 +109,8 @@ function collectNodesData (doc, dialectData) {
           : ''
         // properties
         nodeData.scalarProperties = collectScalarPropsData(doc, node)
-        nodeData.linkProperties = collectLinkPropsData(doc, node)
+        nodeData.linkProperties = collectLinkPropsData(
+          doc, node, dialectData.slug)
       }
       let linkedRanges = nodeData.linkProperties.map((data) => {
         return data.range
@@ -135,14 +137,21 @@ function collectScalarPropsData (doc, node) {
 }
 
 /* Collects nodeMappings item link properties data. */
-function collectLinkPropsData (doc, node) {
+function collectLinkPropsData (doc, node, dialectSlug) {
   const propsNodes = node.queryAll('shacl:property').filter((prop) => {
     return !prop.query('shacl:datatype')
   })
   return propsNodes.map((prop) => {
     let propData = collectCommonPropData(doc, prop)
     propData.range = prop.queryAll('shacl:node @id')
-      .map(utils.parseHashValue).slice(1).join(', ')
+      .map(utils.parseHashValue).slice(1)
+      .map(rng => {
+        return {
+          rangeName: rng,
+          rangeHtmlName: utils.makeSchemaHtmlName(
+            dialectSlug, utils.slugify(rng))
+        }
+      })
     return propData
   })
 }

@@ -85,6 +85,16 @@ function nameSorter (a, b) {
   return 0
 }
 
+/* Makes a slug used in html names creation. */
+function slugify (val) {
+  return val.split(' ').join('').toLowerCase()
+}
+
+/* Creates an html page name for nodeMappings item. */
+function makeSchemaHtmlName (dialectSlug, schemaName) {
+  return `schema_${dialectSlug}_${schemaName}.html`
+}
+
 module.exports = {
   getJsonLdGraph: getJsonLdGraph,
   copyCss: copyCss,
@@ -92,5 +102,7 @@ module.exports = {
   parseHashValue: parseHashValue,
   renderTemplate: renderTemplate,
   TMPL_DIR: TMPL_DIR,
-  nameSorter: nameSorter
+  nameSorter: nameSorter,
+  slugify: slugify,
+  makeSchemaHtmlName: makeSchemaHtmlName
 }
