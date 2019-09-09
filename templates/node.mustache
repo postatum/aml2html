@@ -10,35 +10,50 @@
       <link rel="stylesheet" href="{{.}}">
     {{/css}}
   </head>
-  <body>
-    <div class="container-fluid">
-      <div class="col-md-2 aside">
-        <div>
+  <body class="schema-body" id="{{slug}}-body">
+    <div class="container-fluid root-div-container" id="{{slug}}-root-div-container">
+      <div class="col-md-2 aside" id="{{slug}}-nav-aside">
+        <div class="dialects-nav">
           <h1>Dialects</h1>
           <hr>
           {{#navData.dialects}}
-            <p><a href="{{htmlName}}" title="{{name}}">{{name}}</a></p>
+            <p class="dialects-nav-item">
+              <a href="{{htmlName}}" title="{{name}}">{{name}}</a>
+            </p>
           {{/navData.dialects}}
         </div>
-        <div>
+        <div class="schemas-nav">
           <h1>Schemas</h1>
           <hr>
           {{#navData.nodeMappings}}
-            <p><a href="{{htmlName}}" title="{{name}}">{{name}}</a></p>
+            <p class="schemas-nav-item">
+              <a href="{{htmlName}}" title="{{name}}">{{name}}</a>
+            </p>
           {{/navData.nodeMappings}}
         </div>
       </div>
-      <div class="col-md-10">
-        <h1>{{dialectName}} :: {{name}}</h1>
-        <p>Term ID: {{id}}</p>
+      <div class="col-md-10 content-block" id="{{slug}}-content-block">
+        <h1 class="schema-name-header">
+          <span class="dialect-name">{{dialectName}}</span> ::
+          <span class="schema-name">{{name}}</span>
+        </h1>
+
+        <p class="schema-term-id root-list-item">
+          <span>Term ID: </span><span>{{id}}</span>
+        </p>
+
         {{#description}}
-          <p>Description: {{description}}</p>
+          <p class="schema-description root-list-item">
+            <span>Description: </span><span>{{description}}</span>
+          </p>
         {{/description}}
 
-        {{^linkedSchemas}}No {{/linkedSchemas}}Linked schemas
-        <ul>
+        <p class="linked-schemas-title{{^linkedSchemas}} no-linked-schemas{{/linkedSchemas}}">
+          {{^linkedSchemas}}No {{/linkedSchemas}}Linked schemas
+        </p>
+        <ul class="linked-schemas-list">
           {{#linkedSchemas}}
-            <li>
+            <li class="linked-schemas-list-item">
               {{#rangeHtmlName}}
                 <a href="{{rangeHtmlName}}" title="{{rangeName}}">{{rangeName}}</a>
               {{/rangeHtmlName}}
@@ -49,21 +64,22 @@
           {{/linkedSchemas}}
         </ul>
 
-        <table class="table table-hover table-bordered">
+        <table class="table table-hover table-bordered sprops-table{{^scalarProperties}} no-props-table{{/scalarProperties}}"
+               id="{{slug}}-sprops-table">
           <caption>{{^scalarProperties}}No {{/scalarProperties}}Scalar Properties</caption>
           <tbody>
             {{#scalarProperties}}
-              <tr>
-                <td>{{name}}</td>
-                <td>
+              <tr id="{{name}}-scalar-tr">
+                <td class="sprop-name">{{name}}</td>
+                <td class="sprop-data">
                   <ul>
-                    <li>Term ID: {{id}}</li>
-                    <li>Range: {{range}}</li>
+                    <li class="sprop-term-id">Term ID: {{id}}</li>
+                    <li class="sprop-range">Range: {{range}}</li>
                     {{#propDesc}}
-                      <li>Description: {{propDesc}}</li>
+                      <li class="sprop-description">Description: {{propDesc}}</li>
                     {{/propDesc}}
                     {{#constraints}}
-                      <li>{{name}}: {{value}}</li>
+                      <li class="sprop-constraint">{{name}}: {{value}}</li>
                     {{/constraints}}
                   </ul>
                 </td>
@@ -72,20 +88,21 @@
           </tbody>
         </table>
 
-        <table class="table table-hover table-bordered">
+        <table class="table table-hover table-bordered lprops-table{{^linkProperties}} no-props-table{{/linkProperties}}"
+               id="{{slug}}-lprops-table">
           <caption>{{^linkProperties}}No {{/linkProperties}}Link Properties</caption>
           <tbody>
             {{#linkProperties}}
-              <tr>
-                <td>{{name}}</td>
-                <td>
+              <tr id="{{name}}-link-tr">
+                <td class="lprop-name">{{name}}</td>
+                <td class="lprop-data">
                   <ul>
-                    <li>Term ID: {{id}}</li>
-                    <li>
-                      Range:
-                      <ul>
+                    <li class="lprop-term-id">Term ID: {{id}}</li>
+                    <li class="lprop-range">
+                      <span class="lprop-range-list-title">Range:</span>
+                      <ul class="lprop-range-list">
                         {{#range}}
-                          <li>
+                          <li class="lprop-range-list-item">
                             {{#rangeHtmlName}}
                               <a href="{{rangeHtmlName}}" title="{{rangeName}}">{{rangeName}}</a>
                             {{/rangeHtmlName}}
@@ -97,10 +114,10 @@
                       </ul>
                     </li>
                     {{#propDesc}}
-                      <li>Description: {{propDesc}}</li>
+                      <li class="lprop-description">Description: {{propDesc}}</li>
                     {{/propDesc}}
                     {{#constraints}}
-                      <li>{{name}}: {{value}}</li>
+                      <li class="lprop-constraint">{{name}}: {{value}}</li>
                     {{/constraints}}
                   </ul>
                 </td>

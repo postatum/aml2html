@@ -10,37 +10,54 @@
       <link rel="stylesheet" href="{{.}}">
     {{/css}}
   </head>
-  <body>
-    <div class="container-fluid">
-      <div class="col-md-2 aside">
-        <div>
+  <body class="dialect-body" id="{{slug}}-body">
+    <div class="container-fluid root-div-container"
+         id="{{slug}}-root-div-container">
+      <div class="col-md-2 aside" id="{{slug}}-nav-aside">
+        <div class="dialects-nav">
           <h1>Dialects</h1>
           <hr>
           {{#navData.dialects}}
-            <p><a href="{{htmlName}}" title="{{name}}">{{name}}</a></p>
+            <p class="dialects-nav-item">
+              <a href="{{htmlName}}" title="{{name}}">{{name}}</a>
+            </p>
           {{/navData.dialects}}
         </div>
-        <div>
+        <div class="schemas-nav">
           <h1>Schemas</h1>
           <hr>
           {{#navData.nodeMappings}}
-            <p><a href="{{htmlName}}" title="{{name}}">{{name}}</a></p>
+            <p class="schemas-nav-item">
+              <a href="{{htmlName}}" title="{{name}}">{{name}}</a>
+            </p>
           {{/navData.nodeMappings}}
         </div>
       </div>
-      <div class="col-md-10">
-        <h1>{{name}}</h1>
-        <p>URL: {{id}}</p>
+      <div class="col-md-10 content-block" id="{{slug}}-content-block">
+        <h1 class="dialect-name">{{name}}</h1>
+
+        <p class="dialect-url root-list-item">
+          <span>URL: </span><span>{{id}}</span>
+        </p>
+
         {{#usage}}
-          <p>Description: {{usage}}</p>
+          <p class="dialect-description root-list-item">
+            <span>Description: </span><span>{{usage}}</span>
+          </p>
         {{/usage}}
+
         {{#version}}
-          <p>Version: {{version}}</p>
+          <p class="dialect-version root-list-item">
+            <span>Version: </span><span>{{version}}</span>
+          </p>
         {{/version}}
-        <p>Schemas:</p>
-        <ul>
+
+        <p class="dialect-schemas-list-title">Schemas:</p>
+        <ul class="dialect-schemas-list">
           {{#nodeMappings}}
-            <li><a href="{{htmlName}}" title="{{name}}">{{name}}</a></li>
+            <li class="dialect-schemas-list-item">
+              <a href="{{htmlName}}" title="{{name}}">{{name}}</a>
+            </li>
           {{/nodeMappings}}
         </ul>
       </div>
