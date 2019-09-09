@@ -11,7 +11,7 @@ $ npm install
 ## Usage
 CLI command notation (*note the required `--` before arguments*):
 ```
-npm run aml2html -- <dialectPath>... --outdir=DIR
+npm run aml2html -- <dialectPath>... --outdir=DIR --css=https://foo.bar/some.css --css=/another.css
 ```
 
 E.g.
