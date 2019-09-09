@@ -41,6 +41,7 @@ async function main () {
   // Collect navigation data and render dialect template
   dialectsData.forEach((dialectData) => {
     dialectData.navData = collectNavData(dialectData, commonNavData)
+    dialectData.css = argv.css
 
     // Render dialect overview template
     utils.renderTemplate(
@@ -51,6 +52,7 @@ async function main () {
     // Render nodeMappings item data
     dialectData.nodeMappings.forEach(nodeData => {
       nodeData.navData = dialectData.navData
+      nodeData.css = argv.css
       utils.renderTemplate(
         nodeData,
         path.join(TMPL_DIR, 'node.mustache'),
