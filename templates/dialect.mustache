@@ -13,12 +13,13 @@
   <body class="dialect-body" id="{{slug}}-body">
     <div class="container-fluid root-div-container"
          id="{{slug}}-root-div-container">
+
       <div class="col-md-2 aside" id="{{slug}}-nav-aside">
         <div class="dialects-nav">
           <h1>Dialects</h1>
           <hr>
           {{#navData.dialects}}
-            <p class="dialects-nav-item">
+            <p class="dialects-nav-item {{^active}}in{{/active}}active-nav-item">
               <a href="{{htmlName}}" title="{{name}}">{{name}}</a>
             </p>
           {{/navData.dialects}}
@@ -27,12 +28,13 @@
           <h1>Schemas</h1>
           <hr>
           {{#navData.nodeMappings}}
-            <p class="schemas-nav-item">
+            <p class="schemas-nav-item {{^active}}in{{/active}}active-nav-item">
               <a href="{{htmlName}}" title="{{name}}">{{name}}</a>
             </p>
           {{/navData.nodeMappings}}
         </div>
       </div>
+
       <div class="col-md-10 content-block" id="{{slug}}-content-block">
         <h1 class="dialect-name">{{name}}</h1>
 
@@ -61,6 +63,7 @@
           {{/nodeMappings}}
         </ul>
       </div>
+
     </div>
   </body>
 </html>

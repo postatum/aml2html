@@ -39,7 +39,7 @@ async function main () {
   const commonNavData = collectCommonNavData(dialectsData)
 
   // Collect navigation data and render dialect template
-  dialectsData.forEach((dialectData) => {
+  dialectsData.forEach(dialectData => {
     dialectData.navData = collectNavData(dialectData, commonNavData)
     dialectData.css = argv.css
 
@@ -52,6 +52,9 @@ async function main () {
     // Render nodeMappings item data
     dialectData.nodeMappings.forEach(nodeData => {
       nodeData.navData = dialectData.navData
+      nodeData.navData.nodeMappings = markActive(
+        nodeData.navData.nodeMappings, nodeData.name)
+
       nodeData.css = argv.css
       utils.renderTemplate(
         nodeData,
@@ -218,7 +221,11 @@ function collectPropertyConstraints (prop) {
 function collectCommonNavData (dialectsData) {
   const commonNavData = {
     dialects: dialectsData.map(data => {
-      return {name: data.name, htmlName: data.htmlName}
+      return {
+        name: data.name,
+        htmlName: data.htmlName,
+        active: false
+      }
     }),
     nodeMappings: []
   }
@@ -228,12 +235,24 @@ function collectCommonNavData (dialectsData) {
 /* Collects dialect-specific navigation data. */
 function collectNavData (dialectData, commonNavData) {
   const navData = {
-    dialects: commonNavData.dialects,
+    dialects: markActive(commonNavData.dialects, dialectData.name),
     nodeMappings: dialectData.nodeMappings.map(data => {
-      return {name: data.name, htmlName: data.htmlName}
+      return {
+        name: data.name,
+        htmlName: data.htmlName,
+        active: false
+      }
     })
   }
   return navData
+}
+
+/* Marks item with matching name as active/selected. */
+function markActive (items, name) {
+  return items.map(item => {
+    item.active = item.name === name
+    return item
+  })
 }
 
 main()
