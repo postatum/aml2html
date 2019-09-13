@@ -3,23 +3,17 @@ const parseArgs = require('minimist')
 const ldquery = require('ld-query')
 const path = require('path')
 const fs = require('fs-extra')
+
 const utils = require('./utils')
+const collect = require('./data_collectors')
 
 /** Mustache dialects templates directory path. */
 const TMPL_DIR = path.join(utils.TMPL_DIR)
 
-/** Default context for querying JSON-LD dialect with ld-query. */
-const CTX = {
-  amldoc: 'http://a.ml/vocabularies/document#',
-  meta: 'http://a.ml/vocabularies/meta#',
-  owl: 'http://www.w3.org/2002/07/owl#',
-  rdf: 'http://www.w3.org/2000/01/rdf-schema#',
-  schema: 'http://schema.org/',
-  shacl: 'http://www.w3.org/ns/shacl#'
-}
-
 /** Runs all the logic. */
 async function main () {
+  const ctx = utils.getDefaultContext()
+
   await amf.AMF.init()
   const argv = parseArgs(process.argv.slice(2))
 
@@ -31,16 +25,16 @@ async function main () {
   const dialectsPaths = Array.isArray(argv._) ? argv._ : [argv._]
   const dialectsData = await Promise.all(dialectsPaths.map(async dpth => {
     let graph = await utils.getJsonLdGraph(dpth)
-    let doc = ldquery(graph, CTX).query('[@type=meta:Dialect]')
+    let doc = ldquery(graph, ctx).query('[@type=meta:Dialect]')
     console.log(`Collecting dialect data: ${dpth}`)
-    return collectDialectData(doc)
+    return collect.dialectData(doc, ctx)
   }))
 
-  const commonNavData = collectCommonNavData(dialectsData)
+  const commonNavData = collect.commonNavData(dialectsData)
 
   // Collect navigation data and render dialect template
   dialectsData.forEach(dialectData => {
-    dialectData.navData = collectNavData(dialectData, commonNavData)
+    dialectData.navData = collect.navData(dialectData, commonNavData)
     dialectData.css = argv.css
 
     // Render dialect overview template
@@ -52,7 +46,7 @@ async function main () {
     // Render nodeMappings item data
     dialectData.nodeMappings.forEach(nodeData => {
       nodeData.navData = dialectData.navData
-      nodeData.navData.nodeMappings = markActive(
+      nodeData.navData.nodeMappings = utils.markActive(
         nodeData.navData.nodeMappings, nodeData.name)
 
       nodeData.css = argv.css
@@ -63,196 +57,7 @@ async function main () {
     })
   })
 
-  // Copy css
-  utils.copyCss(outDir)
-}
-
-/* Collects complete dialect data. */
-function collectDialectData (doc) {
-  const dialectData = {
-    name: doc.query('schema:name @value'),
-    id: doc.query('@id'),
-    version: doc.query('schema:version @value')
-  }
-  const usage = doc.json()[`${CTX.amldoc}usage`]
-  if (usage) {
-    dialectData.usage = usage[0]['@value']
-  }
-  dialectData.slug = utils.slugify(dialectData.name)
-  dialectData.htmlName = `${dialectData.slug}.html`
-  dialectData.nodeMappings = collectNodesData(doc, dialectData)
-    .sort(utils.nameSorter)
-  return dialectData
-}
-
-/* Collects dialect nodeMappings data. */
-function collectNodesData (doc, dialectData) {
-  const nodes = doc.queryAll('amldoc:declares[@type=shacl:Shape]')
-    .map(node => {
-      // name, id
-      let nodeData = {
-        name: node.query('schema:name @value'),
-        id: node.query('@id'),
-        dialectName: dialectData.name
-      }
-      // htmlName
-      nodeData.slug = utils.slugify(nodeData.name)
-      nodeData.htmlName = utils.makeSchemaHtmlName(
-        dialectData.slug, nodeData.slug)
-
-      let isUnion = node.query('@type')
-        .indexOf(`${CTX.meta}UnionNodeMapping`) > -1
-      if (isUnion) {
-        let seq = node.query('shacl:node[@type=rdf:Seq]')
-        let names = seq.queryAll('@id').slice(1).map(utils.parseHashValue)
-        // description
-        nodeData.description = `Union of ${names.join(', ')}`
-        // properties
-        nodeData.scalarProperties = []
-        nodeData.linkProperties = []
-      } else {
-        // description
-        let targetClassId = node.query('shacl:targetClass @id')
-        let targetClass = doc.query(`amldoc:declares[@id=${targetClassId}]`)
-        nodeData.description = targetClass
-          ? targetClass.query('schema:description @value')
-          : ''
-        // properties
-        nodeData.scalarProperties = collectScalarPropsData(doc, node)
-        nodeData.linkProperties = collectLinkPropsData(
-          doc, node, dialectData.slug)
-      }
-      nodeData.linkedSchemas = []
-      nodeData.linkProperties.forEach(prop => {
-        nodeData.linkedSchemas = nodeData.linkedSchemas.concat(...prop.range)
-      })
-      // Remove duplicates
-      let rangesNames = nodeData.linkedSchemas.map(sch => sch.rangeName)
-      nodeData.linkedSchemas = nodeData.linkedSchemas.filter((s, i) => {
-        return rangesNames.indexOf(s.rangeName) === i
-      })
-      return nodeData
-    })
-  return nodes
-}
-
-/* Collects nodeMappings item scalar properties data. */
-function collectScalarPropsData (doc, node) {
-  const propsNodes = node.queryAll('shacl:property')
-    .filter(prop => !!prop.query('shacl:datatype'))
-  return propsNodes.map(prop => {
-    let propData = collectCommonPropData(doc, prop)
-    propData.range = utils.parseHashValue(prop.query('shacl:datatype @id'))
-    return propData
-  })
-}
-
-/* Collects nodeMappings item link properties data. */
-function collectLinkPropsData (doc, node, dialectSlug) {
-  const propsNodes = node.queryAll('shacl:property')
-    .filter(prop => !prop.query('shacl:datatype'))
-  return propsNodes.map(prop => {
-    let propData = collectCommonPropData(doc, prop)
-    propData.range = prop.queryAll('shacl:node @id').slice(1)
-      .map(rangeId => {
-        const data = {
-          rangeName: utils.parseHashValue(rangeId)
-        }
-        const declaredLocally = doc.query(`amldoc:declares[@id=${rangeId}]`)
-        if (declaredLocally) {
-          data.rangeHtmlName = utils.makeSchemaHtmlName(
-            dialectSlug, utils.slugify(data.rangeName))
-        }
-        return data
-      })
-    return propData
-  })
-}
-
-/* Collects property data common to scalar and link properties. */
-function collectCommonPropData (doc, prop) {
-  let propData = {
-    name: prop.query('schema:name @value'),
-    id: prop.query('shacl:path @id'),
-    constraints: collectPropertyConstraints(prop)
-  }
-  let vocabProp = doc.query(`amldoc:declares[@id=${propData.id}]`)
-  if (vocabProp) {
-    propData.propDesc = vocabProp.query('schema:description @value')
-  }
-  return propData
-}
-
-/* Collects nodeMappings item property constraints data. */
-function collectPropertyConstraints (prop) {
-  const constraints = [
-    {name: 'mandatory', value: prop.query('shacl:minCount @value') > 0},
-    {name: 'pattern', value: prop.query('shacl:pattern @value')},
-    {name: 'minimum', value: prop.query('shacl:minInclusive @value')},
-    {name: 'maximum', value: prop.query('shacl:maxInclusive @value')},
-    {name: 'allowMultiple', value: prop.query('meta:allowMultiple @value')},
-    {name: 'sorted', value: prop.query('meta:sorted @value')},
-    {name: 'mapKey', value: prop.query('meta:mapProperty @id')},
-    {name: 'typeDiscriminatorName',
-      value: prop.query('meta:typeDiscriminatorName @value')}
-  ]
-
-  const enumNode = prop.query('shacl:in')
-  if (enumNode) {
-    constraints.push({
-      name: 'enum',
-      value: enumNode.queryAll('@value')
-    })
-  }
-
-  const discrValue = prop.query('meta:typeDiscriminatorMap @value')
-  if (discrValue) {
-    constraints.push({
-      name: 'typeDiscriminator',
-      value: discrValue.split(',').join('\n')
-    })
-  }
-
-  // Drop empty and falsy values
-  return constraints.filter(con => !!con.value)
-}
-
-/* Collects common navigation data. */
-function collectCommonNavData (dialectsData) {
-  const commonNavData = {
-    dialects: dialectsData.map(data => {
-      return {
-        name: data.name,
-        htmlName: data.htmlName,
-        active: false
-      }
-    }),
-    nodeMappings: []
-  }
-  return commonNavData
-}
-
-/* Collects dialect-specific navigation data. */
-function collectNavData (dialectData, commonNavData) {
-  const navData = {
-    dialects: markActive(commonNavData.dialects, dialectData.name),
-    nodeMappings: dialectData.nodeMappings.map(data => {
-      return {
-        name: data.name,
-        htmlName: data.htmlName,
-        active: false
-      }
-    })
-  }
-  return navData
-}
-
-/* Marks item with matching name as active/selected. */
-function markActive (items, name) {
-  return items.map(item => {
-    item.active = item.name === name
-    return item
-  })
+  utils.copyStaticFiles(outDir)
 }
 
 main()

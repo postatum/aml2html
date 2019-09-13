@@ -23,15 +23,15 @@ async function getJsonLdGraph (pathArg) {
   return JSON.parse(graphStrResolved)
 }
 
-/** Copies CSS files needed for generated HTML page to look nice.
+/** Copies static files needed for generated HTML page to look nice.
  *
  * @param outDir Generated HTML output directory.
  */
-function copyCss (outDir) {
-  const tmplCssDir = path.join(TMPL_DIR, 'css')
-  const outCssDir = path.join(outDir, 'css')
-  fs.emptyDirSync(outCssDir)
-  fs.copySync(tmplCssDir, outCssDir)
+function copyStaticFiles (outDir) {
+  const tmplStaticDir = path.join(TMPL_DIR, 'static')
+  const outStaticDir = path.join(outDir, 'static')
+  fs.emptyDirSync(outStaticDir)
+  fs.copySync(tmplStaticDir, outStaticDir)
 }
 
 /** Removes array items with duplicate ['id'] property.
@@ -95,14 +95,36 @@ function makeSchemaHtmlName (dialectSlug, schemaName) {
   return `schema_${dialectSlug}_${schemaName}.html`
 }
 
+/* Marks item with matching name as active/selected. */
+function markActive (items, name) {
+  return items.map(item => {
+    item.active = item.name === name
+    return item
+  })
+}
+
+/** Returns default context for querying JSON-LD dialect with ld-query. */
+function getDefaultContext () {
+  return {
+    amldoc: 'http://a.ml/vocabularies/document#',
+    meta: 'http://a.ml/vocabularies/meta#',
+    owl: 'http://www.w3.org/2002/07/owl#',
+    rdf: 'http://www.w3.org/2000/01/rdf-schema#',
+    schema: 'http://schema.org/',
+    shacl: 'http://www.w3.org/ns/shacl#'
+  }
+}
+
 module.exports = {
   getJsonLdGraph: getJsonLdGraph,
-  copyCss: copyCss,
+  copyStaticFiles: copyStaticFiles,
   removeDuplicatesById: removeDuplicatesById,
   parseHashValue: parseHashValue,
   renderTemplate: renderTemplate,
   TMPL_DIR: TMPL_DIR,
   nameSorter: nameSorter,
   slugify: slugify,
-  makeSchemaHtmlName: makeSchemaHtmlName
+  makeSchemaHtmlName: makeSchemaHtmlName,
+  markActive: markActive,
+  getDefaultContext: getDefaultContext
 }
