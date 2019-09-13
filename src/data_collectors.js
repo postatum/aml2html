@@ -1,72 +1,82 @@
 const utils = require('./utils')
 
 /* Collects complete dialect data. */
-function collectDialectData (doc, ctx) {
+function collectDialectData (doc, ctx, acc) {
+  const id =  doc.query('@id')
   const dialectData = {
-    name: doc.query('schema:name @value'),
-    id: doc.query('@id'),
-    version: doc.query('schema:version @value')
+    name: doc.query('> schema:name @value'),
+    id: ctx.idMapping(id),
+    version: doc.query('> schema:version @value')
   }
-  const usage = doc.json()[`${ctx.amldoc}usage`]
-  if (usage) {
-    dialectData.usage = usage[0]['@value']
+  if (acc[id] == null) {
+    console.log(`Collecting dialect data for id ${id}`)
+    const usage = doc.json()[`> ${ctx.amldoc}usage`]
+    if (usage) {
+      dialectData.usage = usage[0]['@value']
+    }
+    dialectData.slug = utils.slugify(dialectData.name)
+    dialectData.htmlName = `${dialectData.slug}.html`
+    console.log("Collecting nodes info for dialect " + id)
+    dialectData.nodeMappings = collectNodesData(doc, dialectData, ctx)
+        .sort(utils.nameSorter)
+    return dialectData
   }
-  dialectData.slug = utils.slugify(dialectData.name)
-  dialectData.htmlName = `${dialectData.slug}.html`
-  dialectData.nodeMappings = collectNodesData(doc, dialectData, ctx)
-    .sort(utils.nameSorter)
-  return dialectData
 }
 
 /* Collects dialect nodeMappings data. */
 function collectNodesData (doc, dialectData, ctx) {
-  const nodes = doc.queryAll('amldoc:declares[@type=shacl:Shape]')
+  let acc = {}
+  doc.queryAll('> amldoc:declares[@type=shacl:Shape]')
     .map(node => {
       // name, id
-      let nodeData = {
-        name: node.query('schema:name @value'),
-        id: node.query('@id'),
-        dialectName: dialectData.name
-      }
-      // htmlName
-      nodeData.slug = utils.slugify(nodeData.name)
-      nodeData.htmlName = utils.makeSchemaHtmlName(
-        dialectData.slug, nodeData.slug)
+      const nodeId = node.query('@id')
+      if (acc[nodeId] == null) {
+        console.log("  - " + nodeId)
+        let nodeData = {
+          name: node.query('> schema:name @value'),
+          id: ctx.idMapping(node.query('@id')),
+          dialectName: dialectData.name
+        }
+        // htmlName
+        nodeData.slug = utils.slugify(nodeData.name)
+        nodeData.htmlName = utils.makeSchemaHtmlName(
+            dialectData.slug, nodeData.slug)
 
-      let isUnion = node.query('@type')
-        .indexOf(`${ctx.meta}UnionNodeMapping`) > -1
-      if (isUnion) {
-        let seq = node.query('shacl:node[@type=rdf:Seq]')
-        let names = seq.queryAll('@id').slice(1).map(utils.parseHashValue)
-        // description
-        nodeData.description = `Union of ${names.join(', ')}`
-        // properties
-        nodeData.scalarProperties = []
-        nodeData.linkProperties = []
-      } else {
-        // description
-        let targetClassId = node.query('shacl:targetClass @id')
-        let targetClass = doc.query(`amldoc:declares[@id=${targetClassId}]`)
-        nodeData.description = targetClass
-          ? targetClass.query('schema:description @value')
-          : ''
-        // properties
-        nodeData.scalarProperties = collectScalarPropsData(doc, node)
-        nodeData.linkProperties = collectLinkPropsData(
-          doc, node, dialectData.slug)
+        let isUnion = node.query('@type')
+            .indexOf(`${ctx.meta}UnionNodeMapping`) > -1
+        if (isUnion) {
+          let seq = node.query('> shacl:node[@type=rdf:Seq]')
+          let names = seq.queryAll('@id').slice(1).map(utils.parseHashValue)
+          // description
+          nodeData.description = `Union of ${names.join(', ')}`
+          // properties
+          nodeData.scalarProperties = []
+          nodeData.linkProperties = []
+        } else {
+          // description
+          let targetClassId = node.query('> shacl:targetClass @id')
+          let targetClass = doc.query(`> amldoc:declares[@id=${targetClassId}]`)
+          nodeData.description = targetClass
+              ? targetClass.query('> schema:description @value')
+              : ''
+          // properties
+          nodeData.scalarProperties = collectScalarPropsData(doc, node)
+          nodeData.linkProperties = collectLinkPropsData(
+              doc, node, dialectData.slug)
+        }
+        nodeData.linkedSchemas = []
+        nodeData.linkProperties.forEach(prop => {
+          nodeData.linkedSchemas = nodeData.linkedSchemas.concat(...prop.range)
+        })
+        // Remove duplicates
+        let rangesNames = nodeData.linkedSchemas.map(sch => sch.rangeName)
+        nodeData.linkedSchemas = nodeData.linkedSchemas.filter((s, i) => {
+          return rangesNames.indexOf(s.rangeName) === i
+        })
+        acc[nodeId] = nodeData
       }
-      nodeData.linkedSchemas = []
-      nodeData.linkProperties.forEach(prop => {
-        nodeData.linkedSchemas = nodeData.linkedSchemas.concat(...prop.range)
-      })
-      // Remove duplicates
-      let rangesNames = nodeData.linkedSchemas.map(sch => sch.rangeName)
-      nodeData.linkedSchemas = nodeData.linkedSchemas.filter((s, i) => {
-        return rangesNames.indexOf(s.rangeName) === i
-      })
-      return nodeData
     })
-  return nodes
+  return Object.values(acc)
 }
 
 /* Collects nodeMappings item scalar properties data. */

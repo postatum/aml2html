@@ -16,7 +16,7 @@
 
       <div class="col-md-2 aside" id="{{slug}}-nav-aside">
         <div class="dialects-nav">
-          <h1>Dialects</h1>
+          <h1>{{dialectsHeader}}</h1>
           <hr>
           {{#navData.dialects}}
             <p class="dialects-nav-item {{^active}}in{{/active}}active-nav-item">
@@ -25,7 +25,7 @@
           {{/navData.dialects}}
         </div>
         <div class="schemas-nav">
-          <h1>Schemas</h1>
+          <h1>{{schemasHeader}}</h1>
           <hr>
           {{#navData.nodeMappings}}
             <p class="schemas-nav-item {{^active}}in{{/active}}active-nav-item">
