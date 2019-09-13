@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/custom.css">
+    {{#css}}
+      <link rel="stylesheet" href="{{.}}">
+    {{/css}}
+  </head>
+  <body class="index-body">
+    <div class="container-fluid root-div-container" id="index-root-div-container">
+
+      <div class="col-md-2 aside" id="index-nav-aside">
+        <div class="main-nav">
+          <h1>Main</h1>
+          <hr>
+          <p class="main-nav-item active-nav-item">
+            <a href="index.html" title="Index">Index</a>
+          </p>
+        </div>
+        <div class="dialects-nav">
+          <h1>Dialects</h1>
+          <hr>
+          {{#navData.dialects}}
+            <p class="dialects-nav-item {{^active}}in{{/active}}active-nav-item">
+              <a href="{{htmlName}}" title="{{name}}">{{name}}</a>
+            </p>
+          {{/navData.dialects}}
+        </div>
+      </div>
+
+
+      <div class="col-md-10 content-block" id="index-content-block">
+
+        <div class="index-dialects-section">
+          <h1>Dialects</h1>
+          <table class="table table-hover table-bordered index-dialects-table">
+            <thead>
+              <tr>
+                <td class="active col-md-3">Dialect</td>
+                <td class="active col-md-7">Usage</td>
+              </tr>
+            </thead>
+            <tbody>
+              {{#dialects}}
+                <tr id="{{slug}}-dialects-table-row">
+                  <td class="name-td col-md-3">{{name}}</td>
+                  <td class="usage-td col-md-7">{{usage}}</td>
+                </tr>
+              {{/dialects}}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="index-schemas-section">
+          <h1>Schemas</h1>
+          {{#dialects}}
+            <h2>{{name}}</h2>
+            <table class="table table-hover table-bordered index-schemas-table"
+                   id="{{slug}}-schemas-table">
+              <thead>
+                <tr>
+                  <td class="active col-md-3">Schema</td>
+                  <td class="active col-md-7">Description</td>
+                </tr>
+              </thead>
+              <tbody>
+                {{#nodeMappings}}
+                  <tr id="{{slug}}-schemas-tr">
+                    <td class="name-td col-md-3">{{name}}</td>
+                    <td class="description-td col-md-7">{{description}}</td>
+                  </tr>
+                {{/nodeMappings}}
+              </tbody>
+            </table>
+          {{/dialects}}
+        </div>
+
+      </div>
+
+
+    </div>
+  </body>
+</html>

@@ -57,6 +57,17 @@ async function main () {
     })
   })
 
+  // Render index page
+  utils.renderTemplate(
+    {
+      dialects: dialectsData,
+      navData: {
+        dialects: utils.markActive(commonNavData.dialects)
+      }
+    },
+    path.join(TMPL_DIR, 'index.mustache'),
+    path.join(outDir, 'index.html'))
+
   utils.copyStaticFiles(outDir)
 }
 
