@@ -111,8 +111,15 @@ function getDefaultContext () {
     owl: 'http://www.w3.org/2002/07/owl#',
     rdf: 'http://www.w3.org/2000/01/rdf-schema#',
     schema: 'http://schema.org/',
-    shacl: 'http://www.w3.org/ns/shacl#'
+    shacl: 'http://www.w3.org/ns/shacl#',
+    idMapping: idMapping,
+    dialectsHeader: 'Dialects',
+    schemasHeader: 'Schemas'
   }
+}
+
+function idMapping (id) {
+  return id
 }
 
 module.exports = {
