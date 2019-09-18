@@ -10,7 +10,7 @@ function collectDialectData (doc, ctx, acc) {
   }
   if (!acc[id]) {
     console.log(`Collecting dialect data for id ${id}`)
-    const usage = doc.json()[`> ${ctx.amldoc}usage`]
+    const usage = doc.json()[`${ctx.amldoc}usage`]
     if (usage) {
       dialectData.usage = usage[0]['@value']
     }
@@ -54,10 +54,10 @@ function collectNodesData (doc, dialectData, ctx) {
           nodeData.linkProperties = []
         } else {
           // description
-          let targetClassId = node.query('> shacl:targetClass @id')
-          let targetClass = doc.query(`> amldoc:declares[@id=${targetClassId}]`)
+          let targetClassId = node.query('shacl:targetClass @id')
+          let targetClass = doc.query(`amldoc:declares[@id=${targetClassId}]`)
           nodeData.description = targetClass
-            ? targetClass.query('> schema:description @value')
+            ? targetClass.query('schema:description @value')
             : ''
           // properties
           nodeData.scalarProperties = collectScalarPropsData(doc, node)
