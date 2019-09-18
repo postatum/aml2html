@@ -8,7 +8,7 @@ function collectDialectData (doc, ctx, acc) {
     id: ctx.idMapping(id),
     version: doc.query('> schema:version @value')
   }
-  if (acc[id] == null) {
+  if (!acc[id]) {
     console.log(`Collecting dialect data for id ${id}`)
     const usage = doc.json()[`> ${ctx.amldoc}usage`]
     if (usage) {
@@ -30,7 +30,7 @@ function collectNodesData (doc, dialectData, ctx) {
     .map(node => {
       // name, id
       const nodeId = node.query('@id')
-      if (acc[nodeId] == null) {
+      if (!acc[nodeId]) {
         console.log(`\t- ${nodeId}`)
         let nodeData = {
           name: node.query('> schema:name @value'),
