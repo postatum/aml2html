@@ -37,6 +37,13 @@
 
         <div class="index-dialects-section">
           <h1>Dialects</h1>
+
+          <div class="index-page-info">
+            {{#indexHeader}}<p class="index-info-header">Title: {{indexHeader}}</p>{{/indexHeader}}
+            {{#indexVersion}}<p class="index-info-version">Version: {{indexVersion}}</p>{{/indexVersion}}
+            {{#indexDescription}}<p class="index-info-description">Description: {{indexDescription}}</p>{{/indexDescription}}
+          </div>
+
           <table class="table table-hover table-bordered index-dialects-table">
             <thead>
               <tr>

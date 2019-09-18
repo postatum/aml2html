@@ -91,7 +91,8 @@ async function main () {
       dialects: dialectsData,
       navData: {
         dialects: utils.markActive(commonNavData.dialects)
-      }
+      },
+      ...ctx.config
     },
     path.join(TMPL_DIR, 'index.mustache'),
     path.join(outDir, 'index.html'))
