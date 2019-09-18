@@ -20,18 +20,19 @@ async function main () {
 
   // Ensure output directory exists
   if (argv.outdir == null) {
-    console.error("Missing mandatory output directory.\nSyntax: aml2html -- <dialect path> --outdir=<output path> [--css=<css path>] [--cfg=<cfg file>]")
+    console.error(`Missing mandatory output directory.
+      Syntax: aml2html -- <dialect path> --outdir=<output path> [--css=<css path>] [--cfg=<cfg file>]`)
   } else {
     const outDir = path.resolve(argv.outdir)
     fs.emptyDirSync(outDir)
 
     // let's add custom configuration elements
     if (argv.cfg) {
-      const cfgPath = process.cwd() + '/' + argv.cfg;
-      console.log("Loading custom configuration from " + cfgPath)
+      const cfgPath = process.cwd() + '/' + argv.cfg
+      console.log(`Loading custom configuration from ${cfgPath}`)
       const customConfig = require(cfgPath)
       if (customConfig.idMapping != null) {
-            ctx.idMapping = customConfig.idMapping
+        ctx.idMapping = customConfig.idMapping
       }
       if (customConfig.dialectsHeader != null) {
         ctx.dialectsHeader = customConfig.dialectsHeader
@@ -44,8 +45,8 @@ async function main () {
     // Collects dialects data into an array
     const dialectsPaths = Array.isArray(argv._) ? argv._ : [argv._]
     let acc = {}
-    for (var i=0; i<dialectsPaths.length; i++) {
-      let dpth = dialectsPaths[i];
+    for (var i = 0; i < dialectsPaths.length; i++) {
+      let dpth = dialectsPaths[i]
       try {
         let defaultGraph = await utils.getJsonLdGraph(dpth)
         let graph = await jsonld.expand(defaultGraph)
@@ -54,19 +55,18 @@ async function main () {
         docs.forEach(doc => {
           const id = doc.query('@id')
           if (acc[id] == null) {
-            console.log("ADDING DIALECT " + id)
+            console.log(`Adding Dialect ${id}`)
             acc[id] = collect.dialectData(doc, ctx, acc)
           }
         })
       } catch (e) {
-        console.error("Error for dialect " + dpth + ": " + e.message);
+        console.error(`Error for dialect ${dpth}: ${e.message}`)
         console.error(e)
       }
     }
 
-    console.log("I GOT " + Object.values(acc).length + " values")
-    const dialectsData  =  Object.values(acc)
-
+    console.log(`Got ${Object.values(acc).length} values`)
+    const dialectsData = Object.values(acc)
 
     const commonNavData = collect.commonNavData(dialectsData)
 
@@ -77,21 +77,21 @@ async function main () {
 
       // Render dialect overview template
       utils.renderTemplate(
-          mergeTemplateData(dialectData, ctx),
-          path.join(TMPL_DIR, 'dialect.mustache'),
-          path.join(outDir, dialectData.htmlName))
+        mergeTemplateData(dialectData, ctx),
+        path.join(TMPL_DIR, 'dialect.mustache'),
+        path.join(outDir, dialectData.htmlName))
 
       // Render nodeMappings item data
       dialectData.nodeMappings.forEach(nodeData => {
         nodeData.navData = dialectData.navData
         nodeData.navData.nodeMappings = utils.markActive(
-            nodeData.navData.nodeMappings, nodeData.name)
+          nodeData.navData.nodeMappings, nodeData.name)
 
         nodeData.css = argv.css
         utils.renderTemplate(
-            mergeTemplateData(nodeData, ctx),
-            path.join(TMPL_DIR, 'node.mustache'),
-            path.join(outDir, nodeData.htmlName))
+          mergeTemplateData(nodeData, ctx),
+          path.join(TMPL_DIR, 'node.mustache'),
+          path.join(outDir, nodeData.htmlName))
       })
     })
 
@@ -99,8 +99,8 @@ async function main () {
   }
 }
 
-function mergeTemplateData(data, ctx) {
-  const acc = {};
+function mergeTemplateData (data, ctx) {
+  const acc = {}
   for (let p in data) {
     if (data.hasOwnProperty(p)) {
       acc[p] = data[p]

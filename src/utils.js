@@ -113,15 +113,14 @@ function getDefaultContext () {
     schema: 'http://schema.org/',
     shacl: 'http://www.w3.org/ns/shacl#',
     idMapping: idMapping,
-    dialectsHeader: "Dialects",
-    schemasHeader: "Schemas"
+    dialectsHeader: 'Dialects',
+    schemasHeader: 'Schemas'
   }
 }
 
-function idMapping(id) {
+function idMapping (id) {
   return id
 }
-
 
 module.exports = {
   getJsonLdGraph: getJsonLdGraph,

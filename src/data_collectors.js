@@ -2,7 +2,7 @@ const utils = require('./utils')
 
 /* Collects complete dialect data. */
 function collectDialectData (doc, ctx, acc) {
-  const id =  doc.query('@id')
+  const id = doc.query('@id')
   const dialectData = {
     name: doc.query('> schema:name @value'),
     id: ctx.idMapping(id),
@@ -16,9 +16,9 @@ function collectDialectData (doc, ctx, acc) {
     }
     dialectData.slug = utils.slugify(dialectData.name)
     dialectData.htmlName = `${dialectData.slug}.html`
-    console.log("Collecting nodes info for dialect " + id)
+    console.log(`Collecting nodes info for dialect ${id}`)
     dialectData.nodeMappings = collectNodesData(doc, dialectData, ctx)
-        .sort(utils.nameSorter)
+      .sort(utils.nameSorter)
     return dialectData
   }
 }
@@ -31,7 +31,7 @@ function collectNodesData (doc, dialectData, ctx) {
       // name, id
       const nodeId = node.query('@id')
       if (acc[nodeId] == null) {
-        console.log("  - " + nodeId)
+        console.log(`\t- ${nodeId}`)
         let nodeData = {
           name: node.query('> schema:name @value'),
           id: ctx.idMapping(node.query('@id')),
@@ -40,10 +40,10 @@ function collectNodesData (doc, dialectData, ctx) {
         // htmlName
         nodeData.slug = utils.slugify(nodeData.name)
         nodeData.htmlName = utils.makeSchemaHtmlName(
-            dialectData.slug, nodeData.slug)
+          dialectData.slug, nodeData.slug)
 
         let isUnion = node.query('@type')
-            .indexOf(`${ctx.meta}UnionNodeMapping`) > -1
+          .indexOf(`${ctx.meta}UnionNodeMapping`) > -1
         if (isUnion) {
           let seq = node.query('> shacl:node[@type=rdf:Seq]')
           let names = seq.queryAll('@id').slice(1).map(utils.parseHashValue)
@@ -57,12 +57,12 @@ function collectNodesData (doc, dialectData, ctx) {
           let targetClassId = node.query('> shacl:targetClass @id')
           let targetClass = doc.query(`> amldoc:declares[@id=${targetClassId}]`)
           nodeData.description = targetClass
-              ? targetClass.query('> schema:description @value')
-              : ''
+            ? targetClass.query('> schema:description @value')
+            : ''
           // properties
           nodeData.scalarProperties = collectScalarPropsData(doc, node)
           nodeData.linkProperties = collectLinkPropsData(
-              doc, node, dialectData.slug)
+            doc, node, dialectData.slug)
         }
         nodeData.linkedSchemas = []
         nodeData.linkProperties.forEach(prop => {
