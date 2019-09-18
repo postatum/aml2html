@@ -34,11 +34,11 @@ The following snippet shows a custom configuration stored in the `cfg.js` file:
 
 ```javascript
 module.exports = {
-    idMapping: function(id) {
-      return id + "_modified";
-    },
-    dialectsHeader: "My label for dialects",
-    schemasHeader: "My label for schemas"
+  idMapping: function(id) {
+    return id + "_modified";
+  },
+  dialectsHeader: "My label for dialects",
+  schemasHeader: "My label for schemas"
 }
 ```
 

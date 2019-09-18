@@ -112,14 +112,27 @@ function getDefaultContext () {
     rdf: 'http://www.w3.org/2000/01/rdf-schema#',
     schema: 'http://schema.org/',
     shacl: 'http://www.w3.org/ns/shacl#',
-    idMapping: idMapping,
-    dialectsHeader: 'Dialects',
-    schemasHeader: 'Schemas'
+    config: {
+      idMapping: (id) => id,
+      dialectsHeader: 'Dialects',
+      schemasHeader: 'Schemas'
+    }
   }
 }
 
-function idMapping (id) {
-  return id
+/* Loads custom config into context config. */
+function loadConfig (cfgName, ctx) {
+  const cfgPath = path.resolve(process.cwd(), cfgName)
+  console.log(`Loading custom configuration from ${cfgPath}`)
+  const cfg = require(cfgPath)
+  // Drop "undefined"s
+  Object.keys(cfg).forEach(key => {
+    if (cfg[key] === undefined) {
+      delete cfg[key]
+    }
+  })
+  ctx.config = {...ctx.config, ...cfg}
+  return ctx
 }
 
 module.exports = {
@@ -133,5 +146,6 @@ module.exports = {
   slugify: slugify,
   makeSchemaHtmlName: makeSchemaHtmlName,
   markActive: markActive,
-  getDefaultContext: getDefaultContext
+  getDefaultContext: getDefaultContext,
+  loadConfig: loadConfig
 }

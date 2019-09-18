@@ -13,7 +13,7 @@ const TMPL_DIR = path.join(utils.TMPL_DIR)
 
 /** Runs all the logic. */
 async function main () {
-  const ctx = utils.getDefaultContext()
+  let ctx = utils.getDefaultContext()
 
   await amf.AMF.init()
   const argv = parseArgs(process.argv.slice(2))
@@ -27,20 +27,9 @@ async function main () {
   const outDir = path.resolve(argv.outdir)
   fs.emptyDirSync(outDir)
 
-  // let's add custom configuration elements
+  // Add custom configuration elements
   if (argv.cfg) {
-    const cfgPath = path.join(process.cwd(), argv.cfg)
-    console.log(`Loading custom configuration from ${cfgPath}`)
-    const customConfig = require(cfgPath)
-    if (customConfig.idMapping) {
-      ctx.idMapping = customConfig.idMapping
-    }
-    if (customConfig.dialectsHeader) {
-      ctx.dialectsHeader = customConfig.dialectsHeader
-    }
-    if (customConfig.schemasHeader) {
-      ctx.schemasHeader = customConfig.schemasHeader
-    }
+    ctx = utils.loadConfig(argv.cfg, ctx)
   }
 
   // Collects dialects data into an array
@@ -78,7 +67,7 @@ async function main () {
 
     // Render dialect overview template
     utils.renderTemplate(
-      mergeTemplateData(dialectData, ctx),
+      {...dialectData, ...ctx.config},
       path.join(TMPL_DIR, 'dialect.mustache'),
       path.join(outDir, dialectData.htmlName))
 
@@ -90,7 +79,7 @@ async function main () {
 
       nodeData.css = argv.css
       utils.renderTemplate(
-        mergeTemplateData(nodeData, ctx),
+        {...nodeData, ...ctx.config},
         path.join(TMPL_DIR, 'node.mustache'),
         path.join(outDir, nodeData.htmlName))
     })
@@ -108,21 +97,6 @@ async function main () {
     path.join(outDir, 'index.html'))
 
   utils.copyStaticFiles(outDir)
-}
-
-
-/* Merges template data */
-function mergeTemplateData (data, ctx) {
-  const acc = {}
-  for (let p in data) {
-    if (data.hasOwnProperty(p)) {
-      acc[p] = data[p]
-    }
-  }
-  acc['dialectsHeader'] = ctx.dialectsHeader
-  acc['schemasHeader'] = ctx.schemasHeader
-
-  return acc
 }
 
 main()

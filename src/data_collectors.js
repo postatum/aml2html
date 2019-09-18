@@ -5,7 +5,7 @@ function collectDialectData (doc, ctx, acc) {
   const id = doc.query('@id')
   const dialectData = {
     name: doc.query('> schema:name @value'),
-    id: ctx.idMapping(id),
+    id: ctx.config.idMapping(id),
     version: doc.query('> schema:version @value')
   }
   if (!acc[id]) {
@@ -34,7 +34,7 @@ function collectNodesData (doc, dialectData, ctx) {
         console.log(`\t- ${nodeId}`)
         let nodeData = {
           name: node.query('> schema:name @value'),
-          id: ctx.idMapping(node.query('@id')),
+          id: ctx.config.idMapping(node.query('@id')),
           dialectName: dialectData.name
         }
         // htmlName
