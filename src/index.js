@@ -11,6 +11,47 @@ const jsonld = require('jsonld')
 /** Mustache dialects templates directory path. */
 const TMPL_DIR = path.join(utils.TMPL_DIR)
 
+/**
+ * Process a file as a vocabulary
+ */
+async function processVocabulary (vocabPath, graph, ctx, acc) {
+  try {
+    console.log(`Collecting vocabulary data: ${vocabPath}`)
+    const docs = ldquery(graph, ctx).queryAll('*[@type=meta:Vocabulary]')
+    docs.forEach(doc => {
+      console.log('FOUND A VOCABULARY')
+      const id = doc.query('@id')
+      if (!acc[id]) {
+        console.log(`Adding vocabulary ${id}`)
+        acc[id] = collect.vocabularyData(doc, ctx, acc)
+      }
+    })
+  } catch (e) {
+    console.error(`Error for vocabulary ${vocabPath}: ${e.message}`)
+    console.error(e)
+  }
+}
+
+/**
+ * Process a file as a dialect
+ */
+async function processDialect (dialectPath, graph, ctx, acc, ontologyTerms) {
+  try {
+    const docs = ldquery(graph, ctx).queryAll('*[@type=meta:Dialect]')
+    console.log(`Collecting dialect data: ${dialectPath}`)
+    docs.forEach(doc => {
+      const id = doc.query('@id')
+      if (!acc[id]) {
+        console.log(`Adding Dialect ${id}`)
+        acc[id] = collect.dialectData(doc, ctx, acc, ontologyTerms)
+      }
+    })
+  } catch (e) {
+    console.error(`Error for dialect ${dialectPath}: ${e.message}`)
+    console.error(e)
+  }
+}
+
 /** Runs all the logic. */
 async function main () {
   let ctx = utils.getDefaultContext()
@@ -21,7 +62,7 @@ async function main () {
   // Ensure output directory exists
   if (!argv.outdir) {
     console.error(`Missing mandatory output directory.
-      Syntax: aml2html -- <dialect path> --outdir=<output path> [--css=<css path>] [--cfg=<cfg file>]`)
+      Syntax: aml2html -- <dialect path> --outdir=<output path> [--indir=<input directory>] [--css=<css path>] [--cfg=<cfg file>]`)
     return
   }
   const outDir = path.resolve(argv.outdir)
@@ -33,26 +74,45 @@ async function main () {
   }
 
   // Collects dialects data into an array
-  const dialectsPaths = Array.isArray(argv._) ? argv._ : [argv._]
+  var dialectsPaths = Array.isArray(argv._) ? argv._ : [argv._]
+  if (argv.indir) {
+    dialectsPaths = utils.walkSync(argv.indir)
+  }
+
   const acc = {}
+  const ontology = {}
+  const jsonGraph = {}
+
+  // Let's load the  JSON-LD
   for (var i = 0; i < dialectsPaths.length; i++) {
-    const dpth = dialectsPaths[i]
+    const p = dialectsPaths[i]
     try {
-      const defaultGraph = await utils.getJsonLdGraph(dpth)
+      const defaultGraph = await utils.getJsonLdGraph(p)
+      console.log('[ok] ' + p)
       const graph = await jsonld.expand(defaultGraph)
-      const docs = ldquery(graph, ctx).queryAll('*[@type=meta:Dialect]')
-      console.log(`Collecting dialect data: ${dpth}`)
-      docs.forEach(doc => {
-        const id = doc.query('@id')
-        if (!acc[id]) {
-          console.log(`Adding Dialect ${id}`)
-          acc[id] = collect.dialectData(doc, ctx, acc)
-        }
-      })
+      jsonGraph[p] = graph
     } catch (e) {
-      console.error(`Error for dialect ${dpth}: ${e.message}`)
-      console.error(e)
+      console.log('[error] ' + p)
     }
+  }
+  console.log('Processed all input files')
+
+  // let's process the vocabularies
+  for (var p in jsonGraph) {
+    const graph = jsonGraph[p]
+    processVocabulary(p, graph, ctx, ontology)
+  }
+  const ontologyTerms = {}
+  Object.values(ontology).forEach(function (vocab) {
+    vocab.nodeMappings.forEach(function (term) {
+      ontologyTerms[term.id] = term
+    })
+  })
+
+  // Let's process the dialects
+  for (p in jsonGraph) {
+    const graph = jsonGraph[p]
+    processDialect(p, graph, ctx, acc, ontologyTerms)
   }
 
   console.log(`Got ${Object.values(acc).length} values`)

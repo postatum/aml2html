@@ -1,7 +1,32 @@
 const utils = require('./utils')
 
+/* Collects complete vocabulary data. */
+function collectVocabularyData (doc, ctx, acc) {
+  const id = doc.query('@id')
+  const vocabularyData = {
+    name: doc.query('> schema:name @value'),
+    id: ctx.config.idMapping(id),
+    version: doc.query('> schema:version @value')
+  }
+  if (!acc[id]) {
+    console.log(`Collecting dialect data for id ${id}`)
+    const usage = doc.json()[`${ctx.amldoc}usage`]
+    if (usage) {
+      vocabularyData.usage = usage[0]['@value']
+    }
+    vocabularyData.slug = utils.slugify(vocabularyData.name + '_vocab')
+    vocabularyData.htmlName = `${vocabularyData.slug}.html`
+    console.log(`Collecting nodes info for vocabulary ${id}`)
+    vocabularyData.nodeMappings = collectVocabularyNodesData(doc, vocabularyData, ctx).sort(utils.nameSorter)
+    vocabularyData.nodeMappings.forEach(function (node) {
+      node.vocabulary = vocabularyData
+    })
+    return vocabularyData
+  }
+}
+
 /* Collects complete dialect data. */
-function collectDialectData (doc, ctx, acc) {
+function collectDialectData (doc, ctx, acc, ontologyTerms) {
   const id = doc.query('@id')
   const dialectData = {
     name: doc.query('> schema:name @value'),
@@ -17,14 +42,88 @@ function collectDialectData (doc, ctx, acc) {
     dialectData.slug = utils.slugify(dialectData.name)
     dialectData.htmlName = `${dialectData.slug}.html`
     console.log(`Collecting nodes info for dialect ${id}`)
-    dialectData.nodeMappings = collectNodesData(doc, dialectData, ctx)
+    dialectData.nodeMappings = collectNodesData(doc, dialectData, ctx, ontologyTerms)
       .sort(utils.nameSorter)
     return dialectData
   }
 }
 
+/* Collects vocabulary classes and properties data. */
+function collectVocabularyNodesData (doc, dialectData, ctx) {
+  const acc = {}
+  // Let's first fetch the classes
+  doc.queryAll('> amldoc:declares[@type=owl:Class]')
+    .map(node => {
+      // name, id
+      const nodeId = node.query('@id')
+      if (!acc[nodeId]) {
+        console.log(`\t- ${nodeId}`)
+        const nodeData = {
+          type: 'class',
+          name: node.query('> meta:displayName @value'),
+          description: node.query('> schema:description @value'),
+          id: ctx.config.idMapping(node.query('@id')),
+          dialectName: dialectData.name
+        }
+        // htmlName
+        nodeData.slug = utils.slugify(nodeData.name + '_class')
+        nodeData.htmlName = utils.makeSchemaHtmlName(dialectData.slug, nodeData.slug)
+
+        // save
+        acc[nodeId] = nodeData
+      }
+    })
+
+  // Now the declared object properties connecting two classes
+  doc.queryAll('> amldoc:declares[@type=owl:ObjectProperty]')
+    .map(node => {
+      // name, id
+      const nodeId = node.query('@id')
+      if (!acc[nodeId]) {
+        console.log(`\t- ${nodeId}`)
+        const nodeData = {
+          type: 'objectProperty',
+          name: node.query('> meta:displayName @value'),
+          description: node.query('> schema:description @value'),
+          id: ctx.config.idMapping(node.query('@id')),
+          dialectName: dialectData.name
+        }
+        // htmlName
+        nodeData.slug = utils.slugify(nodeData.name + '_objectProperty')
+        nodeData.htmlName = utils.makeSchemaHtmlName(dialectData.slug, nodeData.slug)
+
+        // save
+        acc[nodeId] = nodeData
+      }
+    })
+
+  // Finally we collect the literal (datatype) properties
+  doc.queryAll('> amldoc:declares[@type=owl:DatatypeProperty]')
+    .map(node => {
+      // name, id
+      const nodeId = node.query('@id')
+      if (!acc[nodeId]) {
+        console.log(`\t- ${nodeId}`)
+        const nodeData = {
+          type: 'datatypeProperty',
+          name: node.query('> meta:displayName @value'),
+          description: node.query('> schema:description @value'),
+          id: ctx.config.idMapping(node.query('@id')),
+          dialectName: dialectData.name
+        }
+        // htmlName
+        nodeData.slug = utils.slugify(nodeData.name + '_datatypeProperty')
+        nodeData.htmlName = utils.makeSchemaHtmlName(dialectData.slug, nodeData.slug)
+
+        // save
+        acc[nodeId] = nodeData
+      }
+    })
+  return Object.values(acc)
+}
+
 /* Collects dialect nodeMappings data. */
-function collectNodesData (doc, dialectData, ctx) {
+function collectNodesData (doc, dialectData, ctx, ontologyTerms) {
   const acc = {}
   doc.queryAll('> amldoc:declares[@type=shacl:Shape]')
     .map(node => {
@@ -45,7 +144,7 @@ function collectNodesData (doc, dialectData, ctx) {
         const isUnion = node.query('@type')
           .indexOf(`${ctx.meta}UnionNodeMapping`) > -1
         if (isUnion) {
-          const seq = node.query('> shacl:node[@type=rdf:Seq]')
+          const seq = node.query('> shacl:node[@type=rdfs:Seq]')
           const names = seq.queryAll('@id').slice(1).map(utils.parseHashValue)
           // description
           nodeData.description = `Union of ${names.join(', ')}`
@@ -54,15 +153,19 @@ function collectNodesData (doc, dialectData, ctx) {
           nodeData.linkProperties = []
         } else {
           // description
-          const targetClassId = node.query('shacl:targetClass @id')
+          const targetClassId = node.query('> shacl:targetClass @id')
           const targetClass = doc.query(`amldoc:declares[@id=${targetClassId}]`)
           nodeData.description = targetClass
             ? targetClass.query('schema:description @value')
             : ''
+          if (ontologyTerms[targetClassId] != null) {
+            nodeData.description = ontologyTerms[targetClassId].description
+          }
+          nodeData.targetClassId = targetClassId
+
           // properties
-          nodeData.scalarProperties = collectScalarPropsData(doc, node)
-          nodeData.linkProperties = collectLinkPropsData(
-            doc, node, dialectData.slug)
+          nodeData.scalarProperties = sortProps(collectScalarPropsData(doc, node, ontologyTerms))
+          nodeData.linkProperties = sortProps(collectLinkPropsData(doc, node, dialectData.slug, ontologyTerms))
         }
         nodeData.linkedSchemas = []
         nodeData.linkProperties.forEach(prop => {
@@ -80,22 +183,22 @@ function collectNodesData (doc, dialectData, ctx) {
 }
 
 /* Collects nodeMappings item scalar properties data. */
-function collectScalarPropsData (doc, node) {
+function collectScalarPropsData (doc, node, ontologyTerms) {
   const propsNodes = node.queryAll('shacl:property')
     .filter(prop => !!prop.query('shacl:datatype'))
   return propsNodes.map(prop => {
-    const propData = collectCommonPropData(doc, prop)
+    const propData = collectCommonPropData(doc, prop, ontologyTerms)
     propData.range = utils.parseHashValue(prop.query('shacl:datatype @id'))
     return propData
   })
 }
 
 /* Collects nodeMappings item link properties data. */
-function collectLinkPropsData (doc, node, dialectSlug) {
+function collectLinkPropsData (doc, node, dialectSlug, ontologyTerms) {
   const propsNodes = node.queryAll('shacl:property')
     .filter(prop => !prop.query('shacl:datatype'))
   return propsNodes.map(prop => {
-    const propData = collectCommonPropData(doc, prop)
+    const propData = collectCommonPropData(doc, prop, ontologyTerms)
     propData.range = prop.queryAll('shacl:node @id').slice(1)
       .map(rangeId => {
         const data = {
@@ -113,7 +216,7 @@ function collectLinkPropsData (doc, node, dialectSlug) {
 }
 
 /* Collects property data common to scalar and link properties. */
-function collectCommonPropData (doc, prop) {
+function collectCommonPropData (doc, prop, ontologyTerms) {
   const propData = {
     name: prop.query('schema:name @value'),
     id: prop.query('shacl:path @id'),
@@ -123,6 +226,10 @@ function collectCommonPropData (doc, prop) {
   if (vocabProp) {
     propData.propDesc = vocabProp.query('schema:description @value')
   }
+  if (ontologyTerms[propData.id] != null) {
+    propData.propDesc = ontologyTerms[propData.id].description
+  }
+
   return propData
 }
 
@@ -177,6 +284,15 @@ function collectCommonNavData (dialectsData) {
   return commonNavData
 }
 
+function sortProps (props) {
+  var propAcc = {}
+  for (var i = 0; i < props.length; i++) {
+    var nextProp = props[i]
+    propAcc[nextProp.id] = nextProp
+  }
+  return Object.values(propAcc).sort(utils.nameSorter)
+}
+
 /* Collects dialect-specific navigation data. */
 function collectNavData (dialectData, commonNavData) {
   const navData = {
@@ -193,6 +309,7 @@ function collectNavData (dialectData, commonNavData) {
 }
 
 module.exports = {
+  vocabularyData: collectVocabularyData,
   dialectData: collectDialectData,
   nodesData: collectNodesData,
   scalarPropsData: collectScalarPropsData,

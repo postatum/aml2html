@@ -109,13 +109,15 @@ function getDefaultContext () {
     amldoc: 'http://a.ml/vocabularies/document#',
     meta: 'http://a.ml/vocabularies/meta#',
     owl: 'http://www.w3.org/2002/07/owl#',
-    rdf: 'http://www.w3.org/2000/01/rdf-schema#',
+    rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+    rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
     schema: 'http://schema.org/',
     shacl: 'http://www.w3.org/ns/shacl#',
     config: {
       idMapping: (id) => id,
       dialectsHeader: 'Dialects',
-      schemasHeader: 'Schemas'
+      schemasHeader: 'Schemas',
+      mainHeader: 'Main'
     }
   }
 }
@@ -135,7 +137,25 @@ function loadConfig (cfgName, ctx) {
   return ctx
 }
 
+function walkSync (dir, filelist) {
+  var files = fs.readdirSync(dir)
+  filelist = filelist || []
+  files.forEach(function (file) {
+    const fpath = path.join(dir, file)
+    const stats = fs.lstatSync(fpath)
+    if (stats.isDirectory()) {
+      filelist = walkSync(fpath, filelist)
+    } else {
+      if (stats.isFile() && file.endsWith('.yaml')) {
+        filelist.push(fpath)
+      }
+    }
+  })
+  return filelist
+}
+
 module.exports = {
+  walkSync: walkSync,
   getJsonLdGraph: getJsonLdGraph,
   copyStaticFiles: copyStaticFiles,
   removeDuplicatesById: removeDuplicatesById,
