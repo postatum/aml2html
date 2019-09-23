@@ -131,7 +131,7 @@ function loadConfig (cfgName, ctx) {
       delete cfg[key]
     }
   })
-  ctx.config = {...ctx.config, ...cfg}
+  ctx.config = { ...ctx.config, ...cfg }
   return ctx
 }
 

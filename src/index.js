@@ -34,13 +34,13 @@ async function main () {
 
   // Collects dialects data into an array
   const dialectsPaths = Array.isArray(argv._) ? argv._ : [argv._]
-  let acc = {}
+  const acc = {}
   for (var i = 0; i < dialectsPaths.length; i++) {
-    let dpth = dialectsPaths[i]
+    const dpth = dialectsPaths[i]
     try {
-      let defaultGraph = await utils.getJsonLdGraph(dpth)
-      let graph = await jsonld.expand(defaultGraph)
-      let docs = ldquery(graph, ctx).queryAll('*[@type=meta:Dialect]')
+      const defaultGraph = await utils.getJsonLdGraph(dpth)
+      const graph = await jsonld.expand(defaultGraph)
+      const docs = ldquery(graph, ctx).queryAll('*[@type=meta:Dialect]')
       console.log(`Collecting dialect data: ${dpth}`)
       docs.forEach(doc => {
         const id = doc.query('@id')
@@ -67,7 +67,7 @@ async function main () {
 
     // Render dialect overview template
     utils.renderTemplate(
-      {...dialectData, ...ctx.config},
+      { ...dialectData, ...ctx.config },
       path.join(TMPL_DIR, 'dialect.mustache'),
       path.join(outDir, dialectData.htmlName))
 
@@ -79,7 +79,7 @@ async function main () {
 
       nodeData.css = argv.css
       utils.renderTemplate(
-        {...nodeData, ...ctx.config},
+        { ...nodeData, ...ctx.config },
         path.join(TMPL_DIR, 'node.mustache'),
         path.join(outDir, nodeData.htmlName))
     })

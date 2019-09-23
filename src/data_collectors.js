@@ -25,14 +25,14 @@ function collectDialectData (doc, ctx, acc) {
 
 /* Collects dialect nodeMappings data. */
 function collectNodesData (doc, dialectData, ctx) {
-  let acc = {}
+  const acc = {}
   doc.queryAll('> amldoc:declares[@type=shacl:Shape]')
     .map(node => {
       // name, id
       const nodeId = node.query('@id')
       if (!acc[nodeId]) {
         console.log(`\t- ${nodeId}`)
-        let nodeData = {
+        const nodeData = {
           name: node.query('> schema:name @value'),
           id: ctx.config.idMapping(node.query('@id')),
           dialectName: dialectData.name
@@ -42,11 +42,11 @@ function collectNodesData (doc, dialectData, ctx) {
         nodeData.htmlName = utils.makeSchemaHtmlName(
           dialectData.slug, nodeData.slug)
 
-        let isUnion = node.query('@type')
+        const isUnion = node.query('@type')
           .indexOf(`${ctx.meta}UnionNodeMapping`) > -1
         if (isUnion) {
-          let seq = node.query('> shacl:node[@type=rdf:Seq]')
-          let names = seq.queryAll('@id').slice(1).map(utils.parseHashValue)
+          const seq = node.query('> shacl:node[@type=rdf:Seq]')
+          const names = seq.queryAll('@id').slice(1).map(utils.parseHashValue)
           // description
           nodeData.description = `Union of ${names.join(', ')}`
           // properties
@@ -54,8 +54,8 @@ function collectNodesData (doc, dialectData, ctx) {
           nodeData.linkProperties = []
         } else {
           // description
-          let targetClassId = node.query('shacl:targetClass @id')
-          let targetClass = doc.query(`amldoc:declares[@id=${targetClassId}]`)
+          const targetClassId = node.query('shacl:targetClass @id')
+          const targetClass = doc.query(`amldoc:declares[@id=${targetClassId}]`)
           nodeData.description = targetClass
             ? targetClass.query('schema:description @value')
             : ''
@@ -69,7 +69,7 @@ function collectNodesData (doc, dialectData, ctx) {
           nodeData.linkedSchemas = nodeData.linkedSchemas.concat(...prop.range)
         })
         // Remove duplicates
-        let rangesNames = nodeData.linkedSchemas.map(sch => sch.rangeName)
+        const rangesNames = nodeData.linkedSchemas.map(sch => sch.rangeName)
         nodeData.linkedSchemas = nodeData.linkedSchemas.filter((s, i) => {
           return rangesNames.indexOf(s.rangeName) === i
         })
@@ -84,7 +84,7 @@ function collectScalarPropsData (doc, node) {
   const propsNodes = node.queryAll('shacl:property')
     .filter(prop => !!prop.query('shacl:datatype'))
   return propsNodes.map(prop => {
-    let propData = collectCommonPropData(doc, prop)
+    const propData = collectCommonPropData(doc, prop)
     propData.range = utils.parseHashValue(prop.query('shacl:datatype @id'))
     return propData
   })
@@ -95,7 +95,7 @@ function collectLinkPropsData (doc, node, dialectSlug) {
   const propsNodes = node.queryAll('shacl:property')
     .filter(prop => !prop.query('shacl:datatype'))
   return propsNodes.map(prop => {
-    let propData = collectCommonPropData(doc, prop)
+    const propData = collectCommonPropData(doc, prop)
     propData.range = prop.queryAll('shacl:node @id').slice(1)
       .map(rangeId => {
         const data = {
@@ -114,12 +114,12 @@ function collectLinkPropsData (doc, node, dialectSlug) {
 
 /* Collects property data common to scalar and link properties. */
 function collectCommonPropData (doc, prop) {
-  let propData = {
+  const propData = {
     name: prop.query('schema:name @value'),
     id: prop.query('shacl:path @id'),
     constraints: collectPropertyConstraints(prop)
   }
-  let vocabProp = doc.query(`amldoc:declares[@id=${propData.id}]`)
+  const vocabProp = doc.query(`amldoc:declares[@id=${propData.id}]`)
   if (vocabProp) {
     propData.propDesc = vocabProp.query('schema:description @value')
   }
@@ -129,15 +129,17 @@ function collectCommonPropData (doc, prop) {
 /* Collects nodeMappings item property constraints data. */
 function collectPropertyConstraints (prop) {
   const constraints = [
-    {name: 'mandatory', value: prop.query('shacl:minCount @value') > 0},
-    {name: 'pattern', value: prop.query('shacl:pattern @value')},
-    {name: 'minimum', value: prop.query('shacl:minInclusive @value')},
-    {name: 'maximum', value: prop.query('shacl:maxInclusive @value')},
-    {name: 'allowMultiple', value: prop.query('meta:allowMultiple @value')},
-    {name: 'sorted', value: prop.query('meta:sorted @value')},
-    {name: 'mapKey', value: prop.query('meta:mapProperty @id')},
-    {name: 'typeDiscriminatorName',
-      value: prop.query('meta:typeDiscriminatorName @value')}
+    { name: 'mandatory', value: prop.query('shacl:minCount @value') > 0 },
+    { name: 'pattern', value: prop.query('shacl:pattern @value') },
+    { name: 'minimum', value: prop.query('shacl:minInclusive @value') },
+    { name: 'maximum', value: prop.query('shacl:maxInclusive @value') },
+    { name: 'allowMultiple', value: prop.query('meta:allowMultiple @value') },
+    { name: 'sorted', value: prop.query('meta:sorted @value') },
+    { name: 'mapKey', value: prop.query('meta:mapProperty @id') },
+    {
+      name: 'typeDiscriminatorName',
+      value: prop.query('meta:typeDiscriminatorName @value')
+    }
   ]
 
   const enumNode = prop.query('shacl:in')
