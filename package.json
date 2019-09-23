@@ -13,5 +13,8 @@
   },
   "scripts": {
     "aml2html": "node src/index.js"
+  },
+  "devDependencies": {
+    "standard": "^14.3.1"
   }
 }
