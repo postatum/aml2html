@@ -154,6 +154,15 @@ function walkSync (dir, filelist) {
   return filelist
 }
 
+function sortProps (props) {
+  var propAcc = {}
+  for (var i = 0; i < props.length; i++) {
+    var nextProp = props[i]
+    propAcc[nextProp.id] = nextProp
+  }
+  return Object.values(propAcc).sort(nameSorter)
+}
+
 module.exports = {
   walkSync: walkSync,
   getJsonLdGraph: getJsonLdGraph,
@@ -167,5 +176,6 @@ module.exports = {
   makeSchemaHtmlName: makeSchemaHtmlName,
   markActive: markActive,
   getDefaultContext: getDefaultContext,
-  loadConfig: loadConfig
+  loadConfig: loadConfig,
+  sortProps: sortProps
 }

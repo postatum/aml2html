@@ -17,7 +17,8 @@ function collectVocabularyData (doc, ctx, acc) {
     vocabularyData.slug = utils.slugify(vocabularyData.name + '_vocab')
     vocabularyData.htmlName = `${vocabularyData.slug}.html`
     console.log(`Collecting nodes info for vocabulary ${id}`)
-    vocabularyData.nodeMappings = collectVocabularyNodesData(doc, vocabularyData, ctx).sort(utils.nameSorter)
+    vocabularyData.nodeMappings = collectVocabularyNodesData(
+      doc, vocabularyData, ctx).sort(utils.nameSorter)
     vocabularyData.nodeMappings.forEach(function (node) {
       node.vocabulary = vocabularyData
     })
@@ -42,7 +43,8 @@ function collectDialectData (doc, ctx, acc, ontologyTerms) {
     dialectData.slug = utils.slugify(dialectData.name)
     dialectData.htmlName = `${dialectData.slug}.html`
     console.log(`Collecting nodes info for dialect ${id}`)
-    dialectData.nodeMappings = collectNodesData(doc, dialectData, ctx, ontologyTerms)
+    dialectData.nodeMappings = collectNodesData(
+      doc, dialectData, ctx, ontologyTerms)
       .sort(utils.nameSorter)
     return dialectData
   }
@@ -67,7 +69,8 @@ function collectVocabularyNodesData (doc, dialectData, ctx) {
         }
         // htmlName
         nodeData.slug = utils.slugify(nodeData.name + '_class')
-        nodeData.htmlName = utils.makeSchemaHtmlName(dialectData.slug, nodeData.slug)
+        nodeData.htmlName = utils.makeSchemaHtmlName(
+          dialectData.slug, nodeData.slug)
 
         // save
         acc[nodeId] = nodeData
@@ -90,7 +93,8 @@ function collectVocabularyNodesData (doc, dialectData, ctx) {
         }
         // htmlName
         nodeData.slug = utils.slugify(nodeData.name + '_objectProperty')
-        nodeData.htmlName = utils.makeSchemaHtmlName(dialectData.slug, nodeData.slug)
+        nodeData.htmlName = utils.makeSchemaHtmlName(
+          dialectData.slug, nodeData.slug)
 
         // save
         acc[nodeId] = nodeData
@@ -113,7 +117,8 @@ function collectVocabularyNodesData (doc, dialectData, ctx) {
         }
         // htmlName
         nodeData.slug = utils.slugify(nodeData.name + '_datatypeProperty')
-        nodeData.htmlName = utils.makeSchemaHtmlName(dialectData.slug, nodeData.slug)
+        nodeData.htmlName = utils.makeSchemaHtmlName(
+          dialectData.slug, nodeData.slug)
 
         // save
         acc[nodeId] = nodeData
@@ -164,8 +169,10 @@ function collectNodesData (doc, dialectData, ctx, ontologyTerms) {
           nodeData.targetClassId = targetClassId
 
           // properties
-          nodeData.scalarProperties = sortProps(collectScalarPropsData(doc, node, ontologyTerms))
-          nodeData.linkProperties = sortProps(collectLinkPropsData(doc, node, dialectData.slug, ontologyTerms))
+          nodeData.scalarProperties = utils.sortProps(
+            collectScalarPropsData(doc, node, ontologyTerms))
+          nodeData.linkProperties = utils.sortProps(
+            collectLinkPropsData(doc, node, dialectData.slug, ontologyTerms))
         }
         nodeData.linkedSchemas = []
         nodeData.linkProperties.forEach(prop => {
@@ -282,15 +289,6 @@ function collectCommonNavData (dialectsData) {
     nodeMappings: []
   }
   return commonNavData
-}
-
-function sortProps (props) {
-  var propAcc = {}
-  for (var i = 0; i < props.length; i++) {
-    var nextProp = props[i]
-    propAcc[nextProp.id] = nextProp
-  }
-  return Object.values(propAcc).sort(utils.nameSorter)
 }
 
 /* Collects dialect-specific navigation data. */
