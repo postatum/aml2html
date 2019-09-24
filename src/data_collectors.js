@@ -53,77 +53,45 @@ function collectDialectData (doc, ctx, acc, ontologyTerms) {
 /* Collects vocabulary classes and properties data. */
 function collectVocabularyNodesData (doc, dialectData, ctx) {
   const acc = {}
-  // Let's first fetch the classes
-  doc.queryAll('> amldoc:declares[@type=owl:Class]')
-    .map(node => {
-      // name, id
+  const collectionCreds = [
+    // Fetch the classes
+    {
+      query: '> amldoc:declares[@type=owl:Class]',
+      type: 'class'
+    },
+    // Fetch declared object properties connecting two classes
+    {
+      query: '> amldoc:declares[@type=owl:ObjectProperty]',
+      type: 'objectProperty'
+    },
+    // Collect the literal (datatype) properties
+    {
+      query: '> amldoc:declares[@type=owl:ObjectProperty]',
+      type: 'datatypeProperty'
+    }
+  ]
+
+  collectionCreds.forEach(cred => {
+    doc.queryAll(cred.query).map(node => {
       const nodeId = node.query('@id')
       if (!acc[nodeId]) {
         console.log(`\t- ${nodeId}`)
         const nodeData = {
-          type: 'class',
+          type: cred.type,
           name: node.query('> meta:displayName @value'),
           description: node.query('> schema:description @value'),
           id: ctx.config.idMapping(node.query('@id')),
           dialectName: dialectData.name
         }
         // htmlName
-        nodeData.slug = utils.slugify(nodeData.name + '_class')
+        nodeData.slug = utils.slugify(`${nodeData.name}_${cred.type}`)
         nodeData.htmlName = utils.makeSchemaHtmlName(
           dialectData.slug, nodeData.slug)
-
         // save
         acc[nodeId] = nodeData
       }
     })
-
-  // Now the declared object properties connecting two classes
-  doc.queryAll('> amldoc:declares[@type=owl:ObjectProperty]')
-    .map(node => {
-      // name, id
-      const nodeId = node.query('@id')
-      if (!acc[nodeId]) {
-        console.log(`\t- ${nodeId}`)
-        const nodeData = {
-          type: 'objectProperty',
-          name: node.query('> meta:displayName @value'),
-          description: node.query('> schema:description @value'),
-          id: ctx.config.idMapping(node.query('@id')),
-          dialectName: dialectData.name
-        }
-        // htmlName
-        nodeData.slug = utils.slugify(nodeData.name + '_objectProperty')
-        nodeData.htmlName = utils.makeSchemaHtmlName(
-          dialectData.slug, nodeData.slug)
-
-        // save
-        acc[nodeId] = nodeData
-      }
-    })
-
-  // Finally we collect the literal (datatype) properties
-  doc.queryAll('> amldoc:declares[@type=owl:DatatypeProperty]')
-    .map(node => {
-      // name, id
-      const nodeId = node.query('@id')
-      if (!acc[nodeId]) {
-        console.log(`\t- ${nodeId}`)
-        const nodeData = {
-          type: 'datatypeProperty',
-          name: node.query('> meta:displayName @value'),
-          description: node.query('> schema:description @value'),
-          id: ctx.config.idMapping(node.query('@id')),
-          dialectName: dialectData.name
-        }
-        // htmlName
-        nodeData.slug = utils.slugify(nodeData.name + '_datatypeProperty')
-        nodeData.htmlName = utils.makeSchemaHtmlName(
-          dialectData.slug, nodeData.slug)
-
-        // save
-        acc[nodeId] = nodeData
-      }
-    })
+  })
   return Object.values(acc)
 }
 
@@ -170,11 +138,11 @@ function collectNodesData (doc, dialectData, ctx, ontologyTerms) {
 
           // properties
           nodeData.scalarProperties = utils.removeDuplicatesById(
-            collectScalarPropsData(doc, node, ontologyTerms)
-          ).sort(utils.nameSorter)
+            collectScalarPropsData(doc, node, ontologyTerms))
+              .sort(utils.nameSorter)
           nodeData.linkProperties = utils.removeDuplicatesById(
-            collectLinkPropsData(doc, node, dialectData.slug, ontologyTerms)
-          ).sort(utils.nameSorter)
+            collectLinkPropsData(doc, node, dialectData.slug, ontologyTerms))
+              .sort(utils.nameSorter)
         }
         nodeData.linkedSchemas = []
         nodeData.linkProperties.forEach(prop => {

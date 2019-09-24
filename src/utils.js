@@ -136,7 +136,7 @@ function loadConfig (cfgName, ctx) {
 function walkSync (dir, filelist) {
   var files = fs.readdirSync(dir)
   filelist = filelist || []
-  files.forEach(function (file) {
+  files.forEach(file => {
     const fpath = path.join(dir, file)
     const stats = fs.lstatSync(fpath)
     if (stats.isDirectory()) {
