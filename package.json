@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "license": "MIT",
   "dependencies": {
-    "amf-client-js": "^3.4.1",
+    "amf-client-js": "^3.5.0",
     "fs-extra": "^7.0.1",
     "jsonld": "^1.7.0",
     "ld-query": "^2.0.0",
