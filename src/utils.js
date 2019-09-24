@@ -39,15 +39,11 @@ function copyStaticFiles (outDir) {
  * @param items Array of items with .id property.
  */
 function removeDuplicatesById (items) {
-  const addedIds = []
-  const uniqueItems = []
-  items.forEach((item) => {
-    if (addedIds.indexOf(item.id) === -1) {
-      addedIds.push(item.id)
-      uniqueItems.push(item)
-    }
+  var acc = {}
+  items.forEach(item => {
+    acc[item.id] = item
   })
-  return uniqueItems
+  return Object.values(acc)
 }
 
 /** Parses class name by splitting it by / and # and picking last part.
@@ -154,15 +150,6 @@ function walkSync (dir, filelist) {
   return filelist
 }
 
-function sortProps (props) {
-  var propAcc = {}
-  for (var i = 0; i < props.length; i++) {
-    var nextProp = props[i]
-    propAcc[nextProp.id] = nextProp
-  }
-  return Object.values(propAcc).sort(nameSorter)
-}
-
 module.exports = {
   walkSync: walkSync,
   getJsonLdGraph: getJsonLdGraph,
@@ -176,6 +163,5 @@ module.exports = {
   makeSchemaHtmlName: makeSchemaHtmlName,
   markActive: markActive,
   getDefaultContext: getDefaultContext,
-  loadConfig: loadConfig,
-  sortProps: sortProps
+  loadConfig: loadConfig
 }

@@ -169,10 +169,12 @@ function collectNodesData (doc, dialectData, ctx, ontologyTerms) {
           nodeData.targetClassId = targetClassId
 
           // properties
-          nodeData.scalarProperties = utils.sortProps(
-            collectScalarPropsData(doc, node, ontologyTerms))
-          nodeData.linkProperties = utils.sortProps(
-            collectLinkPropsData(doc, node, dialectData.slug, ontologyTerms))
+          nodeData.scalarProperties = utils.removeDuplicatesById(
+            collectScalarPropsData(doc, node, ontologyTerms)
+          ).sort(utils.nameSorter)
+          nodeData.linkProperties = utils.removeDuplicatesById(
+            collectLinkPropsData(doc, node, dialectData.slug, ontologyTerms)
+          ).sort(utils.nameSorter)
         }
         nodeData.linkedSchemas = []
         nodeData.linkProperties.forEach(prop => {
