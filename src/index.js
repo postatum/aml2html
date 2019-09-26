@@ -116,7 +116,7 @@ async function main () {
   }
 
   console.log(`Got ${Object.values(acc).length} values`)
-  const dialectsData = Object.values(acc)
+  const dialectsData = Object.values(acc).sort(utils.nameSorter)
 
   const commonNavData = collect.commonNavData(dialectsData)
 
