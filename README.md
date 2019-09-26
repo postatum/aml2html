@@ -14,10 +14,16 @@ CLI command notation (*note the required `--` before arguments*):
 npm run aml2html -- <dialectPath>... --outdir=DIR --css=https://foo.bar/some.css --css=/another.css
 ```
 
-E.g.
+E.g.:
 ```sh
-$ npm run aml2html -- test_data/amf/dialects/canonical_webapi.yaml test_data/amf/dialects/oas20.yaml test_data/amf/dialects/validation.raml test_data/music/dialect/playlist.yaml --outdir=./test_data/html/
+$ npm run aml2html -- test_data/amf/dialects/canonical_webapi.yaml test_data/amf/dialects/oas20.yaml test_data/amf/dialects/validation.yaml test_data/music/dialect/playlist.yaml --outdir=./test_data/html/
 ```
+
+Or using `--indir` option:
+```sh
+$ npm run aml2html -- --indir=./test_data/ --outdir=./test_data/html/
+```
+
 
 ## Configuration
 
@@ -52,7 +58,7 @@ This file can be used when invoking the HTML generator in the following way:
 
 E.g.
 ```sh
-$ npm run aml2html -- test_data/amf/dialects/canonical_webapi.yaml test_data/amf/dialects/oas20.yaml test_data/amf/dialects/validation.raml test_data/music/dialect/playlist.yaml --outdir=./test_data/html/ --cfg=cfg.js
+$ npm run aml2html -- test_data/amf/dialects/canonical_webapi.yaml test_data/amf/dialects/oas20.yaml test_data/amf/dialects/validation.yaml test_data/music/dialect/playlist.yaml --outdir=./test_data/html/ --cfg=cfg.js
 ```
 
 Configuration files will be searched relative to the working directory of the node interpreter.

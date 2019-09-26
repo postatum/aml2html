@@ -1,6 +1,6 @@
 [
   {
-    "@id": "file://test_data/amf/dialects/validation.raml",
+    "@id": "file://test_data/amf/dialects/validation.yaml",
     "@type": [
       "http://a.ml/vocabularies/meta#Dialect",
       "http://a.ml/vocabularies/document#Document",
@@ -20,7 +20,7 @@
     ],
     "http://a.ml/vocabularies/meta#externals": [
       {
-        "@id": "file://test_data/amf/dialects/validation.raml/externals/schema-org",
+        "@id": "file://test_data/amf/dialects/validation.yaml/externals/schema-org",
         "@type": [
           "http://www.w3.org/2002/07/owl#Ontology",
           "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -38,7 +38,7 @@
         ]
       },
       {
-        "@id": "file://test_data/amf/dialects/validation.raml/externals/shacl",
+        "@id": "file://test_data/amf/dialects/validation.yaml/externals/shacl",
         "@type": [
           "http://www.w3.org/2002/07/owl#Ontology",
           "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -56,7 +56,7 @@
         ]
       },
       {
-        "@id": "file://test_data/amf/dialects/validation.raml/externals/validation",
+        "@id": "file://test_data/amf/dialects/validation.yaml/externals/validation",
         "@type": [
           "http://www.w3.org/2002/07/owl#Ontology",
           "http://a.ml/vocabularies/meta#ExternalVocabulary",
@@ -76,14 +76,14 @@
     ],
     "http://a.ml/vocabularies/meta#documents": [
       {
-        "@id": "file://test_data/amf/dialects/validation.raml/documents",
+        "@id": "file://test_data/amf/dialects/validation.yaml/documents",
         "@type": [
           "http://a.ml/vocabularies/meta#DocumentsModel",
           "http://a.ml/vocabularies/document#DomainElement"
         ],
         "http://a.ml/vocabularies/meta#rootDocument": [
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/documents/root",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/documents/root",
             "@type": [
               "http://a.ml/vocabularies/meta#DocumentMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -95,14 +95,14 @@
             ],
             "http://a.ml/vocabularies/meta#encodedNode": [
               {
-                "@id": "file://test_data/amf/dialects/validation.raml#/declarations/profileNode"
+                "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/profileNode"
               }
             ]
           }
         ],
         "http://a.ml/vocabularies/meta#fragments": [
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/documents/fragments/Validation",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/documents/fragments/Validation",
             "@type": [
               "http://a.ml/vocabularies/meta#DocumentMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -114,7 +114,7 @@
             ],
             "http://a.ml/vocabularies/meta#encodedNode": [
               {
-                "@id": "file://test_data/amf/dialects/validation.raml#/declarations/queryValidationNode"
+                "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/queryValidationNode"
               }
             ]
           }
@@ -128,7 +128,7 @@
     ],
     "http://a.ml/vocabularies/document#declares": [
       {
-        "@id": "file://test_data/amf/dialects/validation.raml#/declarations/propertyConstraintNode",
+        "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/propertyConstraintNode",
         "@type": [
           "http://a.ml/vocabularies/meta#NodeMapping",
           "http://www.w3.org/ns/shacl#Shape",
@@ -146,7 +146,7 @@
         ],
         "http://www.w3.org/ns/shacl#property": [
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/propertyConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/propertyConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -168,7 +168,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/propertyConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/propertyConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -195,7 +195,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/propertyConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/propertyConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -217,7 +217,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/propertyConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/propertyConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -239,7 +239,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/propertyConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/propertyConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -261,7 +261,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/propertyConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/propertyConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -283,7 +283,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/propertyConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/propertyConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -305,7 +305,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/propertyConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/propertyConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -327,7 +327,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/propertyConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/propertyConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -349,7 +349,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/propertyConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/propertyConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -378,7 +378,7 @@
         ]
       },
       {
-        "@id": "file://test_data/amf/dialects/validation.raml#/declarations/profileNode",
+        "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/profileNode",
         "@type": [
           "http://a.ml/vocabularies/meta#NodeMapping",
           "http://www.w3.org/ns/shacl#Shape",
@@ -396,7 +396,7 @@
         ],
         "http://www.w3.org/ns/shacl#property": [
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/profileNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/profileNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -423,7 +423,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/profileNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/profileNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -445,7 +445,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/profileNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/profileNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -467,7 +467,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/profileNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/profileNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -494,7 +494,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/profileNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/profileNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -521,7 +521,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/profileNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/profileNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -548,7 +548,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/profileNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/profileNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -575,7 +575,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/profileNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/profileNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -592,21 +592,21 @@
             ],
             "http://www.w3.org/ns/shacl#node": [
               {
-                "@id": "file://test_data/amf/dialects/validation.raml#/declarations/profileNode/list",
+                "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/profileNode/list",
                 "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
                 "http://www.w3.org/2000/01/rdf-schema#_1": [
                   {
-                    "@id": "file://test_data/amf/dialects/validation.raml#/declarations/shapeValidationNode"
+                    "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/shapeValidationNode"
                   }
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#_2": [
                   {
-                    "@id": "file://test_data/amf/dialects/validation.raml#/declarations/queryValidationNode"
+                    "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/queryValidationNode"
                   }
                 ],
                 "http://www.w3.org/2000/01/rdf-schema#_3": [
                   {
-                    "@id": "file://test_data/amf/dialects/validation.raml#/declarations/functionValidationNode"
+                    "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/functionValidationNode"
                   }
                 ]
               }
@@ -615,7 +615,7 @@
         ]
       },
       {
-        "@id": "file://test_data/amf/dialects/validation.raml#/declarations/functionValidationNode",
+        "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/functionValidationNode",
         "@type": [
           "http://a.ml/vocabularies/meta#NodeMapping",
           "http://www.w3.org/ns/shacl#Shape",
@@ -633,7 +633,7 @@
         ],
         "http://www.w3.org/ns/shacl#property": [
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/functionValidationNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/functionValidationNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -655,7 +655,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/functionValidationNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/functionValidationNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -677,7 +677,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/functionValidationNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/functionValidationNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -704,7 +704,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/functionValidationNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/functionValidationNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -721,11 +721,11 @@
             ],
             "http://www.w3.org/ns/shacl#node": [
               {
-                "@id": "file://test_data/amf/dialects/validation.raml#/declarations/functionValidationNode/list",
+                "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/functionValidationNode/list",
                 "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
                 "http://www.w3.org/2000/01/rdf-schema#_1": [
                   {
-                    "@id": "file://test_data/amf/dialects/validation.raml#/declarations/functionConstraintNode"
+                    "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/functionConstraintNode"
                   }
                 ]
               }
@@ -739,7 +739,7 @@
         ]
       },
       {
-        "@id": "file://test_data/amf/dialects/validation.raml#/declarations/functionConstraintNode",
+        "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/functionConstraintNode",
         "@type": [
           "http://a.ml/vocabularies/meta#NodeMapping",
           "http://www.w3.org/ns/shacl#Shape",
@@ -757,7 +757,7 @@
         ],
         "http://www.w3.org/ns/shacl#property": [
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/functionConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/functionConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -779,7 +779,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/functionConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/functionConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -801,7 +801,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/functionConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/functionConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -828,7 +828,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/functionConstraintNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/functionConstraintNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -852,7 +852,7 @@
         ]
       },
       {
-        "@id": "file://test_data/amf/dialects/validation.raml#/declarations/shapeValidationNode",
+        "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/shapeValidationNode",
         "@type": [
           "http://a.ml/vocabularies/meta#NodeMapping",
           "http://www.w3.org/ns/shacl#Shape",
@@ -870,7 +870,7 @@
         ],
         "http://www.w3.org/ns/shacl#property": [
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/shapeValidationNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/shapeValidationNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -892,7 +892,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/shapeValidationNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/shapeValidationNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -914,7 +914,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/shapeValidationNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/shapeValidationNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -941,7 +941,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/shapeValidationNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/shapeValidationNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -958,11 +958,11 @@
             ],
             "http://www.w3.org/ns/shacl#node": [
               {
-                "@id": "file://test_data/amf/dialects/validation.raml#/declarations/shapeValidationNode/list",
+                "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/shapeValidationNode/list",
                 "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
                 "http://www.w3.org/2000/01/rdf-schema#_1": [
                   {
-                    "@id": "file://test_data/amf/dialects/validation.raml#/declarations/propertyConstraintNode"
+                    "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/propertyConstraintNode"
                   }
                 ]
               }
@@ -976,7 +976,7 @@
         ]
       },
       {
-        "@id": "file://test_data/amf/dialects/validation.raml#/declarations/queryValidationNode",
+        "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/queryValidationNode",
         "@type": [
           "http://a.ml/vocabularies/meta#NodeMapping",
           "http://www.w3.org/ns/shacl#Shape",
@@ -994,7 +994,7 @@
         ],
         "http://www.w3.org/ns/shacl#property": [
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/queryValidationNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/queryValidationNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1016,7 +1016,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/queryValidationNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/queryValidationNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1038,7 +1038,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/queryValidationNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/queryValidationNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1065,7 +1065,7 @@
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/queryValidationNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/queryValidationNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -1082,18 +1082,18 @@
             ],
             "http://www.w3.org/ns/shacl#node": [
               {
-                "@id": "file://test_data/amf/dialects/validation.raml#/declarations/queryValidationNode/list",
+                "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/queryValidationNode/list",
                 "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
                 "http://www.w3.org/2000/01/rdf-schema#_1": [
                   {
-                    "@id": "file://test_data/amf/dialects/validation.raml#/declarations/propertyConstraintNode"
+                    "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/propertyConstraintNode"
                   }
                 ]
               }
             ]
           },
           {
-            "@id": "file://test_data/amf/dialects/validation.raml#/declarations/queryValidationNode",
+            "@id": "file://test_data/amf/dialects/validation.yaml#/declarations/queryValidationNode",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
