@@ -60,62 +60,65 @@
         <p class="linked-schemas-title{{^linkedSchemas}} no-linked-schemas{{/linkedSchemas}}">
           {{^linkedSchemas}}No {{/linkedSchemas}}Linked schemas
         </p>
-        <ul class="linked-schemas-list">
-          {{#linkedSchemas}}
-            <li class="linked-schemas-list-item">
-              {{#rangePageUrl}}
-                <a href="{{rangePageUrl}}" title="{{rangeName}}">{{rangeName}}</a>
-              {{/rangePageUrl}}
-              {{^rangePageUrl}}
-                {{rangeName}}
-              {{/rangePageUrl}}
-            </li>
-          {{/linkedSchemas}}
-        </ul>
+        {{#linkedSchemas.length}}
+          <ul class="linked-schemas-list">
+            {{#linkedSchemas}}
+              <li class="linked-schemas-list-item">
+                {{#rangePageUrl}}
+                  <a href="{{rangePageUrl}}" title="{{rangeName}}">{{rangeName}}</a>
+                {{/rangePageUrl}}
+                {{^rangePageUrl}}
+                  {{rangeName}}
+                {{/rangePageUrl}}
+              </li>
+            {{/linkedSchemas}}
+          </ul>
+        {{/linkedSchemas.length}}
 
-        <table class="table table-hover table-bordered sprops-table{{^scalarProperties}} no-props-table{{/scalarProperties}}"
-               id="{{slug}}-sprops-table">
-          <caption>{{^scalarProperties}}No {{/scalarProperties}}Scalar Properties</caption>
-          {{#scalarProperties.length}}
+        {{^scalarProperties}}<p>No Scalar Properties</p>{{/scalarProperties}}
+        {{#scalarProperties.length}}
+          <table class="table table-hover table-bordered sprops-table"
+                 id="{{slug}}-sprops-table">
+            <caption>Scalar Properties</caption>
             <thead>
               <tr>
                 <td class="active col-md-2">Name</td>
                 <td class="active col-md-8">Details</td>
               </tr>
             </thead>
-          {{/scalarProperties.length}}
-          <tbody>
-            {{#scalarProperties}}
-              <tr id="{{name}}-scalar-tr">
-                <td class="sprop-name col-md-2">{{name}}</td>
-                <td class="sprop-data col-md-8">
-                  <ul>
-                    <li class="sprop-term-id">Term ID: {{id}}</li>
-                    <li class="sprop-range">Range: {{range}}</li>
-                    {{#propDesc}}
-                      <li class="sprop-description">Description: {{propDesc}}</li>
-                    {{/propDesc}}
-                    {{#constraints}}
-                      <li class="sprop-constraint">{{name}}: {{value}}</li>
-                    {{/constraints}}
-                  </ul>
-                </td>
-              </tr>
-            {{/scalarProperties}}
-          </tbody>
-        </table>
+            <tbody>
+              {{#scalarProperties}}
+                <tr id="{{name}}-scalar-tr">
+                  <td class="sprop-name col-md-2">{{name}}</td>
+                  <td class="sprop-data col-md-8">
+                    <ul>
+                      <li class="sprop-term-id">Term ID: {{id}}</li>
+                      <li class="sprop-range">Range: {{range}}</li>
+                      {{#propDesc}}
+                        <li class="sprop-description">Description: {{propDesc}}</li>
+                      {{/propDesc}}
+                      {{#constraints}}
+                        <li class="sprop-constraint">{{name}}: {{value}}</li>
+                      {{/constraints}}
+                    </ul>
+                  </td>
+                </tr>
+              {{/scalarProperties}}
+            </tbody>
+          </table>
+        {{/scalarProperties.length}}
 
-        <table class="table table-hover table-bordered lprops-table{{^linkProperties}} no-props-table{{/linkProperties}}"
+        {{^linkProperties}}<p>No Link Properties</p>{{/linkProperties}}
+        {{#linkProperties.length}}
+        <table class="table table-hover table-bordered lprops-table"
                id="{{slug}}-lprops-table">
-          <caption>{{^linkProperties}}No {{/linkProperties}}Link Properties</caption>
-          {{#linkProperties.length}}
-            <thead>
-              <tr>
-                <td class="active col-md-2">Name</td>
-                <td class="active col-md-8">Details</td>
-              </tr>
-            </thead>
-          {{/linkProperties.length}}
+          <caption>Link Properties</caption>
+          <thead>
+            <tr>
+              <td class="active col-md-2">Name</td>
+              <td class="active col-md-8">Details</td>
+            </tr>
+          </thead>
           <tbody>
             {{#linkProperties}}
               <tr id="{{name}}-link-tr">
@@ -150,6 +153,7 @@
             {{/linkProperties}}
           </tbody>
         </table>
+        {{/linkProperties.length}}
       </div>
 
     </div>
