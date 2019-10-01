@@ -1,0 +1,24 @@
+#%Dialect 1.0
+
+dialect: Favorite Playlists
+version: 1.0
+
+uses:
+  curation: ../vocabulary/music_curation.yaml
+  playlist: ./playlist.yaml
+
+documents:
+  root:
+    encodes: FavoritePlaylistsNode
+
+nodeMappings:
+
+  FavoritePlaylistsNode:
+    classTerm: curation.FavoritePlaylists
+    idTemplate: https://api.spotify.com/v1/{author}/playlists/favorite
+    mapping:
+      items:
+        propertyTerm: curation.contents
+        range: playlist.SelectionNode
+        mapKey: curation.position
+

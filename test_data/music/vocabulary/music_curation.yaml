@@ -9,6 +9,10 @@ uses:
 
 classTerms:
 
+  FavoritePlaylists:
+    displayName: Favorite Playlists
+    description: A list of favorite playlists
+
   Playlist:
     displayName: Playlist
     description: A particular compilation of music tracks

@@ -181,10 +181,11 @@ function collectLinkPropsData (doc, node, dialectSlug, ontologyTerms) {
         const data = {
           rangeName: utils.parseHashValue(rangeId)
         }
-        const declaredLocally = doc.query(`amldoc:declares[@id=${rangeId}]`)
-        if (declaredLocally) {
+        const decl = doc.query(`amldoc:declares[@id=${rangeId}]`)
+        if (decl) {
           data.rangeHtmlName = utils.makeSchemaHtmlName(
-            dialectSlug, utils.slugify(data.rangeName))
+            utils.slugify(decl.parent().query('> schema:name @value')),
+            utils.slugify(data.rangeName))
         }
         return data
       })
