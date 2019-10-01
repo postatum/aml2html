@@ -26,7 +26,7 @@
           <hr>
           {{#navData.dialects}}
             <p class="dialects-nav-item {{^active}}in{{/active}}active-nav-item">
-              <a href="{{htmlName}}" title="{{name}}">{{name}}</a>
+              <a href="{{pageUrl}}" title="{{name}}">{{name}}</a>
             </p>
           {{/navData.dialects}}
         </div>
@@ -35,7 +35,7 @@
           <hr>
           {{#navData.nodeMappings}}
             <p class="schemas-nav-item {{^active}}in{{/active}}active-nav-item">
-              <a href="{{htmlName}}" title="{{name}}">{{name}}</a>
+              <a href="{{pageUrl}}" title="{{name}}">{{name}}</a>
             </p>
           {{/navData.nodeMappings}}
         </div>
@@ -63,12 +63,12 @@
         <ul class="linked-schemas-list">
           {{#linkedSchemas}}
             <li class="linked-schemas-list-item">
-              {{#rangeHtmlName}}
-                <a href="{{rangeHtmlName}}" title="{{rangeName}}">{{rangeName}}</a>
-              {{/rangeHtmlName}}
-              {{^rangeHtmlName}}
+              {{#rangePageUrl}}
+                <a href="{{rangePageUrl}}" title="{{rangeName}}">{{rangeName}}</a>
+              {{/rangePageUrl}}
+              {{^rangePageUrl}}
                 {{rangeName}}
-              {{/rangeHtmlName}}
+              {{/rangePageUrl}}
             </li>
           {{/linkedSchemas}}
         </ul>
@@ -112,12 +112,12 @@
                       <ul class="lprop-range-list">
                         {{#range}}
                           <li class="lprop-range-list-item">
-                            {{#rangeHtmlName}}
-                              <a href="{{rangeHtmlName}}" title="{{rangeName}}">{{rangeName}}</a>
-                            {{/rangeHtmlName}}
-                            {{^rangeHtmlName}}
+                            {{#rangePageUrl}}
+                              <a href="{{rangePageUrl}}" title="{{rangeName}}">{{rangeName}}</a>
+                            {{/rangePageUrl}}
+                            {{^rangePageUrl}}
                               {{rangeName}}
-                            {{/rangeHtmlName}}
+                            {{/rangePageUrl}}
                           </li>
                         {{/range}}
                       </ul>

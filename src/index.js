@@ -129,7 +129,7 @@ async function main () {
     utils.renderTemplate(
       { ...dialectData, ...ctx.config },
       path.join(TMPL_DIR, 'dialect.mustache'),
-      path.join(outDir, dialectData.htmlName))
+      path.join(outDir, dialectData.pageUrl))
 
     // Render nodeMappings item data
     dialectData.nodeMappings.forEach(nodeData => {
@@ -141,7 +141,7 @@ async function main () {
       utils.renderTemplate(
         { ...nodeData, ...ctx.config },
         path.join(TMPL_DIR, 'node.mustache'),
-        path.join(outDir, nodeData.htmlName))
+        path.join(outDir, nodeData.pageUrl))
     })
   })
 
@@ -155,7 +155,7 @@ async function main () {
       ...ctx.config
     },
     path.join(TMPL_DIR, 'index.mustache'),
-    path.join(outDir, 'index.html'))
+    path.join(outDir, utils.makePageUrl('index', 'html')))
 
   utils.copyStaticFiles(outDir)
 }

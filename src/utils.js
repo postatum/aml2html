@@ -56,19 +56,19 @@ function parseHashValue (id) {
   return afterHash
 }
 
-/** Renders Mustache template with data and writes it to an HTML file.
+/** Renders Mustache template with data and writes it to a file.
  *
  * @param data Data to be renreder in a template.
  * @param tmplPath Mustache template path.
- * @param htmlPath Output HTML path.
+ * @param outPath Output file path.
  */
-function renderTemplate (data, tmplPath, htmlPath) {
+function renderTemplate (data, tmplPath, outPath) {
   console.log(
     `Rendering "${tmplPath}" template`,
     data.id ? `for ${data.id}` : '')
   const tmplStr = fs.readFileSync(tmplPath, 'utf-8')
-  const htmlStr = Mustache.render(tmplStr, data)
-  fs.writeFileSync(htmlPath, htmlStr)
+  const renderedStr = Mustache.render(tmplStr, data)
+  fs.writeFileSync(outPath, renderedStr)
 }
 
 function nameSorter (a, b) {
@@ -81,14 +81,19 @@ function nameSorter (a, b) {
   return 0
 }
 
-/* Makes a slug used in html names creation. */
+/* Makes a slug used in page urls creation. */
 function slugify (val) {
   return val.split(' ').join('').toLowerCase()
 }
 
-/* Creates an html page name for nodeMappings item. */
-function makeSchemaHtmlName (dialectSlug, schemaName) {
-  return `schema_${dialectSlug}_${schemaName}.html`
+/* Creates a schema page url for nodeMappings item. */
+function makeSchemaPageUrl (dialectSlug, schemaName, ext) {
+  return makePageUrl(`schema_${dialectSlug}_${schemaName}`, ext)
+}
+
+/* Creates page url using name and extension. */
+function makePageUrl (name, ext) {
+  return `${name}.${ext}`
 }
 
 /* Marks item with matching name as active/selected. */
@@ -160,7 +165,8 @@ module.exports = {
   TMPL_DIR: TMPL_DIR,
   nameSorter: nameSorter,
   slugify: slugify,
-  makeSchemaHtmlName: makeSchemaHtmlName,
+  makeSchemaPageUrl: makeSchemaPageUrl,
+  makePageUrl: makePageUrl,
   markActive: markActive,
   getDefaultContext: getDefaultContext,
   loadConfig: loadConfig
