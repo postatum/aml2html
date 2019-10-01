@@ -75,7 +75,7 @@ function convertToMarkdown (htmlStr) {
   const TurndownService = require('turndown')
   const turndownPluginGfm = require('turndown-plugin-gfm')
   const turndownService = new TurndownService()
-  turndownService.use(turndownPluginGfm.tables)
+  turndownService.use(turndownPluginGfm.gfm)
   return turndownService.turndown(htmlStr)
 }
 
