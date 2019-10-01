@@ -76,6 +76,14 @@
         <table class="table table-hover table-bordered sprops-table{{^scalarProperties}} no-props-table{{/scalarProperties}}"
                id="{{slug}}-sprops-table">
           <caption>{{^scalarProperties}}No {{/scalarProperties}}Scalar Properties</caption>
+          {{#scalarProperties.length}}
+            <thead>
+              <tr>
+                <td class="active col-md-2">Name</td>
+                <td class="active col-md-8">Details</td>
+              </tr>
+            </thead>
+          {{/scalarProperties.length}}
           <tbody>
             {{#scalarProperties}}
               <tr id="{{name}}-scalar-tr">
@@ -100,6 +108,14 @@
         <table class="table table-hover table-bordered lprops-table{{^linkProperties}} no-props-table{{/linkProperties}}"
                id="{{slug}}-lprops-table">
           <caption>{{^linkProperties}}No {{/linkProperties}}Link Properties</caption>
+          {{#linkProperties.length}}
+            <thead>
+              <tr>
+                <td class="active col-md-2">Name</td>
+                <td class="active col-md-8">Details</td>
+              </tr>
+            </thead>
+          {{/linkProperties.length}}
           <tbody>
             {{#linkProperties}}
               <tr id="{{name}}-link-tr">
