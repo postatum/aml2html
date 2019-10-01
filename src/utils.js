@@ -71,6 +71,14 @@ function renderTemplate (data, tmplPath, outPath) {
   fs.writeFileSync(outPath, renderedStr)
 }
 
+function convertToMarkdown (htmlStr) {
+  const TurndownService = require('turndown')
+  const turndownPluginGfm = require('turndown-plugin-gfm')
+  const turndownService = new TurndownService()
+  turndownService.use(turndownPluginGfm.tables)
+  return turndownService.turndown(htmlStr)
+}
+
 function nameSorter (a, b) {
   if (a.name > b.name) {
     return 1
