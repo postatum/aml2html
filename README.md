@@ -11,17 +11,27 @@ $ npm install
 ## Usage
 CLI command notation (*note the required `--` before arguments*):
 ```
-npm run aml2html -- <dialectPath>... --outdir=DIR --css=https://foo.bar/some.css --css=/another.css
+Usage: npm run aml2html -- [options] <outputDir>
+
+Convert AML Vocabularies & Dialects to HTML
+
+Options:
+  -d, --indir <path>   Path to input directory to convert. Takes precedence over --infile.
+  -f, --infile <path>  Path to input file to convert (default: [])
+  -s, --syntax <name>  Output syntax (html or md) (default: "html")
+  -c, --css <path>     Custom css file path (default: [])
+  -g, --cfg <path>     Configuration file path
+  -h, --help           output usage information
 ```
 
 E.g.:
 ```sh
-$ npm run aml2html -- test_data/amf/dialects/canonical_webapi.yaml test_data/amf/dialects/oas20.yaml test_data/amf/dialects/validation.yaml test_data/music/dialect/playlist.yaml --outdir=./outdir/
+$ npm run aml2html -- ./outdir --infile=test_data/amf/dialects/canonical_webapi.yaml --infile=test_data/amf/dialects/oas20.yaml --infile=test_data/amf/dialects/validation.yaml --infile=test_data/music/dialect/playlist.yaml
 ```
 
 Or using `--indir` option:
 ```sh
-$ npm run aml2html -- --indir=./test_data/ --outdir=./outdir/
+$ npm run aml2html -- ./outdir --indir=./test_data
 ```
 
 
@@ -58,7 +68,7 @@ This file can be used when invoking the HTML generator in the following way:
 
 E.g.
 ```sh
-$ npm run aml2html -- test_data/amf/dialects/canonical_webapi.yaml test_data/amf/dialects/oas20.yaml test_data/amf/dialects/validation.yaml test_data/music/dialect/playlist.yaml --outdir=./outdir/ --cfg=cfg.js
+$ npm run aml2html -- ./outdir --indir=./test_data --cfg=cfg.js
 ```
 
 Configuration files will be searched relative to the working directory of the node interpreter.
