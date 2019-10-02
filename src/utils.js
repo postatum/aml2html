@@ -160,7 +160,7 @@ function walkSync (dir, filelist) {
 }
 
 function collectOpt (value, previous) {
-  return previous.concat([value]);
+  return previous.concat([value])
 }
 
 module.exports = {

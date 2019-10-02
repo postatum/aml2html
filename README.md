@@ -1,5 +1,5 @@
 # aml2doc
-Convert AML Vocabularies & Dialects to HTML.
+Convert AML Vocabularies & Dialects to documentation.
 
 ## Installation
 ```sh
@@ -13,7 +13,7 @@ CLI command notation (*note the required `--` before arguments*):
 ```
 Usage: npm run aml2doc -- [options] <outputDir>
 
-Convert AML Vocabularies & Dialects to HTML
+Convert AML Vocabularies & Dialects to documentation.
 
 Options:
   -d, --indir <path>   Path to input directory to convert. Takes precedence over --infile.
