@@ -9,9 +9,7 @@
     "jsonld": "^1.7.0",
     "ld-query": "^2.0.0",
     "minimist": "^1.2.0",
-    "mustache": "^3.0.1",
-    "turndown": "^5.0.3",
-    "turndown-plugin-gfm": "^1.0.2"
+    "mustache": "^3.0.1"
   },
   "scripts": {
     "aml2html": "node src/index.js"
