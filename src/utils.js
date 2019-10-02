@@ -3,6 +3,7 @@ const path = require('path')
 const fs = require('fs-extra')
 const Mustache = require('mustache')
 
+/** Mustache dialects templates directory path. */
 const TMPL_DIR = path.join(__dirname, '..', 'templates')
 
 /** Converts AML Document to resolved JSON-LD AMF Graph.
@@ -59,6 +60,8 @@ function parseHashValue (id) {
 /** Renders Mustache template with data and writes it to an HTML file.
  *
  * @param data Data to be renreder in a template.
+ * @param tmplType Template type. Must match type-specific template
+                   folders names.
  * @param tmplPath Mustache template path.
  * @param htmlPath Output HTML path.
  */
@@ -150,6 +153,10 @@ function walkSync (dir, filelist) {
   return filelist
 }
 
+function collectOpt (value, previous) {
+  return previous.concat([value]);
+}
+
 module.exports = {
   walkSync: walkSync,
   getJsonLdGraph: getJsonLdGraph,
@@ -163,5 +170,6 @@ module.exports = {
   makeSchemaHtmlName: makeSchemaHtmlName,
   markActive: markActive,
   getDefaultContext: getDefaultContext,
-  loadConfig: loadConfig
+  loadConfig: loadConfig,
+  collectOpt: collectOpt
 }

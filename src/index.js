@@ -1,5 +1,5 @@
 const amf = require('amf-client-js')
-const parseArgs = require('minimist')
+const program = require('commander')
 const ldquery = require('ld-query')
 const path = require('path')
 const fs = require('fs-extra')
@@ -52,32 +52,49 @@ async function processDialect (dialectPath, graph, ctx, acc, ontologyTerms) {
   }
 }
 
+function defineAndParseArgv () {
+  program
+    .arguments('<outputDir>')
+    .action((outputDir) => {
+      program.outputDir = outputDir
+    })
+    .name('aml2html')
+    .description('Convert AML Vocabularies & Dialects to HTML')
+    .option('-d, --indir <path>', 'Path to input directory to convert. Takes precedence over --infile.')
+    .option('-f, --infile <path>', 'Path to input file to convert', utils.collectOpt, [])
+    .option('-c, --css <path>', 'Custom css file path', utils.collectOpt, [])
+    .option('-g, --cfg <path>', 'Configuration file path')
+    .parse(process.argv)
+
+  if (!program.outputDir) {
+    console.error('Missing output directory path (outputDir).\n')
+    program.help()
+  }
+  if (!(program.infile.length > 0 || program.indir)) {
+    console.error('Missing input (--infile or --indir).\n')
+    program.help()
+  }
+}
+
 /** Runs all the logic. */
 async function main () {
+  defineAndParseArgv()
   let ctx = utils.getDefaultContext()
-
   await amf.AMF.init()
-  const argv = parseArgs(process.argv.slice(2))
 
   // Ensure output directory exists
-  if (!argv.outdir) {
-    console.error(`Missing mandatory output directory.
-      Syntax: aml2html -- <dialect path> --outdir=<output path> [--indir=<input directory>] [--css=<css path>] [--cfg=<cfg file>]`)
-    return
-  }
-  const outDir = path.resolve(argv.outdir)
+  const outDir = path.resolve(program.outputDir)
   fs.emptyDirSync(outDir)
 
   // Add custom configuration elements
-  if (argv.cfg) {
-    ctx = utils.loadConfig(argv.cfg, ctx)
+  if (program.cfg) {
+    ctx = utils.loadConfig(program.cfg, ctx)
   }
 
   // Collects dialects data into an array
-  var dialectsPaths = Array.isArray(argv._) ? argv._ : [argv._]
-  if (argv.indir) {
-    dialectsPaths = utils.walkSync(argv.indir)
-  }
+  const dialectsPaths = program.indir
+    ? utils.walkSync(program.indir)
+    : program.infile
 
   const acc = {}
   const ontology = {}
@@ -123,7 +140,7 @@ async function main () {
   // Collect navigation data and render dialect template
   dialectsData.forEach(dialectData => {
     dialectData.navData = collect.navData(dialectData, commonNavData)
-    dialectData.css = argv.css
+    dialectData.css = program.css
 
     // Render dialect overview template
     utils.renderTemplate(
@@ -137,7 +154,7 @@ async function main () {
       nodeData.navData.nodeMappings = utils.markActive(
         nodeData.navData.nodeMappings, nodeData.name)
 
-      nodeData.css = argv.css
+      nodeData.css = program.css
       utils.renderTemplate(
         { ...nodeData, ...ctx.config },
         path.join(TMPL_DIR, 'node.mustache'),
@@ -148,6 +165,7 @@ async function main () {
   // Render index page
   utils.renderTemplate(
     {
+      css: program.css,
       dialects: dialectsData,
       navData: {
         dialects: utils.markActive(commonNavData.dialects)
