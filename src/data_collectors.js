@@ -15,7 +15,7 @@ function collectVocabularyData (doc, ctx, acc) {
       vocabularyData.usage = usage[0]['@value']
     }
     vocabularyData.slug = utils.slugify(vocabularyData.name + '_vocab')
-    vocabularyData.pageUrl = utils.makePageUrl(vocabularyData.slug, 'html')
+    vocabularyData.pageName = vocabularyData.slug
     console.log(`Collecting nodes info for vocabulary ${id}`)
     vocabularyData.nodeMappings = collectVocabularyNodesData(
       doc, vocabularyData, ctx).sort(utils.nameSorter)
@@ -41,7 +41,7 @@ function collectDialectData (doc, ctx, acc, ontologyTerms) {
       dialectData.usage = usage[0]['@value']
     }
     dialectData.slug = utils.slugify(dialectData.name)
-    dialectData.pageUrl = utils.makePageUrl(dialectData.slug, 'html')
+    dialectData.pageName = dialectData.slug
     console.log(`Collecting nodes info for dialect ${id}`)
     dialectData.nodeMappings = collectNodesData(
       doc, dialectData, ctx, ontologyTerms)
@@ -83,10 +83,10 @@ function collectVocabularyNodesData (doc, dialectData, ctx) {
           id: ctx.config.idMapping(node.query('@id')),
           dialectName: dialectData.name
         }
-        // pageUrl
+        // pageName
         nodeData.slug = utils.slugify(`${nodeData.name}_${cred.type}`)
-        nodeData.pageUrl = utils.makeSchemaPageUrl(
-          dialectData.slug, nodeData.slug, 'html')
+        nodeData.pageName = utils.makeSchemaPageName(
+          dialectData.slug, nodeData.slug)
         // save
         acc[nodeId] = nodeData
       }
@@ -109,10 +109,10 @@ function collectNodesData (doc, dialectData, ctx, ontologyTerms) {
           id: ctx.config.idMapping(node.query('@id')),
           dialectName: dialectData.name
         }
-        // pageUrl
+        // pageName
         nodeData.slug = utils.slugify(nodeData.name)
-        nodeData.pageUrl = utils.makeSchemaPageUrl(
-          dialectData.slug, nodeData.slug, 'html')
+        nodeData.pageName = utils.makeSchemaPageName(
+          dialectData.slug, nodeData.slug)
 
         const isUnion = node.query('@type')
           .indexOf(`${ctx.meta}UnionNodeMapping`) > -1
@@ -183,10 +183,9 @@ function collectLinkPropsData (doc, node, dialectSlug, ontologyTerms) {
         }
         const decl = doc.query(`amldoc:declares[@id=${rangeId}]`)
         if (decl) {
-          data.rangePageUrl = utils.makeSchemaPageUrl(
+          data.rangePageName = utils.makeSchemaPageName(
             utils.slugify(decl.parent().query('> schema:name @value')),
-            utils.slugify(data.rangeName),
-            'html')
+            utils.slugify(data.rangeName))
         }
         return data
       })
@@ -254,7 +253,7 @@ function collectCommonNavData (dialectsData) {
     dialects: dialectsData.map(data => {
       return {
         name: data.name,
-        pageUrl: data.pageUrl,
+        pageName: data.pageName,
         active: false
       }
     }),
@@ -270,7 +269,7 @@ function collectNavData (dialectData, commonNavData) {
     nodeMappings: dialectData.nodeMappings.map(data => {
       return {
         name: data.name,
-        pageUrl: data.pageUrl,
+        pageName: data.pageName,
         active: false
       }
     })

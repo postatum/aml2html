@@ -143,8 +143,8 @@ async function main () {
     // Render dialect overview template
     utils.renderTemplate(
       { ...dialectData, ...ctx.config },
-      'html', 'dialect.mustache',
-      path.join(outDir, dialectData.pageUrl))
+      path.join(utils.TMPL_DIR, program.syntax, 'dialect.mustache'),
+      path.join(outDir, `${dialectData.pageName}.${program.syntax}`))
 
     // Render nodeMappings item data
     dialectData.nodeMappings.forEach(nodeData => {
@@ -155,8 +155,8 @@ async function main () {
       nodeData.css = program.css
       utils.renderTemplate(
         { ...nodeData, ...ctx.config },
-        'html', 'node.mustache',
-        path.join(outDir, nodeData.pageUrl))
+        path.join(utils.TMPL_DIR, program.syntax, 'node.mustache'),
+        path.join(outDir, `${nodeData.pageName}.${program.syntax}`))
     })
   })
 
@@ -170,8 +170,8 @@ async function main () {
       },
       ...ctx.config
     },
-    'html', 'index.mustache',
-    path.join(outDir, utils.makePageUrl('index', 'html')))
+    path.join(utils.TMPL_DIR, program.syntax, 'index.mustache'),
+    path.join(outDir, `index.${program.syntax}`))
 
   utils.copyStaticFiles(outDir)
 }
