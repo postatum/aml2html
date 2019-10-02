@@ -55,7 +55,7 @@ function defineAndParseArgv () {
     .action((outputDir) => {
       program.outputDir = outputDir
     })
-    .name('aml2html')
+    .name('aml2doc')
     .description('Convert AML Vocabularies & Dialects to HTML')
     .option('-d, --indir <path>', 'Path to input directory to convert. Takes precedence over --infile.')
     .option('-f, --infile <path>', 'Path to input file to convert', utils.collectOpt, [])

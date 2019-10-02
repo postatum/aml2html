@@ -1,5 +1,5 @@
 {
-  "name": "aml2html",
+  "name": "aml2doc",
   "version": "0.1.0",
   "main": "src/index.js",
   "license": "MIT",
@@ -12,7 +12,7 @@
     "mustache": "^3.0.1"
   },
   "scripts": {
-    "aml2html": "node src/index.js"
+    "aml2doc": "node src/index.js"
   },
   "devDependencies": {
     "standard": "^14.3.1"

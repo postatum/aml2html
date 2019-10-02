@@ -1,17 +1,17 @@
-# aml2html
+# aml2doc
 Convert AML Vocabularies & Dialects to HTML.
 
 ## Installation
 ```sh
-$ git clone git@github.com:aml-org/aml2html.git
-$ cd aml2html
+$ git clone git@github.com:aml-org/aml2doc.git
+$ cd aml2doc
 $ npm install
 ```
 
 ## Usage
 CLI command notation (*note the required `--` before arguments*):
 ```
-Usage: npm run aml2html -- [options] <outputDir>
+Usage: npm run aml2doc -- [options] <outputDir>
 
 Convert AML Vocabularies & Dialects to HTML
 
@@ -26,12 +26,12 @@ Options:
 
 E.g.:
 ```sh
-$ npm run aml2html -- ./outdir --infile=test_data/amf/dialects/canonical_webapi.yaml --infile=test_data/amf/dialects/oas20.yaml --infile=test_data/amf/dialects/validation.yaml --infile=test_data/music/dialect/playlist.yaml
+$ npm run aml2doc -- ./outdir --infile=test_data/amf/dialects/canonical_webapi.yaml --infile=test_data/amf/dialects/oas20.yaml --infile=test_data/amf/dialects/validation.yaml --infile=test_data/music/dialect/playlist.yaml
 ```
 
 Or using `--indir` option:
 ```sh
-$ npm run aml2html -- ./outdir --indir=./test_data
+$ npm run aml2doc -- ./outdir --indir=./test_data
 ```
 
 
@@ -68,7 +68,7 @@ This file can be used when invoking the HTML generator in the following way:
 
 E.g.
 ```sh
-$ npm run aml2html -- ./outdir --indir=./test_data --cfg=cfg.js
+$ npm run aml2doc -- ./outdir --indir=./test_data --cfg=cfg.js
 ```
 
 Configuration files will be searched relative to the working directory of the node interpreter.
