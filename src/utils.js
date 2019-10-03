@@ -68,7 +68,7 @@ function renderTemplate (data, tmplPath, outPath) {
     `Rendering "${tmplPath}" template`,
     data.id ? `for ${data.id}` : '')
   const tmplStr = fs.readFileSync(tmplPath, 'utf-8')
-  const renderedStr = Mustache.render(tmplStr, data)
+  const renderedStr = Mustache.render(tmplStr, addTmplUtils(data))
   fs.writeFileSync(outPath, renderedStr)
 }
 
@@ -151,8 +151,23 @@ function walkSync (dir, filelist) {
   return filelist
 }
 
+/* Collects program options */
 function collectOpt (value, previous) {
   return previous.concat([value])
+}
+
+/* Adds template utility functions */
+function addTmplUtils (data) {
+  return {
+    ...data,
+    // Strips newlines
+    stripn: () => {
+      return (text, render) => {
+        const rendered = render(text)
+        return rendered ? rendered.split('\n').join(' ') : rendered
+      }
+    }
+  }
 }
 
 module.exports = {
@@ -169,5 +184,6 @@ module.exports = {
   markActive: markActive,
   getDefaultContext: getDefaultContext,
   loadConfig: loadConfig,
-  collectOpt: collectOpt
+  collectOpt: collectOpt,
+  addTmplUtils: addTmplUtils
 }

@@ -1,1 +1,35 @@
-markdown will be here
+# Index
+
+## Navigation
+
+### Index
+[Index](index.md)
+
+### {{dialectsHeader}}
+{{#navData.dialects}}
+{{#active}}{{name}}{{/active}} •
+{{^active}}[{{name}}]({{pageName}}.md){{/active}}
+{{/navData.dialects}}
+
+## {{mainHeader}}
+{{#indexHeader}}Title: {{indexHeader}}{{/indexHeader}}
+{{#indexVersion}}Version: {{indexVersion}}{{/indexVersion}}
+{{#indexDescription}}Description: {{indexDescription}}{{/indexDescription}}
+
+## {{dialectsHeader}}
+Dialect | Usage
+------- | -----
+{{#dialects}}
+{{name}} | {{usage}}
+{{/dialects}}
+
+## {{schemasHeader}}
+{{#dialects}}
+
+### {{name}}
+Schema | Description
+------ | -----------
+{{#nodeMappings}}
+{{name}} | {{#stripn}}{{description}}{{/stripn}}
+{{/nodeMappings}}
+{{/dialects}}
