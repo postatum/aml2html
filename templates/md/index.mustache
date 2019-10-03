@@ -3,18 +3,25 @@
 ## Navigation
 
 ### Index
-[Index](index.md)
+*Index*
 
 ### {{dialectsHeader}}
 {{#navData.dialects}}
-{{#active}}{{name}}{{/active}} •
-{{^active}}[{{name}}]({{pageName}}.md){{/active}}
+• [{{name}}]({{pageName}}.md)
 {{/navData.dialects}}
 
 ## {{mainHeader}}
-{{#indexHeader}}Title: {{indexHeader}}{{/indexHeader}}
-{{#indexVersion}}Version: {{indexVersion}}{{/indexVersion}}
-{{#indexDescription}}Description: {{indexDescription}}{{/indexDescription}}
+{{#indexHeader}}
+Title: {{indexHeader}}
+{{/indexHeader}}
+
+{{#indexVersion}}
+Version: {{indexVersion}}
+{{/indexVersion}}
+
+{{#indexDescription}}
+Description: {{indexDescription}}
+{{/indexDescription}}
 
 ## {{dialectsHeader}}
 Dialect | Usage
