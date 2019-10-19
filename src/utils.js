@@ -133,7 +133,12 @@ function loadConfig (cfgName, ctx) {
     }
   })
   ctx.config = { ...ctx.config, ...cfg }
-  return ctx
+
+  if (ctx.config.downloadLinks) {
+    ctx.config.downloadLinks = JSON.parse(fs.readFileSync(ctx.config.downloadLinks).toString())
+  }
+
+  return ctx;
 }
 
 function walkSync (dir, filelist) {

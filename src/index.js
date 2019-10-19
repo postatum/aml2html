@@ -76,6 +76,37 @@ function defineAndParseArgv () {
   }
 }
 
+function processLinks(links) {
+  let primaryLinks = [];
+  let secondaryLinks = [];
+
+  links.forEach((anchor) => {
+    if (anchor.position === "primary") {
+      primaryLinks.push(anchor);
+    } else {
+      secondaryLinks.push(anchor)
+    }
+  });
+
+  if (primaryLinks.length > 0 || secondaryLinks.length > 0) {
+    let acc = {};
+    if (primaryLinks.length > 0) {
+      acc["primaryLinks"] = primaryLinks
+      acc["hasPrimaryLinks"] = true
+    }
+    if (secondaryLinks.length > 0) {
+      acc["secondaryLinks"] = secondaryLinks
+      acc["hasSecondaryLinks"] = true
+    }
+    return acc
+  } else {
+    return {
+      hasPrimaryLinks: false,
+      hasSecondaryLinks: false
+    }
+  }
+}
+
 /** Runs all the logic. */
 async function main () {
   defineAndParseArgv()
@@ -90,6 +121,9 @@ async function main () {
   if (program.cfg) {
     ctx = utils.loadConfig(program.cfg, ctx)
   }
+
+  // Check if we have download links to generate
+  let downloadLinks = ctx.config.downloadLinks || {}
 
   // Collects dialects data into an array
   const dialectsPaths = program.indir
@@ -124,7 +158,7 @@ async function main () {
     vocab.nodeMappings.forEach(function (term) {
       ontologyTerms[term.id] = term
     })
-  })
+  });
 
   // Let's process the dialects
   for (p in jsonGraph) {
@@ -139,12 +173,15 @@ async function main () {
 
   // Collect navigation data and render dialect template
   dialectsData.forEach(dialectData => {
+    let dialectId = dialectData["id"]
+    let links = processLinks(downloadLinks[dialectId] || {});
+
     dialectData.navData = collect.navData(dialectData, commonNavData)
     dialectData.css = program.css
 
     // Render dialect overview template
     utils.renderTemplate(
-      { ...dialectData, ...ctx.config },
+      { ...dialectData, ...ctx.config, ...links},
       path.join(TMPL_DIR, 'dialect.mustache'),
       path.join(outDir, dialectData.htmlName))
 

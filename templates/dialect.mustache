@@ -61,6 +61,17 @@
           </p>
         {{/version}}
 
+        {{#hasPrimaryLinks}}
+            <div class="dialect-primary-download-links">
+                <p>Download:</p>
+                <ul>
+                {{#primaryLinks}}
+                    <li><a href="{{href}}">{{text}}</a></li>
+                {{/primaryLinks}}
+                </ul>
+            </div>
+        {{/hasPrimaryLinks}}
+
         <p class="dialect-schemas-list-title">Schemas:</p>
         <ul class="dialect-schemas-list">
           {{#nodeMappings}}
@@ -69,6 +80,19 @@
             </li>
           {{/nodeMappings}}
         </ul>
+
+          {{#hasSecondaryLinks}}
+              <div class="dialect-secondary-download-links">
+                  <p>Download in other formats:</p>
+                  <ul>
+                      {{#secondaryLinks}}
+                          <li><a href="{{href}}">{{text}}</a></li>
+                      {{/secondaryLinks}}
+                  </ul>
+              </div>
+          {{/hasSecondaryLinks}}
+
+
       </div>
 
     </div>
