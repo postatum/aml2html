@@ -138,6 +138,10 @@ function loadConfig (cfgName, ctx) {
     ctx.config.downloadLinks = JSON.parse(fs.readFileSync(ctx.config.downloadLinks).toString())
   }
 
+  if (ctx.config.indexDownloadLinks) {
+    ctx.config.indexDownloadLinks = JSON.parse(fs.readFileSync(ctx.config.indexDownloadLinks).toString())
+  }
+
   return ctx;
 }
 

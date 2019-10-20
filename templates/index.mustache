@@ -47,6 +47,17 @@
           {{/indexDescription}}
         </div>
 
+          {{#hasIndexLinks}}
+              <div class="dialect-secondary-download-links">
+                  <p>Download as a single file in the following formats:</p>
+                  <ul>
+                      {{#indexLinks}}
+                          <li><a href="{{{href}}}">{{text}}</a></li>
+                      {{/indexLinks}}
+                  </ul>
+              </div>
+          {{/hasIndexLinks}}
+
         <div class="index-dialects-section">
           <h1>{{dialectsHeader}}</h1>
           <table class="table table-hover table-bordered index-dialects-table">

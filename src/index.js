@@ -124,6 +124,11 @@ async function main () {
 
   // Check if we have download links to generate
   let downloadLinks = ctx.config.downloadLinks || {}
+  // links for the index page
+  let indexLinks = {
+    indexLinks: ctx.config.indexDownloadLinks || []
+  }
+  indexLinks['hasIndexLinks'] = (indexLinks.indexLinks.length > 0)
 
   // Collects dialects data into an array
   const dialectsPaths = program.indir
@@ -207,7 +212,8 @@ async function main () {
       navData: {
         dialects: utils.markActive(commonNavData.dialects)
       },
-      ...ctx.config
+      ...ctx.config,
+      ...indexLinks
     },
     path.join(TMPL_DIR, 'index.mustache'),
     path.join(outDir, 'index.html'))
