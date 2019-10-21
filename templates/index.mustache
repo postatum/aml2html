@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/custom.css">
     {{#css}}
-      <link rel="stylesheet" href="{{.}}">
+      <link rel="stylesheet" href="{{{.}}}">
     {{/css}}
   </head>
   <body class="index-body">
@@ -26,7 +26,7 @@
           <hr>
           {{#navData.dialects}}
             <p class="dialects-nav-item {{^active}}in{{/active}}active-nav-item">
-              <a href="{{htmlName}}" title="{{name}}">{{name}}</a>
+              <a href="{{{htmlName}}}" title="{{name}}">{{name}}</a>
             </p>
           {{/navData.dialects}}
         </div>

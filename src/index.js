@@ -76,27 +76,27 @@ function defineAndParseArgv () {
   }
 }
 
-function processLinks(links) {
-  let primaryLinks = [];
-  let secondaryLinks = [];
+function processLinks (links) {
+  const primaryLinks = []
+  const secondaryLinks = []
 
   links.forEach((anchor) => {
-    if (anchor.position === "primary") {
-      primaryLinks.push(anchor);
+    if (anchor.position === 'primary') {
+      primaryLinks.push(anchor)
     } else {
       secondaryLinks.push(anchor)
     }
-  });
+  })
 
   if (primaryLinks.length > 0 || secondaryLinks.length > 0) {
-    let acc = {};
+    const acc = {}
     if (primaryLinks.length > 0) {
-      acc["primaryLinks"] = primaryLinks
-      acc["hasPrimaryLinks"] = true
+      acc.primaryLinks = primaryLinks
+      acc.hasPrimaryLinks = true
     }
     if (secondaryLinks.length > 0) {
-      acc["secondaryLinks"] = secondaryLinks
-      acc["hasSecondaryLinks"] = true
+      acc.secondaryLinks = secondaryLinks
+      acc.hasSecondaryLinks = true
     }
     return acc
   } else {
@@ -123,12 +123,12 @@ async function main () {
   }
 
   // Check if we have download links to generate
-  let downloadLinks = ctx.config.downloadLinks || {}
+  const downloadLinks = ctx.config.downloadLinks || {}
   // links for the index page
-  let indexLinks = {
+  const indexLinks = {
     indexLinks: ctx.config.indexDownloadLinks || []
   }
-  indexLinks['hasIndexLinks'] = (indexLinks.indexLinks.length > 0)
+  indexLinks.hasIndexLinks = (indexLinks.indexLinks.length > 0)
 
   // Collects dialects data into an array
   const dialectsPaths = program.indir
@@ -163,7 +163,7 @@ async function main () {
     vocab.nodeMappings.forEach(function (term) {
       ontologyTerms[term.id] = term
     })
-  });
+  })
 
   // Let's process the dialects
   for (p in jsonGraph) {
@@ -178,15 +178,14 @@ async function main () {
 
   // Collect navigation data and render dialect template
   dialectsData.forEach(dialectData => {
-    let dialectId = dialectData["id"]
-    let links = processLinks(downloadLinks[dialectId] || {});
+    const links = processLinks(downloadLinks[dialectData.id] || [])
 
     dialectData.navData = collect.navData(dialectData, commonNavData)
     dialectData.css = program.css
 
     // Render dialect overview template
     utils.renderTemplate(
-      { ...dialectData, ...ctx.config, ...links},
+      { ...dialectData, ...ctx.config, ...links },
       path.join(TMPL_DIR, 'dialect.mustache'),
       path.join(outDir, dialectData.htmlName))
 

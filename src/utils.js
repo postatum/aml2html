@@ -135,14 +135,16 @@ function loadConfig (cfgName, ctx) {
   ctx.config = { ...ctx.config, ...cfg }
 
   if (ctx.config.downloadLinks) {
-    ctx.config.downloadLinks = JSON.parse(fs.readFileSync(ctx.config.downloadLinks).toString())
+    ctx.config.downloadLinks = JSON.parse(
+      fs.readFileSync(ctx.config.downloadLinks).toString())
   }
 
   if (ctx.config.indexDownloadLinks) {
-    ctx.config.indexDownloadLinks = JSON.parse(fs.readFileSync(ctx.config.indexDownloadLinks).toString())
+    ctx.config.indexDownloadLinks = JSON.parse(
+      fs.readFileSync(ctx.config.indexDownloadLinks).toString())
   }
 
-  return ctx;
+  return ctx
 }
 
 function walkSync (dir, filelist) {
@@ -163,7 +165,7 @@ function walkSync (dir, filelist) {
 }
 
 function collectOpt (value, previous) {
-  return previous.concat([value]);
+  return previous.concat([value])
 }
 
 module.exports = {
