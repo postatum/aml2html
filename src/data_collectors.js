@@ -66,7 +66,7 @@ function collectVocabularyNodesData (doc, dialectData, ctx) {
     },
     // Collect the literal (datatype) properties
     {
-      query: '> amldoc:declares[@type=owl:ObjectProperty]',
+      query: '> amldoc:declares[@type=owl:DatatypeProperty]',
       type: 'datatypeProperty'
     }
   ]

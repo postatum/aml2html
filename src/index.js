@@ -91,11 +91,11 @@ function processLinks (links) {
   if (primaryLinks.length > 0 || secondaryLinks.length > 0) {
     const acc = {}
     if (primaryLinks.length > 0) {
-      acc.primaryLinks = primaryLinks
+      acc.primaryLinks = primaryLinks.sort(utils.sorterBy("text"))
       acc.hasPrimaryLinks = true
     }
     if (secondaryLinks.length > 0) {
-      acc.secondaryLinks = secondaryLinks
+      acc.secondaryLinks = secondaryLinks.sort(utils.sorterBy("text"))
       acc.hasSecondaryLinks = true
     }
     return acc
@@ -126,7 +126,7 @@ async function main () {
   const downloadLinks = ctx.config.downloadLinks || {}
   // links for the index page
   const indexLinks = {
-    indexLinks: ctx.config.indexDownloadLinks || []
+    indexLinks: (ctx.config.indexDownloadLinks || []).sort(utils.sorterBy("text"))
   }
   indexLinks.hasIndexLinks = (indexLinks.indexLinks.length > 0)
 

@@ -84,6 +84,18 @@ function nameSorter (a, b) {
   return 0
 }
 
+function sorterBy (p) {
+  return function(a,b) {
+    if (a[p] > b[p]) {
+      return 1
+    }
+    if (a[p] < b[p]) {
+      return -1
+    }
+    return 0
+  }
+}
+
 /* Makes a slug used in html names creation. */
 function slugify (val) {
   return val.split(' ').join('').toLowerCase()
@@ -177,6 +189,7 @@ module.exports = {
   renderTemplate: renderTemplate,
   TMPL_DIR: TMPL_DIR,
   nameSorter: nameSorter,
+  sorterBy: sorterBy,
   slugify: slugify,
   makeSchemaHtmlName: makeSchemaHtmlName,
   markActive: markActive,
