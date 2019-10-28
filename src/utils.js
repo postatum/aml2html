@@ -74,18 +74,8 @@ function renderTemplate (data, tmplPath, htmlPath) {
   fs.writeFileSync(htmlPath, htmlStr)
 }
 
-function nameSorter (a, b) {
-  if (a.name > b.name) {
-    return 1
-  }
-  if (a.name < b.name) {
-    return -1
-  }
-  return 0
-}
-
 function sorterBy (p) {
-  return function(a,b) {
+  return function (a, b) {
     if (a[p] > b[p]) {
       return 1
     }
@@ -188,7 +178,7 @@ module.exports = {
   parseHashValue: parseHashValue,
   renderTemplate: renderTemplate,
   TMPL_DIR: TMPL_DIR,
-  nameSorter: nameSorter,
+  nameSorter: sorterBy('name'),
   sorterBy: sorterBy,
   slugify: slugify,
   makeSchemaHtmlName: makeSchemaHtmlName,
