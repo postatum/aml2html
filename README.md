@@ -16,11 +16,12 @@ Usage: npm run aml2html -- [options] <outputDir>
 Convert AML Vocabularies & Dialects to HTML
 
 Options:
-  -d, --indir <path>   Path to input directory to convert. Takes precedence over --infile.
-  -f, --infile <path>  Path to input file to convert (default: [])
-  -c, --css <path>     Custom css file path (default: [])
-  -g, --cfg <path>     Configuration file path
-  -h, --help           output usage information
+  -d, --indir <path>     Path to input directory to convert. Takes precedence over --infile.
+  -f, --infile <path>    Path to input file to convert (default: [])
+  -c, --css <path>       Custom css file path (default: [])
+  -g, --cfg <path>       Configuration file path
+  -h, --help             output usage information
+  -t, --templates <path> Path to optional custom templates for the documentation
 ```
 
 E.g.:
@@ -71,6 +72,19 @@ $ npm run aml2html -- ./outdir --indir=./test_data --cfg=cfg.js
 ```
 
 Configuration files will be searched relative to the working directory of the node interpreter.
+
+## Custom templates
+
+The documentation generator accepts as optional argument a directory where a new set of templates for the documentation
+must be provided.
+
+This is the list of supported templates:
+
+ - index.mustache: Index page template
+ - dialect.mustache: Template for a single dialect
+ - node.mustache: Template for a single node in a dialect
+ 
+ Please, inspect the default to inspect the variables available in each template.
 
 ## Viewing generated HTML
 Open the directory specified as `--outdir` option value and open any `.html` file in a browser.

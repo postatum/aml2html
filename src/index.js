@@ -9,7 +9,7 @@ const collect = require('./data_collectors')
 const jsonld = require('jsonld')
 
 /** Mustache dialects templates directory path. */
-const TMPL_DIR = path.join(utils.TMPL_DIR)
+let TMPL_DIR = path.join(utils.TMPL_DIR)
 
 /**
  * Process a file as a vocabulary
@@ -64,6 +64,7 @@ function defineAndParseArgv () {
     .option('-f, --infile <path>', 'Path to input file to convert', utils.collectOpt, [])
     .option('-c, --css <path>', 'Custom css file path', utils.collectOpt, [])
     .option('-g, --cfg <path>', 'Configuration file path')
+    .option('-t, --templates <path>', 'Optional path to custom templates for the documentation')
     .parse(process.argv)
 
   if (!program.outputDir) {
@@ -182,6 +183,9 @@ async function main () {
 
     dialectData.navData = collect.navData(dialectData, commonNavData)
     dialectData.css = program.css
+    if (program.templates != null) {
+      TMPL_DIR = program.templates;
+    }
 
     // Render dialect overview template
     utils.renderTemplate(
