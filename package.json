@@ -1,8 +1,9 @@
 {
-  "name": "aml2html",
+  "name": "@aml-org/aml2html",
   "version": "0.1.0",
   "main": "src/index.js",
   "license": "MIT",
+  "repository": "github.com/aml-org/aml2html",
   "dependencies": {
     "amf-client-js": "^3.5.0",
     "commander": "^3.0.2",
@@ -11,6 +12,7 @@
     "ld-query": "^2.0.0",
     "mustache": "^3.0.1"
   },
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "scripts": {
     "aml2html": "node src/index.js"
   },
