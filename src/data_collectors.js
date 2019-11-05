@@ -3,10 +3,12 @@ const utils = require('./utils')
 /* Collects complete vocabulary data. */
 function collectVocabularyData (doc, ctx, acc) {
   const id = doc.query('@id')
+  const name = doc.query('> schema:name @value')
   const vocabularyData = {
-    name: doc.query('> schema:name @value'),
+    name: name,
     id: ctx.config.idMapping(id),
-    version: doc.query('> schema:version @value')
+    version: doc.query('> schema:version @value'),
+    label: ctx.config.labelMapping(name)
   }
   if (!acc[id]) {
     console.log(`Collecting dialect data for id ${id}`)
@@ -29,8 +31,10 @@ function collectVocabularyData (doc, ctx, acc) {
 /* Collects complete dialect data. */
 function collectDialectData (doc, ctx, acc, ontologyTerms) {
   const id = doc.query('@id')
+  const name = doc.query('> schema:name @value')
   const dialectData = {
-    name: doc.query('> schema:name @value'),
+    name: name,
+    label: ctx.config.labelMapping(name),
     id: ctx.config.idMapping(id),
     version: doc.query('> schema:version @value')
   }
@@ -76,12 +80,15 @@ function collectVocabularyNodesData (doc, dialectData, ctx) {
       const nodeId = node.query('@id')
       if (!acc[nodeId]) {
         console.log(`\t- ${nodeId}`)
+        const name = node.query('> meta:displayName @value')
         const nodeData = {
           type: cred.type,
-          name: node.query('> meta:displayName @value'),
+          name: name,
+          label: ctx.config.labelMapping(name),
           description: node.query('> schema:description @value'),
           id: ctx.config.idMapping(node.query('@id')),
-          dialectName: dialectData.name
+          dialectName: dialectData.name,
+          dialectLabel: ctx.config.labelMapping(dialectData.name)
         }
         // htmlName
         nodeData.slug = utils.slugify(`${nodeData.name}_${cred.type}`)
@@ -104,10 +111,13 @@ function collectNodesData (doc, dialectData, ctx, ontologyTerms) {
       const nodeId = node.query('@id')
       if (!acc[nodeId]) {
         console.log(`\t- ${nodeId}`)
+        const name = node.query('> schema:name @value')
         const nodeData = {
-          name: node.query('> schema:name @value'),
+          name: name,
+          label: ctx.config.labelMapping(name),
           id: ctx.config.idMapping(node.query('@id')),
-          dialectName: dialectData.name
+          dialectName: dialectData.name,
+          dialectLabel: ctx.config.labelMapping(dialectData.name)
         }
         // htmlName
         nodeData.slug = utils.slugify(nodeData.name)
@@ -141,7 +151,7 @@ function collectNodesData (doc, dialectData, ctx, ontologyTerms) {
             collectScalarPropsData(doc, node, ontologyTerms))
             .sort(utils.nameSorter)
           nodeData.linkProperties = utils.removeDuplicatesById(
-            collectLinkPropsData(doc, node, dialectData.slug, ontologyTerms))
+            collectLinkPropsData(doc, node, dialectData.slug, ontologyTerms, ctx))
             .sort(utils.nameSorter)
         }
         nodeData.linkedSchemas = []
@@ -171,15 +181,19 @@ function collectScalarPropsData (doc, node, ontologyTerms) {
 }
 
 /* Collects nodeMappings item link properties data. */
-function collectLinkPropsData (doc, node, dialectSlug, ontologyTerms) {
+function collectLinkPropsData (doc, node, dialectSlug, ontologyTerms, ctx) {
   const propsNodes = node.queryAll('shacl:property')
     .filter(prop => !prop.query('shacl:datatype'))
   return propsNodes.map(prop => {
     const propData = collectCommonPropData(doc, prop, ontologyTerms)
     propData.range = prop.queryAll('shacl:node @id').slice(1)
       .map(rangeId => {
+        const name = utils.parseHashValue(rangeId)
+        const rangeDesc = (ontologyTerms[ctx.config.idMapping(name)]||{}).description
         const data = {
-          rangeName: utils.parseHashValue(rangeId)
+          rangeName: name,
+          rangeLabel: ctx.config.labelMapping(name),
+          rangeDescription: rangeDesc
         }
         const decl = doc.query(`amldoc:declares[@id=${rangeId}]`)
         if (decl) {
@@ -248,11 +262,13 @@ function collectPropertyConstraints (prop) {
 }
 
 /* Collects common navigation data. */
-function collectCommonNavData (dialectsData) {
+function collectCommonNavData (dialectsData, ctx) {
   const commonNavData = {
     dialects: dialectsData.map(data => {
+      const name = data.name
       return {
-        name: data.name,
+        name: name,
+        label: ctx.config.labelMapping(name),
         htmlName: data.htmlName,
         active: false
       }
@@ -263,12 +279,14 @@ function collectCommonNavData (dialectsData) {
 }
 
 /* Collects dialect-specific navigation data. */
-function collectNavData (dialectData, commonNavData) {
+function collectNavData (dialectData, commonNavData, ctx) {
   const navData = {
     dialects: utils.markActive(commonNavData.dialects, dialectData.name),
     nodeMappings: dialectData.nodeMappings.map(data => {
+      const name = data.name
       return {
-        name: data.name,
+        name: name,
+        label: ctx.config.labelMapping(name),
         htmlName: data.htmlName,
         active: false
       }

@@ -175,13 +175,13 @@ async function main () {
   console.log(`Got ${Object.values(acc).length} values`)
   const dialectsData = Object.values(acc).sort(utils.nameSorter)
 
-  const commonNavData = collect.commonNavData(dialectsData)
+  const commonNavData = collect.commonNavData(dialectsData, ctx)
 
   // Collect navigation data and render dialect template
   dialectsData.forEach(dialectData => {
     const links = processLinks(downloadLinks[dialectData.id] || [])
 
-    dialectData.navData = collect.navData(dialectData, commonNavData)
+    dialectData.navData = collect.navData(dialectData, commonNavData, ctx)
     dialectData.css = program.css
     if (program.templates != null) {
       TMPL_DIR = program.templates;

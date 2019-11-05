@@ -116,6 +116,7 @@ function getDefaultContext () {
     shacl: 'http://www.w3.org/ns/shacl#',
     config: {
       idMapping: (id) => id,
+      labelMapping: (name) => name,
       dialectsHeader: 'Dialects',
       schemasHeader: 'Schemas',
       mainHeader: 'Main'

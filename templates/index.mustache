@@ -70,7 +70,7 @@
             <tbody>
               {{#dialects}}
                 <tr id="{{slug}}-dialects-table-row">
-                  <td class="name-td col-md-3">{{name}}</td>
+                  <td class="name-td col-md-3">{{label}}</td>
                   <td class="usage-td col-md-7">{{usage}}</td>
                 </tr>
               {{/dialects}}
@@ -81,7 +81,7 @@
         <div class="index-schemas-section">
           <h1>{{schemasHeader}}</h1>
           {{#dialects}}
-            <h2>{{name}}</h2>
+            <h2>{{label}}</h2>
             <table class="table table-hover table-bordered index-schemas-table"
              id="{{slug}}-schemas-table">
               <thead>
@@ -93,7 +93,7 @@
               <tbody>
                 {{#nodeMappings}}
                   <tr id="{{slug}}-schemas-tr">
-                    <td class="name-td col-md-3">{{name}}</td>
+                    <td class="name-td col-md-3">{{label}}</td>
                     <td class="description-td col-md-7">{{description}}</td>
                   </tr>
                 {{/nodeMappings}}

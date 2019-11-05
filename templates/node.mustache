@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>{{dialectName}} :: {{name}}</title>
+    <title>{{dialectName}} :: {{label}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
@@ -44,7 +44,7 @@
       <div class="col-md-10 content-block" id="{{slug}}-content-block">
         <h1 class="schema-name-header">
           <span class="dialect-name">{{dialectName}}</span> ::
-          <span class="schema-name">{{name}}</span>
+          <span class="schema-name">{{label}}</span>
         </h1>
 
         <p class="schema-term-id root-list-item">
@@ -88,8 +88,8 @@
             </thead>
             <tbody>
               {{#scalarProperties}}
-                <tr id="{{name}}-scalar-tr">
-                  <td class="sprop-name col-md-2">{{name}}</td>
+                <tr id="{{label}}-scalar-tr">
+                  <td class="sprop-name col-md-2">{{label}}</td>
                   <td class="sprop-data col-md-8">
                     <ul>
                       <li class="sprop-term-id">Term ID: {{id}}</li>
@@ -121,8 +121,8 @@
           </thead>
           <tbody>
             {{#linkProperties}}
-              <tr id="{{name}}-link-tr">
-                <td class="lprop-name col-md-2">{{name}}</td>
+              <tr id="{{label}}-link-tr">
+                <td class="lprop-name col-md-2">{{label}}</td>
                 <td class="lprop-data col-md-8">
                   <ul>
                     <li class="lprop-term-id">Term ID: {{id}}</li>
