@@ -2,17 +2,20 @@
 
 const expect = require('chai').expect
 const tmp = require('tmp')
-const utils = require('../src/utils')
+const rewire = require('rewire')
+const utils = rewire('../src/utils')
 
 describe('utils.collectOpt', function () {
+  const collectOpt = utils.__get__('collectOpt')
   it('should concat options strings', function () {
-    expect(utils.collectOpt('b', '')).to.deep.equal('b')
-    expect(utils.collectOpt('b', 'a')).to.deep.equal('ab')
-    expect(utils.collectOpt('bc', 'a')).to.deep.equal('abc')
+    expect(collectOpt('b', '')).to.deep.equal('b')
+    expect(collectOpt('b', 'a')).to.deep.equal('ab')
+    expect(collectOpt('bc', 'a')).to.deep.equal('abc')
   })
 })
 
 describe('utils.walkSync', function () {
+  const walkSync = utils.__get__('walkSync')
   let tmpDir1, tmpDir2, tmpFile1, tmpFile2, tmpFile3
   beforeEach(function () {
     tmpDir1 = tmp.dirSync()
@@ -30,13 +33,13 @@ describe('utils.walkSync', function () {
     tmpDir1.removeCallback()
   })
   it('should list yaml files in nested directories', function () {
-    const data = utils.walkSync(tmpDir1.name)
+    const data = walkSync(tmpDir1.name)
     expect(data).to.be.lengthOf(2)
     expect(data).to.be.contain(tmpFile2.name)
     expect(data).to.be.contain(tmpFile3.name)
   })
   it('should append found files names to passed list', function () {
-    const data = utils.walkSync(tmpDir1.name, ['foo'])
+    const data = walkSync(tmpDir1.name, ['foo'])
     expect(data).to.be.lengthOf(3)
     expect(data).to.be.contain('foo')
     expect(data).to.be.contain(tmpFile2.name)
@@ -45,6 +48,7 @@ describe('utils.walkSync', function () {
 })
 
 describe('utils.processLinks', function () {
+  const processLinks = utils.__get__('processLinks')
   it('should sort and group primary and secondary links', function () {
     const links = [
       { position: 'primary', text: 'b' },
@@ -53,7 +57,7 @@ describe('utils.processLinks', function () {
       { position: 'secondary', text: 'b' },
       { position: 'other', text: 'd' }
     ]
-    expect(utils.processLinks(links)).to.deep.equal({
+    expect(processLinks(links)).to.deep.equal({
       hasPrimaryLinks: true,
       primaryLinks: [
         { position: 'primary', text: 'a' },
@@ -69,7 +73,7 @@ describe('utils.processLinks', function () {
   })
   context('when no links are passed', function () {
     it('should return object with falsy values', function () {
-      expect(utils.processLinks([])).to.deep.equal({
+      expect(processLinks([])).to.deep.equal({
         hasPrimaryLinks: false,
         hasSecondaryLinks: false
       })
@@ -81,7 +85,7 @@ describe('utils.processLinks', function () {
         { position: 'primary', text: 'b' },
         { position: 'primary', text: 'a' }
       ]
-      expect(utils.processLinks(links)).to.deep.equal({
+      expect(processLinks(links)).to.deep.equal({
         hasPrimaryLinks: true,
         primaryLinks: [
           { position: 'primary', text: 'a' },
@@ -97,7 +101,7 @@ describe('utils.processLinks', function () {
         { position: 'secondary', text: 'b' },
         { position: 'secondary', text: 'a' }
       ]
-      expect(utils.processLinks(links)).to.deep.equal({
+      expect(processLinks(links)).to.deep.equal({
         hasPrimaryLinks: false,
         secondaryLinks: [
           { position: 'secondary', text: 'a' },

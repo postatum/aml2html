@@ -1,0 +1,5 @@
+[
+  {"href": "hi://test.com/dialect.pdf", "text": "pdf", "position": "primary"},
+  {"href": "hi://test.com/dialect.txt", "text": "txt", "position": "primary"},
+  {"href": "hi://test.else/dialect.aml", "text": "aml", "position": "secondary"}
+]
