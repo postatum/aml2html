@@ -1,4 +1,4 @@
-/* global describe, it, beforeEach, afterEach */
+/* global describe, it, beforeEach, afterEach, context */
 
 const expect = require('chai').expect
 const tmp = require('tmp')
@@ -41,5 +41,70 @@ describe('utils.walkSync', function () {
     expect(data).to.be.contain('foo')
     expect(data).to.be.contain(tmpFile2.name)
     expect(data).to.be.contain(tmpFile3.name)
+  })
+})
+
+describe('utils.processLinks', function () {
+  it('should sort and group primary and secondary links', function () {
+    const links = [
+      { position: 'primary', text: 'b' },
+      { position: 'primary', text: 'a' },
+      { position: 'secondary', text: 'c' },
+      { position: 'secondary', text: 'b' },
+      { position: 'other', text: 'd' }
+    ]
+    expect(utils.processLinks(links)).to.deep.equal({
+      hasPrimaryLinks: true,
+      primaryLinks: [
+        { position: 'primary', text: 'a' },
+        { position: 'primary', text: 'b' }
+      ],
+      hasSecondaryLinks: true,
+      secondaryLinks: [
+        { position: 'secondary', text: 'b' },
+        { position: 'secondary', text: 'c' },
+        { position: 'other', text: 'd' }
+      ]
+    })
+  })
+  context('when no links are passed', function () {
+    it('should return object with falsy values', function () {
+      expect(utils.processLinks([])).to.deep.equal({
+        hasPrimaryLinks: false,
+        hasSecondaryLinks: false
+      })
+    })
+  })
+  context('when only primary links are present', function () {
+    it('should specify that secondary links are missing', function () {
+      const links = [
+        { position: 'primary', text: 'b' },
+        { position: 'primary', text: 'a' }
+      ]
+      expect(utils.processLinks(links)).to.deep.equal({
+        hasPrimaryLinks: true,
+        primaryLinks: [
+          { position: 'primary', text: 'a' },
+          { position: 'primary', text: 'b' }
+        ],
+        hasSecondaryLinks: false
+      })
+    })
+  })
+  context('when only secondary links are present', function () {
+    it('should specify that primary links are missing', function () {
+      const links = [
+        { position: 'secondary', text: 'b' },
+        { position: 'secondary', text: 'a' }
+      ]
+      expect(utils.processLinks(links)).to.deep.equal({
+        hasPrimaryLinks: false,
+        secondaryLinks: [
+          { position: 'secondary', text: 'a' },
+          { position: 'secondary', text: 'b' }
+        ],
+        hasSecondaryLinks: true
+      })
+    })
   })
 })

@@ -77,37 +77,6 @@ function defineAndParseArgv () {
   }
 }
 
-function processLinks (links) {
-  const primaryLinks = []
-  const secondaryLinks = []
-
-  links.forEach((anchor) => {
-    if (anchor.position === 'primary') {
-      primaryLinks.push(anchor)
-    } else {
-      secondaryLinks.push(anchor)
-    }
-  })
-
-  if (primaryLinks.length > 0 || secondaryLinks.length > 0) {
-    const acc = {}
-    if (primaryLinks.length > 0) {
-      acc.primaryLinks = primaryLinks.sort(utils.sorterBy('text'))
-      acc.hasPrimaryLinks = true
-    }
-    if (secondaryLinks.length > 0) {
-      acc.secondaryLinks = secondaryLinks.sort(utils.sorterBy('text'))
-      acc.hasSecondaryLinks = true
-    }
-    return acc
-  } else {
-    return {
-      hasPrimaryLinks: false,
-      hasSecondaryLinks: false
-    }
-  }
-}
-
 /** Runs all the logic. */
 async function main () {
   defineAndParseArgv()
@@ -179,7 +148,7 @@ async function main () {
 
   // Collect navigation data and render dialect template
   dialectsData.forEach(dialectData => {
-    const links = processLinks(downloadLinks[dialectData.id] || [])
+    const links = utils.processLinks(downloadLinks[dialectData.id] || [])
 
     dialectData.navData = collect.navData(dialectData, commonNavData, ctx)
     dialectData.css = program.css

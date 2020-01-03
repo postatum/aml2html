@@ -172,6 +172,36 @@ function collectOpt (value, previous) {
   return previous.concat([value])
 }
 
+function processLinks (links) {
+  const acc = {
+    hasPrimaryLinks: false,
+    hasSecondaryLinks: false
+  }
+  if (!links || links.length < 1) {
+    return acc
+  }
+  const primaryLinks = []
+  const secondaryLinks = []
+
+  links.forEach(link => {
+    if (link.position === 'primary') {
+      primaryLinks.push(link)
+    } else {
+      secondaryLinks.push(link)
+    }
+  })
+
+  if (primaryLinks.length > 0) {
+    acc.primaryLinks = primaryLinks.sort(sorterBy('text'))
+    acc.hasPrimaryLinks = true
+  }
+  if (secondaryLinks.length > 0) {
+    acc.secondaryLinks = secondaryLinks.sort(sorterBy('text'))
+    acc.hasSecondaryLinks = true
+  }
+  return acc
+}
+
 module.exports = {
   walkSync: walkSync,
   getJsonLdGraph: getJsonLdGraph,
@@ -187,5 +217,6 @@ module.exports = {
   markActive: markActive,
   getDefaultContext: getDefaultContext,
   loadConfig: loadConfig,
-  collectOpt: collectOpt
+  collectOpt: collectOpt,
+  processLinks: processLinks
 }
