@@ -48,6 +48,8 @@ The file must export a JS module with the following symbols:
 * `indexHeader`: Header to be displayed on the `index.html` page
 * `indexVersion`: Version to be displayed on the `index.html` page
 * `indexDescription`: Description to be displayed on the `index.html` page
+* `indexDownloadLinks`: Path to a JSON file containing links to download vocabularies AML in different formats. See sections below for JSON file format description.
+* `downloadLinks`: Path to a JSON file containing links to download dialects AML in different formats. See sections below for JSON file format description.
 
 The following snippet shows a custom configuration stored in the `cfg.js` file:
 
@@ -60,7 +62,9 @@ module.exports = {
   schemasHeader: "My label for schemas",
   indexHeader: "My dialects",
   indexVersion: "Version 1.0",
-  indexDescription: "My first list of dialects"
+  indexDescription: "My first list of dialects",
+  indexDownloadLinks: '/path/to/indexDownloadLinks.json',
+  downloadLinks: '/path/to/downloadLinks.json'
 }
 ```
 
@@ -73,6 +77,26 @@ $ npm run aml2html -- ./outdir --indir=./test_data --cfg=cfg.js
 
 Configuration files will be searched relative to the working directory of the node interpreter.
 
+### indexDownloadLinks file format
+
+```json
+[
+  {"href": "https://somewhere.com/vocabulary.pdf", "text": "pdf"},
+  {"href": "https://somewhere.com/vocabulary.txt", "text": "txt"},
+  {"href": "https://somewhere.else/vocabulary.aml", "text": "aml"}
+]
+```
+
+### downloadLinks file format
+
+```json
+[
+  {"href": "https://somewhere.com/dialect.pdf", "text": "pdf", "position": "primary"},
+  {"href": "https://somewhere.com/dialect.txt", "text": "txt", "position": "primary"},
+  {"href": "https://somewhere.else/dialect.aml", "text": "aml", "position": "secondary"}
+]
+```
+
 ## Custom templates
 
 The documentation generator accepts as optional argument a directory where a new set of templates for the documentation
@@ -83,7 +107,7 @@ This is the list of supported templates:
  - index.mustache: Index page template
  - dialect.mustache: Template for a single dialect
  - node.mustache: Template for a single node in a dialect
- 
+
  Please, inspect the default to inspect the variables available in each template.
 
 ## Viewing generated HTML
