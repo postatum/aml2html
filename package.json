@@ -3,7 +3,7 @@
   "version": "0.1.2",
   "main": "src/index.js",
   "license": "MIT",
-  "repository": "github.com/aml-org/aml2html",
+  "repository": "git://github.com/aml-org/aml2html",
   "dependencies": {
     "amf-client-js": "^3.5.0",
     "commander": "^3.0.2",
