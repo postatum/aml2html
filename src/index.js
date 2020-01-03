@@ -184,7 +184,7 @@ async function main () {
     dialectData.navData = collect.navData(dialectData, commonNavData, ctx)
     dialectData.css = program.css
     if (program.templates != null) {
-      TMPL_DIR = program.templates;
+      TMPL_DIR = program.templates
     }
 
     // Render dialect overview template

@@ -189,7 +189,7 @@ function collectLinkPropsData (doc, node, dialectSlug, ontologyTerms, ctx) {
     propData.range = prop.queryAll('shacl:node @id').slice(1)
       .map(rangeId => {
         const name = utils.parseHashValue(rangeId)
-        const rangeDesc = (ontologyTerms[ctx.config.idMapping(name)]||{}).description
+        const rangeDesc = (ontologyTerms[ctx.config.idMapping(name)] || {}).description
         const data = {
           rangeName: name,
           rangeLabel: ctx.config.labelMapping(name),
