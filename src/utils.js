@@ -150,6 +150,7 @@ function loadConfig (cfgName, ctx) {
   return ctx
 }
 
+/* Lists files in dir and appends them to filelist. */
 function walkSync (dir, filelist) {
   var files = fs.readdirSync(dir)
   filelist = filelist || []

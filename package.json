@@ -16,9 +16,15 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
-    "aml2html": "node src/index.js"
+    "lint": "standard",
+    "aml2html": "node src/index.js",
+    "test": "npm run lint && nyc mocha -R spec --bail test/*.js"
   },
   "devDependencies": {
-    "standard": "^14.3.1"
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "nyc": "^15.0.0",
+    "standard": "^14.3.1",
+    "tmp": "^0.1.0"
   }
 }
