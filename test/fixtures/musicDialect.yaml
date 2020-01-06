@@ -1,0 +1,23 @@
+#%Dialect 1.0
+
+dialect: Playlist
+version: 1.0
+
+uses:
+  music: ../musicVocabulary.yaml
+
+external:
+  schema-org: http://schema.org/
+
+documents:
+  root:
+    encodes: ArtistNode
+
+nodeMappings:
+  ArtistNode:
+    classTerm: music.MusicArtist
+    idTemplate: https://api.spotify.com/v1/artists/{spotifyId}
+    mapping:
+      name:
+        propertyTerm: schema-org.name
+        range: string

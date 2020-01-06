@@ -1,3 +1,4 @@
+const ldquery = require('ld-query')
 const utils = require('./utils')
 
 /* Collects complete vocabulary data. */
@@ -295,6 +296,35 @@ function collectNavData (dialectData, commonNavData, ctx) {
   return navData
 }
 
+/**
+ * Process a file as a vocabulary
+ */
+function processVocabulary (graph, ctx, acc) {
+  const docs = ldquery(graph, ctx).queryAll('*[@type=meta:Vocabulary]')
+  docs.forEach(doc => {
+    console.log('FOUND A VOCABULARY')
+    const id = doc.query('@id')
+    if (!acc[id]) {
+      console.log(`Adding vocabulary ${id}`)
+      acc[id] = collectVocabularyData(doc, ctx, acc)
+    }
+  })
+}
+
+/**
+ * Process a file as a dialect
+ */
+function processDialect (graph, ctx, acc, ontologyTerms) {
+  const docs = ldquery(graph, ctx).queryAll('*[@type=meta:Dialect]')
+  docs.forEach(doc => {
+    const id = doc.query('@id')
+    if (!acc[id]) {
+      console.log(`Adding Dialect ${id}`)
+      acc[id] = collectDialectData(doc, ctx, acc, ontologyTerms)
+    }
+  })
+}
+
 module.exports = {
   vocabularyData: collectVocabularyData,
   dialectData: collectDialectData,
@@ -304,5 +334,7 @@ module.exports = {
   commonPropData: collectCommonPropData,
   propertyConstraints: collectPropertyConstraints,
   commonNavData: collectCommonNavData,
-  navData: collectNavData
+  navData: collectNavData,
+  processVocabulary: processVocabulary,
+  processDialect: processDialect
 }

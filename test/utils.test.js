@@ -6,6 +6,7 @@ const path = require('path')
 const fs = require('fs-extra')
 const rewire = require('rewire')
 const amf = require('amf-client-js')
+
 const utils = rewire('../src/utils')
 
 const FIXTURES_DIR = path.join(__dirname, 'fixtures')
@@ -135,11 +136,11 @@ describe('utils.loadConfig', function () {
     expect(ctx).to.have.property('config')
     expect(ctx.config).to.not.have.property('something')
     expect(ctx.config)
-      .to.have.property('idMapping')
-      .and.be.a('function')
+      .to.have.property('idMapping').and
+      .be.a('function')
     expect(ctx.config)
-      .to.have.property('labelMapping')
-      .and.be.a('function')
+      .to.have.property('labelMapping').and
+      .be.a('function')
     expect(ctx.config).to.include({
       dialectsHeader: 'My label for dialects',
       schemasHeader: 'My label for schemas',
@@ -148,15 +149,15 @@ describe('utils.loadConfig', function () {
       indexDescription: 'My first list of dialects'
     })
     expect(ctx.config)
-      .to.have.property('downloadLinks')
-      .and.deep.equal([
+      .to.have.property('downloadLinks').and
+      .deep.equal([
         { href: 'hi://test.com/dialect.pdf', text: 'pdf', position: 'primary' },
         { href: 'hi://test.com/dialect.txt', text: 'txt', position: 'primary' },
         { href: 'hi://test.else/dialect.aml', text: 'aml', position: 'secondary' }
       ])
     expect(ctx.config)
-      .to.have.property('indexDownloadLinks')
-      .and.deep.equal([
+      .to.have.property('indexDownloadLinks').and
+      .deep.equal([
         { href: 'hi://test.com/vocabulary.pdf', text: 'pdf' },
         { href: 'hi://test.com/vocabulary.txt', text: 'txt' },
         { href: 'hi://test.else/vocabulary.aml', text: 'aml' }
@@ -179,11 +180,11 @@ describe('utils.getDefaultContext', function () {
     })
     expect(ctx).to.have.property('config')
     expect(ctx.config)
-      .to.have.property('idMapping')
-      .and.be.a('function')
+      .to.have.property('idMapping').and
+      .be.a('function')
     expect(ctx.config)
-      .to.have.property('labelMapping')
-      .and.be.a('function')
+      .to.have.property('labelMapping').and
+      .be.a('function')
     expect(ctx.config).to.include({
       dialectsHeader: 'Dialects',
       schemasHeader: 'Schemas',

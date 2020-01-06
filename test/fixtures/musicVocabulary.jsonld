@@ -1,0 +1,111 @@
+[
+  {
+    "@id": "file:///somewhere/fixtures/musicVocabulary.yaml",
+    "@type": [
+      "http://a.ml/vocabularies/meta#Vocabulary",
+      "http://www.w3.org/2002/07/owl#Ontology",
+      "http://a.ml/vocabularies/document#Unit"
+    ],
+    "http://schema.org/name": [
+      {
+        "@value": "Music Vocabulary"
+      }
+    ],
+    "http://a.ml/vocabularies/meta#externals": [
+      {
+        "@id": "file:///somewhere/fixtures/musicVocabulary.yaml/externals/geo",
+        "@type": [
+          "http://www.w3.org/2002/07/owl#Ontology",
+          "http://a.ml/vocabularies/meta#ExternalVocabulary",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://schema.org/alias": [
+          {
+            "@value": "geo"
+          }
+        ],
+        "http://a.ml/vocabularies/meta#base": [
+          {
+            "@value": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+          }
+        ]
+      },
+      {
+        "@id": "file:///somewhere/fixtures/musicVocabulary.yaml/externals/schema-org",
+        "@type": [
+          "http://www.w3.org/2002/07/owl#Ontology",
+          "http://a.ml/vocabularies/meta#ExternalVocabulary",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://schema.org/alias": [
+          {
+            "@value": "schema-org"
+          }
+        ],
+        "http://a.ml/vocabularies/meta#base": [
+          {
+            "@value": "http://schema.org/"
+          }
+        ]
+      }
+    ],
+    "http://a.ml/vocabularies/meta#base": [
+      {
+        "@value": "http://a.ml/vocabularies/music#"
+      }
+    ],
+    "http://a.ml/vocabularies/document#location": [
+      {
+        "@value": "http://a.ml/amf/default_document"
+      }
+    ],
+    "http://a.ml/vocabularies/document#version": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "http://a.ml/vocabularies/document#references": [],
+    "http://a.ml/vocabularies/document#declares": [
+      {
+        "@id": "http://a.ml/vocabularies/music#MusicArtist",
+        "@type": [
+          "http://www.w3.org/2002/07/owl#Class",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://a.ml/vocabularies/meta#displayName": [
+          {
+            "@value": "Music Artist"
+          }
+        ],
+        "http://schema.org/description": [
+          {
+            "@value": "A person or a group of people (or a computer :-) ), whose musical\ncreative work shows sensitivity and imagination\n"
+          }
+        ]
+      },
+      {
+        "@id": "http://a.ml/vocabularies/music#duration",
+        "@type": [
+          "http://www.w3.org/2002/07/owl#DatatypeProperty",
+          "http://a.ml/vocabularies/meta#Property",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://a.ml/vocabularies/meta#displayName": [
+          {
+            "@value": "duration"
+          }
+        ],
+        "http://schema.org/description": [
+          {
+            "@value": "The duration of a track or a signal in ms"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#range": [
+          {
+            "@id": "http://www.w3.org/2001/XMLSchema#float"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,85 +1,17 @@
 const amf = require('amf-client-js')
-const program = require('commander')
-const ldquery = require('ld-query')
 const path = require('path')
 const fs = require('fs-extra')
+const jsonld = require('jsonld')
 
 const utils = require('./utils')
 const collect = require('./data_collectors')
-const jsonld = require('jsonld')
 
 /** Mustache dialects templates directory path. */
 let TMPL_DIR = path.join(utils.TMPL_DIR)
 
-/**
- * Process a file as a vocabulary
- */
-async function processVocabulary (vocabPath, graph, ctx, acc) {
-  try {
-    console.log(`Collecting vocabulary data: ${vocabPath}`)
-    const docs = ldquery(graph, ctx).queryAll('*[@type=meta:Vocabulary]')
-    docs.forEach(doc => {
-      console.log('FOUND A VOCABULARY')
-      const id = doc.query('@id')
-      if (!acc[id]) {
-        console.log(`Adding vocabulary ${id}`)
-        acc[id] = collect.vocabularyData(doc, ctx, acc)
-      }
-    })
-  } catch (e) {
-    console.error(`Error for vocabulary ${vocabPath}: ${e.message}`)
-    console.error(e)
-  }
-}
-
-/**
- * Process a file as a dialect
- */
-async function processDialect (dialectPath, graph, ctx, acc, ontologyTerms) {
-  try {
-    const docs = ldquery(graph, ctx).queryAll('*[@type=meta:Dialect]')
-    console.log(`Collecting dialect data: ${dialectPath}`)
-    docs.forEach(doc => {
-      const id = doc.query('@id')
-      if (!acc[id]) {
-        console.log(`Adding Dialect ${id}`)
-        acc[id] = collect.dialectData(doc, ctx, acc, ontologyTerms)
-      }
-    })
-  } catch (e) {
-    console.error(`Error for dialect ${dialectPath}: ${e.message}`)
-    console.error(e)
-  }
-}
-
-function defineAndParseArgv () {
-  program
-    .arguments('<outputDir>')
-    .action((outputDir) => {
-      program.outputDir = outputDir
-    })
-    .name('aml2html')
-    .description('Convert AML Vocabularies & Dialects to HTML')
-    .option('-d, --indir <path>', 'Path to input directory to convert. Takes precedence over --infile.')
-    .option('-f, --infile <path>', 'Path to input file to convert', utils.collectOpt, [])
-    .option('-c, --css <path>', 'Custom css file path', utils.collectOpt, [])
-    .option('-g, --cfg <path>', 'Configuration file path')
-    .option('-t, --templates <path>', 'Optional path to custom templates for the documentation')
-    .parse(process.argv)
-
-  if (!program.outputDir) {
-    console.error('Missing output directory path (outputDir).\n')
-    program.help()
-  }
-  if (!(program.infile.length > 0 || program.indir)) {
-    console.error('Missing input (--infile or --indir).\n')
-    program.help()
-  }
-}
-
 /** Runs all the logic. */
 async function main () {
-  defineAndParseArgv()
+  const program = utils.defineAndParseArgv()
   let ctx = utils.getDefaultContext()
   await amf.AMF.init()
 
@@ -126,7 +58,13 @@ async function main () {
   // let's process the vocabularies
   for (var p in jsonGraph) {
     const graph = jsonGraph[p]
-    processVocabulary(p, graph, ctx, ontology)
+    try {
+      console.log(`Collecting vocabulary data: ${p}`)
+      collect.processVocabulary(graph, ctx, ontology)
+    } catch (e) {
+      console.error(`Error for vocabulary ${p}: ${e.message}`)
+      console.error(e)
+    }
   }
   const ontologyTerms = {}
   Object.values(ontology).forEach(function (vocab) {
@@ -138,7 +76,13 @@ async function main () {
   // Let's process the dialects
   for (p in jsonGraph) {
     const graph = jsonGraph[p]
-    processDialect(p, graph, ctx, acc, ontologyTerms)
+    try {
+      console.log(`Collecting dialect data: ${p}`)
+      collect.processDialect(graph, ctx, acc, ontologyTerms)
+    } catch (e) {
+      console.error(`Error for dialect ${p}: ${e.message}`)
+      console.error(e)
+    }
   }
 
   console.log(`Got ${Object.values(acc).length} values`)
