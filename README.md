@@ -43,6 +43,7 @@ Configuration code is passed as a JS referenced in the `cfg` invocation paramete
 The file must export a JS module with the following symbols:
 
 * `idMapping`: Function used to generate the final URIs shown in the HTML documentation for entities and dialects
+* `labelMapping`: Function used to generate the final labels shown in the HTML documentation for entities and dialects
 * `dialectsHeader`: Name of the header used for the dialects section in the documentaton
 * `schemasHeader`: Name of the header used for the schemas section in the documentation
 * `indexHeader`: Header to be displayed on the `index.html` page
@@ -56,13 +57,16 @@ The following snippet shows a custom configuration stored in the `cfg.js` file:
 ```javascript
 module.exports = {
   idMapping: function(id) {
-    return id + "_modified";
+    return id + '_modified'
   },
-  dialectsHeader: "My label for dialects",
-  schemasHeader: "My label for schemas",
-  indexHeader: "My dialects",
-  indexVersion: "Version 1.0",
-  indexDescription: "My first list of dialects",
+  labelMapping: function (label) {
+    return label + '_modified'
+  },
+  dialectsHeader: 'My label for dialects',
+  schemasHeader: 'My label for schemas',
+  indexHeader: 'My dialects',
+  indexVersion: 'Version 1.0',
+  indexDescription: 'My first list of dialects',
   indexDownloadLinks: '/path/to/indexDownloadLinks.json',
   downloadLinks: '/path/to/downloadLinks.json'
 }

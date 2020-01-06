@@ -74,6 +74,7 @@ function renderTemplate (data, tmplPath, htmlPath) {
   fs.writeFileSync(htmlPath, htmlStr)
 }
 
+/* Sorts objects by property. To be used in Array.sort() */
 function sorterBy (p) {
   return function (a, b) {
     if (a[p] > b[p]) {
@@ -126,7 +127,8 @@ function getDefaultContext () {
 
 /* Loads custom config into context config. */
 function loadConfig (cfgName, ctx) {
-  const cfgPath = path.resolve(process.cwd(), cfgName)
+  const cwd = process.cwd()
+  const cfgPath = path.resolve(cwd, cfgName)
   console.log(`Loading custom configuration from ${cfgPath}`)
   const cfg = require(cfgPath)
   // Drop "undefined"s
@@ -138,13 +140,15 @@ function loadConfig (cfgName, ctx) {
   ctx.config = { ...ctx.config, ...cfg }
 
   if (ctx.config.downloadLinks) {
-    ctx.config.downloadLinks = JSON.parse(
-      fs.readFileSync(ctx.config.downloadLinks).toString())
+    ctx.config.downloadLinks = JSON.parse(fs.readFileSync(
+      path.resolve(cwd, ctx.config.downloadLinks)
+    ).toString())
   }
 
   if (ctx.config.indexDownloadLinks) {
-    ctx.config.indexDownloadLinks = JSON.parse(
-      fs.readFileSync(ctx.config.indexDownloadLinks).toString())
+    ctx.config.indexDownloadLinks = JSON.parse(fs.readFileSync(
+      path.resolve(cwd, ctx.config.indexDownloadLinks)
+    ).toString())
   }
 
   return ctx
@@ -168,10 +172,15 @@ function walkSync (dir, filelist) {
   return filelist
 }
 
+/* Concats options for commander. */
 function collectOpt (value, previous) {
   return previous.concat([value])
 }
 
+/*
+  Processes downloadLinks and indexDownloadLinks by grouping
+  and sorting them.
+*/
 function processLinks (links) {
   const acc = {
     hasPrimaryLinks: false,
