@@ -59,7 +59,7 @@ function collectDialectData (doc, ctx, acc, ontologyTerms) {
 function collectVocabularyNodesData (doc, dialectData, ctx) {
   const acc = {}
   const collectionCreds = [
-    // Fetch the classes
+    // Fetch classes
     {
       query: '> amldoc:declares[@type=owl:Class]',
       type: 'class'
@@ -69,7 +69,7 @@ function collectVocabularyNodesData (doc, dialectData, ctx) {
       query: '> amldoc:declares[@type=owl:ObjectProperty]',
       type: 'objectProperty'
     },
-    // Collect the literal (datatype) properties
+    // Collect literal (datatype) properties
     {
       query: '> amldoc:declares[@type=owl:DatatypeProperty]',
       type: 'datatypeProperty'
