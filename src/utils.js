@@ -127,9 +127,8 @@ function getDefaultContext () {
 }
 
 /* Loads custom config into context config. */
-function loadConfig (cfgName, ctx) {
-  const cwd = process.cwd()
-  const cfgPath = path.resolve(cwd, cfgName)
+function loadConfig (cfgPath, ctx) {
+  cfgPath = path.resolve(cfgPath)
   console.log(`Loading custom configuration from ${cfgPath}`)
   const cfg = require(cfgPath)
   // Drop "undefined"s
@@ -141,15 +140,13 @@ function loadConfig (cfgName, ctx) {
   ctx.config = { ...ctx.config, ...cfg }
 
   if (ctx.config.downloadLinks) {
-    ctx.config.downloadLinks = JSON.parse(fs.readFileSync(
-      path.resolve(cwd, ctx.config.downloadLinks)
-    ).toString())
+    const dlp = path.resolve(path.dirname(cfgPath), ctx.config.downloadLinks)
+    ctx.config.downloadLinks = JSON.parse(fs.readFileSync(dlp).toString())
   }
 
   if (ctx.config.indexDownloadLinks) {
-    ctx.config.indexDownloadLinks = JSON.parse(fs.readFileSync(
-      path.resolve(cwd, ctx.config.indexDownloadLinks)
-    ).toString())
+    const idlp = path.resolve(path.dirname(cfgPath), ctx.config.indexDownloadLinks)
+    ctx.config.indexDownloadLinks = JSON.parse(fs.readFileSync(idlp).toString())
   }
 
   return ctx

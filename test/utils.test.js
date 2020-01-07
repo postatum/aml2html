@@ -120,18 +120,10 @@ describe('utils.processLinks', function () {
 })
 
 describe('utils.loadConfig', function () {
-  let revert
-  beforeEach(function () {
-    revert = utils.__set__({
-      process: {
-        cwd: () => FIXTURES_DIR
-      }
-    })
-  })
-  afterEach(function () { revert() })
   const loadConfig = utils.__get__('loadConfig')
   it('should load config', function () {
-    const ctx = loadConfig('cfg.js', { foo: 1 })
+    const fpath = path.join(FIXTURES_DIR, 'cfg.js')
+    const ctx = loadConfig(fpath, { foo: 1 })
     expect(ctx).to.have.property('foo', 1)
     expect(ctx).to.have.property('config')
     expect(ctx.config).to.not.have.property('something')

@@ -49,8 +49,8 @@ The file must export a JS module with the following symbols:
 * `indexHeader`: Header to be displayed on the `index.html` page
 * `indexVersion`: Version to be displayed on the `index.html` page
 * `indexDescription`: Description to be displayed on the `index.html` page
-* `indexDownloadLinks`: Path to a JSON file containing links to download vocabularies AML in different formats. See sections below for JSON file format description.
-* `downloadLinks`: Path to a JSON file containing links to download dialects AML in different formats. See sections below for JSON file format description.
+* `indexDownloadLinks`: Path to a JSON file containing links to download vocabularies AML in different formats. See sections below for JSON file format description. Path should be relative to the config file or absolute.
+* `downloadLinks`: Path to a JSON file containing links to download dialects AML in different formats. See sections below for JSON file format description. Path should be relative to the config file or absolute.
 
 The following snippet shows a custom configuration stored in the `cfg.js` file:
 
@@ -76,7 +76,7 @@ This file can be used when invoking the HTML generator in the following way:
 
 E.g.
 ```sh
-$ npm run aml2html -- ./outdir --indir=./test_data --cfg=cfg.js
+$ npm run aml2html -- ./outdir --indir=./test_data --cfg=/path/to/cfg.js
 ```
 
 Configuration files will be searched relative to the working directory of the node interpreter.
