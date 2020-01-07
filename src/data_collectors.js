@@ -22,7 +22,7 @@ function collectVocabularyData (doc, ctx, acc) {
     console.log(`Collecting nodes info for vocabulary ${id}`)
     vocabularyData.nodeMappings = collectVocabularyNodesData(
       doc, vocabularyData, ctx).sort(utils.nameSorter)
-    vocabularyData.nodeMappings.forEach(function (node) {
+    vocabularyData.nodeMappings.forEach(node => {
       node.vocabulary = vocabularyData
     })
     return vocabularyData

@@ -1,7 +1,6 @@
 const amf = require('amf-client-js')
 const path = require('path')
 const fs = require('fs-extra')
-const jsonld = require('jsonld')
 
 const utils = require('./utils')
 const collect = require('./data_collectors')
@@ -10,8 +9,7 @@ const collect = require('./data_collectors')
 let TMPL_DIR = path.join(utils.TMPL_DIR)
 
 /** Runs all the logic. */
-async function main () {
-  const program = utils.defineAndParseArgv()
+async function aml2html (program) {
   let ctx = utils.getDefaultContext()
   await amf.AMF.init()
 
@@ -28,9 +26,10 @@ async function main () {
   const downloadLinks = ctx.config.downloadLinks || {}
   // links for the index page
   const indexLinks = {
-    indexLinks: (ctx.config.indexDownloadLinks || []).sort(utils.sorterBy('text'))
+    indexLinks: (ctx.config.indexDownloadLinks || [])
+      .sort(utils.sorterBy('text'))
   }
-  indexLinks.hasIndexLinks = (indexLinks.indexLinks.length > 0)
+  indexLinks.hasIndexLinks = indexLinks.indexLinks.length > 0
 
   // Collects dialects data into an array
   const dialectsPaths = program.indir
@@ -39,25 +38,12 @@ async function main () {
 
   const acc = {}
   const ontology = {}
-  const jsonGraph = {}
-
-  // Let's load the  JSON-LD
-  for (var i = 0; i < dialectsPaths.length; i++) {
-    const p = dialectsPaths[i]
-    try {
-      const defaultGraph = await utils.getJsonLdGraph(p)
-      console.log('[ok] ' + p)
-      const graph = await jsonld.expand(defaultGraph)
-      jsonGraph[p] = graph
-    } catch (e) {
-      console.log('[error] ' + p)
-    }
-  }
+  const jsonGraphs = await utils.collectJsonGraphs(dialectsPaths)
   console.log('Processed all input files')
 
-  // let's process the vocabularies
-  for (var p in jsonGraph) {
-    const graph = jsonGraph[p]
+  // Process vocabularies
+  for (var p in jsonGraphs) {
+    const graph = jsonGraphs[p]
     try {
       console.log(`Collecting vocabulary data: ${p}`)
       collect.processVocabulary(graph, ctx, ontology)
@@ -66,16 +52,12 @@ async function main () {
       console.error(e)
     }
   }
-  const ontologyTerms = {}
-  Object.values(ontology).forEach(function (vocab) {
-    vocab.nodeMappings.forEach(function (term) {
-      ontologyTerms[term.id] = term
-    })
-  })
 
-  // Let's process the dialects
-  for (p in jsonGraph) {
-    const graph = jsonGraph[p]
+  const ontologyTerms = utils.getOntologyTerms(ontology)
+
+  // Process dialects
+  for (p in jsonGraphs) {
+    const graph = jsonGraphs[p]
     try {
       console.log(`Collecting dialect data: ${p}`)
       collect.processDialect(graph, ctx, acc, ontologyTerms)
@@ -137,4 +119,4 @@ async function main () {
   utils.copyStaticFiles(outDir)
 }
 
-main()
+module.exports = aml2html

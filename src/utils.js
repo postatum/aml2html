@@ -2,6 +2,7 @@ const amf = require('amf-client-js')
 const path = require('path')
 const fs = require('fs-extra')
 const Mustache = require('mustache')
+const jsonld = require('jsonld')
 
 /** Mustache dialects templates directory path. */
 const TMPL_DIR = path.join(__dirname, '..', 'templates')
@@ -76,7 +77,7 @@ function renderTemplate (data, tmplPath, htmlPath) {
 
 /* Sorts objects by property. To be used in Array.sort() */
 function sorterBy (p) {
-  return function (a, b) {
+  return (a, b) => {
     if (a[p] > b[p]) {
       return 1
     }
@@ -211,31 +212,32 @@ function processLinks (links) {
   return acc
 }
 
-function defineAndParseArgv () {
-  const program = require('commander')
-  program
-    .arguments('<outputDir>')
-    .action((outputDir) => {
-      program.outputDir = outputDir
-    })
-    .name('aml2html')
-    .description('Convert AML Vocabularies & Dialects to HTML')
-    .option('-d, --indir <path>', 'Path to input directory to convert. Takes precedence over --infile.')
-    .option('-f, --infile <path>', 'Path to input file to convert', collectOpt, [])
-    .option('-c, --css <path>', 'Custom css file path', collectOpt, [])
-    .option('-g, --cfg <path>', 'Configuration file path')
-    .option('-t, --templates <path>', 'Optional path to custom templates for the documentation')
-    .parse(process.argv)
+/* Collects JSON Graphs for all dialects from dialectsPaths. */
+async function collectJsonGraphs (dialectsPaths) {
+  const jsonGraphs = {}
+  for (var i = 0; i < dialectsPaths.length; i++) {
+    const p = dialectsPaths[i]
+    try {
+      const defaultGraph = await getJsonLdGraph(p)
+      console.log('[ok] ' + p)
+      const graph = await jsonld.expand(defaultGraph)
+      jsonGraphs[p] = graph
+    } catch (e) {
+      console.log('[error] ' + p, e.toString())
+    }
+  }
+  return jsonGraphs
+}
 
-  if (!program.outputDir) {
-    console.error('Missing output directory path (outputDir).\n')
-    program.help()
-  }
-  if (!(program.infile.length > 0 || program.indir)) {
-    console.error('Missing input (--infile or --indir).\n')
-    program.help()
-  }
-  return program
+/* Extracts ontology terms from ontology mapping. */
+function getOntologyTerms (ontologyObj) {
+  const ontologyTerms = {}
+  Object.values(ontologyObj).forEach(vocab => {
+    vocab.nodeMappings.forEach(term => {
+      ontologyTerms[term.id] = term
+    })
+  })
+  return ontologyTerms
 }
 
 module.exports = {
@@ -255,5 +257,6 @@ module.exports = {
   loadConfig: loadConfig,
   collectOpt: collectOpt,
   processLinks: processLinks,
-  defineAndParseArgv: defineAndParseArgv
+  collectJsonGraphs: collectJsonGraphs,
+  getOntologyTerms: getOntologyTerms
 }

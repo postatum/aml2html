@@ -15,9 +15,12 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
+  "bin": {
+    "aml2html": "bin/aml2html.js"
+  },
   "scripts": {
     "lint": "standard",
-    "aml2html": "node src/index.js",
+    "aml2html": "node bin/aml2html.js",
     "test": "npm run lint && nyc mocha -R spec --bail test/*.test.js"
   },
   "devDependencies": {

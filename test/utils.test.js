@@ -316,3 +316,42 @@ describe('utils.getJsonLdGraph', function () {
     expect(graph[0]).to.have.property('@type')
   })
 })
+
+describe('utils.collectJsonGraphs', function () {
+  const collectJsonGraphs = utils.__get__('collectJsonGraphs')
+  it('should collect JSON Graphs for all dialects from dialectsPaths', async function () {
+    const fpath = `file://${path.join(FIXTURES_DIR, 'musicDialect.yaml')}`
+    const dialectsPaths = [fpath]
+    const data = await collectJsonGraphs(dialectsPaths)
+    expect(Object.keys(data)).to.be.lengthOf(dialectsPaths.length)
+    expect(data)
+      .to.have.property(fpath).and
+      .be.an('array').and
+      .be.lengthOf(1)
+    expect(data[fpath][0]).to.have.property('@id', fpath)
+  })
+})
+
+describe('utils.getOntologyTerms', function () {
+  const getOntologyTerms = utils.__get__('getOntologyTerms')
+  it('should extract ontology terms from ontology mapping', function () {
+    const ontologyObj = {
+      vocab1: {
+        nodeMappings: [
+          { id: 'a', name: 'A' },
+          { id: 'b', name: 'B' }
+        ]
+      },
+      vocab2: {
+        nodeMappings: [
+          { id: 'c', name: 'C' }
+        ]
+      }
+    }
+    expect(getOntologyTerms(ontologyObj)).to.deep.equal({
+      a: { id: 'a', name: 'A' },
+      b: { id: 'b', name: 'B' },
+      c: { id: 'c', name: 'C' }
+    })
+  })
+})
