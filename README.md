@@ -1,5 +1,6 @@
 # aml2doc
 [![Build Status](https://travis-ci.org/aml-org/aml2doc.svg?branch=master)](https://travis-ci.org/aml-org/aml2doc)
+
 Convert AML Vocabularies & Dialects to documentation.
 
 ## Installation

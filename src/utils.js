@@ -239,13 +239,15 @@ function getOntologyTerms (ontologyObj) {
 function addTmplUtils (data) {
   return {
     ...data,
-    // Strips newlines
-    stripn: () => {
-      return (text, render) => {
-        const rendered = render(text)
-        return rendered ? rendered.split('\n').join(' ') : rendered
-      }
-    }
+    stripn: stripn
+  }
+}
+
+/* Strips newlines */
+function stripn () {
+  return (text, render) => {
+    const rendered = render(text)
+    return rendered ? rendered.split('\n').join(' ') : rendered
   }
 }
 

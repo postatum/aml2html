@@ -2,7 +2,7 @@
 
 ## Navigation
 
-**Index:** • *Index*
+**Index:** • Index
 
 **{{dialectsHeader}}:**{{#navData.dialects}} • [{{name}}]({{pageName}}.md){{/navData.dialects}}
 
@@ -31,16 +31,16 @@ Download as a single file in the following formats:
 Dialect | Usage
 ------- | -----
 {{#dialects}}
-{{name}} | {{usage}}
+{{label}} | {{usage}}
 {{/dialects}}
 
 ## {{schemasHeader}}
 {{#dialects}}
 
-### {{name}}
+### {{label}}
 Schema | Description
 ------ | -----------
 {{#nodeMappings}}
-{{name}} | {{#stripn}}{{description}}{{/stripn}}
+{{label}} | {{#stripn}}{{description}}{{/stripn}}
 {{/nodeMappings}}
 {{/dialects}}

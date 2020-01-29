@@ -347,3 +347,30 @@ describe('utils.getOntologyTerms', function () {
     })
   })
 })
+
+describe('utils.addTmplUtils', function () {
+  const addTmplUtils = utils.__get__('addTmplUtils')
+  it('should add template utility functions to an object', function () {
+    const obj = addTmplUtils({ foo: 1 })
+    expect(obj).to.have.property('foo', 1)
+    expect(obj).to.have.property('stripn')
+  })
+})
+
+describe('utils.stripn', function () {
+  const stripn = utils.__get__('stripn')
+  it('should rendex text and remove newlines from it', function () {
+    const fn = stripn()
+    const stripped = fn(
+      'hello\nworld\nagain',
+      x => x + '\nmore')
+    expect(stripped).to.equal('hello world again more')
+  })
+  context('when it fails to renders text', function () {
+    it('should returned render results as is', function () {
+      const fn = stripn()
+      const stripped = fn('hello\nworld\nagain', x => null)
+      expect(stripped).to.equal(null)
+    })
+  })
+})

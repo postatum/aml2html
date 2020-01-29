@@ -1,4 +1,4 @@
-# {{dialectName}} :: {{name}}
+# {{dialectName}} :: {{label}}
 
 ## Navigation
 
@@ -8,14 +8,14 @@
 
 **{{schemasHeader}}:**{{#navData.nodeMappings}} • {{#active}}*{{name}}*{{/active}}{{^active}}[{{name}}]({{pageName}}.md){{/active}}{{/navData.nodeMappings}}
 
-## {{dialectName}} :: {{name}}
+## {{dialectName}} :: {{label}}
 Term ID: {{targetClassId}}
 
 {{#description}}
 Description: {{#stripn}}{{description}}{{/stripn}}
 {{/description}}
 
-{{^linkedSchemas}}No {{/linkedSchemas}} Linked Schemas
+{{^linkedSchemas}}No {{/linkedSchemas}}Linked schemas
 {{#linkedSchemas}}
 {{#rangePageName}}
   * [{{rangeName}}]({{rangePageName}}.md)
