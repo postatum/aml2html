@@ -19,6 +19,14 @@ Version: {{indexVersion}}
 Description: {{indexDescription}}
 {{/indexDescription}}
 
+{{#hasIndexLinks}}
+Download as a single file in the following formats:
+{{#indexLinks}}
+  * [{{text}}]({{{href}}})
+{{/indexLinks}}
+{{/hasIndexLinks}}
+
+
 ## {{dialectsHeader}}
 Dialect | Usage
 ------- | -----

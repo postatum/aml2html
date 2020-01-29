@@ -19,7 +19,21 @@ Description: {{#stripn}}{{usage}}{{/stripn}}
 Version: {{version}}
 {{/version}}
 
+{{#hasPrimaryLinks}}
+Download:
+{{#primaryLinks}}
+  * [{{text}}]({{{href}}})
+{{/primaryLinks}}
+{{/hasPrimaryLinks}}
+
 Schemas:
 {{#nodeMappings}}
   * [{{name}}]({{pageName}}.md)
 {{/nodeMappings}}
+
+{{#hasSecondaryLinks}}
+Download in other formats:
+{{#secondaryLinks}}
+  * [{{text}}]({{{href}}})
+{{/secondaryLinks}}
+{{/hasSecondaryLinks}}
