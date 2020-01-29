@@ -87,17 +87,10 @@ describe('aml2doc html integration test', function () {
       .to.contain('string').and
       .to.contain('No Link Properties')
   })
-  it('should render proper data at schema page', function () {
+  it('should render proper data at union schema page', function () {
     const fpath = path.join(outDir.name, 'schema_playlist_artistunion.html')
     const html = fs.readFileSync(fpath).toString()
-    expect(html).to.contain(
-      '<link rel="stylesheet" href="inexisting/css/file.css">')
-    expect(html)
-      .to.contain('index.html').and
-      .to.contain('schema_playlist_artistnode.html').and
-      .to.contain('schema_playlist_artistunion.html').and
-      .to.contain('playlist.html').and
-      .to.contain('Union of ArtistNode, ArtistNode')
+    expect(html).to.contain('Union of ArtistNode, ArtistNode')
   })
 })
 
