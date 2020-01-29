@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>{{name}}</title>
+    <title>{{label}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/custom.css">
     {{#css}}
-      <link rel="stylesheet" href="{{.}}">
+      <link rel="stylesheet" href="{{{.}}}">
     {{/css}}
   </head>
   <body class="dialect-body" id="{{slug}}-body">
@@ -27,7 +27,7 @@
           <hr>
           {{#navData.dialects}}
             <p class="dialects-nav-item {{^active}}in{{/active}}active-nav-item">
-              <a href="{{pageName}}.html" title="{{name}}">{{name}}</a>
+              <a href="{{{pageName}}}.html" title="{{name}}">{{name}}</a>
             </p>
           {{/navData.dialects}}
         </div>
@@ -36,14 +36,14 @@
           <hr>
           {{#navData.nodeMappings}}
             <p class="schemas-nav-item {{^active}}in{{/active}}active-nav-item">
-              <a href="{{pageName}}.html" title="{{name}}">{{name}}</a>
+              <a href="{{{pageName}}}.html" title="{{name}}">{{name}}</a>
             </p>
           {{/navData.nodeMappings}}
         </div>
       </div>
 
       <div class="col-md-10 content-block" id="{{slug}}-content-block">
-        <h1 class="dialect-name">{{name}}</h1>
+        <h1 class="dialect-name">{{label}}</h1>
 
         <p class="dialect-url root-list-item">
           <span>URL: </span><span>{{id}}</span>
@@ -61,14 +61,38 @@
           </p>
         {{/version}}
 
+        {{#hasPrimaryLinks}}
+            <div class="dialect-primary-download-links">
+                <p>Download:</p>
+                <ul>
+                {{#primaryLinks}}
+                    <li><a href="{{{href}}}">{{text}}</a></li>
+                {{/primaryLinks}}
+                </ul>
+            </div>
+        {{/hasPrimaryLinks}}
+
         <p class="dialect-schemas-list-title">Schemas:</p>
         <ul class="dialect-schemas-list">
           {{#nodeMappings}}
             <li class="dialect-schemas-list-item">
-              <a href="{{pageName}}.html" title="{{name}}">{{name}}</a>
+              <a href="{{{pageName}}}.html" title="{{label}}">{{label}}</a>
             </li>
           {{/nodeMappings}}
         </ul>
+
+          {{#hasSecondaryLinks}}
+              <div class="dialect-secondary-download-links">
+                  <p>Download in other formats:</p>
+                  <ul>
+                      {{#secondaryLinks}}
+                          <li><a href="{{{href}}}">{{text}}</a></li>
+                      {{/secondaryLinks}}
+                  </ul>
+              </div>
+          {{/hasSecondaryLinks}}
+
+
       </div>
 
     </div>

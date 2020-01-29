@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/custom.css">
     {{#css}}
-      <link rel="stylesheet" href="{{.}}">
+      <link rel="stylesheet" href="{{{.}}}">
     {{/css}}
   </head>
   <body class="index-body">
@@ -26,7 +26,7 @@
           <hr>
           {{#navData.dialects}}
             <p class="dialects-nav-item {{^active}}in{{/active}}active-nav-item">
-              <a href="{{pageName}}.html" title="{{name}}">{{name}}</a>
+              <a href="{{{pageName}}}.html" title="{{name}}">{{name}}</a>
             </p>
           {{/navData.dialects}}
         </div>
@@ -47,6 +47,17 @@
           {{/indexDescription}}
         </div>
 
+          {{#hasIndexLinks}}
+              <div class="dialect-secondary-download-links">
+                  <p>Download as a single file in the following formats:</p>
+                  <ul>
+                      {{#indexLinks}}
+                          <li><a href="{{{href}}}">{{text}}</a></li>
+                      {{/indexLinks}}
+                  </ul>
+              </div>
+          {{/hasIndexLinks}}
+
         <div class="index-dialects-section">
           <h1>{{dialectsHeader}}</h1>
           <table class="table table-hover table-bordered index-dialects-table">
@@ -59,7 +70,7 @@
             <tbody>
               {{#dialects}}
                 <tr id="{{slug}}-dialects-table-row">
-                  <td class="name-td col-md-3">{{name}}</td>
+                  <td class="name-td col-md-3">{{label}}</td>
                   <td class="usage-td col-md-7">{{usage}}</td>
                 </tr>
               {{/dialects}}
@@ -70,7 +81,7 @@
         <div class="index-schemas-section">
           <h1>{{schemasHeader}}</h1>
           {{#dialects}}
-            <h2>{{name}}</h2>
+            <h2>{{label}}</h2>
             <table class="table table-hover table-bordered index-schemas-table"
              id="{{slug}}-schemas-table">
               <thead>
@@ -82,7 +93,7 @@
               <tbody>
                 {{#nodeMappings}}
                   <tr id="{{slug}}-schemas-tr">
-                    <td class="name-td col-md-3">{{name}}</td>
+                    <td class="name-td col-md-3">{{label}}</td>
                     <td class="description-td col-md-7">{{description}}</td>
                   </tr>
                 {{/nodeMappings}}

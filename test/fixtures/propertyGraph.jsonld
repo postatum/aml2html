@@ -1,0 +1,66 @@
+{
+  "@id": "file:///somewhere/fixtures/musicDialect.yaml#/declarations/ArtistNode",
+  "http://www.w3.org/ns/shacl#path": [
+    {
+      "@id": "http://www.w3.org/ns/shacl#in"
+    }
+  ],
+  "http://schema.org/name": [
+    {
+      "@value": "ArtistNode"
+    }
+  ],
+  "http://www.w3.org/ns/shacl#minCount": [
+    {
+      "@value": 1
+    }
+  ],
+  "http://www.w3.org/ns/shacl#pattern": [
+    {
+      "@value": "fooPattern"
+    }
+  ],
+  "http://www.w3.org/ns/shacl#minInclusive": [
+    {
+      "@value": 2
+    }
+  ],
+  "http://www.w3.org/ns/shacl#maxInclusive": [
+    {
+      "@value": 3
+    }
+  ],
+  "http://a.ml/vocabularies/meta#allowMultiple": [
+    {
+      "@value": true
+    }
+  ],
+  "http://a.ml/vocabularies/meta#sorted": [
+    {
+      "@value": true
+    }
+  ],
+  "http://a.ml/vocabularies/meta#mapProperty": [
+    {
+      "@id": "thisIsMapPropertyId"
+    }
+  ],
+  "http://a.ml/vocabularies/meta#typeDiscriminatorName": [
+    {
+      "@value": "thisIsYypeDiscriminatorNameVal"
+    }
+  ],
+  "http://www.w3.org/ns/shacl#in": {
+    "one": {
+      "@value": "foo"
+    },
+    "two": {
+      "@value": "bar"
+    }
+  },
+  "http://a.ml/vocabularies/meta#typeDiscriminatorMap": [
+    {
+      "@value": "hello,world"
+    }
+  ]
+}

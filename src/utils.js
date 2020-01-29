@@ -2,6 +2,7 @@ const amf = require('amf-client-js')
 const path = require('path')
 const fs = require('fs-extra')
 const Mustache = require('mustache')
+const jsonld = require('jsonld')
 
 /** Mustache dialects templates directory path. */
 const TMPL_DIR = path.join(__dirname, '..', 'templates')
@@ -72,14 +73,17 @@ function renderTemplate (data, tmplPath, outPath) {
   fs.writeFileSync(outPath, renderedStr)
 }
 
-function nameSorter (a, b) {
-  if (a.name > b.name) {
-    return 1
+/* Sorts objects by property. To be used in Array.sort() */
+function sorterBy (p) {
+  return (a, b) => {
+    if (a[p] > b[p]) {
+      return 1
+    }
+    if (a[p] < b[p]) {
+      return -1
+    }
+    return 0
   }
-  if (a.name < b.name) {
-    return -1
-  }
-  return 0
 }
 
 /* Makes a slug used in page urls creation. */
@@ -112,6 +116,7 @@ function getDefaultContext () {
     shacl: 'http://www.w3.org/ns/shacl#',
     config: {
       idMapping: (id) => id,
+      labelMapping: (name) => name,
       dialectsHeader: 'Dialects',
       schemasHeader: 'Schemas',
       mainHeader: 'Main'
@@ -120,8 +125,8 @@ function getDefaultContext () {
 }
 
 /* Loads custom config into context config. */
-function loadConfig (cfgName, ctx) {
-  const cfgPath = path.resolve(process.cwd(), cfgName)
+function loadConfig (cfgPath, ctx) {
+  cfgPath = path.resolve(cfgPath)
   console.log(`Loading custom configuration from ${cfgPath}`)
   const cfg = require(cfgPath)
   // Drop "undefined"s
@@ -131,9 +136,21 @@ function loadConfig (cfgName, ctx) {
     }
   })
   ctx.config = { ...ctx.config, ...cfg }
+
+  if (ctx.config.downloadLinks) {
+    const dlp = path.resolve(path.dirname(cfgPath), ctx.config.downloadLinks)
+    ctx.config.downloadLinks = JSON.parse(fs.readFileSync(dlp).toString())
+  }
+
+  if (ctx.config.indexDownloadLinks) {
+    const idlp = path.resolve(path.dirname(cfgPath), ctx.config.indexDownloadLinks)
+    ctx.config.indexDownloadLinks = JSON.parse(fs.readFileSync(idlp).toString())
+  }
+
   return ctx
 }
 
+/* Lists files in dir and appends them to filelist. */
 function walkSync (dir, filelist) {
   var files = fs.readdirSync(dir)
   filelist = filelist || []
@@ -151,9 +168,71 @@ function walkSync (dir, filelist) {
   return filelist
 }
 
-/* Collects program options */
+/* Concats options for commander. */
 function collectOpt (value, previous) {
   return previous.concat([value])
+}
+
+/*
+  Processes downloadLinks and indexDownloadLinks by grouping
+  and sorting them.
+*/
+function processLinks (links) {
+  const acc = {
+    hasPrimaryLinks: false,
+    hasSecondaryLinks: false
+  }
+  if (!links || links.length < 1) {
+    return acc
+  }
+  const primaryLinks = []
+  const secondaryLinks = []
+
+  links.forEach(link => {
+    if (link.position === 'primary') {
+      primaryLinks.push(link)
+    } else {
+      secondaryLinks.push(link)
+    }
+  })
+
+  if (primaryLinks.length > 0) {
+    acc.primaryLinks = primaryLinks.sort(sorterBy('text'))
+    acc.hasPrimaryLinks = true
+  }
+  if (secondaryLinks.length > 0) {
+    acc.secondaryLinks = secondaryLinks.sort(sorterBy('text'))
+    acc.hasSecondaryLinks = true
+  }
+  return acc
+}
+
+/* Collects JSON Graphs for all dialects from dialectsPaths. */
+async function collectJsonGraphs (dialectsPaths) {
+  const jsonGraphs = {}
+  for (var i = 0; i < dialectsPaths.length; i++) {
+    const p = dialectsPaths[i]
+    try {
+      const defaultGraph = await getJsonLdGraph(p)
+      console.log('[ok] ' + p)
+      const graph = await jsonld.expand(defaultGraph)
+      jsonGraphs[p] = graph
+    } catch (e) {
+      console.log('[error] ' + p, e.toString())
+    }
+  }
+  return jsonGraphs
+}
+
+/* Extracts ontology terms from ontology mapping. */
+function getOntologyTerms (ontologyObj) {
+  const ontologyTerms = {}
+  Object.values(ontologyObj).forEach(vocab => {
+    vocab.nodeMappings.forEach(term => {
+      ontologyTerms[term.id] = term
+    })
+  })
+  return ontologyTerms
 }
 
 /* Adds template utility functions */
@@ -178,12 +257,16 @@ module.exports = {
   parseHashValue: parseHashValue,
   renderTemplate: renderTemplate,
   TMPL_DIR: TMPL_DIR,
-  nameSorter: nameSorter,
+  nameSorter: sorterBy('name'),
+  sorterBy: sorterBy,
   slugify: slugify,
   makeSchemaPageName: makeSchemaPageName,
   markActive: markActive,
   getDefaultContext: getDefaultContext,
   loadConfig: loadConfig,
   collectOpt: collectOpt,
-  addTmplUtils: addTmplUtils
+  addTmplUtils: addTmplUtils,
+  processLinks: processLinks,
+  collectJsonGraphs: collectJsonGraphs,
+  getOntologyTerms: getOntologyTerms
 }

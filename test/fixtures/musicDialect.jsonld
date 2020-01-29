@@ -1,0 +1,119 @@
+[
+  {
+    "@id": "file:///somewhere/fixtures/musicDialect.yaml",
+    "@type": [
+      "http://a.ml/vocabularies/meta#Dialect",
+      "http://a.ml/vocabularies/document#Document",
+      "http://a.ml/vocabularies/document#Fragment",
+      "http://a.ml/vocabularies/document#Module",
+      "http://a.ml/vocabularies/document#Unit"
+    ],
+    "http://schema.org/name": [
+      {
+        "@value": "Playlist"
+      }
+    ],
+    "http://schema.org/version": [
+      {
+        "@value": "1.0"
+      }
+    ],
+    "http://a.ml/vocabularies/meta#externals": [
+      {
+        "@id": "file:///somewhere/fixtures/musicDialect.yaml/externals/schema-org",
+        "@type": [
+          "http://www.w3.org/2002/07/owl#Ontology",
+          "http://a.ml/vocabularies/meta#ExternalVocabulary",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://schema.org/alias": [
+          {
+            "@value": "schema-org"
+          }
+        ],
+        "http://a.ml/vocabularies/meta#base": [
+          {
+            "@value": "http://schema.org/"
+          }
+        ]
+      }
+    ],
+    "http://a.ml/vocabularies/meta#documents": [
+      {
+        "@id": "file:///somewhere/fixtures/musicDialect.yaml/documents",
+        "@type": [
+          "http://a.ml/vocabularies/meta#DocumentsModel",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://a.ml/vocabularies/meta#rootDocument": [
+          {
+            "@id": "file:///somewhere/fixtures/musicDialect.yaml#/documents/root",
+            "@type": [
+              "http://a.ml/vocabularies/meta#DocumentMapping",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/meta#name": [
+              {
+                "@value": "Playlist 1.0"
+              }
+            ],
+            "http://a.ml/vocabularies/meta#encodedNode": [
+              {
+                "@id": "file:///somewhere/fixtures/musicDialect.yaml#/declarations/ArtistNode"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "http://a.ml/vocabularies/document#version": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "http://a.ml/vocabularies/document#declares": [
+      {
+        "@id": "file:///somewhere/fixtures/musicDialect.yaml#/declarations/ArtistNode",
+        "@type": [
+          "http://a.ml/vocabularies/meta#NodeMapping",
+          "http://www.w3.org/ns/shacl#Shape",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://schema.org/name": [
+          {
+            "@value": "ArtistNode"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#property": [
+          {
+            "@id": "file:///somewhere/fixtures/musicDialect.yaml#/declarations/ArtistNode",
+            "@type": [
+              "http://a.ml/vocabularies/meta#NodePropertyMapping",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://www.w3.org/ns/shacl#path": [
+              {
+                "@id": "http://schema.org/name"
+              }
+            ],
+            "http://schema.org/name": [
+              {
+                "@value": "name"
+              }
+            ],
+            "http://www.w3.org/ns/shacl#datatype": [
+              {
+                "@id": "http://www.w3.org/2001/XMLSchema#string"
+              }
+            ]
+          }
+        ],
+        "http://www.w3.org/ns/hydra/core#template": [
+          {
+            "@value": "https://api.spotify.com/v1/artists/{spotifyId}"
+          }
+        ]
+      }
+    ]
+  }
+]

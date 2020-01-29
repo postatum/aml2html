@@ -1,9 +1,10 @@
 {
-  "name": "aml2doc",
+  "name": "@aml-org/aml2doc",
+  "version": "0.1.2",
   "description": "Convert AML Vocabularies & Dialects to documentation",
-  "version": "0.1.0",
   "main": "src/index.js",
   "license": "MIT",
+  "repository": "git://github.com/aml-org/aml2doc",
   "dependencies": {
     "amf-client-js": "^3.5.0",
     "commander": "^3.0.2",
@@ -12,10 +13,23 @@
     "ld-query": "^2.0.0",
     "mustache": "^3.0.1"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "bin": {
+    "aml2doc": "bin/aml2doc.js"
+  },
   "scripts": {
-    "aml2doc": "node src/index.js"
+    "lint": "standard",
+    "aml2doc": "node bin/aml2doc.js",
+    "test": "npm run lint && nyc mocha -R spec --bail test/*.test.js"
   },
   "devDependencies": {
-    "standard": "^14.3.1"
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "nyc": "^15.0.0",
+    "rewire": "^4.0.1",
+    "standard": "^14.3.1",
+    "tmp": "^0.1.0"
   }
 }

@@ -1,0 +1,5 @@
+[
+  {"href": "hi://test.com/vocabulary.pdf", "text": "pdf"},
+  {"href": "hi://test.com/vocabulary.txt", "text": "txt"},
+  {"href": "hi://test.else/vocabulary.aml", "text": "aml"}
+]
