@@ -115,4 +115,5 @@ This is the list of supported templates:
  Please, inspect the default to inspect the variables available in each template.
 
 ## Viewing generated HTML
+
 Open the directory specified as `--outdir` option value and open any `.html` file in a browser.
