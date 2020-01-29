@@ -33,6 +33,7 @@ describe('aml2doc html integration test', function () {
       'index.html',
       'playlist.html',
       'schema_playlist_artistnode.html',
+      'schema_playlist_artistunion.html',
       'static'
     ])
     expect(fs.readdirSync(path.join(outDir.name, 'static')))
@@ -66,6 +67,7 @@ describe('aml2doc html integration test', function () {
       .to.contain('playlist.html').and
       .to.contain('index.html').and
       .to.contain('schema_playlist_artistnode.html').and
+      .to.contain('schema_playlist_artistunion.html').and
       .to.contain('Version:').and
       .to.contain('ArtistNode_modified').and
       .to.contain('musicDialect.yaml_modified')
@@ -78,11 +80,24 @@ describe('aml2doc html integration test', function () {
     expect(html)
       .to.contain('index.html').and
       .to.contain('schema_playlist_artistnode.html').and
+      .to.contain('schema_playlist_artistunion.html').and
       .to.contain('playlist.html').and
       .to.contain('No Linked schemas').and
       .to.contain('schema.org').and
       .to.contain('string').and
       .to.contain('No Link Properties')
+  })
+  it('should render proper data at schema page', function () {
+    const fpath = path.join(outDir.name, 'schema_playlist_artistunion.html')
+    const html = fs.readFileSync(fpath).toString()
+    expect(html).to.contain(
+      '<link rel="stylesheet" href="inexisting/css/file.css">')
+    expect(html)
+      .to.contain('index.html').and
+      .to.contain('schema_playlist_artistnode.html').and
+      .to.contain('schema_playlist_artistunion.html').and
+      .to.contain('playlist.html').and
+      .to.contain('Union of ArtistNode, ArtistNode')
   })
 })
 
