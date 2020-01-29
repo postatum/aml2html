@@ -21,3 +21,9 @@ nodeMappings:
       name:
         propertyTerm: schema-org.name
         range: string
+
+  ArtistUnion:
+    classTerm: music.MusicArtist
+    union:
+      - ArtistNode
+      - ArtistNode
