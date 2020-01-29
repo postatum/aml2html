@@ -118,6 +118,7 @@ describe('aml2doc md integration test', function () {
       'index.md',
       'playlist.md',
       'schema_playlist_artistnode.md',
+      'schema_playlist_artistunion.md',
       'static'
     ])
     expect(fs.readdirSync(path.join(outDir.name, 'static')))
@@ -145,6 +146,7 @@ describe('aml2doc md integration test', function () {
     expect(md)
       .to.contain('index.md').and
       .to.contain('schema_playlist_artistnode.md').and
+      .to.contain('schema_playlist_artistunion.md').and
       .to.contain('Version:').and
       .to.contain('ArtistNode_modified').and
       .to.contain('musicDialect.yaml_modified')
@@ -158,5 +160,10 @@ describe('aml2doc md integration test', function () {
       .to.contain('schema.org').and
       .to.contain('string').and
       .to.contain('No Link Properties')
+  })
+  it('should render proper data at union schema page', function () {
+    const fpath = path.join(outDir.name, 'schema_playlist_artistunion.md')
+    const md = fs.readFileSync(fpath).toString()
+    expect(md).to.contain('Union of ArtistNode, ArtistNode')
   })
 })
