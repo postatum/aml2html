@@ -1,4 +1,6 @@
 # aml2html
+[![Build Status](https://travis-ci.org/aml-org/aml2html.svg?branch=master)](https://travis-ci.org/aml-org/aml2html)
+
 Convert AML Vocabularies & Dialects to HTML.
 
 ## Installation
