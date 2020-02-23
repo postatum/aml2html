@@ -4,7 +4,7 @@ dialect: Playlist
 version: 1.0
 
 uses:
-  music: ../musicVocabulary.yaml
+  music: musicVocabulary.yaml
 
 external:
   schema-org: http://schema.org/
@@ -16,11 +16,12 @@ documents:
 nodeMappings:
   ArtistNode:
     classTerm: music.MusicArtist
-    idTemplate: https://api.spotify.com/v1/artists/{spotifyId}
+    idTemplate: https://api.spotify.com/v1/artists/{name}
     mapping:
       name:
         propertyTerm: schema-org.name
         range: string
+        mandatory: true
 
   ArtistUnion:
     classTerm: music.MusicArtist

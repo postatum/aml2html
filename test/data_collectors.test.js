@@ -14,12 +14,12 @@ const FIXTURES_DIR = path.join(__dirname, 'fixtures')
 function getDialectData () {
   return {
     name: 'WebAPI',
-    id: 'file:///somewhere/fixtures/musicDialect.yaml',
+    id: 'file://test/fixtures/musicDialect.yaml',
     slug: 'webapi',
     htmlName: 'webapi.html',
     nodeMappings: [{
       name: 'Scope',
-      id: 'file:///somewhere/fixtures/musicDialect.yaml#/declarations/Scope',
+      id: 'file://test/fixtures/musicDialect.yaml#/declarations/Scope',
       htmlName: 'node_scope.html',
       description: null,
       scalarProperties: [{
@@ -53,11 +53,11 @@ describe('data_collectors.processVocabulary', async function () {
     const ctx = utils.getDefaultContext()
     const acc = {}
     processVocabulary(graph, ctx, acc)
-    const id = 'file:///somewhere/fixtures/musicVocabulary.yaml'
+    const id = 'file://test/fixtures/musicVocabulary.yaml'
     expect(acc).to.have.property(id)
     expect(acc[id]).to.include({
       name: 'Music Vocabulary',
-      id: 'file:///somewhere/fixtures/musicVocabulary.yaml',
+      id: 'file://test/fixtures/musicVocabulary.yaml',
       version: null,
       label: 'Music Vocabulary',
       slug: 'musicvocabulary_vocab',
@@ -71,8 +71,7 @@ describe('data_collectors.processVocabulary', async function () {
       type: 'class',
       name: 'Music Artist',
       label: 'Music Artist',
-      description: 'A person or a group of people (or a computer :-) )' +
-        ', whose musical\ncreative work shows sensitivity and imagination\n',
+      description: 'A person or a group of people (or a computer :-) ), whose musical creative work shows sensitivity and imagination\n',
       id: 'http://a.ml/vocabularies/music#MusicArtist',
       dialectName: 'Music Vocabulary',
       dialectLabel: 'Music Vocabulary',
@@ -91,12 +90,12 @@ describe('data_collectors.processDialect', async function () {
     const acc = {}
     const ontologyTerms = {}
     processDialect(graph, ctx, acc, ontologyTerms)
-    const id = 'file:///somewhere/fixtures/musicDialect.yaml'
+    const id = 'file://test/fixtures/musicDialect.yaml'
     expect(acc).to.have.property(id)
     expect(acc[id]).to.include({
       name: 'Playlist',
       label: 'Playlist',
-      id: 'file:///somewhere/fixtures/musicDialect.yaml',
+      id: 'file://test/fixtures/musicDialect.yaml',
       version: '1.0',
       slug: 'playlist',
       htmlName: 'playlist.html'
@@ -104,17 +103,17 @@ describe('data_collectors.processDialect', async function () {
     expect(acc[id])
       .to.have.property('nodeMappings')
       .and.be.an('array')
-      .and.be.lengthOf(1)
+      .and.be.lengthOf(2)
     expect(acc[id].nodeMappings[0]).to.include({
       name: 'ArtistNode',
       label: 'ArtistNode',
-      id: 'file:///somewhere/fixtures/musicDialect.yaml#/declarations/ArtistNode',
+      id: 'file://test/fixtures/musicDialect.yaml#/declarations/ArtistNode',
       dialectName: 'Playlist',
       dialectLabel: 'Playlist',
       slug: 'artistnode',
       htmlName: 'schema_playlist_artistnode.html',
-      description: '',
-      targetClassId: null
+      description: 'A person or a group of people (or a computer :-) ), whose musical creative work shows sensitivity and imagination\n',
+      targetClassId: 'http://a.ml/vocabularies/music#MusicArtist'
     })
     expect(acc[id].nodeMappings[0])
       .to.have.property('linkProperties').and
@@ -128,7 +127,12 @@ describe('data_collectors.processDialect', async function () {
         {
           name: 'name',
           id: 'http://schema.org/name',
-          constraints: [],
+          constraints: [
+            {
+              name: 'mandatory',
+              value: true
+            }
+          ],
           range: 'string'
         }
       ])
@@ -208,13 +212,12 @@ describe('data_collectors.collectCommonPropData', async function () {
   it('should collect property data common to scalar and link properties', function () {
     const doc = getDocumentLdq('validationDialect.jsonld')
     const prop = doc.query(
-      'shacl:property[@id=file://validation.yaml#/declarations/profileNode]')
+      'shacl:property[@id=file://test/fixtures/validationDialect.yaml#/declarations/profileNode/property/info]')
     const data = collectCommonPropData(doc, prop, {})
     expect(data).to.deep.equal({
-      name: 'profile',
-      id: 'http://schema.org/name',
-      propDesc: 'Textual representation',
-      constraints: [{ name: 'mandatory', value: true }]
+      name: 'info',
+      id: 'http://a.ml/vocabularies/amf-validation#setSeverityInfo',
+      constraints: [{ name: 'allowMultiple', value: true }]
     })
   })
 })
@@ -224,7 +227,7 @@ describe('data_collectors.collectLinkPropsData', async function () {
   it('should collect nodeMappings item link properties data', function () {
     const doc = getDocumentLdq('validationDialect.jsonld')
     const node = doc.query(
-      'amldoc:declares[@id=file://validation.yaml#/declarations/profileNode]')
+      'amldoc:declares[@id=file://test/fixtures/validationDialect.yaml#/declarations/profileNode]')
     const ctx = utils.getDefaultContext()
     const ontologyTerms = { shapeValidationNode: { description: 'hello' } }
     const data = collectLinkPropsData(doc, node, 'iamdialect', ontologyTerms, ctx)
@@ -257,45 +260,77 @@ describe('data_collectors.collectScalarPropsData', async function () {
   it('should collect nodeMappings item scalar properties data', function () {
     const doc = getDocumentLdq('validationDialect.jsonld')
     const node = doc.query(
-      'amldoc:declares[@id=file://validation.yaml#/declarations/profileNode]')
+      'amldoc:declares[@id=file://test/fixtures/validationDialect.yaml#/declarations/profileNode]')
     const data = collectScalarPropsData(doc, node, 'iamdialect', {})
-    expect(data).to.deep.equal([{
-      name: 'profile',
-      id: 'http://schema.org/name',
-      constraints: [{ name: 'mandatory', value: true }],
-      propDesc: 'Textual representation',
-      range: 'string'
-    }, {
-      name: 'description',
-      id: 'http://schema.org/description',
-      constraints: [],
-      range: 'string'
-    }, {
-      name: 'extends',
-      id: 'http://a.ml/vocabularies/amf-validation#extendsProfile',
-      constraints: [],
-      range: 'string'
-    }, {
-      name: 'violation',
-      id: 'http://a.ml/vocabularies/amf-validation#setSeverityViolation',
-      constraints: [{ name: 'allowMultiple', value: true }],
-      range: 'string'
-    }, {
-      name: 'info',
-      id: 'http://a.ml/vocabularies/amf-validation#setSeverityInfo',
-      constraints: [{ name: 'allowMultiple', value: true }],
-      range: 'string'
-    }, {
-      name: 'warning',
-      id: 'http://a.ml/vocabularies/amf-validation#setSeverityWarning',
-      constraints: [{ name: 'allowMultiple', value: true }],
-      range: 'string'
-    }, {
-      name: 'disabled',
-      id: 'http://a.ml/vocabularies/amf-validation#disableValidation',
-      constraints: [{ name: 'allowMultiple', value: true }],
-      range: 'string'
-    }])
+    expect(data).to.deep.equal([
+      {
+        constraints: [
+          {
+            name: 'allowMultiple',
+            value: true
+          }
+        ],
+        id: 'http://a.ml/vocabularies/amf-validation#setSeverityInfo',
+        name: 'info',
+        range: 'string'
+      },
+      {
+        constraints: [],
+        id: 'http://schema.org/description',
+        name: 'description',
+        range: 'string'
+      },
+      {
+        constraints: [],
+        id: 'http://a.ml/vocabularies/amf-validation#extendsProfile',
+        name: 'extends',
+        range: 'string'
+      },
+      {
+        constraints: [
+          {
+            name: 'allowMultiple',
+            value: true
+          }
+        ],
+        id: 'http://a.ml/vocabularies/amf-validation#setSeverityWarning',
+        name: 'warning',
+        range: 'string'
+      },
+      {
+        constraints: [
+          {
+            name: 'allowMultiple',
+            value: true
+          }
+        ],
+        id: 'http://a.ml/vocabularies/amf-validation#disableValidation',
+        name: 'disabled',
+        range: 'string'
+      },
+      {
+        constraints: [
+          {
+            name: 'mandatory',
+            value: true
+          }
+        ],
+        id: 'http://schema.org/name',
+        name: 'profile',
+        range: 'string'
+      },
+      {
+        constraints: [
+          {
+            name: 'allowMultiple',
+            value: true
+          }
+        ],
+        id: 'http://a.ml/vocabularies/amf-validation#setSeverityViolation',
+        name: 'violation',
+        range: 'string'
+      }
+    ])
   })
 })
 
@@ -310,7 +345,7 @@ describe('data_collectors.collectNodesData', async function () {
     expect(data[0]).to.include({
       name: 'propertyConstraintNode',
       label: 'propertyConstraintNode',
-      id: 'file://validation.yaml#/declarations/propertyConstraintNode',
+      id: 'file://test/fixtures/validationDialect.yaml#/declarations/propertyConstraintNode',
       dialectName: 'WebAPI',
       dialectLabel: 'WebAPI',
       slug: 'propertyconstraintnode',
@@ -341,7 +376,7 @@ describe('data_collectors.collectVocabularyNodesData', async function () {
       name: 'Music Artist',
       label: 'Music Artist',
       description: 'A person or a group of people (or a computer :-) )' +
-        ', whose musical\ncreative work shows sensitivity and imagination\n',
+        ', whose musical creative work shows sensitivity and imagination\n',
       id: 'http://a.ml/vocabularies/music#MusicArtist',
       dialectName: 'WebAPI',
       dialectLabel: 'WebAPI',
@@ -370,7 +405,7 @@ describe('data_collectors.collectDialectData', async function () {
     expect(data).to.include({
       name: 'Validation Profile',
       label: 'Validation Profile',
-      id: 'file://validation.yaml',
+      id: 'file://test/fixtures/validationDialect.yaml',
       version: '1.0',
       slug: 'validationprofile',
       htmlName: 'validationprofile.html'
@@ -389,7 +424,7 @@ describe('data_collectors.collectVocabularyData', async function () {
     const data = collectVocabularyData(doc, ctx, {})
     expect(data).to.include({
       name: 'Music Vocabulary',
-      id: 'file:///somewhere/fixtures/musicVocabulary.yaml',
+      id: 'file://test/fixtures/musicVocabulary.yaml',
       version: null,
       label: 'Music Vocabulary',
       slug: 'musicvocabulary_vocab',

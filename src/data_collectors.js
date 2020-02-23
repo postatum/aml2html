@@ -4,11 +4,11 @@ const utils = require('./utils')
 /* Collects complete vocabulary data. */
 function collectVocabularyData (doc, ctx, acc) {
   const id = doc.query('@id')
-  const name = doc.query('> schema:name @value')
+  const name = doc.query('> core:name @value')
   const vocabularyData = {
     name: name,
     id: ctx.config.idMapping(id),
-    version: doc.query('> schema:version @value'),
+    version: doc.query('> core:version @value'),
     label: ctx.config.labelMapping(name)
   }
   if (!acc[id]) {
@@ -32,12 +32,12 @@ function collectVocabularyData (doc, ctx, acc) {
 /* Collects complete dialect data. */
 function collectDialectData (doc, ctx, acc, ontologyTerms) {
   const id = doc.query('@id')
-  const name = doc.query('> schema:name @value')
+  const name = doc.query('> core:name @value')
   const dialectData = {
     name: name,
     label: ctx.config.labelMapping(name),
     id: ctx.config.idMapping(id),
-    version: doc.query('> schema:version @value')
+    version: doc.query('> core:version @value')
   }
   if (!acc[id]) {
     console.log(`Collecting dialect data for id ${id}`)
@@ -81,12 +81,12 @@ function collectVocabularyNodesData (doc, dialectData, ctx) {
       const nodeId = node.query('@id')
       if (!acc[nodeId]) {
         console.log(`\t- ${nodeId}`)
-        const name = node.query('> meta:displayName @value')
+        const name = node.query('> core:displayName @value')
         const nodeData = {
           type: cred.type,
           name: name,
           label: ctx.config.labelMapping(name),
-          description: node.query('> schema:description @value'),
+          description: node.query('> core:description @value'),
           id: ctx.config.idMapping(node.query('@id')),
           dialectName: dialectData.name,
           dialectLabel: ctx.config.labelMapping(dialectData.name)
@@ -112,7 +112,7 @@ function collectNodesData (doc, dialectData, ctx, ontologyTerms) {
       const nodeId = node.query('@id')
       if (!acc[nodeId]) {
         console.log(`\t- ${nodeId}`)
-        const name = node.query('> schema:name @value')
+        const name = node.query('> core:name @value')
         const nodeData = {
           name: name,
           label: ctx.config.labelMapping(name),
@@ -140,7 +140,7 @@ function collectNodesData (doc, dialectData, ctx, ontologyTerms) {
           const targetClassId = node.query('> shacl:targetClass @id')
           const targetClass = doc.query(`amldoc:declares[@id=${targetClassId}]`)
           nodeData.description = targetClass
-            ? targetClass.query('schema:description @value')
+            ? targetClass.query('core:description @value')
             : ''
           if (ontologyTerms[targetClassId] != null) {
             nodeData.description = ontologyTerms[targetClassId].description
@@ -199,7 +199,7 @@ function collectLinkPropsData (doc, node, dialectSlug, ontologyTerms, ctx) {
         const decl = doc.query(`amldoc:declares[@id=${rangeId}]`)
         if (decl) {
           data.rangeHtmlName = utils.makeSchemaHtmlName(
-            utils.slugify(decl.parent().query('> schema:name @value')),
+            utils.slugify(decl.parent().query('> core:name @value')),
             utils.slugify(data.rangeName))
         }
         return data
@@ -211,13 +211,13 @@ function collectLinkPropsData (doc, node, dialectSlug, ontologyTerms, ctx) {
 /* Collects property data common to scalar and link properties. */
 function collectCommonPropData (doc, prop, ontologyTerms) {
   const propData = {
-    name: prop.query('schema:name @value'),
+    name: prop.query('core:name @value'),
     id: prop.query('shacl:path @id'),
     constraints: collectPropertyConstraints(prop)
   }
   const vocabProp = doc.query(`amldoc:declares[@id=${propData.id}]`)
   if (vocabProp) {
-    propData.propDesc = vocabProp.query('schema:description @value')
+    propData.propDesc = vocabProp.query('core:description @value')
   }
   if (ontologyTerms[propData.id] != null) {
     propData.propDesc = ontologyTerms[propData.id].description

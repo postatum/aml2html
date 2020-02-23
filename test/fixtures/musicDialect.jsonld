@@ -1,6 +1,6 @@
 [
   {
-    "@id": "file:///somewhere/fixtures/musicDialect.yaml",
+    "@id": "file://test/fixtures/musicDialect.yaml",
     "@type": [
       "http://a.ml/vocabularies/meta#Dialect",
       "http://a.ml/vocabularies/document#Document",
@@ -8,25 +8,25 @@
       "http://a.ml/vocabularies/document#Module",
       "http://a.ml/vocabularies/document#Unit"
     ],
-    "http://schema.org/name": [
+    "http://a.ml/vocabularies/core#name": [
       {
         "@value": "Playlist"
       }
     ],
-    "http://schema.org/version": [
+    "http://a.ml/vocabularies/core#version": [
       {
         "@value": "1.0"
       }
     ],
     "http://a.ml/vocabularies/meta#externals": [
       {
-        "@id": "file:///somewhere/fixtures/musicDialect.yaml/externals/schema-org",
+        "@id": "file://test/fixtures/musicDialect.yaml/externals/schema-org",
         "@type": [
           "http://www.w3.org/2002/07/owl#Ontology",
           "http://a.ml/vocabularies/meta#ExternalVocabulary",
           "http://a.ml/vocabularies/document#DomainElement"
         ],
-        "http://schema.org/alias": [
+        "http://a.ml/vocabularies/core#displayName": [
           {
             "@value": "schema-org"
           }
@@ -40,53 +40,189 @@
     ],
     "http://a.ml/vocabularies/meta#documents": [
       {
-        "@id": "file:///somewhere/fixtures/musicDialect.yaml/documents",
+        "@id": "file://test/fixtures/musicDialect.yaml/documents",
         "@type": [
           "http://a.ml/vocabularies/meta#DocumentsModel",
           "http://a.ml/vocabularies/document#DomainElement"
         ],
         "http://a.ml/vocabularies/meta#rootDocument": [
           {
-            "@id": "file:///somewhere/fixtures/musicDialect.yaml#/documents/root",
+            "@id": "file://test/fixtures/musicDialect.yaml#/documents/root",
             "@type": [
               "http://a.ml/vocabularies/meta#DocumentMapping",
               "http://a.ml/vocabularies/document#DomainElement"
             ],
-            "http://a.ml/vocabularies/meta#name": [
+            "http://a.ml/vocabularies/core#name": [
               {
                 "@value": "Playlist 1.0"
               }
             ],
             "http://a.ml/vocabularies/meta#encodedNode": [
               {
-                "@id": "file:///somewhere/fixtures/musicDialect.yaml#/declarations/ArtistNode"
+                "@id": "file://test/fixtures/musicDialect.yaml#/declarations/ArtistNode"
               }
             ]
           }
         ]
       }
     ],
+    "http://a.ml/vocabularies/document#location": [
+      {
+        "@value": "file://test/fixtures/musicDialect.yaml"
+      }
+    ],
     "http://a.ml/vocabularies/document#version": [
       {
-        "@value": "1.0.0"
+        "@value": "2.0.1"
+      }
+    ],
+    "http://a.ml/vocabularies/document#root": [
+      {
+        "@value": true
+      }
+    ],
+    "http://a.ml/vocabularies/document#references": [
+      {
+        "@id": "file://test/fixtures/musicVocabulary.yaml",
+        "@type": [
+          "http://a.ml/vocabularies/meta#Vocabulary",
+          "http://www.w3.org/2002/07/owl#Ontology",
+          "http://a.ml/vocabularies/document#Unit"
+        ],
+        "http://a.ml/vocabularies/core#name": [
+          {
+            "@value": "Music Vocabulary"
+          }
+        ],
+        "http://a.ml/vocabularies/meta#externals": [
+          {
+            "@id": "file://test/fixtures/musicVocabulary.yaml/externals/geo",
+            "@type": [
+              "http://www.w3.org/2002/07/owl#Ontology",
+              "http://a.ml/vocabularies/meta#ExternalVocabulary",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/core#displayName": [
+              {
+                "@value": "geo"
+              }
+            ],
+            "http://a.ml/vocabularies/meta#base": [
+              {
+                "@value": "http://www.w3.org/2003/01/geo/wgs84_pos#"
+              }
+            ]
+          },
+          {
+            "@id": "file://test/fixtures/musicVocabulary.yaml/externals/schema-org",
+            "@type": [
+              "http://www.w3.org/2002/07/owl#Ontology",
+              "http://a.ml/vocabularies/meta#ExternalVocabulary",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/core#displayName": [
+              {
+                "@value": "schema-org"
+              }
+            ],
+            "http://a.ml/vocabularies/meta#base": [
+              {
+                "@value": "http://schema.org/"
+              }
+            ]
+          }
+        ],
+        "http://a.ml/vocabularies/document#declares": [
+          {
+            "@id": "http://a.ml/vocabularies/music#MusicArtist",
+            "@type": [
+              "http://www.w3.org/2002/07/owl#Class",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/core#name": [
+              {
+                "@value": "MusicArtist"
+              }
+            ],
+            "http://a.ml/vocabularies/core#displayName": [
+              {
+                "@value": "Music Artist"
+              }
+            ],
+            "http://a.ml/vocabularies/core#description": [
+              {
+                "@value": "A person or a group of people (or a computer :-) ), whose musical creative work shows sensitivity and imagination\n"
+              }
+            ]
+          },
+          {
+            "@id": "http://a.ml/vocabularies/music#duration",
+            "@type": [
+              "http://www.w3.org/2002/07/owl#DatatypeProperty",
+              "http://a.ml/vocabularies/meta#Property",
+              "http://a.ml/vocabularies/document#DomainElement"
+            ],
+            "http://a.ml/vocabularies/core#displayName": [
+              {
+                "@value": "duration"
+              }
+            ],
+            "http://a.ml/vocabularies/core#description": [
+              {
+                "@value": "The duration of a track or a signal in ms"
+              }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#range": [
+              {
+                "@id": "http://www.w3.org/2001/XMLSchema#float"
+              }
+            ]
+          }
+        ],
+        "http://a.ml/vocabularies/meta#base": [
+          {
+            "@value": "http://a.ml/vocabularies/music#"
+          }
+        ],
+        "http://a.ml/vocabularies/document#location": [
+          {
+            "@value": "file://test/fixtures/musicVocabulary.yaml"
+          }
+        ],
+        "http://a.ml/vocabularies/document#version": [
+          {
+            "@value": "2.0.1"
+          }
+        ],
+        "http://a.ml/vocabularies/document#references": [],
+        "http://a.ml/vocabularies/document#root": [
+          {
+            "@value": false
+          }
+        ]
       }
     ],
     "http://a.ml/vocabularies/document#declares": [
       {
-        "@id": "file:///somewhere/fixtures/musicDialect.yaml#/declarations/ArtistNode",
+        "@id": "file://test/fixtures/musicDialect.yaml#/declarations/ArtistNode",
         "@type": [
           "http://a.ml/vocabularies/meta#NodeMapping",
           "http://www.w3.org/ns/shacl#Shape",
           "http://a.ml/vocabularies/document#DomainElement"
         ],
-        "http://schema.org/name": [
+        "http://www.w3.org/ns/shacl#targetClass": [
+          {
+            "@id": "http://a.ml/vocabularies/music#MusicArtist"
+          }
+        ],
+        "http://a.ml/vocabularies/core#name": [
           {
             "@value": "ArtistNode"
           }
         ],
         "http://www.w3.org/ns/shacl#property": [
           {
-            "@id": "file:///somewhere/fixtures/musicDialect.yaml#/declarations/ArtistNode",
+            "@id": "file://test/fixtures/musicDialect.yaml#/declarations/ArtistNode/property/name",
             "@type": [
               "http://a.ml/vocabularies/meta#NodePropertyMapping",
               "http://a.ml/vocabularies/document#DomainElement"
@@ -96,7 +232,7 @@
                 "@id": "http://schema.org/name"
               }
             ],
-            "http://schema.org/name": [
+            "http://a.ml/vocabularies/core#name": [
               {
                 "@value": "name"
               }
@@ -105,12 +241,46 @@
               {
                 "@id": "http://www.w3.org/2001/XMLSchema#string"
               }
+            ],
+            "http://www.w3.org/ns/shacl#minCount": [
+              {
+                "@value": 1
+              }
             ]
           }
         ],
-        "http://www.w3.org/ns/hydra/core#template": [
+        "http://a.ml/vocabularies/apiContract#uriTemplate": [
           {
-            "@value": "https://api.spotify.com/v1/artists/{spotifyId}"
+            "@value": "https://api.spotify.com/v1/artists/{name}"
+          }
+        ]
+      },
+      {
+        "@id": "file://test/fixtures/musicDialect.yaml#/declarations/ArtistUnion",
+        "@type": [
+          "http://a.ml/vocabularies/meta#UnionNodeMapping",
+          "http://www.w3.org/ns/shacl#Shape",
+          "http://a.ml/vocabularies/document#DomainElement"
+        ],
+        "http://a.ml/vocabularies/core#name": [
+          {
+            "@value": "ArtistUnion"
+          }
+        ],
+        "http://www.w3.org/ns/shacl#node": [
+          {
+            "@id": "file://test/fixtures/musicDialect.yaml#/declarations/ArtistUnion/list",
+            "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
+            "http://www.w3.org/2000/01/rdf-schema#_1": [
+              {
+                "@id": "file://test/fixtures/musicDialect.yaml#/declarations/ArtistNode"
+              }
+            ],
+            "http://www.w3.org/2000/01/rdf-schema#_2": [
+              {
+                "@id": "file://test/fixtures/musicDialect.yaml#/declarations/ArtistNode"
+              }
+            ]
           }
         ]
       }

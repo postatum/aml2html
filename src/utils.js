@@ -109,6 +109,7 @@ function markActive (items, name) {
 /** Returns default context for querying JSON-LD dialect with ld-query. */
 function getDefaultContext () {
   return {
+    core: 'http://a.ml/vocabularies/core#',
     amldoc: 'http://a.ml/vocabularies/document#',
     meta: 'http://a.ml/vocabularies/meta#',
     owl: 'http://www.w3.org/2002/07/owl#',
