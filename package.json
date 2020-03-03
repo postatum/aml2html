@@ -1,12 +1,12 @@
 {
   "name": "@aml-org/aml2doc",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Convert AML Vocabularies & Dialects to documentation",
   "main": "src/index.js",
   "license": "MIT",
   "repository": "git://github.com/aml-org/aml2doc",
   "dependencies": {
-    "amf-client-js": "^3.5.0",
+    "amf-client-js": "^4.0.4",
     "commander": "^3.0.2",
     "fs-extra": "^7.0.1",
     "jsonld": "^1.7.0",

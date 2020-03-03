@@ -13,8 +13,7 @@ classTerms:
   MusicArtist:
     displayName: Music Artist
     description: |
-      A person or a group of people (or a computer :-) ), whose musical
-      creative work shows sensitivity and imagination
+      A person or a group of people (or a computer :-) ), whose musical creative work shows sensitivity and imagination
 
 propertyTerms:
 
