@@ -9,7 +9,7 @@ const collect = require('./data_collectors')
 let TMPL_DIR = path.join(utils.TMPL_DIR)
 
 /** Runs all the logic. */
-async function aml2html (program) {
+async function aml2doc (program) {
   let ctx = utils.getDefaultContext()
   await amf.AMF.init()
 
@@ -119,4 +119,4 @@ async function aml2html (program) {
   utils.copyStaticFiles(outDir)
 }
 
-module.exports = aml2html
+module.exports = aml2doc
